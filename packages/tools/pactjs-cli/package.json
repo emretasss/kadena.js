@@ -1,15 +1,15 @@
 {
-  "name": "@kadena/pactjs-cli",
+  "name": "@kadena/kadaena-cli",
   "version": "0.1.0",
-  "description": "CLI tool accompanying @kadena/pactjs-core and @kadena/pactjs-client to generate TypeScript definitions and Pact client",
+  "description": "The kadena CLI (command line interface) for developing on the kadena blockchain",
   "repository": {
     "type": "git",
     "url": "https://github.com/kadena-community/kadena.js.git",
-    "directory": "packages/tools/pactjs-cli"
+    "directory": "packages/tools/kadena-cli"
   },
   "license": "MIT",
   "bin": {
-    "pactjs": "lib/index.js"
+    "kadenacli": "lib/index.js"
   },
   "scripts": {
     "_phase:build": "heft build --clean",

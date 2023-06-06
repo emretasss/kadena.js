@@ -5,7 +5,7 @@ import {
   StringContractDefinition,
 } from '@kadena/pactjs-generator';
 
-import { retrieveContractFromChain } from '../utils/retrieveContractFromChain';
+import { retrieveContractFromChain } from '../../../utils/retrieveContractFromChain';
 
 import { ContractGenerateOptions } from './';
 

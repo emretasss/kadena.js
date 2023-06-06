@@ -19,7 +19,7 @@ jest.mock('@kadena/pactjs-generator', () => ({
   generateDts: mockedGenerateDts,
 }));
 
-import { retrieveContractFromChain } from '../../utils/retrieveContractFromChain';
+import { retrieveContractFromChain } from '../../../../utils/retrieveContractFromChain';
 import { generate } from '../generate';
 import { ContractGenerateOptions } from '..';
 

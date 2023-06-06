@@ -1,4 +1,4 @@
-import { retrieveContractFromChain } from '../utils/retrieveContractFromChain';
+import { retrieveContractFromChain } from '../../../utils/retrieveContractFromChain';
 
 import { TOptions } from '.';
 

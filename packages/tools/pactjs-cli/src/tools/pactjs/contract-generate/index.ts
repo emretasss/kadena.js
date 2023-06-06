@@ -1,4 +1,4 @@
-import { networkMap } from '../utils/networkMap';
+import { networkMap } from '../../../utils/networkMap';
 
 import { generate } from './generate';
 

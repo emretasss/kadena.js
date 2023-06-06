@@ -1,7 +1,7 @@
 jest.mock('fs');
 jest.mock('../../utils/retrieveContractFromChain');
 
-import { retrieveContractFromChain } from '../../utils/retrieveContractFromChain';
+import { retrieveContractFromChain } from '../../../../utils/retrieveContractFromChain';
 
 import { writeFileSync } from 'fs';
 import path from 'path';

@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import { contractGenerateCommand } from './contract-generate';
-import { retrieveContractCommand } from './retrieve-contract';
-import { templateGenerateCommand } from './template-generate';
+import { generateCommands as generateMarmaladeCommands } from './tools/marmalade';
+import { generateCommands as generatePactCommands } from './tools/pactjs';
 
 import { program } from 'commander';
 import { readFileSync } from 'fs';
@@ -11,11 +10,15 @@ const packageJson: { version: string } = JSON.parse(
   readFileSync(join(__dirname, '../package.json'), 'utf8'),
 );
 
-contractGenerateCommand(program, packageJson.version);
-templateGenerateCommand(program, packageJson.version);
-retrieveContractCommand(program, packageJson.version);
+// marmalade
+generateMarmaladeCommands(program, packageJson.version);
+
+// pactjs
+generatePactCommands(program, packageJson.version);
 
 program
-  .description('pactjs cli to create transactions for Kadena chainweb')
+  .description(
+    'The kadena CLI (command line interface) for developing on the kadena blockchain',
+  )
   .version(packageJson.version)
   .parse();
