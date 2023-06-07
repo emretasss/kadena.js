@@ -16,7 +16,7 @@ jobs:
       - name: fetch vercel url
         env:
           VERCEL_TOKEN: ${{ secrets.vercel_kadenajs_gh_token }}
-          GIT_SHA: ${{ github.sha }}
+          COMMIT_SHA: ${{ github.sha }}
           PROJECT_ID: ${{ secrets.vercel_projectid_docs }}
         run: |
           echo "Sleeping a bit to ensure Vercel has kicked off build (this should be a hook tbh)"
