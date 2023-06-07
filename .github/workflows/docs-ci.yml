@@ -9,7 +9,8 @@ jobs:
   cypress-regression:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/vercel-cypress@v1
+      - name: cypress regression
+        uses: mikefrancis/vercel-cypress@b5f5997a03284c62afab2dac72303009c21bb5fc
         with:
           vercel-token: ${{ secrets.vercel_kadenajs_gh_token }}
           repo: alpha-docs
