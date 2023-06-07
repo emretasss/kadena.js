@@ -89,6 +89,6 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@kadena/react-ui'],
 };
-//empty comment
+
 export default withVanillaExtract(withMDX(nextConfig));
 
