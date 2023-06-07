@@ -1,0 +1,15 @@
+name: Docs - CI
+
+on:
+  push:
+    paths:
+      - chainweb/docker-build/**
+      
+jobs:
+  cypress-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/vercel-cypress@v1
+        with:
+          vercel-token: ${{ secrets.vercel_kadenajs_gh_token }}
+          repo: alpha-docs
