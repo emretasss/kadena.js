@@ -8,9 +8,18 @@ on:
 jobs:
   cypress-regression:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: cypress regression
-        uses: mikefrancis/vercel-cypress@b5f5997a03284c62afab2dac72303009c21bb5fc
-        with:
-          vercel-token: ${{ secrets.vercel_kadenajs_gh_token }}
-          repo: alpha-docs
+      - name: fetch vercel url
+        env:
+          VERCEL_TOKEN: ${{ secrets.vercel_kadenajs_gh_token }}
+          GIT_SHA: ${{ github.sha }}
+          PROJECT_ID: ${{ secrets.vercel_projectid_docs }}
+        run: |
+          echo "PREVIEW_URL=$(curl -H "Content-type: application/json" -H "Authorization: Bearer $VERCEL_TOKEN" "https://api.vercel.com/v5/deployments?teamId=kadena-js&projectId=$PROJECT_ID&state=BUILDING,READY&target=preview" | jq --arg commit_sha "$COMMIT_SHA" -r '.deployments[] | select(.meta.githubCommitSha == $commit_sha ) | .url ')" >> $GITHUB_ENV
+      - name: test placeholdcer
+        working-directory: packages/apps/kadena-docs
+        run: |
+          npm install
+          npx cypress run --config baseUrl="${{ env.PREVIEW_URL }}"
+      
