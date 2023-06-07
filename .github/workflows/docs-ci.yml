@@ -9,7 +9,10 @@ jobs:
   cypress-regression:
     runs-on: ubuntu-latest
     
-    steps:
+    steps:      
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
       - name: fetch vercel url
         env:
           VERCEL_TOKEN: ${{ secrets.vercel_kadenajs_gh_token }}
