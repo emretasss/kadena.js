@@ -1,5 +1,5 @@
 {
-  "name": "@kadena/kadaena-cli",
+  "name": "@kadena/cli",
   "version": "0.1.0",
   "description": "The kadena CLI (command line interface) for developing on the kadena blockchain",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "bin": {
-    "kadenacli": "lib/index.js"
+    "kadena": "lib/index.js"
   },
   "scripts": {
     "_phase:build": "heft build --clean",
