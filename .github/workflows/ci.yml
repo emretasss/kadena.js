@@ -29,9 +29,15 @@ jobs:
         with:
           path: |
             common/temp/install-run
-            common/temp/build-cache
             ~/.rush
           key: cache-rush-${{ runner.os }}-${{ hashFiles('rush.json') }}
+
+      - name: Cache Build
+        uses: actions/cache@v3
+        with:
+          path: |
+            common/temp/build-cache
+          key: cache-rush-${{ runner.os }}
 
       - name: Cache pnpm
         uses: actions/cache@v3
