@@ -1,6 +1,11 @@
 # Change Log - @kadena/client
 
-This log was last generated on Thu, 22 Jun 2023 09:46:33 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Jul 2023 14:24:16 GMT and should not be manually modified.
+
+## 0.4.1
+Mon, 10 Jul 2023 14:24:16 GMT
+
+_Version update only_
 
 ## 0.4.0
 Thu, 22 Jun 2023 09:46:33 GMT

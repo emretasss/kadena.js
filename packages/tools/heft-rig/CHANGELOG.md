@@ -1,6 +1,11 @@
 # Change Log - @kadena-dev/heft-rig
 
-This log was last generated on Thu, 22 Jun 2023 09:46:33 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Jul 2023 14:24:16 GMT and should not be manually modified.
+
+## 0.0.8
+Mon, 10 Jul 2023 14:24:16 GMT
+
+_Version update only_
 
 ## 0.0.7
 Thu, 22 Jun 2023 09:46:33 GMT
