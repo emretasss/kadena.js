@@ -3,6 +3,15 @@ import { ChainId, ICap } from '@kadena/types';
 /**
  * @alpha
  */
+export interface ISignerDetail {
+  publicKey: string;
+  scheme?: 'ED25519' | 'ETH';
+  address?: string;
+}
+
+/**
+ * @alpha
+ */
 export interface IExecPayloadObject {
   // executable pact code
   exec: {

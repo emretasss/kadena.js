@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@kadena/client",
+      "comment": "refactor addSigner interface to accept publicKey and signerDetail object",
+      "type": "none"
+    }
+  ],
+  "packageName": "@kadena/client"
+}

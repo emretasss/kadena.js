@@ -237,6 +237,16 @@ export interface IQuicksignSigner {
     sig: IQuicksignSig;
 }
 
+// @alpha (undocumented)
+export interface ISignerDetail {
+    // (undocumented)
+    address?: string;
+    // (undocumented)
+    publicKey: string;
+    // (undocumented)
+    scheme?: 'ED25519' | 'ETH';
+}
+
 // @alpha
 export function isSignedCommand(command: IUnsignedCommand | ICommand): command is ICommand;
 

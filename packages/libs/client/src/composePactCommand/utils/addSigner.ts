@@ -1,16 +1,23 @@
-import { ICapabilityItem, IPactCommand } from '../../interfaces/IPactCommand';
+import {
+  ICapabilityItem,
+  IPactCommand,
+  ISignerDetail,
+} from '../../interfaces/IPactCommand';
 
 interface IAddSigner {
-  (
-    first:
-      | string
-      | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
-  ): () => Pick<IPactCommand, 'signers'>;
+  (publicKey: string): () => Partial<IPactCommand>;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   <TCommand extends any>(
-    first:
-      | string
-      | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
+    publicKey: string,
+    capability: (withCapability: ExtractType<TCommand>) => ICapabilityItem[],
+  ): TCommand;
+
+  (signerDetail: ISignerDetail): () => Partial<IPactCommand>;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  <TCommand extends any>(
+    signerDetail: ISignerDetail,
     capability: (withCapability: ExtractType<TCommand>) => ICapabilityItem[],
   ): TCommand;
 }
@@ -21,7 +28,7 @@ interface IAddSigner {
 export const addSigner: IAddSigner = ((
   first:
     | string
-    | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
+    | { publicKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
   capability: (
     withCapability: (
       name: string,
@@ -30,10 +37,10 @@ export const addSigner: IAddSigner = ((
   ) => ICapabilityItem[],
 ): unknown => {
   const {
-    pubKey,
+    publicKey: pubKey,
     scheme = 'ED25519',
     address = undefined,
-  } = typeof first === 'object' ? first : { pubKey: first };
+  } = typeof first === 'object' ? first : { publicKey: first };
   let clist: undefined | Array<{ name: string; args: unknown[] }>;
   if (typeof capability === 'function') {
     clist = capability((name: string, ...args: unknown[]) => ({

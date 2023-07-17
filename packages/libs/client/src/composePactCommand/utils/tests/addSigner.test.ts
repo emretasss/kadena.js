@@ -30,7 +30,7 @@ describe('addSigner', () => {
   });
 
   it('accept signer object as a first argument', () => {
-    expect(addSigner({ pubKey: 'test', scheme: 'ED25519' })()).toEqual({
+    expect(addSigner({ publicKey: 'test', scheme: 'ED25519' })()).toEqual({
       signers: [
         {
           pubKey: 'test',
@@ -42,7 +42,7 @@ describe('addSigner', () => {
 
   it('returns signers with address if its presented', () => {
     const signer = addSigner({
-      pubKey: 'key',
+      publicKey: 'key',
       address: 'address',
     })();
     expect(signer).toEqual({

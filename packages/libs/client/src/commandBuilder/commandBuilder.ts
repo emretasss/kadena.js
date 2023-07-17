@@ -16,6 +16,7 @@ import {
   ICapabilityItem,
   IContinuationPayloadObject,
   IPactCommand,
+  ISignerDetail,
 } from '../interfaces/IPactCommand';
 import { createTransaction } from '../utils/createTransaction';
 
@@ -33,13 +34,13 @@ export type ExtractType<TCommand> = TCommand extends { payload: infer TPayload }
 
 interface IAddSigner<TCommand> {
   /**
-   * Add signer without capability
+   * Add signer with publicKey
    */
-  (
-    first:
-      | string
-      | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
-  ): IBuilder<TCommand>;
+  (publicKey: string): IBuilder<TCommand>;
+  /**
+   * Add signerDetail
+   */
+  (signerDetail: ISignerDetail): IBuilder<TCommand>;
   /**
    * Add a signer including capabilities. The withCapability function is obtained from
    * the function you call in the execution part.
@@ -52,9 +53,23 @@ interface IAddSigner<TCommand> {
    * ])
    */
   (
-    first:
-      | string
-      | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
+    publicKey: string,
+    capability: (withCapability: ExtractType<TCommand>) => ICapabilityItem[],
+  ): IBuilder<TCommand>;
+
+  /**
+   * Add a signerDetail including capabilities. The withCapability function is obtained from
+   * the function you call in the execution part.
+   * @example
+   * Pact.builder.execute(
+   *   Pact.coin.transfer("alice", "bob", \{ decimal:"1" \})
+   * ).addSigner(\{ publicKey:"key", scheme:"ETH" \}, (withCapability) =\> [
+   *   withCapability("coin.GAS"),
+   *   withCapability("coin.TRANSFER", "alice", "bob", \{ decimal:"1" \})
+   * ])
+   */
+  (
+    signerDetail: ISignerDetail,
     capability: (withCapability: ExtractType<TCommand>) => ICapabilityItem[],
   ): IBuilder<TCommand>;
 }
@@ -146,7 +161,7 @@ export const commandBuilder = (): ICommandBuilder => {
       addSigner: (pubKey, cap?: unknown) => {
         command = composePactCommand(
           addSigner(
-            pubKey,
+            pubKey as ISignerDetail,
             cap as (withCapability: GeneralCapability) => ICapabilityItem[],
           ) as (cmd: Partial<IPactCommand>) => Partial<IPactCommand>,
         )(command);
