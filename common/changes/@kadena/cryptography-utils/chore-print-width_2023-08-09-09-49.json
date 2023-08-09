@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@kadena/cryptography-utils",
+      "comment": "formatting after print-width update",
+      "type": "none"
+    }
+  ],
+  "packageName": "@kadena/cryptography-utils"
+}

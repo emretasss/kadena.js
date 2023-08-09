@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@kadena/pactjs",
+      "comment": "formatting after print-width update",
+      "type": "none"
+    }
+  ],
+  "packageName": "@kadena/pactjs"
+}

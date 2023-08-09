@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@kadena/client",
+      "comment": "formatting after print-width update",
+      "type": "none"
+    }
+  ],
+  "packageName": "@kadena/client"
+}
