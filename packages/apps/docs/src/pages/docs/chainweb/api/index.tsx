@@ -2,10 +2,7 @@ import { options } from '@/components/Layout/Redocly/Redocly';
 import { Specs } from '@/components/Specs';
 import apiSpecs from '@/specs/chainweb/chainweb.openapi.json';
 import { ILayout } from '@/types/Layout';
-import {
-  checkSubTreeForActive,
-  getPathName,
-} from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
+import { checkSubTreeForActive, getPathName } from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
 import { GetStaticProps } from 'next';
 import { OpenAPIV3 } from 'openapi-types';
 import React, { FC } from 'react';

@@ -24,22 +24,17 @@ export interface ITransactionPayload {
   data: unknown;
 }
 
-export const decimalFormatter: Intl.NumberFormat = new Intl.NumberFormat(
-  'en-US',
-  {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 12,
-  },
-);
+export const decimalFormatter: Intl.NumberFormat = new Intl.NumberFormat('en-US', {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 12,
+});
 
 export const setTransferCreateCommand =
   (from: KAccount, to: KAccount, toKs: string, amount: number): Reducer =>
   async (payload) => {
     return {
       ...(await payload),
-      command: `(coin.transfer-create "${from}" "${to}" (read-keyset '${toKs}) ${decimalFormatter.format(
-        amount,
-      )})`,
+      command: `(coin.transfer-create "${from}" "${to}" (read-keyset '${toKs}) ${decimalFormatter.format(amount)})`,
     };
   };
 export const setTransactionCommand =
@@ -47,8 +42,6 @@ export const setTransactionCommand =
   async (payload) => {
     return {
       ...(await payload),
-      command: `(coin.transfer "${from}" "${to}" ${decimalFormatter.format(
-        amount,
-      )})`,
+      command: `(coin.transfer "${from}" "${to}" ${decimalFormatter.format(amount)})`,
     };
   };

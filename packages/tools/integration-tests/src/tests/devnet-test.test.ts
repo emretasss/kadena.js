@@ -25,21 +25,15 @@ import { createSampleContTx, createSampleExecTx } from './mock-txs';
 import { backOff } from 'exponential-backoff';
 
 const devnetNetwork: ChainwebNetworkId = 'development';
-const devnetApiHostChain0: string =
-  'http://localhost:8080/chainweb/0.0/development/chain/0/pact';
-const devnetApiHostChain1: string =
-  'http://localhost:8080/chainweb/0.0/development/chain/1/pact';
+const devnetApiHostChain0: string = 'http://localhost:8080/chainweb/0.0/development/chain/0/pact';
+const devnetApiHostChain1: string = 'http://localhost:8080/chainweb/0.0/development/chain/1/pact';
 const devnetKeyPair = {
   publicKey: 'f89ef46927f506c70b6a58fd322450a936311dc6ac91f4ec3d8ef949608dbf1f',
   secretKey: 'da81490c7efd5a95398a3846fa57fd17339bdf1b941d102f2d3217ad29785ff0',
 };
 const devnetAccount = `k:${devnetKeyPair.publicKey}`;
 
-const sampleCommand1: IUnsignedCommand = createSampleExecTx(
-  devnetKeyPair,
-  `(+ 1 2)`,
-  devnetNetwork,
-);
+const sampleCommand1: IUnsignedCommand = createSampleExecTx(devnetKeyPair, `(+ 1 2)`, devnetNetwork);
 
 const signedSampleCommand1: ICommand = ensureSignedCommand(sampleCommand1);
 
@@ -81,10 +75,7 @@ function sleep20Seconds(): Promise<unknown> {
 
 describe('[DevNet] Makes /send request of simple transaction', () => {
   it('Receives request key of transaction', async () => {
-    const actual: Response | SendResponse = await send(
-      sendReq1,
-      devnetApiHostChain0,
-    );
+    const actual: Response | SendResponse = await send(sendReq1, devnetApiHostChain0);
     const expected: SendResponse = {
       requestKeys: [signedSampleCommand1.hash],
     };
@@ -94,10 +85,7 @@ describe('[DevNet] Makes /send request of simple transaction', () => {
 
 describe('[DevNet] Makes /send request to initiate a cross-chain transaction', () => {
   test('Receives request key of transaction', async () => {
-    const actual: Response | SendResponse = await send(
-      sendReq2,
-      devnetApiHostChain0,
-    );
+    const actual: Response | SendResponse = await send(sendReq2, devnetApiHostChain0);
     const expected: SendResponse = {
       requestKeys: [signedSampleCommand2.hash],
     };
@@ -107,12 +95,8 @@ describe('[DevNet] Makes /send request to initiate a cross-chain transaction', (
 
 describe('[DevNet] Makes /local request of simple transaction', () => {
   it('Receives the expected transaction result', async () => {
-    const actual: ICommandResult | Response = await local(
-      signedSampleCommand1,
-      devnetApiHostChain0,
-    );
-    const { logs, metaData, ...actualWithoutLogsAndMetaData } =
-      actual as ICommandResult;
+    const actual: ICommandResult | Response = await local(signedSampleCommand1, devnetApiHostChain0);
+    const { logs, metaData, ...actualWithoutLogsAndMetaData } = actual as ICommandResult;
     const expected: Omit<ILocalCommandResult, 'logs' | 'metaData'> = {
       reqKey: signedSampleCommand1.hash,
       txId: null,
@@ -133,10 +117,7 @@ describe('[DevNet] Makes /local request of simple transaction', () => {
 
 describe('[DevNet] Makes /poll request of simple transaction', () => {
   it('Receives empty result while tx is still in mempool', async () => {
-    const actual: Response | IPollResponse = await poll(
-      createPollRequest(sendReq1),
-      devnetApiHostChain0,
-    );
+    const actual: Response | IPollResponse = await poll(createPollRequest(sendReq1), devnetApiHostChain0);
     const expected: IPollResponse = {};
     expect(actual).toEqual(expected);
   });
@@ -168,21 +149,18 @@ describe('[DevNet] Attempts to retrieve result of a simple transaction', () => {
 
   it('Makes /listen request and retrieves expected result', async () => {
     await backOff(() =>
-      listen(createListenRequest(sendReq1), devnetApiHostChain0).then(
-        (actual: ICommandResult | Response) => {
-          const { logs, metaData, txId, events, ...resultWithoutDynamicData } =
-            actual as ICommandResult;
-          expect(logs).toBeTruthy();
-          expect(txId).toBeTruthy();
-          expect(metaData).toBeTruthy();
-          if (events !== undefined && events.length !== 0) {
-            const { moduleHash, ...eventWithNoModHash } = events[0];
-            expect([eventWithNoModHash]).toEqual(expectedEvent);
-            expect(moduleHash).toBeTruthy();
-          }
-          expect(resultWithoutDynamicData).toEqual(expectedResult);
-        },
-      ),
+      listen(createListenRequest(sendReq1), devnetApiHostChain0).then((actual: ICommandResult | Response) => {
+        const { logs, metaData, txId, events, ...resultWithoutDynamicData } = actual as ICommandResult;
+        expect(logs).toBeTruthy();
+        expect(txId).toBeTruthy();
+        expect(metaData).toBeTruthy();
+        if (events !== undefined && events.length !== 0) {
+          const { moduleHash, ...eventWithNoModHash } = events[0];
+          expect([eventWithNoModHash]).toEqual(expectedEvent);
+          expect(moduleHash).toBeTruthy();
+        }
+        expect(resultWithoutDynamicData).toEqual(expectedResult);
+      }),
     );
   });
 
@@ -218,12 +196,8 @@ describe('[DevNet] Finishes a cross-chain transfer', () => {
   });
 
   it('/spv fails because instance is too young', async () => {
-    const actual = spv(
-      { requestKey: signedSampleCommand2.hash, targetChainId: '1' },
-      devnetApiHostChain0,
-    );
-    const expected =
-      'SPV target not reachable: target chain not reachable. Chainweb instance is too young';
+    const actual = spv({ requestKey: signedSampleCommand2.hash, targetChainId: '1' }, devnetApiHostChain0);
+    const expected = 'SPV target not reachable: target chain not reachable. Chainweb instance is too young';
     return expect(actual).rejects.toThrowError(expected);
   });
 
@@ -236,10 +210,7 @@ describe('[DevNet] Finishes a cross-chain transfer', () => {
 
     // Retrieve spv proof
     const actualSPVProof: string | Response = await backOff(() =>
-      spv(
-        { requestKey: signedSampleCommand2.hash, targetChainId: '1' },
-        devnetApiHostChain0,
-      ),
+      spv({ requestKey: signedSampleCommand2.hash, targetChainId: '1' }, devnetApiHostChain0),
     );
     const proof = actualSPVProof as string;
     const hash = signedSampleCommand2.hash;
@@ -255,10 +226,7 @@ describe('[DevNet] Finishes a cross-chain transfer', () => {
     );
     const signedContReqPayload: ICommand = ensureSignedCommand(contReqPayload);
     const contReq: ISendRequestBody = createSendRequest(signedContReqPayload);
-    const actualContSendResp: SendResponse | Response = await send(
-      contReq,
-      devnetApiHostChain1,
-    );
+    const actualContSendResp: SendResponse | Response = await send(contReq, devnetApiHostChain1);
     const expectedContSendResp: SendResponse = {
       requestKeys: [signedContReqPayload.hash],
     };

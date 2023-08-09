@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
 
-const Chainweb: React.FC<SVGProps<SVGSVGElement>> = (
-  props: SVGProps<SVGSVGElement>,
-) => (
-  <svg
-    width={40}
-    height={40}
-    viewBox="0 0 40 40"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+const Chainweb: React.FC<SVGProps<SVGSVGElement>> = (props: SVGProps<SVGSVGElement>) => (
+  <svg width={40} height={40} viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" {...props}>
     <g clipPath="url(#clip0_1407_2150)">
       <path
         d="M34.1747 18.62C35.1351 18.62 35.9137 17.8414 35.9137 16.8811C35.9137 15.9207 35.1351 15.1421 34.1747 15.1421C33.2143 15.1421 32.4358 15.9207 32.4358 16.8811C32.4358 17.8414 33.2143 18.62 34.1747 18.62Z"

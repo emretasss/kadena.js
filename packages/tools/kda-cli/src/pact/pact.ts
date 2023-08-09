@@ -21,12 +21,7 @@ type Capability =
   | IGenericCapability
   | ICapabilities[keyof ICapabilities]
   | L2.ICapabilities[keyof L2.ICapabilities];
-export type Payload = (
-  | ITransactionPayload
-  | L2.ITransactionPayload
-  | L2.IDepositPayload
-  | L2.IWithdrawPayload
-) & {
+export type Payload = (ITransactionPayload | L2.ITransactionPayload | L2.IDepositPayload | L2.IWithdrawPayload) & {
   meta: IMeta;
   domain: string;
   networkId: string;
@@ -136,14 +131,10 @@ export const setCommand =
     };
   };
 
-export type Reducer = <T extends Partial<Payload | SignedPayload>>(
-  payload: Promise<T> | T,
-) => Promise<T> | T;
+export type Reducer = <T extends Partial<Payload | SignedPayload>>(payload: Promise<T> | T) => Promise<T> | T;
 export const buildCommand =
   (...reducers: Reducer[]): Reducer =>
-  async <T extends Partial<Payload>>(
-    initialPayload: Promise<T> | T,
-  ): Promise<T> => {
+  async <T extends Partial<Payload>>(initialPayload: Promise<T> | T): Promise<T> => {
     let payload = await initialPayload;
     for (const reducer of reducers) {
       payload = await reducer(payload);
@@ -201,8 +192,7 @@ const mapCapValue = (
   // eslint-disable-next-line @rushstack/no-new-null
 ): null | string | number | { int: number } => {
   if (value === undefined) return null;
-  if (value.startsWith('"') && value.endsWith('"'))
-    return value.replace(/^"|"$/g, '');
+  if (value.startsWith('"') && value.endsWith('"')) return value.replace(/^"|"$/g, '');
   if (value.includes('.')) return parseFloat(value);
   return { int: parseInt(value, 10) };
 };
@@ -231,23 +221,17 @@ export const addCapabilities =
 
 export const getSigners = (caps: Capability[]): ISigner[] =>
   Object.entries(
-    caps.reduce(
-      (
-        acc: Record<string, Capability[] | undefined>,
-        cap: Capability,
-      ): Record<string, Capability[]> => {
-        if (cap.name === 'UNRESTRICTED')
-          return {
-            ...acc,
-            [cap.signer]: [],
-          } as Record<string, Capability[]>;
+    caps.reduce((acc: Record<string, Capability[] | undefined>, cap: Capability): Record<string, Capability[]> => {
+      if (cap.name === 'UNRESTRICTED')
         return {
           ...acc,
-          [cap.signer]: [...(acc[cap.signer] || []), cap],
+          [cap.signer]: [],
         } as Record<string, Capability[]>;
-      },
-      {},
-    ),
+      return {
+        ...acc,
+        [cap.signer]: [...(acc[cap.signer] || []), cap],
+      } as Record<string, Capability[]>;
+    }, {}),
   ).map(([pubKey, caps]) => ({
     scheme: 'ED25519',
     pubKey,
@@ -258,9 +242,7 @@ export const getSigners = (caps: Capability[]): ISigner[] =>
     })),
   }));
 
-export const getContinuationPayload = <T extends Partial<Payload>>(
-  payload: T,
-): IPactRequest => {
+export const getContinuationPayload = <T extends Partial<Payload>>(payload: T): IPactRequest => {
   if (payload.meta === undefined) throw new Error('Meta is required');
   if (payload.networkId === undefined) throw new Error('NetworkId is required');
   if (payload.caps === undefined) throw new Error('Caps is required');
@@ -284,9 +266,7 @@ export const getContinuationPayload = <T extends Partial<Payload>>(
   };
 };
 
-export const getPayload = <T extends Partial<Payload>>(
-  payload: T,
-): IPactRequest => {
+export const getPayload = <T extends Partial<Payload>>(payload: T): IPactRequest => {
   if (payload.meta === undefined) throw new Error('Meta is required');
   if (payload.networkId === undefined) throw new Error('NetworkId is required');
   if (payload.caps === undefined) throw new Error('Caps is required');
@@ -314,9 +294,7 @@ interface IQuicksignPayloadRequest {
   reqs: IQuicksignPayload[];
 }
 
-export const getQuicksignPayload = (
-  ...payloads: IPactRequest[]
-): IQuicksignPayloadRequest => {
+export const getQuicksignPayload = (...payloads: IPactRequest[]): IQuicksignPayloadRequest => {
   return {
     reqs: payloads.map((payload) => ({
       sigs: payload.signers.reduce(
@@ -353,13 +331,7 @@ export const signWithChainweaver: Reducer = async (payload) => {
 };
 
 export const signWithKeypair =
-  ({
-    secretKey,
-    publicKey,
-  }: {
-    secretKey: string;
-    publicKey: string;
-  }): Reducer =>
+  ({ secretKey, publicKey }: { secretKey: string; publicKey: string }): Reducer =>
   async (payload) => {
     const payloadData = getPayload(await payload);
     const payloadString = JSON.stringify(payloadData);
@@ -371,11 +343,8 @@ export const signWithKeypair =
     };
   };
 
-const getBaseUrl = <T extends Partial<Payload | SignedPayload>>(
-  payload: T,
-): string => {
-  if (typeof payload?.meta?.chainId !== 'string')
-    throw new Error('Meta is required');
+const getBaseUrl = <T extends Partial<Payload | SignedPayload>>(payload: T): string => {
+  if (typeof payload?.meta?.chainId !== 'string') throw new Error('Meta is required');
   if (isFalsy(payload.domain)) throw new Error('Domain is required');
   if (isFalsy(payload.networkId)) throw new Error('NetworkId is required');
   return `${payload.domain}/chainweb/0.0/${payload.networkId}/chain/${payload.meta.chainId}/pact`;
@@ -389,9 +358,7 @@ export const local =
     if (!payload.caps) throw new Error('Caps is required');
 
     const response = await fetch(
-      `${getBaseUrl(
-        payload,
-      )}/api/v1/local?preflight=${preflight}&signatureValidation=${signatureValidation}`,
+      `${getBaseUrl(payload)}/api/v1/local?preflight=${preflight}&signatureValidation=${signatureValidation}`,
       {
         method: 'POST',
         headers: {
@@ -448,8 +415,7 @@ export const send: Reducer = async (payload) => {
 
 export const listen: Reducer = async (p) => {
   const payload = await p;
-  if (!payload.txKeys)
-    throw new Error('No transactions pending for this paylaod');
+  if (!payload.txKeys) throw new Error('No transactions pending for this paylaod');
   const [res] = await Promise.all(
     payload.txKeys.map(async (key) => {
       const response = await fetch(`${getBaseUrl(payload)}/api/v1/listen`, {
@@ -463,8 +429,7 @@ export const listen: Reducer = async (p) => {
       });
       if (!response.ok) throw new Error('Failed to listen');
       const data = await response.json();
-      if (data.result.status !== 'success')
-        throw new Error(`Failed to listen: ${JSON.stringify(data)}`);
+      if (data.result.status !== 'success') throw new Error(`Failed to listen: ${JSON.stringify(data)}`);
       return data;
     }),
   );
@@ -480,8 +445,7 @@ export const listen: Reducer = async (p) => {
 
 export const getSPVProof: Reducer = async (p) => {
   const payload = await p;
-  if (!payload.txKeys)
-    throw new Error('No transactions pending for this paylaod');
+  if (!payload.txKeys) throw new Error('No transactions pending for this paylaod');
   const [proof] = await Promise.all(
     payload.txKeys.map(async (key) => {
       const response = await fetch(`${getBaseUrl(payload)}/spv`, {
@@ -501,13 +465,6 @@ export const getSPVProof: Reducer = async (p) => {
   return { ...payload, proof };
 };
 
-export const signSendListen: Reducer = buildCommand(
-  signWithChainweaver,
-  send,
-  listen,
-);
-export const signLocal = ({
-  preflight = true,
-  signatureValidation = true,
-}): Reducer =>
+export const signSendListen: Reducer = buildCommand(signWithChainweaver, send, listen);
+export const signLocal = ({ preflight = true, signatureValidation = true }): Reducer =>
   buildCommand(signWithChainweaver, local({ preflight, signatureValidation }));

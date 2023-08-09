@@ -7,9 +7,7 @@ import { mockFetch } from './mockFetch';
 import fetch, { Response } from 'cross-fetch';
 
 const mockedFunctionFetch = fetch as jest.MockedFunction<typeof fetch>;
-mockedFunctionFetch.mockImplementation(
-  mockFetch as jest.MockedFunction<typeof fetch>,
-);
+mockedFunctionFetch.mockImplementation(mockFetch as jest.MockedFunction<typeof fetch>);
 
 test('unhandled endpoint should return error', async () => {
   const expectedErrorMsg = 'Unhandled request URL: /unhandled';
@@ -58,10 +56,7 @@ test('empty requestBody returns error in /local', async () => {
 test('empty requestBody returns error in /local?preflight=true&signatureVerification=true', async () => {
   const expectedErrorMsg = 'Expected RequestInit body not found.';
 
-  const response = await fetch(
-    '/api/v1/local?preflight=true&signatureVerification=true',
-    undefined,
-  );
+  const response = await fetch('/api/v1/local?preflight=true&signatureVerification=true', undefined);
   const responseActual: Promise<Response> = parseResponse(response as Response);
 
   return expect(responseActual).rejects.toThrowError(expectedErrorMsg);
@@ -70,10 +65,7 @@ test('empty requestBody returns error in /local?preflight=true&signatureVerifica
 test('empty requestBody returns error in /local?preflight=true&signatureVerification=false', async () => {
   const expectedErrorMsg = 'Expected RequestInit body not found.';
 
-  const response = await fetch(
-    '/api/v1/local?preflight=true&signatureVerification=false',
-    undefined,
-  );
+  const response = await fetch('/api/v1/local?preflight=true&signatureVerification=false', undefined);
   const responseActual: Promise<Response> = parseResponse(response as Response);
 
   return expect(responseActual).rejects.toThrowError(expectedErrorMsg);

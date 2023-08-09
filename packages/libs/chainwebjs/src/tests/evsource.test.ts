@@ -68,9 +68,7 @@ const logg = (...args: unknown[]): void => {
  * advanced low-level control.
  */
 
-const transactions_chains = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-];
+const transactions_chains = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
 describe('chainweb.transaction.stream', () => {
   streamTest(
@@ -172,9 +170,7 @@ describe('chainweb.block.stream', () => {
  * The functions also return the underlying EventSource object, for more
  * advanced low-level control.
  */
-const events_allChains = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-];
+const events_allChains = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
 describe('chainweb.event.stream', () => {
   streamTest.each([data3, data2])(

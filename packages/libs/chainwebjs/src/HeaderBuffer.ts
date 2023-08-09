@@ -52,9 +52,7 @@ export class HeaderBuffer {
       this.currHeight = h - 1;
     } else if (h <= this.currHeight) {
       // It is an orpaned block
-      throw new Error(
-        `HeaderBuffer: confirmation depth violation: block at height ${h} got orphaned`,
-      );
+      throw new Error(`HeaderBuffer: confirmation depth violation: block at height ${h} got orphaned`);
     } else {
       // place item into buffer
       const idx = h - this.currHeight;
@@ -77,9 +75,7 @@ export class HeaderBuffer {
       if (b !== undefined && b !== null) {
         this.callback(b);
       } else {
-        throw new Error(
-          `HeaderBuffer: missing block at height ${this.currHeight}`,
-        );
+        throw new Error(`HeaderBuffer: missing block at height ${this.currHeight}`);
       }
     }
   }

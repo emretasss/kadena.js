@@ -21,5 +21,4 @@ import { useContext } from 'react';
 
 const defaultContext: IUseThemeProps = { setTheme: () => {}, themes: [] };
 
-export const useTheme = (): IUseThemeProps =>
-  useContext(ThemeContext) ?? defaultContext;
+export const useTheme = (): IUseThemeProps => useContext(ThemeContext) ?? defaultContext;

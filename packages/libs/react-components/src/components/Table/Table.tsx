@@ -20,10 +20,7 @@ export const Table: ITableComposition = ({ children }) => {
   return (
     <StyledTable>
       {React.Children.map(children, (child) => {
-        if (
-          !React.isValidElement(child) ||
-          (Boolean(child) && child.type !== TBody && child.type !== THead)
-        )
+        if (!React.isValidElement(child) || (Boolean(child) && child.type !== TBody && child.type !== THead))
           return null;
 
         return child;

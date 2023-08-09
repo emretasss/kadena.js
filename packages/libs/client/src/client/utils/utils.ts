@@ -11,15 +11,9 @@ export const jsonRequest = (body: object) => ({
   body: JSON.stringify(body),
 });
 
-export function getUrl(
-  host: string,
-  endpoint: string,
-  params?: object,
-): string {
+export function getUrl(host: string, endpoint: string, params?: object): string {
   const cleanHost = host.endsWith('/') ? host.slice(0, host.length - 1) : host;
-  const urlStr = `${cleanHost}${
-    endpoint.startsWith('/') ? endpoint : `/${endpoint}`
-  }`;
+  const urlStr = `${cleanHost}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
   const url = new URL(urlStr);
 
   if (params !== undefined) {
@@ -33,13 +27,7 @@ export function getUrl(
   return url.toString();
 }
 
-export const kadenaHostGenerator = ({
-  networkId,
-  chainId,
-}: {
-  networkId: string;
-  chainId: ChainId;
-}): string => {
+export const kadenaHostGenerator = ({ networkId, chainId }: { networkId: string; chainId: ChainId }): string => {
   switch (networkId) {
     case 'mainnet01':
       return `https://api.chainweb.com/chainweb/0.0/${networkId}/chain/${chainId}/pact`;
@@ -96,10 +84,7 @@ export const mergeAllPollRequestPromises = <T extends object | string>(
   results: Array<IPollRequestPromise<T>>,
 ): IPollRequestPromise<T> => {
   return Object.assign(Promise.all(results).then(mergeAll), {
-    requests: results.reduce(
-      (acc, data) => ({ ...acc, ...data.requests }),
-      {} as Record<string, Promise<T>>,
-    ),
+    requests: results.reduce((acc, data) => ({ ...acc, ...data.requests }), {} as Record<string, Promise<T>>),
   });
 };
 
@@ -108,9 +93,7 @@ export const mapRecord = <T extends any, Mapper extends (item: T) => any>(
   object: Record<string, T>,
   mapper: Mapper,
 ): Record<string, ReturnType<Mapper>> =>
-  Object.fromEntries(
-    Object.entries(object).map(([key, data]) => [key, mapper(data)]),
-  );
+  Object.fromEntries(Object.entries(object).map(([key, data]) => [key, mapper(data)]));
 
 export const withCounter = <
   A extends unknown[],
@@ -126,12 +109,9 @@ export const withCounter = <
   };
 };
 
-export const sleep = (duration: number): Promise<void> =>
-  new Promise((resolve) => setTimeout(resolve, duration));
+export const sleep = (duration: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, duration));
 
-export const groupByHost = (
-  items: Array<{ requestKey: string; hostUrl: string }>,
-): [string, string[]][] => {
+export const groupByHost = (items: Array<{ requestKey: string; hostUrl: string }>): [string, string[]][] => {
   const byHost = new Map<string, string[]>();
   items.forEach(({ hostUrl, requestKey }) => {
     const prev = byHost.get(hostUrl) ?? [];

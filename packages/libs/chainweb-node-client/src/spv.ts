@@ -13,10 +13,7 @@ import fetch from 'cross-fetch';
  * @param apiHost - API host running a Pact-enabled server.
  * @alpha
  */
-export async function spv(
-  requestBody: ISPVRequestBody,
-  apiHost: string,
-): Promise<SPVResponse | Response> {
+export async function spv(requestBody: ISPVRequestBody, apiHost: string): Promise<SPVResponse | Response> {
   const request = stringifyAndMakePOSTRequest(requestBody);
   const spvUrl = new URL(`${apiHost}/spv`);
   try {

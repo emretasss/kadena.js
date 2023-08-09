@@ -13,9 +13,8 @@ Collection of Kadena cryptography utility functions
 
 ## Cryptography Utils
 
-> Cryptography-Utils is a collection of cryptography utility functions. This
-> library is used by kadena.js to hash your transactions. If you have private
-> keys available, you can also sign them with this library.
+> Cryptography-Utils is a collection of cryptography utility functions. This library is used by kadena.js to hash your
+> transactions. If you have private keys available, you can also sign them with this library.
 
 API Reference can be found here [cryptography-utils.api.md][1]
 

@@ -37,9 +37,7 @@ describe('TrackerCard', () => {
     const firstLabelValueContainer = getByTestId('kda-label-value-container-0');
     const firstLabel = getByTestId('kda-label-0');
     const maskedValue = getByTestId('kda-masked-value');
-    const secondLabelValueContainer = getByTestId(
-      'kda-label-value-container-1',
-    );
+    const secondLabelValueContainer = getByTestId('kda-label-value-container-1');
     const secondLabel = getByTestId('kda-label-1');
     const value = getByTestId('kda-value-1');
     const helperText = getByTestId('kda-helper-text');
@@ -121,13 +119,7 @@ describe('TrackerCard', () => {
   });
 
   test('empty labelValue prop and helper text results in no label-value containers and no helper text', () => {
-    const { getByTestId } = render(
-      <TrackerCard
-        labelValues={[]}
-        variant="vertical"
-        icon={ProductIcon.QuickStart}
-      />,
-    );
+    const { getByTestId } = render(<TrackerCard labelValues={[]} variant="vertical" icon={ProductIcon.QuickStart} />);
 
     const trackerCard = getByTestId('kda-tracker-card');
     const icon = getByTestId('kda-icon');
@@ -136,9 +128,7 @@ describe('TrackerCard', () => {
     expect(trackerCard).toBeInTheDocument();
     expect(icon).toBeInTheDocument();
     expect(dataContainer).toBeInTheDocument();
-    expect(
-      screen.queryByTestId('kda-label-value-container-0'),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId('kda-label-value-container-0')).not.toBeInTheDocument();
     expect(screen.queryByTestId('kda-masked-value')).not.toBeInTheDocument();
     expect(screen.queryByTestId('kda-label-0')).not.toBeInTheDocument();
     expect(screen.queryByTestId('kda-value-0')).not.toBeInTheDocument();
@@ -157,15 +147,11 @@ describe('TrackerCard', () => {
     );
 
     const firstLabelValueContainer = getByTestId('kda-label-value-container-0');
-    const secondLabelValueContainer = getByTestId(
-      'kda-label-value-container-1',
-    );
+    const secondLabelValueContainer = getByTestId('kda-label-value-container-1');
 
     expect(firstLabelValueContainer).toBeInTheDocument();
     expect(secondLabelValueContainer).toBeInTheDocument();
-    expect(
-      screen.queryByTestId('kda-label-value-container-2'),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId('kda-label-value-container-2')).not.toBeInTheDocument();
   });
 
   test('masked value should not be masked when default visible is true', () => {

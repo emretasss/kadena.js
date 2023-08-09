@@ -83,17 +83,11 @@ interface IPactTree {
 }
 
 // return the namespace of the module in case the file has multiple modules and namespaces
-const getNamespace = (
-  moduleLoc: number,
-  allNamespaces?: Array<{ location: number; name: string }>,
-): string => {
+const getNamespace = (moduleLoc: number, allNamespaces?: Array<{ location: number; name: string }>): string => {
   if (allNamespaces === undefined) return '';
   const { name } = allNamespaces.reduce(
     (prev, namespace) => {
-      if (
-        namespace.location < moduleLoc &&
-        namespace.location > prev.location
-      ) {
+      if (namespace.location < moduleLoc && namespace.location > prev.location) {
         return namespace;
       }
       return prev;
@@ -104,10 +98,7 @@ const getNamespace = (
 };
 
 // return the list of modules used in the module including the modules used in root level
-const getUsedModules = (
-  moduleLoc: number,
-  allUsedModules?: IUsedModules[],
-): Array<Omit<IUsedModules, 'location'>> => {
+const getUsedModules = (moduleLoc: number, allUsedModules?: IUsedModules[]): Array<Omit<IUsedModules, 'location'>> => {
   if (!allUsedModules) return [];
   const list = allUsedModules.reduce(
     (list, { location, ...mod }) => {
@@ -123,9 +114,7 @@ const getUsedModules = (
 };
 
 // returns the list of modules used in the functions of the module without using "use" keyword in the module
-function getUsedModulesInFunctions(
-  functions?: IFunction[],
-): Required<IModuleLike>[] {
+function getUsedModulesInFunctions(functions?: IFunction[]): Required<IModuleLike>[] {
   if (!functions) return [];
 
   return functions.flatMap((fun) => {
@@ -137,9 +126,7 @@ function getUsedModulesInFunctions(
     }));
   });
 }
-type IsNotDuplicated = <T>(
-  isEqual: (a: T, b: T) => boolean,
-) => (a: T, idx: number, list: T[]) => boolean;
+type IsNotDuplicated = <T>(isEqual: (a: T, b: T) => boolean) => (a: T, idx: number, list: T[]) => boolean;
 
 const isNotDuplicated: IsNotDuplicated =
   <T>(isEqual: (a: T, b: T) => boolean) =>
@@ -147,17 +134,12 @@ const isNotDuplicated: IsNotDuplicated =
     list.findIndex((b) => isEqual(a, b)) === idx;
 
 // eslint-disable-next-line @rushstack/typedef-var
-const isNotDuplicatedModule = isNotDuplicated<IModuleLike>(
-  (a, b) => a.name === b.name && a.namespace === b.namespace,
-);
+const isNotDuplicatedModule = isNotDuplicated<IModuleLike>((a, b) => a.name === b.name && a.namespace === b.namespace);
 
 /**
  * @alpha
  */
-export function contractParser(
-  contract: string,
-  namespace: string = '',
-): [IModule[], IPointer] {
+export function contractParser(contract: string, namespace: string = ''): [IModule[], IPointer] {
   const pointer = getPointer(contract);
   const result = parser(pointer);
   const tree = unwrapData(result);
@@ -185,9 +167,7 @@ interface IModuleLoader {
   getStorage(): Map<string, IModuleWithPointer>;
 }
 
-const moduleLoader = (
-  fetchModule: (moduleFullName: string) => Promise<string>,
-): IModuleLoader => {
+const moduleLoader = (fetchModule: (moduleFullName: string) => Promise<string>): IModuleLoader => {
   const storage = new Map<string, IModuleWithPointer>();
 
   const parseModule = (content: string, namespace?: string): void => {
@@ -242,15 +222,10 @@ async function loadModuleDependencies(
   // skip this module if its not available
   if (!module) return [];
 
-  const interfaceOrModule = [
-    ...(module.usedModules || []),
-    ...(module.usedInterface || []),
-  ];
+  const interfaceOrModule = [...(module.usedModules || []), ...(module.usedInterface || [])];
 
   const mods = await Promise.all(
-    interfaceOrModule.map(async (usedModule) =>
-      loadModuleDependencies(getModuleFullName(usedModule), getModule),
-    ),
+    interfaceOrModule.map(async (usedModule) => loadModuleDependencies(getModuleFullName(usedModule), getModule)),
   );
   const dependencies = mods.flat();
 
@@ -281,11 +256,7 @@ const getFunctionCalls = (
 };
 
 // adding function calls to each function in the module
-function addFunctionCalls(
-  mod: IModule,
-  allModule: Map<string, IModule>,
-  pointer: IPointer,
-): void {
+function addFunctionCalls(mod: IModule, allModule: Map<string, IModule>, pointer: IPointer): void {
   if (mod.kind !== 'module') return;
 
   const usedModules = mod.usedModules;
@@ -337,17 +308,10 @@ function addFunctionCalls(
 }
 
 // extract all capabilities for each function in the module
-function addFunctionCapabilities(
-  mod: IModule,
-  allModule: Map<string, IModule>,
-): void {
+function addFunctionCapabilities(mod: IModule, allModule: Map<string, IModule>): void {
   if (mod.kind !== 'module' || !mod.functions) return;
   mod.functions.forEach((fun) => {
-    fun.allExtractedCaps = getCapabilities(
-      allModule,
-      getModuleFullName(mod),
-      fun.name,
-    );
+    fun.allExtractedCaps = getCapabilities(allModule, getModuleFullName(mod), fun.name);
   });
 }
 

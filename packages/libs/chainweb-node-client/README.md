@@ -15,9 +15,8 @@ API Reference can be found here [chainweb-node-client.api.md][1]
 
 ## Chainweb Node Client
 
-Chainweb Node Client is a typed JavaScript wrapper with fetch to call
-chainweb-node API endpoints. These endpoints are broken down into three
-categories:
+Chainweb Node Client is a typed JavaScript wrapper with fetch to call chainweb-node API endpoints. These endpoints are
+broken down into three categories:
 
 1.  blockchain - wrapper around chainweb-node p2p api endpoints
 2.  pact - [https://api.chainweb.com/openapi/pact.html][2]
@@ -51,9 +50,8 @@ const response: ICommandResult | Response = await listen(requestKey, '');
 
 ### local
 
-Blocking/sync call to submit a command for non-transactional execution. In a
-blockchain environment this would be a node-local “dirty read”. Any database
-writes or changes to the environment are rolled back.
+Blocking/sync call to submit a command for non-transactional execution. In a blockchain environment this would be a
+node-local “dirty read”. Any database writes or changes to the environment are rolled back.
 
 ```ts
 const signedCommand: LocalRequestBody = {
@@ -67,8 +65,7 @@ const response: ICommandResult | Response = await local(signedCommand, '');
 
 ### mkCap
 
-Helper function for creating a pact capability object. Output can be used with
-the `mkSignerCList` function.
+Helper function for creating a pact capability object. Output can be used with the `mkSignerCList` function.
 
 ```ts
 mkCap('coin.TRANSFER', ['fromAcctName', 'toAcctName', 0.1]);
@@ -102,8 +99,7 @@ const response: Response | IPollResponse = await poll(signedCommand, '');
 
 ### send
 
-Asynchronous submission of one or more public (unencrypted) commands to the
-blockchain for execution.
+Asynchronous submission of one or more public (unencrypted) commands to the blockchain for execution.
 
 ```ts
 const signedCommand1: ICommand = {

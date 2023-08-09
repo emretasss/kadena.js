@@ -75,13 +75,7 @@ export function headerStream(
   network: string,
   host: string,
 ): EventSource {
-  return chainUpdates(
-    depth,
-    chainIds,
-    (u) => callback(u.header),
-    network,
-    host,
-  );
+  return chainUpdates(depth, chainIds, (u) => callback(u.header), network, host);
 }
 
 /**
@@ -101,17 +95,7 @@ export async function headerByBlockHash(
   network: string,
   host: string,
 ): Promise<IBlockHeader> {
-  const x = await branch(
-    chainId,
-    [hash],
-    [],
-    undefined,
-    undefined,
-    1,
-    undefined,
-    network,
-    host,
-  );
+  const x = await branch(chainId, [hash], [], undefined, undefined, 1, undefined, network, host);
   return x[0];
 }
 
@@ -148,11 +132,7 @@ export const headerByHeight = async (
  * @param {string} [network="mainnet01"] - chainweb network
  * @param {string} [host="https://api.chainweb.com"] - chainweb api host
  */
-const headerUpdates = (
-  callback: (header: IBufferHeader) => void,
-  network: string,
-  host: string,
-): EventSource => {
+const headerUpdates = (callback: (header: IBufferHeader) => void, network: string, host: string): EventSource => {
   const url = baseUrl(network, host, 'header/updates');
 
   const es = buildEventSource(`${url}`);

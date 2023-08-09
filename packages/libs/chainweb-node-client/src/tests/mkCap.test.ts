@@ -53,18 +53,10 @@ test("should create a cap with JavaScript's Number.MIN_SAFE_INTEGER", () => {
 test('should create a cap with number, pact integer, and pact decimal', () => {
   const bigInt = new PactNumber('90071992547409910000').toPactInteger();
   const smallDec = new PactNumber('-0.90071992547409910000').toPactDecimal();
-  const actual = mkCap('coin.TEST', [
-    Number.MIN_SAFE_INTEGER,
-    bigInt,
-    smallDec,
-  ]);
+  const actual = mkCap('coin.TEST', [Number.MIN_SAFE_INTEGER, bigInt, smallDec]);
   const expected = {
     name: 'coin.TEST',
-    args: [
-      -9007199254740991,
-      { int: '90071992547409910000' },
-      { decimal: '-0.9007199254740991' },
-    ],
+    args: [-9007199254740991, { int: '90071992547409910000' }, { decimal: '-0.9007199254740991' }],
   };
 
   expect(expected).toEqual(actual);

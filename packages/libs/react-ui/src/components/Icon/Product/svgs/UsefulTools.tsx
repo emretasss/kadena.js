@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
 
-const UsefulTools: React.FC<SVGProps<SVGSVGElement>> = (
-  props: SVGProps<SVGSVGElement>,
-) => (
-  <svg
-    width={40}
-    height={40}
-    viewBox="0 0 40 40"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+const UsefulTools: React.FC<SVGProps<SVGSVGElement>> = (props: SVGProps<SVGSVGElement>) => (
+  <svg width={40} height={40} viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" {...props}>
     <g clipPath="url(#clip0_1080_2293)">
       <path
         d="M324,40H56A16,16,0,0,0,40,56v97.82a16,16,0,0,0,16,16h77.87V324a16,16,0,0,0,16,16h80.26a16,16,0,0,0,16-16V169.82H290a50,50,0,0,0,50-50V56A16,16,0,0,0,324,40Z"

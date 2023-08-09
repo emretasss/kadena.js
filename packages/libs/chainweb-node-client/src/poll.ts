@@ -15,10 +15,7 @@ import fetch from 'cross-fetch';
  *
  * @alpha
  */
-export async function poll(
-  requestBody: IPollRequestBody,
-  apiHost: string,
-): Promise<IPollResponse> {
+export async function poll(requestBody: IPollRequestBody, apiHost: string): Promise<IPollResponse> {
   const request = stringifyAndMakePOSTRequest(requestBody);
   const pollUrl = new URL(`${apiHost}/api/v1/poll`);
 

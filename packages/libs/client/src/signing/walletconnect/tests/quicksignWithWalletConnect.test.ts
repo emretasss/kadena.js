@@ -56,12 +56,11 @@ describe('quicksignWithWalletConnect', () => {
       ),
     };
 
-    const quicksignWithWalletConnect: ISignFunction =
-      createWalletConnectQuicksign(
-        client as unknown as Client,
-        session,
-        walletConnectChainId,
-      );
+    const quicksignWithWalletConnect: ISignFunction = createWalletConnectQuicksign(
+      client as unknown as Client,
+      session,
+      walletConnectChainId,
+    );
 
     try {
       // @ts-ignore
@@ -232,9 +231,7 @@ describe('quicksignWithWalletConnect', () => {
       // Fail test if quicksignWithWalletConnect() doesn't throw. Next line shouldn't be reached.
       expect(true).toBe(false);
     } catch (e) {
-      expect(e.message).toContain(
-        'Hash of the transaction signed by the wallet does not match. Our hash',
-      );
+      expect(e.message).toContain('Hash of the transaction signed by the wallet does not match. Our hash');
     }
   });
 });

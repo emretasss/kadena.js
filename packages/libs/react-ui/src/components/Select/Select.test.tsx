@@ -44,9 +44,7 @@ describe('Select', () => {
     );
 
     const selectContainer = getByTestId('kda-select');
-    const selectElement = selectContainer.querySelector(
-      'select',
-    ) as HTMLSelectElement;
+    const selectElement = selectContainer.querySelector('select') as HTMLSelectElement;
 
     fireEvent.change(selectElement, { target: { value: '2' } });
     expect(handleChange).toHaveBeenCalledTimes(1);
@@ -61,9 +59,7 @@ describe('Select', () => {
     );
 
     const selectContainer = getByTestId('kda-select');
-    const selectElement = selectContainer.querySelector(
-      'select',
-    ) as HTMLSelectElement;
+    const selectElement = selectContainer.querySelector('select') as HTMLSelectElement;
 
     expect(selectElement.disabled).toBe(true);
   });

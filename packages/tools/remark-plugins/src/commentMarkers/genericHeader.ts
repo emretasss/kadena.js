@@ -23,9 +23,5 @@ export function genericHeader(vFile: VFile) {
   <img src="${blackLogoPath}" width="200" alt="kadena.js logo" />
 </picture>`;
 
-  return root([
-    heading(1, text(name)),
-    paragraph(text(description)),
-    html(logo),
-  ]);
+  return root([heading(1, text(name)), paragraph(text(description)), html(logo)]);
 }

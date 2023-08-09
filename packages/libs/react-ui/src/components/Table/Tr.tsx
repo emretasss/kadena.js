@@ -17,32 +17,18 @@ export const Tr: FC<ITrProps> = ({ children, url, onClick }) => {
   return (
     <tr className={trClass}>
       {React.Children.map(children, (child) => {
-        if (
-          !React.isValidElement(child) ||
-          (Boolean(child) && child.type !== Th && child.type !== Td)
-        )
-          return null;
+        if (!React.isValidElement(child) || (Boolean(child) && child.type !== Th && child.type !== Td)) return null;
 
         return child;
       })}
 
       {url !== undefined ? (
         <td className={linkButtonClass}>
-          <IconButton
-            as="a"
-            href={url}
-            title={url}
-            icon={SystemIcon.TrailingIcon}
-          />
+          <IconButton as="a" href={url} title={url} icon={SystemIcon.TrailingIcon} />
         </td>
       ) : onClick !== undefined ? (
         <td className={linkButtonClass}>
-          <IconButton
-            as="button"
-            title=""
-            onClick={onClick}
-            icon={SystemIcon.TrailingIcon}
-          />
+          <IconButton as="button" title="" onClick={onClick} icon={SystemIcon.TrailingIcon} />
         </td>
       ) : (
         ''

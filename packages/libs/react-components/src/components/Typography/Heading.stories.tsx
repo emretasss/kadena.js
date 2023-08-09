@@ -1,11 +1,5 @@
 import { Heading } from './Heading';
-import {
-  boldVariant,
-  colorVariant,
-  elementVariant,
-  fontVariant,
-  transformVariant,
-} from './styles';
+import { boldVariant, colorVariant, elementVariant, fontVariant, transformVariant } from './styles';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
@@ -37,9 +31,7 @@ const meta: Meta<typeof Heading> = {
       control: { type: 'select' },
     },
     transform: {
-      options: Object.keys(
-        transformVariant,
-      ) as (keyof typeof transformVariant)[],
+      options: Object.keys(transformVariant) as (keyof typeof transformVariant)[],
       control: { type: 'radio' },
     },
   },
@@ -60,14 +52,7 @@ export const Primary: Story = {
     transform: undefined,
   },
   render: ({ font, bold, as, variant, transform, children, color }) => (
-    <Heading
-      font={font}
-      bold={bold}
-      as={as}
-      variant={variant}
-      color={color}
-      transform={transform}
-    >
+    <Heading font={font} bold={bold} as={as} variant={variant} color={color} transform={transform}>
       {children}
     </Heading>
   ),

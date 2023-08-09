@@ -7,9 +7,7 @@ import { IPactCommand } from '../interfaces/IPactCommand';
  * Prepare a transaction object. Creates an object with hash, cmd and sigs ({@link @kadena/types#IUnsignedCommand})
  * @public
  */
-export const createTransaction: (
-  pactCommand: Partial<IPactCommand>,
-) => IUnsignedCommand = (pactCommand) => {
+export const createTransaction: (pactCommand: Partial<IPactCommand>) => IUnsignedCommand = (pactCommand) => {
   const cmd = JSON.stringify(pactCommand);
 
   // TODO: some wallets might need this,

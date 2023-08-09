@@ -7,14 +7,7 @@ interface IChoice {
   value: string;
 }
 export interface IQuestion {
-  type:
-    | 'input'
-    | 'select'
-    | 'multi-select'
-    | 'confirm'
-    | 'multi-input'
-    | 'rerun'
-    | 'execute';
+  type: 'input' | 'select' | 'multi-select' | 'confirm' | 'multi-input' | 'rerun' | 'execute';
   name: string;
   message: string;
   defaultValue?: string | string[];
@@ -30,15 +23,10 @@ export interface IQuestionAnswer {
   answeredQuestions: { question: IQuestion; answer: IAnswers }[];
 }
 
-const findNextQuestion = (
-  question: IQuestion,
-  questions: IQuestion[],
-  answers: IAnswers,
-): IQuestion | undefined => {
+const findNextQuestion = (question: IQuestion, questions: IQuestion[], answers: IAnswers): IQuestion | undefined => {
   const index = questions.indexOf(question);
   const next = questions[index + 1];
-  if (next?.when && !next.when(answers))
-    return findNextQuestion(next, questions, answers);
+  if (next?.when && !next.when(answers)) return findNextQuestion(next, questions, answers);
   return next;
 };
 export const getNextQuestion = ({
@@ -49,11 +37,7 @@ export const getNextQuestion = ({
 }: IQuestionAnswer): IQuestionAnswer => {
   if (!current)
     return {
-      current: findNextQuestion(
-        { type: 'input', message: '', name: '' },
-        questions,
-        answers,
-      ),
+      current: findNextQuestion({ type: 'input', message: '', name: '' }, questions, answers),
       questions,
       answers,
       answeredQuestions,

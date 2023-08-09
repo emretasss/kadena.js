@@ -9,16 +9,14 @@ layout: full
 
 # Building a voting dApp
 
-One of the best ways to learn a new technology is to get your hands dirty and
-build applications with it. In this tutorial we'll learn to use Kadena's smart
-contract language, Pact, to build a minimal voting application that runs on the
-Chainweb blockchain.
+One of the best ways to learn a new technology is to get your hands dirty and build applications with it. In this
+tutorial we'll learn to use Kadena's smart contract language, Pact, to build a minimal voting application that runs on
+the Chainweb blockchain.
 
-Along the way, we'll learn how to write and test smart contracts in Pact, the
-basic architecture of dApps on Chainweb, and about major concepts like gas
-stations and deploying contracts. We'll also get acquainted with several useful
-tools in the Kadena ecosystem, including the Pact local test server and
-JavaScript libraries you can use to interact with nodes running Pact.
+Along the way, we'll learn how to write and test smart contracts in Pact, the basic architecture of dApps on Chainweb,
+and about major concepts like gas stations and deploying contracts. We'll also get acquainted with several useful tools
+in the Kadena ecosystem, including the Pact local test server and JavaScript libraries you can use to interact with
+nodes running Pact.
 
 ### Voting on the Blockchain
 
@@ -27,35 +25,28 @@ The complete code of this tutorial can also be found in the
 [voting dApp repository](https://github.com/kadena-community/voting-dapp).  
 :::
 
-Elections are a necessary part of democracies and democratic organizations. The
-voting systems used to administer elections must ensure a fair process and
-trustworthy result — easier said than done! Election security is a deep,
+Elections are a necessary part of democracies and democratic organizations. The voting systems used to administer
+elections must ensure a fair process and trustworthy result — easier said than done! Election security is a deep,
 fascinating topic, especially when it comes to online voting.
 
-Blockchain technologies are well-suited to help secure online elections. A
-public blockchain gives participants a single view of all transactions, which
-makes it easy to verify votes without trusting a central election authority to
-tally and report the results.
+Blockchain technologies are well-suited to help secure online elections. A public blockchain gives participants a single
+view of all transactions, which makes it easy to verify votes without trusting a central election authority to tally and
+report the results.
 
-Blockchain technologies don't solve all election security issues, but they're a
-strong foundation and
+Blockchain technologies don't solve all election security issues, but they're a strong foundation and
 [researchers have proposed fully-secure online voting systems based on them](https://eprint.iacr.org/2019/1406.pdf).
-They've also seen success in the real world: Thailand's Democrat party held an
-election in which
+They've also seen success in the real world: Thailand's Democrat party held an election in which
 [more than 120,000 registered Democrats voted via blockchain](https://bitcoinmagazine.com/culture/thailand-uses-blockchain-supported-electronic-voting-system-primaries).
 
 ### What We're Building
 
-We'll build a tiny voting dApp prototype that lets anyone with a Kadena wallet
-address vote for a candidate from a selection of candidates. Each voter (i.e.
-address) can vote once. Some Kadena accounts are chosen as "election officials",
-and the smart contract grants them special privileges to select the candidates.
-Election officials can add new candidates at any time (but they can't remove
-candidates or adjust their votes).
+We'll build a tiny voting dApp prototype that lets anyone with a Kadena wallet address vote for a candidate from a
+selection of candidates. Each voter (i.e. address) can vote once. Some Kadena accounts are chosen as "election
+officials", and the smart contract grants them special privileges to select the candidates. Election officials can add
+new candidates at any time (but they can't remove candidates or adjust their votes).
 
-Once the app is deployed, the election has begun! The frontend for our dApp will
-help users submit their votes and will display the total votes received by each
-candidate.
+Once the app is deployed, the election has begun! The frontend for our dApp will help users submit their votes and will
+display the total votes received by each candidate.
 
 ## Setup
 
@@ -67,8 +58,7 @@ candidate.
 
 #### Create Project Structure
 
-Let's start by creating a basic project structure. Open your terminal and run
-the commands below:
+Let's start by creating a basic project structure. Open your terminal and run the commands below:
 
 ```bash
 mkdir election-dapp && cd election-dapp
@@ -91,8 +81,8 @@ A typical developer workflow looks like this:
 4. Deploy to local pact server
 5. Deploy to Testnet
 
-In this section we will focus on steps 1 to 3. Later, we'll deploy our smart
-contract to a local Pact server and to Testnet (the test version of Chainweb).
+In this section we will focus on steps 1 to 3. Later, we'll deploy our smart contract to a local Pact server and to
+Testnet (the test version of Chainweb).
 
 In your project directory, let's create two files:
 
@@ -100,30 +90,23 @@ In your project directory, let's create two files:
 - `pact/election.repl`, which will hold our tests
 
 :::info  
-What is Pact REPL? The Pact REPL is an environment where we can load our Pact
-source code and work with it interactively. It's a best practice to include a
-`.repl` file next to your source code which imports your contract, calls
-functions from it, and inspects its current state to ensure everything is
-correct.  
+What is Pact REPL? The Pact REPL is an environment where we can load our Pact source code and work with it
+interactively. It's a best practice to include a `.repl` file next to your source code which imports your contract,
+calls functions from it, and inspects its current state to ensure everything is correct.  
 :::
 
-We also have to import some dependencies to our project but first let's provide
-some context to better understand why we need them. In the introduction we
-explained that our voting smart contract allows anyone with a wallet address to
-vote for a candidate. Kadena uses an account model so creating a wallet means
-creating an account for the native coin, KDA, which is a smart contract deployed
-on Kadena blockchain. The name of this contract is intuitively `coin`.
+We also have to import some dependencies to our project but first let's provide some context to better understand why we
+need them. In the introduction we explained that our voting smart contract allows anyone with a wallet address to vote
+for a candidate. Kadena uses an account model so creating a wallet means creating an account for the native coin, KDA,
+which is a smart contract deployed on Kadena blockchain. The name of this contract is intuitively `coin`.
 
 The `coin` contract itself has two additional dependencies:
 
-- `fungible-v2`, an interface that each fungible token deployed on Kadena should
-  implement
-- `fungible-xchain-v1`, an interface that provides standard capability for
-  cross-chain transfers.
+- `fungible-v2`, an interface that each fungible token deployed on Kadena should implement
+- `fungible-xchain-v1`, an interface that provides standard capability for cross-chain transfers.
 
-To be able to properly test our voting contract we will need to invoke functions
-defined in the `coin` contract so we have to include it in our project together
-with its dependencies, the `fungible-v2` and `fungible-xchain-v1` interfaces.
+To be able to properly test our voting contract we will need to invoke functions defined in the `coin` contract so we
+have to include it in our project together with its dependencies, the `fungible-v2` and `fungible-xchain-v1` interfaces.
 
 Please find the latest versions of those modules here:
 
@@ -131,24 +114,20 @@ Please find the latest versions of those modules here:
 - [fungible-v2.pact](https://github.com/kadena-io/chainweb-node/blob/master/pact/coin-contract/v2/fungible-v2.pact)
 - [fungible-xchain-v1.pact](https://github.com/kadena-io/chainweb-node/blob/master/pact/coin-contract/v4/fungible-xchain-v1.pact)
 
-Make sure to add these files to your project in the `pact/root/` directory. You
-should have 3 new files: `coin-v5.pact`, `fungible-v2.pact`,
-`fungible-xchain-v1.pact`.
+Make sure to add these files to your project in the `pact/root/` directory. You should have 3 new files: `coin-v5.pact`,
+`fungible-v2.pact`, `fungible-xchain-v1.pact`.
 
 Before we begin writing code, let's recap the features of our voting contract:
 
-1. Voters can record 1 vote for a candidate of their choice from the list of
-   options. In response to voting, we'll return confirmation of their vote by
-   returning their vote back to them.
-2. Election administrators can add candidates. The "add candidate" functionality
-   should be guarded to only allow access to keys belonging to the election
-   administrator accounts.
+1. Voters can record 1 vote for a candidate of their choice from the list of options. In response to voting, we'll
+   return confirmation of their vote by returning their vote back to them.
+2. Election administrators can add candidates. The "add candidate" functionality should be guarded to only allow access
+   to keys belonging to the election administrator accounts.
 
 #### Election module
 
-We're going to start by creating a Pact module called `election` and define a
-keyset named `election-admin-keyset` which is used to guard certain features of
-the module.
+We're going to start by creating a Pact module called `election` and define a keyset named `election-admin-keyset` which
+is used to guard certain features of the module.
 
 Let's copy the following code in the `election.pact` file:
 
@@ -173,34 +152,27 @@ Let's copy the following code in the `election.pact` file:
 )
 ```
 
-The `GOVERNANCE` keyword on the module definition line is the _module governance
-capability_ and it references the capability defined right below using the
-`defcap` construct. It's purpose is to restrict access to the module upgrade and
-administration operations, for example later on we'll add an `insert-candidate`
-function that only administrators should be able to call and we'll use the
-GOVERNANCE capability to guard it. The implementation can be as simple as in our
-example, enforcing a keyset or more complex like tallying a stakeholder vote on
-an upgrade hash.
+The `GOVERNANCE` keyword on the module definition line is the _module governance capability_ and it references the
+capability defined right below using the `defcap` construct. It's purpose is to restrict access to the module upgrade
+and administration operations, for example later on we'll add an `insert-candidate` function that only administrators
+should be able to call and we'll use the GOVERNANCE capability to guard it. The implementation can be as simple as in
+our example, enforcing a keyset or more complex like tallying a stakeholder vote on an upgrade hash.
 
 :::note  
-Module names and keyset definitions are required to be unique. We will mention
-this again when we get to deploy our contract to Testnet, but you should keep
-this in mind when you think about choosing a name for your modules and
+Module names and keyset definitions are required to be unique. We will mention this again when we get to deploy our
+contract to Testnet, but you should keep this in mind when you think about choosing a name for your modules and
 keysets.  
 :::
 
 #### Capabilities
 
-Capabilities offer a system to manage user rights in an explicit way, i.e. allow
-a user to perform some sensitive task if the required capability has been
-successfully acquired. If not, the transaction will fail.
+Capabilities offer a system to manage user rights in an explicit way, i.e. allow a user to perform some sensitive task
+if the required capability has been successfully acquired. If not, the transaction will fail.
 
-Our module already defines one capability, the module governance capability. In
-addition to that, we're going to define the `ACCOUNT-OWNER` and the `VOTED`
-capabilities. The `VOTED` capability is used to emit an event when a vote has
-been made. The `ACCOUNT-OWNER` capability validates the ownership of the KDA
-account that's used to identify a user. This might not be clear at first but
-let's look at the code:
+Our module already defines one capability, the module governance capability. In addition to that, we're going to define
+the `ACCOUNT-OWNER` and the `VOTED` capabilities. The `VOTED` capability is used to emit an event when a vote has been
+made. The `ACCOUNT-OWNER` capability validates the ownership of the KDA account that's used to identify a user. This
+might not be clear at first but let's look at the code:
 
 ```clojure
 ;; election.pact
@@ -224,33 +196,29 @@ let's look at the code:
   )
 ```
 
-The user submitting the vote is identified by the `account` parameter that we
-will pass to the `vote` function that we'll implement later on. This parameter
-can take any value which is why we need to make sure the value provided is the
-correct one, in our case it should be the KDA account controlled by the tx
-initiator. Every KDA account has a _guard_ which controls access to it and we're
-using the `coin.details` function that returns an object of type
-`fungible-v2.account-details` to retrieve this guard for the provided account.
-Finally we execute the guard using the built-in Pact function `enforce-guard`.
+The user submitting the vote is identified by the `account` parameter that we will pass to the `vote` function that
+we'll implement later on. This parameter can take any value which is why we need to make sure the value provided is the
+correct one, in our case it should be the KDA account controlled by the tx initiator. Every KDA account has a _guard_
+which controls access to it and we're using the `coin.details` function that returns an object of type
+`fungible-v2.account-details` to retrieve this guard for the provided account. Finally we execute the guard using the
+built-in Pact function `enforce-guard`.
 
 Don't forget to add the snippet above in the `election` module body.
 
 :::info
 
 To learn more about guards and capabilities, please visit the
-[Guards, Capabilities and Events](/docs/pact/reference/concepts#guards) section
-of the Pact official documentation.
+[Guards, Capabilities and Events](/docs/pact/reference/concepts#guards) section of the Pact official documentation.
 
 :::
 
 ### Tables and data storage
 
-So far we've defined a module and implemented some capabilities. Now we're going
-to talk about storing data. We have to store who the candidates are so you can
-vote for them and as well as who voted already so we can prevent double-voting.
+So far we've defined a module and implemented some capabilities. Now we're going to talk about storing data. We have to
+store who the candidates are so you can vote for them and as well as who voted already so we can prevent double-voting.
 
-Pact smart contracts store data in tables and each table has its own schema. For
-our voting contract we need 2 tables: `candidates` and `votes`.
+Pact smart contracts store data in tables and each table has its own schema. For our voting contract we need 2 tables:
+`candidates` and `votes`.
 
 ```clojure
   ;; election.pact
@@ -279,33 +247,27 @@ our voting contract we need 2 tables: `candidates` and `votes`.
   (deftable candidates:{candidates-schema})
 ```
 
-To summarize, we created a table to store candidates and their associated vote
-counts and one for storing what accounts have already voted to prevent
-double-voting.
+To summarize, we created a table to store candidates and their associated vote counts and one for storing what accounts
+have already voted to prevent double-voting.
 
 :::info  
-To find out about all Pact's supported types you can check the
-[Data Types](/docs/pact/reference/concepts#data-types) section in the Pact
-official documentation.  
+To find out about all Pact's supported types you can check the [Data Types](/docs/pact/reference/concepts#data-types)
+section in the Pact official documentation.  
 :::
 
 :::note  
-Pact implements a key-row model which means a row is accessed by a single key.
-The key is implicitly present in the schema but it is our responsibility as
-developers to design the schema in a way that we can retrieve the information
-that we need using a single row query. Multiple row queries are very expensive
-and should not be used.
+Pact implements a key-row model which means a row is accessed by a single key. The key is implicitly present in the
+schema but it is our responsibility as developers to design the schema in a way that we can retrieve the information
+that we need using a single row query. Multiple row queries are very expensive and should not be used.
 
-The row key is always a simple string, not to be confused with the cryptographic
-keys used for signing transactions.  
+The row key is always a simple string, not to be confused with the cryptographic keys used for signing transactions.  
 :::
 
 #### Functionality
 
-We've defined our data storage so now we can add functions to read and write
-data, i.e. candidates and votes. One of the core features of our voting contract
-is to allow users to vote for a candidate while preventing double-voting so
-let's implement it:
+We've defined our data storage so now we can add functions to read and write data, i.e. candidates and votes. One of the
+core features of our voting contract is to allow users to vote for a candidate while preventing double-voting so let's
+implement it:
 
 ```clojure
   ;; election.pact
@@ -384,12 +346,10 @@ let's implement it:
   )
 ```
 
-A quick recap: we implemented a `vote` function that allows to vote for a
-candidate while **preventing double-voting, voting for a candidate that doesn't
-exist or voting with an account that the user doesn't own**.
+A quick recap: we implemented a `vote` function that allows to vote for a candidate while **preventing double-voting,
+voting for a candidate that doesn't exist or voting with an account that the user doesn't own**.
 
-Now that we can vote, we also need a function to read the number of votes a
-candidate received:
+Now that we can vote, we also need a function to read the number of votes a candidate received:
 
 ```clojure
   (defun get-votes:integer (cid:string)
@@ -421,15 +381,13 @@ Last thing on the list is adding candidates:
   )
 ```
 
-Inserting a new candidate is an "admin-only" operation and we reused the already
-defined `GOVERNANCE` capability to guard it.
+Inserting a new candidate is an "admin-only" operation and we reused the already defined `GOVERNANCE` capability to
+guard it.
 
-We have now essentially completed our module. All the required functionality is
-implemented.
+We have now essentially completed our module. All the required functionality is implemented.
 
-When a module is deployed, the tables that it defines need to be created. This
-is done using the `create-table` function. Insert the snippet below after the
-module's closing parenthesis:
+When a module is deployed, the tables that it defines need to be created. This is done using the `create-table`
+function. Insert the snippet below after the module's closing parenthesis:
 
 ```clojure
 ;; election.pact
@@ -447,11 +405,9 @@ module's closing parenthesis:
 ```
 
 :::info  
-Code outside the module will be called when the module is loaded the first time,
-when its deployed or upgraded. In the snippet above we are checking if the
-`upgrade` key that comes from transaction data is `true` and only execute the
-`create-table` calls if it's not since we cannot recreate tables when upgrading
-a module.  
+Code outside the module will be called when the module is loaded the first time, when its deployed or upgraded. In the
+snippet above we are checking if the `upgrade` key that comes from transaction data is `true` and only execute the
+`create-table` calls if it's not since we cannot recreate tables when upgrading a module.  
 :::
 
 You can find the complete source code of the `election.pact` contract in the
@@ -460,47 +416,40 @@ You can find the complete source code of the `election.pact` contract in the
 It's time to summarize what we've learned so far:
 
 - we can use Pact capabilities to protect certain features of our smart contract
-- we should design our tables in such a way that we can retrieve the information
-  using a single row query
+- we should design our tables in such a way that we can retrieve the information using a single row query
 - we can validate the owner of an account by executing its guard
 
 These are general concepts to keep in mind when developing Pact smart contracts.
 
 ### Namespaces
 
-Each module or interface needs to be part of a namespace. To set the namespace
-of a module we have to use the `namespace` function. Ensure the following line
-is at the beginning of your `.pact` files:
+Each module or interface needs to be part of a namespace. To set the namespace of a module we have to use the
+`namespace` function. Ensure the following line is at the beginning of your `.pact` files:
 
 ```clojure
 (namespace 'free)
 ```
 
-Within the same namespace, each module name needs to be unique, similar
-requirement for defined keysets.
+Within the same namespace, each module name needs to be unique, similar requirement for defined keysets.
 
-Access a module's function using the fully qualified name
-`{namespace}.{module-name}.{function-name}`, e.g. `free.election.vote`. See the
-Pact documentation to
+Access a module's function using the fully qualified name `{namespace}.{module-name}.{function-name}`, e.g.
+`free.election.vote`. See the Pact documentation to
 [read more about namespaces](/docs/pact/reference/concepts#namespace-declaration).
 
 The `free` namespace is available to use on both `mainnet` and `testnet`.
 
 ### Testing the contract
 
-We wrote quite a bit of code but at this point we don't know if it's working
-correctly. A critical step in smart-contract development process is writing a
-proper set of tests which is what we're going to focus on now.
+We wrote quite a bit of code but at this point we don't know if it's working correctly. A critical step in
+smart-contract development process is writing a proper set of tests which is what we're going to focus on now.
 
 :::tip  
-We separated writing functionality and writing tests to make it easier to follow
-this tutorial but in a real-world scenario you should work on these in
-parallel.  
+We separated writing functionality and writing tests to make it easier to follow this tutorial but in a real-world
+scenario you should work on these in parallel.  
 :::
 
-We're going to start by setting up the environment data that we need for our
-tests, load the required modules, i.e. `coin` module and of our `election`
-module and create some KDA accounts that we will use to vote later on.
+We're going to start by setting up the environment data that we need for our tests, load the required modules, i.e.
+`coin` module and of our `election` module and create some KDA accounts that we will use to vote later on.
 
 Create the `election.repl` file and copy the snippet below:
 
@@ -566,9 +515,8 @@ Create the `election.repl` file and copy the snippet below:
 (commit-tx)
 ```
 
-Now that this initial setup is done, we can go on and write some tests. Notice
-that we did not add any candidates just yet so any attempt to vote at this point
-should fail. Let's try it:
+Now that this initial setup is done, we can go on and write some tests. Notice that we did not add any candidates just
+yet so any attempt to vote at this point should fail. Let's try it:
 
 ```clojure
 ;; election.repl
@@ -585,18 +533,15 @@ should fail. Let's try it:
 (commit-tx)
 ```
 
-In the snippet above we've learned that we can use `expect-failure` to test that
-an expression will fail and that we can configure the keys and capabilities
-signing a transaction using `env-sigs`.
+In the snippet above we've learned that we can use `expect-failure` to test that an expression will fail and that we can
+configure the keys and capabilities signing a transaction using `env-sigs`.
 
-:::note REPL-Only Functions `expect-failure` and `env-sigs` are two of the many
-REPL-only functions that we can use in `.repl` files to test Pact
-smart-contracts by simulating blockchain environment. You can check the
-[complete list of REPL-only functions](/docs/pact/reference/functions/repl-only-functions#repl-only-functions)
-in the Pact official documentation. :::
+:::note REPL-Only Functions `expect-failure` and `env-sigs` are two of the many REPL-only functions that we can use in
+`.repl` files to test Pact smart-contracts by simulating blockchain environment. You can check the
+[complete list of REPL-only functions](/docs/pact/reference/functions/repl-only-functions#repl-only-functions) in the
+Pact official documentation. :::
 
-Next we're going to add some candidates and check if their number of votes is
-correctly initialized.
+Next we're going to add some candidates and check if their number of votes is correctly initialized.
 
 ```clojure
 ;; election.repl
@@ -622,11 +567,11 @@ correctly initialized.
 (commit-tx)
 ```
 
-We can use `expect` function to test that any 2 expressions value is equal, in
-this case we checked if `get-votes` returns 0 for each candidate.
+We can use `expect` function to test that any 2 expressions value is equal, in this case we checked if `get-votes`
+returns 0 for each candidate.
 
-Moving on, we want to validate that votes are correctly recorded, the `VOTED`
-event is emitted and double-voting is not allowed.
+Moving on, we want to validate that votes are correctly recorded, the `VOTED` event is emitted and double-voting is not
+allowed.
 
 ```clojure
 ;; election.repl
@@ -673,19 +618,15 @@ event is emitted and double-voting is not allowed.
 (commit-tx)
 ```
 
-Notice the `let` construct that we used above, it is helpful when you need to
-bind some variables to be in the same scope as other logic that uses them. In
-our case we first loaded the number of votes and binded the result to `count`
-variable which we compared with the new count after submitting a vote. Feel free
-to read more about [`let` and `let*`](/docs/pact/reference/syntax#let) in Pact
-official documentation.
+Notice the `let` construct that we used above, it is helpful when you need to bind some variables to be in the same
+scope as other logic that uses them. In our case we first loaded the number of votes and binded the result to `count`
+variable which we compared with the new count after submitting a vote. Feel free to read more about
+[`let` and `let*`](/docs/pact/reference/syntax#let) in Pact official documentation.
 
 :::info  
-Write a test Can you think of some cases that we didn't cover? Hint:
-ACCOUNT-OWNER.
+Write a test Can you think of some cases that we didn't cover? Hint: ACCOUNT-OWNER.
 
-Try to write a test that validates that only the correct owner of an account can
-vote.  
+Try to write a test that validates that only the correct owner of an account can vote.  
 :::
 
 The only thing left is to run these tests and confirm everything is working:
@@ -696,8 +637,7 @@ pact> (load "election.repl")
 ```
 
 :::tip  
-The REPL preserves state between subsequent runs unless the optional parameter
-`reset` is set to true:
+The REPL preserves state between subsequent runs unless the optional parameter `reset` is set to true:
 
 ```
 (load "election.repl" true)
@@ -707,53 +647,44 @@ The REPL preserves state between subsequent runs unless the optional parameter
 
 Let's recap what we've learned in this section:
 
-- we can test Pact smart-contracts using `.repl` scripts that simulate
-  blockchain environment through a set of REPL-only functions
-- before writing tests we need to make sure all required modules are loaded as
-  well as KDA accounts are created if we need them
-- we can test functions returned values, emitted events, failure scenarios (and
-  much more that we couldn't cover)
+- we can test Pact smart-contracts using `.repl` scripts that simulate blockchain environment through a set of REPL-only
+  functions
+- before writing tests we need to make sure all required modules are loaded as well as KDA accounts are created if we
+  need them
+- we can test functions returned values, emitted events, failure scenarios (and much more that we couldn't cover)
 
 ### Implementing the Gas Station
 
-A unique feature of Kadena is the ability to allow gas to be paid by a different
-entity than the one who initiated the transaction. This entity is what we call a
-_gas station_.
+A unique feature of Kadena is the ability to allow gas to be paid by a different entity than the one who initiated the
+transaction. This entity is what we call a _gas station_.
 
 :::info  
-**Gas** is the cost necessary to perform a transaction on the network. Gas is
-paid to miners and its price varies based on supply and demand. It's a critical
-piece of the puzzle, but at the same time it brings up a UX problem. Every user
-needs to be aware of what gas is as well as how much gas they need to pay for
-their transaction. This causes significant friction and a less than ideal
-experience.
+**Gas** is the cost necessary to perform a transaction on the network. Gas is paid to miners and its price varies based
+on supply and demand. It's a critical piece of the puzzle, but at the same time it brings up a UX problem. Every user
+needs to be aware of what gas is as well as how much gas they need to pay for their transaction. This causes significant
+friction and a less than ideal experience.
 
 To help mitigate this problem Kadena brings an innovation to the game. Hello
 [gas stations](https://medium.com/kadena-io/the-first-crypto-gas-station-is-now-on-kadenas-blockchain-6dc43b4b3836)!
 
-Gas stations are a way for dApps to subsidize gas costs for their users. This
-means that your user doesn't need to know what gas is or how much the gas price
-is, which translates into a smooth experience when interacting with your dApp.
+Gas stations are a way for dApps to subsidize gas costs for their users. This means that your user doesn't need to know
+what gas is or how much the gas price is, which translates into a smooth experience when interacting with your dApp.
 
-In our voting app this will allow users to submit votes without paying for gas,
-instead gas will be subsidized by the gas station. In short, this means that
-miners will still be paid, but our users can vote for free.
+In our voting app this will allow users to submit votes without paying for gas, instead gas will be subsidized by the
+gas station. In short, this means that miners will still be paid, but our users can vote for free.
 
-The standard for gas station implementation is defined by the `gas-payer-v1`
-interface. The `gas-payer-v1` interface is deployed to all chains on `testnet`
-and `mainnet` so you can directly use it in your contract. We can specify that a
+The standard for gas station implementation is defined by the `gas-payer-v1` interface. The `gas-payer-v1` interface is
+deployed to all chains on `testnet` and `mainnet` so you can directly use it in your contract. We can specify that a
 module implements an interface using the `(implements INTERFACE)` construct.  
 :::
 
 :::info  
-Pact interfaces are similar to Java's interfaces, Scala's traits, Haskell's
-typeclasses or Solidity's interfaces. If you're not familiar with this concept
-you can [read more about it](/docs/pact/reference/concepts#interfaces) in Pact
+Pact interfaces are similar to Java's interfaces, Scala's traits, Haskell's typeclasses or Solidity's interfaces. If
+you're not familiar with this concept you can [read more about it](/docs/pact/reference/concepts#interfaces) in Pact
 reference.  
 :::
 
-Let's take a look at the `gas-payer-v1` interface defining a capability and a
-function:
+Let's take a look at the `gas-payer-v1` interface defining a capability and a function:
 
 ```clojure
 (interface gas-payer-v1
@@ -791,22 +722,19 @@ function:
 
 :::tip
 
-`@doc` is a metadata field used to provide documentation and `@model` is used by
-Pact tooling to verify the correctness of the implementation. You can
-[read more about docs and metadata](/docs/pact/reference/syntax#docs-and-metadata)
-in Pact reference.
+`@doc` is a metadata field used to provide documentation and `@model` is used by Pact tooling to verify the correctness
+of the implementation. You can [read more about docs and metadata](/docs/pact/reference/syntax#docs-and-metadata) in
+Pact reference.
 
 :::
 
-Our module needs to implement all the functions and capabilities defined by the
-`gas-payer-v1` interface:
+Our module needs to implement all the functions and capabilities defined by the `gas-payer-v1` interface:
 
 - `GAS_PAYER` capability
 - `create-gas-payer-guard` function
 
-A gas station allows someone to debit from a coin account that they do not own,
-gas station account, to pay the gas fee for a transaction under certain
-conditions. How exactly that happens, let's see below.
+A gas station allows someone to debit from a coin account that they do not own, gas station account, to pay the gas fee
+for a transaction under certain conditions. How exactly that happens, let's see below.
 
 Create a new file `election-gas-station.pact` and paste the following snippet:
 
@@ -827,10 +755,9 @@ Create a new file `election-gas-station.pact` and paste the following snippet:
 )
 ```
 
-Next we will implement the `gas-payer-v1` interface. We don't want to let users
-abuse our gas station so we'll have to add a limit for the maximum gas price
-we're willing to pay or make sure it can only be used to pay for transactions
-that are calling the `election` module. Let's get to it:
+Next we will implement the `gas-payer-v1` interface. We don't want to let users abuse our gas station so we'll have to
+add a limit for the maximum gas price we're willing to pay or make sure it can only be used to pay for transactions that
+are calling the `election` module. Let's get to it:
 
 ```clojure
   ;; election-gas-station.pact
@@ -875,9 +802,8 @@ that are calling the `election` module. Let's get to it:
   )
 ```
 
-To recap, the `GAS_PAYER` capability implementation performs a few checks and
-composes the `ALLOW_GAS` capability that we will define next. `chain-gas-price`
-and `enforce-below-or-at-gas-price` are helper functions to limit the gas price
+To recap, the `GAS_PAYER` capability implementation performs a few checks and composes the `ALLOW_GAS` capability that
+we will define next. `chain-gas-price` and `enforce-below-or-at-gas-price` are helper functions to limit the gas price
 that our gas station is willing to pay.
 
 ```clojure
@@ -900,8 +826,7 @@ that our gas station is willing to pay.
   )
 ```
 
-Then we can wrap it up and make sure the `init` function is called when we're
-deploying the module:
+Then we can wrap it up and make sure the `init` function is called when we're deploying the module:
 
 ```clojure
 ;; election-gas-station.pact
@@ -913,56 +838,48 @@ deploying the module:
 )
 ```
 
-First we define the `ALLOW_GAS` capability which is brought in scope by the
-`GAS_PAYER` capability through `compose-capability` function.
+First we define the `ALLOW_GAS` capability which is brought in scope by the `GAS_PAYER` capability through
+`compose-capability` function.
 
-:::note Composing capabilities allows for modular factoring of guard code, e.g.
-an "outer" capability could be composed out of multiple "inner" capabilities.
-Also composed capabilities are only in scope when their parent capability is
+:::note Composing capabilities allows for modular factoring of guard code, e.g. an "outer" capability could be composed
+out of multiple "inner" capabilities. Also composed capabilities are only in scope when their parent capability is
 granted. :::
 
-Then we implement the `gas-payer-guard` function which tests if `GAS` (magic
-capability defined in coin contract) and `ALLOW_GAS` capabilities have been
-granted which are needed to be able to pay for gas fees. By composing
-`ALLOW_GAS` in `GAS_PAYER` we hide the implementation details of `GAS_PAYER`
-that `gas-payer-guard` function does not need to know about. This is then used
-in `create-gas-payer-guard` to create a special guard for the coin contract
-account from where the gas fees are paid.
+Then we implement the `gas-payer-guard` function which tests if `GAS` (magic capability defined in coin contract) and
+`ALLOW_GAS` capabilities have been granted which are needed to be able to pay for gas fees. By composing `ALLOW_GAS` in
+`GAS_PAYER` we hide the implementation details of `GAS_PAYER` that `gas-payer-guard` function does not need to know
+about. This is then used in `create-gas-payer-guard` to create a special guard for the coin contract account from where
+the gas fees are paid.
 
-Last thing we need is to create an account where the funds will be stored which
-is what happens in the `init` function. As you can see, the guard of that
-account is the guard returned by `create-gas-payer-guard`, essentially allowing
-access to the account as long as `GAS` and `ALLOW_GAS` capabilities have already
-been granted.
+Last thing we need is to create an account where the funds will be stored which is what happens in the `init` function.
+As you can see, the guard of that account is the guard returned by `create-gas-payer-guard`, essentially allowing access
+to the account as long as `GAS` and `ALLOW_GAS` capabilities have already been granted.
 
-To summarize, a gas station is a coin account with a special guard that's valid
-if both `GAS` and `ALLOW_GAS` capabilities are granted. If you're wondering how
-`GAS_PAYER` is granted, the answer is
-[signature capabilities](/docs/pact/reference/concepts#signature-capabilities).
-We will see how this works in the frontend section of this tutorial where we
-interact with the smart contracts.
+To summarize, a gas station is a coin account with a special guard that's valid if both `GAS` and `ALLOW_GAS`
+capabilities are granted. If you're wondering how `GAS_PAYER` is granted, the answer is
+[signature capabilities](/docs/pact/reference/concepts#signature-capabilities). We will see how this works in the
+frontend section of this tutorial where we interact with the smart contracts.
 
 :::info  
-Guards and capabilities are an entire topic that we cannot cover in detail in
-this tutorial. To learn more check the
-[Guards, Capabilities and Events](/docs/pact/reference/concepts#guards-capabilities-and-events)
-section of the Pact documentation.  
+Guards and capabilities are an entire topic that we cannot cover in detail in this tutorial. To learn more check the
+[Guards, Capabilities and Events](/docs/pact/reference/concepts#guards-capabilities-and-events) section of the Pact
+documentation.  
 :::
 
 ### Deploying to Chainweb
 
-To deploy our contracts to the real blockchain network, we'll need to pay for
-the transaction using gas fees (whether it's Testnet or Mainnet).
+To deploy our contracts to the real blockchain network, we'll need to pay for the transaction using gas fees (whether
+it's Testnet or Mainnet).
 
-In this tutorial we are using Chainweaver wallet to create accounts and sign
-transactions. Head over to Chainweaver and create an account on `testnet`.
+In this tutorial we are using Chainweaver wallet to create accounts and sign transactions. Head over to Chainweaver and
+create an account on `testnet`.
 
-Next step is to fund your `testnet` account using this
-[faucet](http://faucet.testnet.chainweb.com). You will receive 20 Testnet KDA.
+Next step is to fund your `testnet` account using this [faucet](http://faucet.testnet.chainweb.com). You will receive 20
+Testnet KDA.
 
 :::tip  
-Here's a snippet that you can use to list all deployed modules by using the
-top-level `list-modules` built-in function:  
+Here's a snippet that you can use to list all deployed modules by using the top-level `list-modules` built-in
+function:  
 :::
 
 ```javascript
@@ -991,14 +908,12 @@ async function listModules() {
 }
 ```
 
-The snippets can also be found in the
-[tutorial repository](https://github.com/kadena-community/voting-dapp).
+The snippets can also be found in the [tutorial repository](https://github.com/kadena-community/voting-dapp).
 
-You can use the snippet below to deploy your contract to **chain 1** on
-`testnet`. To do this, it's required to run Chainweaver locally to sign for the
-transaction. Please see the
-[Chainweaver User Guide](https://docs.kadena.io/basics/chainweaver/chainweaver-user-guide)
-for downloads and instructions.
+You can use the snippet below to deploy your contract to **chain 1** on `testnet`. To do this, it's required to run
+Chainweaver locally to sign for the transaction. Please see the
+[Chainweaver User Guide](https://docs.kadena.io/basics/chainweaver/chainweaver-user-guide) for downloads and
+instructions.
 
 Now we can install the dependencies and deploy the contract:
 
@@ -1046,9 +961,8 @@ async function deployContract(pactCode) {
 }
 ```
 
-Make sure to replace `ACCOUNT_NAME` and the `PUBLIC_KEY` with the ones in your
-local chainweaver. Also ensure the `CHAIN_ID` matches the one having `KDA`
-available. When everything goes according to plan, you should see something like
+Make sure to replace `ACCOUNT_NAME` and the `PUBLIC_KEY` with the ones in your local chainweaver. Also ensure the
+`CHAIN_ID` matches the one having `KDA` available. When everything goes according to plan, you should see something like
 this:
 
 ```shell
@@ -1058,14 +972,11 @@ $ node ./deploy-testnet.js
 
 ### Frontend
 
-If you made it until here, congrats! We wrote, tested and deployed our smart
-contract. But we're still missing a key component: a UI for users to interact
-with our dApp, so let's get this done.
+If you made it until here, congrats! We wrote, tested and deployed our smart contract. But we're still missing a key
+component: a UI for users to interact with our dApp, so let's get this done.
 
-Start by adding the required libraries from
-[Kadena.js](https://github.com/kadena-community/kadena.js) as a dependency to
-your project either via a package manager or add it to your asset pipeline
-similar to any other JavaScript library.
+Start by adding the required libraries from [Kadena.js](https://github.com/kadena-community/kadena.js) as a dependency
+to your project either via a package manager or add it to your asset pipeline similar to any other JavaScript library.
 
 ```bash
 npm init -y
@@ -1074,19 +985,16 @@ npm install @kadena/client @kadena/chainweb-node-client --save
 
 #### Typescript
 
-The Kadena.js team has created libraries that allow Javascript/Typescript users
-to easily interact with the Kadena Blockchain. Also there's a commandline tool
-`pactjs-cli` that allows generation of types from pact contracts, which we're
-going to make use of in this tutorial. Let's first add the required libraries to
-your project.
+The Kadena.js team has created libraries that allow Javascript/Typescript users to easily interact with the Kadena
+Blockchain. Also there's a commandline tool `pactjs-cli` that allows generation of types from pact contracts, which
+we're going to make use of in this tutorial. Let's first add the required libraries to your project.
 
 ```bash
 npm install typescript @kadena/types --save-dev
 npm install @kadena/pactjs-cli -g
 ```
 
-Create a `tsconfig.json` file in the root of the frontend folder and paste in
-the following JSON:
+Create a `tsconfig.json` file in the root of the frontend folder and paste in the following JSON:
 
 ```js
 {
@@ -1103,10 +1011,9 @@ the following JSON:
 }
 ```
 
-From the root of the frontend folder, use the following commands to generate
-types for our `election`, `election-gas-station` and `coin` contracts.
-Generating types for the `coin` contract is necessary, because when paying for
-gas we use the `coin.GAS` capability from the coin contract.
+From the root of the frontend folder, use the following commands to generate types for our `election`,
+`election-gas-station` and `coin` contracts. Generating types for the `coin` contract is necessary, because when paying
+for gas we use the `coin.GAS` capability from the coin contract.
 
 ```bash
 npx pactjs contract-generate --file ../pact/election.pact;
@@ -1114,37 +1021,31 @@ npx pactjs contract-generate --file ../pact/election-gas-station.pact;
 npx pactjs contract-generate --file ../pact/root/coin-v5.pact
 ```
 
-The log shows what has happened. Inside the `node_modules` directory, a new
-package has been created: `.kadena/pactjs-generated`. This package is extending
-the @kadena/client types to give you type information. Make sure to add
-`"types": [".kadena/pactjs-generated"]` to your tsconfig.json.
+The log shows what has happened. Inside the `node_modules` directory, a new package has been created:
+`.kadena/pactjs-generated`. This package is extending the @kadena/client types to give you type information. Make sure
+to add `"types": [".kadena/pactjs-generated"]` to your tsconfig.json.
 
 ### Our implementation
 
 :::note  
-Our example uses [React](https://reactjs.org), but you are free to use any
-framework that you are comfortable with. The main focus will be on blockchain
-and wallet interaction.  
+Our example uses [React](https://reactjs.org), but you are free to use any framework that you are comfortable with. The
+main focus will be on blockchain and wallet interaction.  
 :::
 
-There are a few key aspects concerning a frontend implementation of a blockchain
-application:
+There are a few key aspects concerning a frontend implementation of a blockchain application:
 
 - reading data from smart contracts
 - allowing users to sign and submit transactions
-- notify users when various actions take place like a transaction being mined or
-  a smart contract event was emitted
+- notify users when various actions take place like a transaction being mined or a smart contract event was emitted
 
 The code of this tutorial can be found in the frontend folder in the
-[tutorial repository](https://github.com/kadena-community/voting-dapp). For
-demonstration purposes the election smart contracts have been deployed to
-**_testnet chain 0_** and **_testnet chain 1_**.
+[tutorial repository](https://github.com/kadena-community/voting-dapp). For demonstration purposes the election smart
+contracts have been deployed to **_testnet chain 0_** and **_testnet chain 1_**.
 
 #### Read Data
 
-For this demo application we would like to display the number of votes that each
-candidate received. To do that we have to call the `get-votes` function from our
-`election` module. Here's what that looks like:
+For this demo application we would like to display the number of votes that each candidate received. To do that we have
+to call the `get-votes` function from our `election` module. Here's what that looks like:
 
 ```js
 // ./api.ts
@@ -1177,22 +1078,20 @@ export const getVotes = async (candidateId: string): Promise<number> => {
 }
 ```
 
-We're sending a command to the `/local` endpoint where the `pactCode` attribute
-is a call to our module function which returns the number of votes for the given
-candidate.
+We're sending a command to the `/local` endpoint where the `pactCode` attribute is a call to our module function which
+returns the number of votes for the given candidate.
 
-:::note Remember to always use the fully qualified name,
-_namespace.module.function_. :::
+:::note Remember to always use the fully qualified name, _namespace.module.function_. :::
 
-Here's a screenshot from our demo app where we display the candidates and the
-number of votes received by each candidate:
+Here's a screenshot from our demo app where we display the candidates and the number of votes received by each
+candidate:
 
 ![Screenshot of the voting dApp](https://github.com/kadena-community/voting-dapp/blob/main/frontend/screens/main.png?raw=true)
 
 #### Sign & Send Transaction
 
-The next step is to allow users to vote for a candidate. When it comes to
-updating on-chain data, each dApp has to implement the following flow:
+The next step is to allow users to vote for a candidate. When it comes to updating on-chain data, each dApp has to
+implement the following flow:
 
 1. Create transaction
 2. Sign transaction
@@ -1200,19 +1099,16 @@ updating on-chain data, each dApp has to implement the following flow:
 4. Notify when transaction is mined
 
 :::info  
-In this tutorial we are using Chainweaver wallet to sign transactions, other
-wallets might have a different API but the steps mentioned above are similar.
-There might be the case where a wallet takes care of more than signing a
-transaction (e.g. it also sends it to the network) and you will have to adapt
-your implementation accordingly.  
+In this tutorial we are using Chainweaver wallet to sign transactions, other wallets might have a different API but the
+steps mentioned above are similar. There might be the case where a wallet takes care of more than signing a transaction
+(e.g. it also sends it to the network) and you will have to adapt your implementation accordingly.  
 :::
 
-**@kadena/client** provides a couple of useful methods here:
-`signWithChainweaver` to interact with the Chainweaver signing API and `send` on
-the `ICommandBuilder` to submit the signed transaction to the network.
+**@kadena/client** provides a couple of useful methods here: `signWithChainweaver` to interact with the Chainweaver
+signing API and `send` on the `ICommandBuilder` to submit the signed transaction to the network.
 
-In the snippet below we are constructing a transaction that calls the
-`free.election.vote` contract function to vote for a candidate.
+In the snippet below we are constructing a transaction that calls the `free.election.vote` contract function to vote for
+a candidate.
 
 ```js
 // ./api.ts
@@ -1254,31 +1150,27 @@ export const vote = async (
 };
 ```
 
-Notice the `addCap` function where we define the capabilities that the user's
-keyset will have to sign. In this case we have two:
+Notice the `addCap` function where we define the capabilities that the user's keyset will have to sign. In this case we
+have two:
 
 - `coin.GAS` -> enables the payment of gas fees
-- `free.election.ACCOUNT-OWNER` -> checks if the user is the owner of the KDA
-  account
+- `free.election.ACCOUNT-OWNER` -> checks if the user is the owner of the KDA account
 
 :::note  
-Scoping signatures Keep in mind, for security reasons a keyset should only sign
-specific capabilities and using a keyset in "unrestricted mode" is not
-recommended. Scoping the signature allows the signer to safely call untrusted
-code which is an important security feature of Pact and Kadena.
+Scoping signatures Keep in mind, for security reasons a keyset should only sign specific capabilities and using a keyset
+in "unrestricted mode" is not recommended. Scoping the signature allows the signer to safely call untrusted code which
+is an important security feature of Pact and Kadena.
 
-"Unrestricted mode" means that we do not define any capabilities when creating a
-transaction.  
+"Unrestricted mode" means that we do not define any capabilities when creating a transaction.  
 :::
 
-Since this is a transaction that requires gas fees, we now set `sender` (account
-paying for gas) to the name of the KDA account of the user. If we would want to
-utilize the gas station we deployed we would set the sender to the account owned
-by our gas station `election-gas-station` and use the
-`free.election-gas-station.GAS_PAYER` capability instead of `coin.GAS`.
+Since this is a transaction that requires gas fees, we now set `sender` (account paying for gas) to the name of the KDA
+account of the user. If we would want to utilize the gas station we deployed we would set the sender to the account
+owned by our gas station `election-gas-station` and use the `free.election-gas-station.GAS_PAYER` capability instead of
+`coin.GAS`.
 
-Lastly, to get the result of a transaction we are using the `pollTransactions`
-helper method which can be found in the project repository.
+Lastly, to get the result of a transaction we are using the `pollTransactions` helper method which can be found in the
+project repository.
 
 To run the frontend dApp, go to the frontend folder and run:
 
@@ -1286,33 +1178,27 @@ To run the frontend dApp, go to the frontend folder and run:
 npm run start
 ```
 
-Going back to the UI, we implemented this signing flow using a modal window
-where users have to enter their KDA account. Once the account is entered and the
-user hasn't voted yet the **Vote Now** button will become available. Clicking on
-the **Vote Now** button will automatically open the Chainweaver signing wizard.
+Going back to the UI, we implemented this signing flow using a modal window where users have to enter their KDA account.
+Once the account is entered and the user hasn't voted yet the **Vote Now** button will become available. Clicking on the
+**Vote Now** button will automatically open the Chainweaver signing wizard.
 
 Below is the first step of the Chainweaver request signing wizard:
 
 ![Screenshot of Chainweaver request signing wizard](https://github.com/kadena-community/voting-dapp/blob/main/frontend/screens/quicksign.png?raw=true)
 
-Once the transaction is signed, our dApp modal will automatically submit it to
-the network.
+Once the transaction is signed, our dApp modal will automatically submit it to the network.
 
-The request key together with the transaction result are displayed in the
-browsers console output.
+The request key together with the transaction result are displayed in the browsers console output.
 
-_Note: Since mining is an external process, while waiting for our transaction to
-be included in the blockchain, the user should be able to keep using the
-application freely._
+_Note: Since mining is an external process, while waiting for our transaction to be included in the blockchain, the user
+should be able to keep using the application freely._
 
-:::info As an extra excercise; modify the code to utilize the gasstation instead
-of having the user pay for gas fees. :::
+:::info As an extra excercise; modify the code to utilize the gasstation instead of having the user pay for gas fees.
+:::
 
 ### Conclusion
 
-It took a while but we are now at the end of this tutorial. Congratulations!
-You've managed to implement a complete dApp on Kadena blockchain and we hope you
-found this guide useful.
+It took a while but we are now at the end of this tutorial. Congratulations! You've managed to implement a complete dApp
+on Kadena blockchain and we hope you found this guide useful.
 
-Stay tuned for more tutorials and we cannot wait to see what dApps **YOU** will
-build next!
+Stay tuned for more tutorials and we cannot wait to see what dApps **YOU** will build next!

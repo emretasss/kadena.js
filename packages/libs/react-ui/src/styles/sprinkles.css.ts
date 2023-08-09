@@ -66,13 +66,7 @@ const responsiveProperties = defineProperties({
     position: ['fixed', 'static', 'absolute', 'relative', 'sticky'],
     display: ['none', 'flex', 'block', 'inline', 'inline-block', 'grid'],
     flexDirection: ['row', 'row-reverse', 'column', 'column-reverse'],
-    justifyContent: [
-      'flex-start',
-      'center',
-      'flex-end',
-      'space-around',
-      'space-between',
-    ],
+    justifyContent: ['flex-start', 'center', 'flex-end', 'space-around', 'space-between'],
     alignItems: ['flex-start', 'center', 'flex-end', 'stretch'],
     paddingTop: vars.sizes,
     paddingBottom: vars.sizes,
@@ -116,10 +110,6 @@ const responsiveProperties = defineProperties({
   },
 });
 
-export const sprinkles = createSprinkles(
-  systemProperties,
-  colorProperties,
-  responsiveProperties,
-);
+export const sprinkles = createSprinkles(systemProperties, colorProperties, responsiveProperties);
 
 export type Sprinkles = Parameters<typeof sprinkles>[0];

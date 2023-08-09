@@ -3,8 +3,7 @@ import { colorVariants } from './IconButton.css';
 import { SystemIcon } from '@components/Icon';
 import React, { FC } from 'react';
 
-export interface IIconButtonProps
-  extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'color'> {
+export interface IIconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'color'> {
   as?: 'button' | 'a';
   icon: (typeof SystemIcon)[keyof typeof SystemIcon];
   onClick?: React.MouseEventHandler<HTMLButtonElement>;

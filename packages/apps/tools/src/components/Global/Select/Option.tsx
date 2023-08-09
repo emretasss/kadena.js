@@ -1,8 +1,7 @@
 import { StyledOption } from '@/components/Global/Select/styles';
 import React, { FC } from 'react';
 
-export interface IOptionProps
-  extends Omit<React.OptionHTMLAttributes<HTMLOptionElement>, 'as'> {
+export interface IOptionProps extends Omit<React.OptionHTMLAttributes<HTMLOptionElement>, 'as'> {
   //
 }
 

@@ -13,9 +13,7 @@ const keywordsMap: Record<string, string> = {
   object: 'object',
 };
 
-const mapType = (
-  inputType?: string | { kind: string; value: string },
-): string => {
+const mapType = (inputType?: string | { kind: string; value: string }): string => {
   if (inputType === undefined) {
     return 'any';
   }
@@ -23,18 +21,14 @@ const mapType = (
     return keywordsMap[inputType] ?? 'any';
   }
 
-  if (typeof inputType === 'object' && inputType.kind === 'module')
-    return 'PactReference';
+  if (typeof inputType === 'object' && inputType.kind === 'module') return 'PactReference';
   // TODO: import the schema as interface to return kind instead of any
   // return inputType.kind;
   return keywordsMap[inputType.kind] ?? 'any';
 };
 
 const getFuncCapInterfaceName = (func: IFunction): string => {
-  if (
-    func.allExtractedCaps === undefined ||
-    func.allExtractedCaps.length === 0
-  ) {
+  if (func.allExtractedCaps === undefined || func.allExtractedCaps.length === 0) {
     return '';
   }
 
@@ -67,10 +61,7 @@ const getParameters = (
 };
 
 function genFunCapsInterface(func: IFunction): string {
-  if (
-    func.allExtractedCaps === undefined ||
-    func.allExtractedCaps.length === 0
-  ) {
+  if (func.allExtractedCaps === undefined || func.allExtractedCaps.length === 0) {
     return '';
   }
   const interfaceName = getFuncCapInterfaceName(func);
@@ -81,13 +72,8 @@ function genFunCapsInterface(func: IFunction): string {
       const args = getParameters(cap.capability.parameters);
       parameters = [...parameters, ...args];
     }
-    const comment =
-      cap.capability.doc !== undefined
-        ? `/**${EOL}* ${cap.capability.doc}${EOL}*/`
-        : '';
-    const addCap = `(${EOL}${parameters
-      .map((line) => indent(line))
-      .join(`, ${EOL}`)}): ICap`;
+    const comment = cap.capability.doc !== undefined ? `/**${EOL}* ${cap.capability.doc}${EOL}*/` : '';
+    const addCap = `(${EOL}${parameters.map((line) => indent(line)).join(`, ${EOL}`)}): ICap`;
     return { comment, addCap };
   });
 
@@ -97,15 +83,12 @@ function genFunCapsInterface(func: IFunction): string {
 
 const getFunctionType = (func: IFunction): string => {
   const capInterfaceName = getFuncCapInterfaceName(func) || '';
-  const comment =
-    func.doc !== undefined ? `/**${EOL}* ${func.doc}${EOL}*/${EOL}` : '';
+  const comment = func.doc !== undefined ? `/**${EOL}* ${func.doc}${EOL}*/${EOL}` : '';
 
   const parameters = getParameters(func.parameters);
   const lnBreak = parameters.length > 1;
   const nl = lnBreak ? EOL : '';
-  const caps = capInterfaceName
-    ? `${capInterfaceName} & ICapability_Coin_GAS`
-    : 'ICapability_Coin_GAS';
+  const caps = capInterfaceName ? `${capInterfaceName} & ICapability_Coin_GAS` : 'ICapability_Coin_GAS';
   return indent(
     `${comment}"${func.name}": (${nl}${parameters
       .map((d) => (lnBreak ? indent(d) : d))
@@ -116,10 +99,7 @@ const getFunctionType = (func: IFunction): string => {
 /**
  * @alpha
  */
-export function generateDts(
-  moduleFullName: string,
-  modules: Record<string, IModule>,
-): string {
+export function generateDts(moduleFullName: string, modules: Record<string, IModule>): string {
   const module = modules[moduleFullName];
   if (module === undefined) {
     throw new Error(`Module ${moduleFullName} not found`);
@@ -132,11 +112,7 @@ export function generateDts(
   const functions = module.functions.filter(({ kind }) => kind === 'defun');
   const defpacts = module.functions.filter(({ kind }) => kind === 'defpact');
 
-  const capsInterfaces =
-    module.functions
-      ?.map(genFunCapsInterface)
-      .filter(Boolean)
-      .join(EOL.repeat(2)) || '';
+  const capsInterfaces = module.functions?.map(genFunCapsInterface).filter(Boolean).join(EOL.repeat(2)) || '';
 
   const dts = `
 import type { IPactDecimal, IPactInt, PactReference, ICap } from '@kadena/types';

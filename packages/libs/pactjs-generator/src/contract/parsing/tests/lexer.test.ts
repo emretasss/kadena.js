@@ -40,30 +40,8 @@ describe('lexer', () => {
     [`100.25`, 1, 'decimal'],
     [`-922337203685477580712387461234`, 1, 'decimal'],
     [`(and true false)`, 7, 'boolean', 'boolean'],
-    [
-      `(module [1, 2, 3])`,
-      13,
-      'lsquare',
-      'decimal',
-      'comma',
-      'decimal',
-      'comma',
-      'decimal',
-      'rsquare',
-    ],
-    [
-      `{ "foo": (+ 1 2) }`,
-      14,
-      'lcurly',
-      'string',
-      'colon',
-      'lparen',
-      'atom',
-      'decimal',
-      'decimal',
-      'rparen',
-      'rcurly',
-    ],
+    [`(module [1, 2, 3])`, 13, 'lsquare', 'decimal', 'comma', 'decimal', 'comma', 'decimal', 'rsquare'],
+    [`{ "foo": (+ 1 2) }`, 14, 'lcurly', 'string', 'colon', 'lparen', 'atom', 'decimal', 'decimal', 'rparen', 'rcurly'],
     [`{ "balance" := bal }`, 9, 'string', 'assign', 'atom'],
     [`{ "balance" := 'bal }`, 9, 'string', 'assign', 'symbol'],
     [
@@ -79,15 +57,7 @@ describe('lexer', () => {
       'atom',
       'rcurly',
     ],
-    [
-      `(bar::quux 1 "hi")`,
-      9,
-      'atom',
-      'dereference',
-      'atom',
-      'decimal',
-      'string',
-    ],
+    [`(bar::quux 1 "hi")`, 9, 'atom', 'dereference', 'atom', 'decimal', 'string'],
     [`(defun prefix:string (pfx:string str:string) (+ pfx ""))`, 25],
     [
       `(defun average (a b)
@@ -127,40 +97,29 @@ describe('lexer', () => {
       'interface',
       'module',
       'implements',
-    ].map(
-      (atom) =>
-        [`(${atom})`, 3, atom] as [
-          Expression,
-          ExpectedTokenCount,
-          ...ExpectedSequence,
-        ],
-    ),
+    ].map((atom) => [`(${atom})`, 3, atom] as [Expression, ExpectedTokenCount, ...ExpectedSequence]),
   ];
 
-  testsAndExpected.forEach(
-    ([test, expectedTokenCount, ...expectedSequence], index) => {
-      it(`tokenizes "${test}" in "${expectedTokenCount}" tokens ${
-        expectedSequence.length ? `with "${expectedSequence?.join(',')}"` : ``
-      }`, () => {
-        // only log last one
-        const logger =
-          // eslint-disable-next-line no-constant-condition
-          false && index === testsAndExpected.length - 1
-            ? console.log
-            : () => {};
+  testsAndExpected.forEach(([test, expectedTokenCount, ...expectedSequence], index) => {
+    it(`tokenizes "${test}" in "${expectedTokenCount}" tokens ${
+      expectedSequence.length ? `with "${expectedSequence?.join(',')}"` : ``
+    }`, () => {
+      // only log last one
+      const logger =
+        // eslint-disable-next-line no-constant-condition
+        false && index === testsAndExpected.length - 1 ? console.log : () => {};
 
-        const output = getLexerOutput(test, logger);
-        const outputWithoutLogger = getLexerOutput(test);
-        // match given length
-        expect(output).toHaveLength(expectedTokenCount);
-        expect(output).toEqual(outputWithoutLogger);
-        expect(
-          output
-            .map(({ type }) => type)
-            .filter((t) => t !== 'ws')
-            .join(),
-        ).toContain(expectedSequence?.join());
-      });
-    },
-  );
+      const output = getLexerOutput(test, logger);
+      const outputWithoutLogger = getLexerOutput(test);
+      // match given length
+      expect(output).toHaveLength(expectedTokenCount);
+      expect(output).toEqual(outputWithoutLogger);
+      expect(
+        output
+          .map(({ type }) => type)
+          .filter((t) => t !== 'ws')
+          .join(),
+      ).toContain(expectedSequence?.join());
+    });
+  });
 });

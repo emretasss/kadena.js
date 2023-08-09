@@ -10,13 +10,7 @@ interface IProps {
   onClick: MouseEventHandler<HTMLAnchorElement>;
 }
 
-export const AsideLink: FC<IProps> = ({
-  children,
-  href,
-  label,
-  isActive,
-  onClick,
-}) => {
+export const AsideLink: FC<IProps> = ({ children, href, label, isActive, onClick }) => {
   return (
     <AsideItem>
       <AsideItemLink href={href} onClick={onClick} isActive={isActive}>

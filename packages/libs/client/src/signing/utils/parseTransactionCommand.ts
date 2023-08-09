@@ -7,8 +7,6 @@ import { IPactCommand } from '../../interfaces/IPactCommand';
  *
  * @internal
  */
-export const parseTransactionCommand: (
-  transaction: IUnsignedCommand | ICommand,
-) => IPactCommand = (transaction) => {
+export const parseTransactionCommand: (transaction: IUnsignedCommand | ICommand) => IPactCommand = (transaction) => {
   return JSON.parse(transaction.cmd);
 };

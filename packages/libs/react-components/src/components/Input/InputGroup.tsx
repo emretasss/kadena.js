@@ -23,15 +23,7 @@ export interface IInputGroupProps {
   children: React.ReactNode;
 }
 
-export const InputGroup: FC<IInputGroupProps> = ({
-  label,
-  tag,
-  info,
-  helper,
-  children,
-  status,
-  disabled = false,
-}) => {
+export const InputGroup: FC<IInputGroupProps> = ({ label, tag, info, helper, children, status, disabled = false }) => {
   const hasHeader = Boolean(label) || Boolean(tag) || Boolean(info);
   const variant = disabled ? 'disabled' : status;
 

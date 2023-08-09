@@ -5,9 +5,7 @@ import { tooltipHandler } from './tooltipHandler';
 export type { ITooltipProps };
 
 interface ITooltip {
-  Root: React.ForwardRefExoticComponent<
-    Omit<ITooltipProps, 'ref'> & React.RefAttributes<HTMLDivElement>
-  >;
+  Root: React.ForwardRefExoticComponent<Omit<ITooltipProps, 'ref'> & React.RefAttributes<HTMLDivElement>>;
   handler: typeof tooltipHandler;
 }
 

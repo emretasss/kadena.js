@@ -61,11 +61,7 @@ export async function retryFetch(
  *
  * @alpha
  */
-export function baseUrl(
-  network: string,
-  host: string,
-  pathSuffix: string,
-): URL {
+export function baseUrl(network: string, host: string, pathSuffix: string): URL {
   return new URL(`${host}/chainweb/0.0/${network}/${pathSuffix}`);
 }
 
@@ -79,12 +75,7 @@ export function baseUrl(
  *
  * @alpha
  */
-export function chainUrl(
-  chainId: number | string,
-  pathSuffix: string,
-  network: string,
-  host: string,
-): URL {
+export function chainUrl(chainId: number | string, pathSuffix: string, network: string, host: string): URL {
   if (chainId === null) {
     throw new Error('missing chainId parameter');
   }

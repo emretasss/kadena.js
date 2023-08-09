@@ -21,10 +21,7 @@ import { testSPVProof, testURL } from './Pact';
  * ```
  *
  */
-export async function mockFetch(
-  url: string,
-  init?: RequestInit,
-): Promise<object> {
+export async function mockFetch(url: string, init?: RequestInit): Promise<object> {
   switch (url) {
     case `${testURL}/api/v1/send`: {
       if (init?.body !== null && init?.body !== undefined) {
@@ -194,8 +191,7 @@ export async function mockFetch(
     }
     case `${testURL}/tooyoung/spv`: {
       if (init?.body !== null && init?.body !== undefined) {
-        const errorMsg =
-          'SPV target not reachable: target chain not reachable. Chainweb instance is too young';
+        const errorMsg = 'SPV target not reachable: target chain not reachable. Chainweb instance is too young';
         return Promise.resolve({
           ok: false,
           text: () => Promise.resolve(errorMsg),
@@ -229,10 +225,7 @@ export async function mockFetch(
         const parsedBody: ISendRequestBody = JSON.parse(body.toString());
         const requestKeys = parsedBody.cmds.map((cmd) => cmd.hash);
         const errorMsg: string = requestKeys
-          .map(
-            (rk) =>
-              `Error: Validation failed for hash "${rk}": Transaction already exists on chain`,
-          )
+          .map((rk) => `Error: Validation failed for hash "${rk}": Transaction already exists on chain`)
           .join('\n');
         return Promise.resolve({
           ok: false,

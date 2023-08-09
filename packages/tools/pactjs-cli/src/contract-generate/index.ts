@@ -53,10 +53,7 @@ const Options = z
 
 export type TOptions = z.infer<typeof Options>;
 
-export function contractGenerateCommand(
-  program: Command,
-  version: string,
-): void {
+export function contractGenerateCommand(program: Command, version: string): void {
   program
     .command('contract-generate')
     .description('Generate client based on a contract')
@@ -66,29 +63,15 @@ export function contractGenerateCommand(
       'Custom name for the interface of the caps. ' +
         'Can be used to create a type definition with a limited set of capabilities.',
     )
-    .option(
-      '-f, --file <file>',
-      'Generate d.ts from Pact contract file',
-      asList,
-    )
-    .option(
-      '--contract <contractName>',
-      'Generate d.ts from Pact contract from the blockchain',
-      asList,
-    )
-    .option(
-      '--namespace <string>',
-      'use as the namespace of the contract if its not clear in the contract',
-    )
+    .option('-f, --file <file>', 'Generate d.ts from Pact contract file', asList)
+    .option('--contract <contractName>', 'Generate d.ts from Pact contract from the blockchain', asList)
+    .option('--namespace <string>', 'use as the namespace of the contract if its not clear in the contract')
     .option(
       '--api <api>',
       'The API to use for retrieving the contract, e.g. "https://api.chainweb.com/chainweb/0.0/mainnet01/chain/8/pact"',
     )
     .addOption(
-      new Option(
-        '--chain <chain>',
-        'The chainId to retrieve the contract from, e.g. 8. Defaults to 1.',
-      )
+      new Option('--chain <chain>', 'The chainId to retrieve the contract from, e.g. 8. Defaults to 1.')
         .argParser((value) => parseInt(value, 10))
         .default(1),
     )
@@ -109,9 +92,7 @@ export function contractGenerateCommand(
               }
               return err.message;
             })
-            .reduce(
-              (a, b) => `${a}\n${b}`,
-            )}\nReceived arguments ${JSON.stringify(args)}` +
+            .reduce((a, b) => `${a}\n${b}`)}\nReceived arguments ${JSON.stringify(args)}` +
             `\n${program.helpInformation(e)}`,
         );
       }

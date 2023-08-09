@@ -20,13 +20,7 @@ export interface IAceEditorProps {
   onChange?: IOnchange;
 }
 
-const AceViewerComponent: FC<IAceEditorProps> = ({
-  code,
-  width,
-  height,
-  readonly,
-  onChange,
-}) => (
+const AceViewerComponent: FC<IAceEditorProps> = ({ code, width, height, readonly, onChange }) => (
   <AceEditor
     mode="clojure"
     theme="one_dark"

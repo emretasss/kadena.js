@@ -17,9 +17,7 @@ async function doSafeTransfer(
   const aLowAmount = new PactNumber('0.001').toPactDecimal();
 
   // we add the aLowAmount to the transferAmount as we only added it to verify the receiver also signed the command
-  const pactDecimal = new PactNumber(amount)
-    .plus(aLowAmount.decimal)
-    .toPactDecimal();
+  const pactDecimal = new PactNumber(amount).plus(aLowAmount.decimal).toPactDecimal();
 
   const unsignedTr = Pact.builder
     .execution(
@@ -52,10 +50,8 @@ async function doSafeTransfer(
   throw new Error('UNSIGNED_COMMAND');
 }
 
-const senderAccount: string =
-  'k:dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46';
-const receiverAccount: string =
-  'k:2f48080efe54e6eb670487f664bcaac7684b4ebfcfc8a3330ef080c9c97f7e11';
+const senderAccount: string = 'k:dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46';
+const receiverAccount: string = 'k:2f48080efe54e6eb670487f664bcaac7684b4ebfcfc8a3330ef080c9c97f7e11';
 
 doSafeTransfer(
   {

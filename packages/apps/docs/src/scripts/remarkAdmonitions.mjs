@@ -14,9 +14,7 @@ const isStart = (branch) => {
 const isEnd = (branch) => {
   if (branch.children.length === 0) return false;
 
-  const endLeaf = branch.children.find((item) =>
-    item.value?.match(ENDNOTER_EGEXP),
-  );
+  const endLeaf = branch.children.find((item) => item.value?.match(ENDNOTER_EGEXP));
   if (endLeaf) {
     endLeaf.value = endLeaf.value?.replace(':::', '');
     return Boolean(endLeaf);

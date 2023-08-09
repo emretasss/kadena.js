@@ -79,15 +79,7 @@ export const Primary: Story = {
     marginLeft: undefined,
     marginRight: undefined,
   },
-  render: ({
-    margin,
-    marginX,
-    marginY,
-    marginTop,
-    marginBottom,
-    marginLeft,
-    marginRight,
-  }) => (
+  render: ({ margin, marginX, marginY, marginTop, marginBottom, marginLeft, marginRight }) => (
     <div className={containerClass}>
       <Box
         margin={margin}

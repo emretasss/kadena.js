@@ -1,10 +1,4 @@
-import {
-  IsWrappedData,
-  isWrappedData,
-  IWrappedData,
-  UnwrappedObjects,
-  wrapData,
-} from '../dataWrapper';
+import { IsWrappedData, isWrappedData, IWrappedData, UnwrappedObjects, wrapData } from '../dataWrapper';
 import { UnionToIntersection } from '../typeUtilities';
 
 import { oneOf } from './oneOf';
@@ -19,11 +13,7 @@ interface IRepeat {
     ...parsers: T
   ): IParser<
     IWrappedData<
-      Partial<
-        UnionToIntersection<
-          MakeArr<UnwrappedObjects<IsWrappedData<RuleReturnType<T[number]>>>>
-        >
-      >,
+      Partial<UnionToIntersection<MakeArr<UnwrappedObjects<IsWrappedData<RuleReturnType<T[number]>>>>>>,
       undefined
     >,
     never
@@ -66,10 +56,7 @@ export const repeat: IRepeat = (...parsers) => {
             acc[key] = pushUnique(acc[key], item.data[key]);
           });
         } else if (item.data !== undefined) {
-          acc['not-categorized'] = pushUnique(
-            acc['not-categorized'],
-            item.data,
-          );
+          acc['not-categorized'] = pushUnique(acc['not-categorized'], item.data);
         }
       }
 

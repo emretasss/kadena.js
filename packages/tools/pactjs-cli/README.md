@@ -2,8 +2,7 @@
 
 # @kadena/pactjs-cli
 
-CLI tool accompanying @kadena/pactjs-core and @kadena/pactjs-client to generate
-TypeScript definitions and Pact client
+CLI tool accompanying @kadena/pactjs-core and @kadena/pactjs-client to generate TypeScript definitions and Pact client
 
 <picture>
   <source srcset="https://raw.githubusercontent.com/kadena-community/kadena.js/main/common/images/Kadena.JS_logo-white.png" media="(prefers-color-scheme: dark)"/>

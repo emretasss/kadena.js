@@ -47,13 +47,7 @@ export const Primary: Story = {
     startUnmaskedValues: 6,
     endUnmaskedValues: 4,
   },
-  render: ({
-    title,
-    value,
-    defaultVisibility,
-    startUnmaskedValues,
-    endUnmaskedValues,
-  }) => {
+  render: ({ title, value, defaultVisibility, startUnmaskedValues, endUnmaskedValues }) => {
     return (
       <>
         <MaskedValue

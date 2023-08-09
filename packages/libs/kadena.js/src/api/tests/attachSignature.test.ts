@@ -24,9 +24,7 @@ describe('attachSignature', () => {
         secretKey: string;
       },
     ]);
-    const expected = [
-      { hash: signature.hash, sig: undefined, publicKey: signature.pubKey },
-    ];
+    const expected = [{ hash: signature.hash, sig: undefined, publicKey: signature.pubKey }];
 
     expect(actual).toEqual(expected);
   });

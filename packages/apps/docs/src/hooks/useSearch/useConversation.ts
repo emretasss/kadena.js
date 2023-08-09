@@ -31,10 +31,7 @@ type ActionType =
 
 const initialState = { input: '', output: '', history: [] };
 
-const conversationReducer: Reducer<IConversation, ActionType> = (
-  state,
-  action,
-) => {
+const conversationReducer: Reducer<IConversation, ActionType> = (state, action) => {
   switch (action.type) {
     case 'setInput':
       return { ...state, input: action.value };
@@ -58,10 +55,7 @@ const conversationReducer: Reducer<IConversation, ActionType> = (
   }
 };
 
-export const useConversation = (): [
-  IConversation,
-  (action: ActionType) => void,
-] => {
+export const useConversation = (): [IConversation, (action: ActionType) => void] => {
   const [state, dispatch] = useReducer(conversationReducer, initialState);
   return [state, dispatch];
 };

@@ -8,10 +8,7 @@ export interface IFooterProps {
   darkMode?: boolean;
 }
 
-export const FooterContainer: FC<IFooterProps> = ({
-  children,
-  darkMode = false,
-}) => {
+export const FooterContainer: FC<IFooterProps> = ({ children, darkMode = false }) => {
   const footerContent = (
     <footer className={containerClass} data-testid="kda-footer">
       {children}

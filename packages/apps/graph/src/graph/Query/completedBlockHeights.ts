@@ -13,11 +13,7 @@ builder.queryField('completedBlockHeights', (t) => {
 
     type: [Block],
 
-    resolve: async (
-      __query,
-      __parent,
-      { completedHeights: onlyCompleted = false, heightCount = 3 },
-    ) => {
+    resolve: async (__query, __parent, { completedHeights: onlyCompleted = false, heightCount = 3 }) => {
       if (onlyCompleted === true) {
         const completedHeights = (await prismaClient.$queryRaw`
         SELECT height

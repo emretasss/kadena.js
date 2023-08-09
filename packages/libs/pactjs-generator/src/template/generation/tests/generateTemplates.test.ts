@@ -21,17 +21,11 @@ describe('generateDts', () => {
 
   it('generates a ts for a full template', () => {
     const simpleTransferTpl = parseTemplate(
-      readFileSync(
-        join(__dirname, '../my-tx-lib/src/simple-transfer.json'),
-        'utf8',
-      ),
+      readFileSync(join(__dirname, '../my-tx-lib/src/simple-transfer.json'), 'utf8'),
     );
 
     const safeTransactionTpl = parseTemplate(
-      readFileSync(
-        join(__dirname, '../my-tx-lib/src/safe-transaction.yaml'),
-        'utf8',
-      ),
+      readFileSync(join(__dirname, '../my-tx-lib/src/safe-transaction.yaml'), 'utf8'),
     );
 
     const ts = generateTemplates(

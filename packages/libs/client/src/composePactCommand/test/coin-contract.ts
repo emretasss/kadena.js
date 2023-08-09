@@ -2,22 +2,12 @@ import type { ICap } from '@kadena/types';
 
 interface ITransferCapability {
   (name: 'coin.GAS'): ICap;
-  (
-    name: 'coin.TRANSFER',
-    from: string,
-    to: string,
-    amount: { decimal: string },
-  ): ICap;
+  (name: 'coin.TRANSFER', from: string, to: string, amount: { decimal: string }): ICap;
 }
 
 interface ITransferCrosschainCapability {
   (name: 'coin.GAS'): ICap;
-  (
-    name: 'coin.TRANSFER_XCHAIN',
-    sender: string,
-    receiver: string,
-    amount: { decimal: string },
-  ): ICap;
+  (name: 'coin.TRANSFER_XCHAIN', sender: string, receiver: string, amount: { decimal: string }): ICap;
   (name: 'coin.CREDIT', receiver: string): ICap;
 }
 

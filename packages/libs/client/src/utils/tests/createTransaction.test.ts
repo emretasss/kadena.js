@@ -29,9 +29,7 @@ describe('createTransaction', () => {
   it('returns a transaction object with the correct hash', () => {
     const transaction = createTransaction(pactCommand);
 
-    expect(transaction.hash).toBe(
-      'fo-INzZ1jYEYILEavqawvkBmGld6DajK7ozxGZF8knM',
-    );
+    expect(transaction.hash).toBe('fo-INzZ1jYEYILEavqawvkBmGld6DajK7ozxGZF8knM');
   });
 
   it('returns a transaction object with the correct cmd', () => {

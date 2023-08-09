@@ -27,19 +27,13 @@ const pactServerKeyPair = {
   secretKey: '8693e641ae2bbe9ea802c736f42027b03f86afe63cae315e7169c9c496c17332',
 };
 const pactCode: string = '(+ 1 2)';
-const sampleCommand: IUnsignedCommand = createSampleExecTx(
-  pactServerKeyPair,
-  pactCode,
-);
+const sampleCommand: IUnsignedCommand = createSampleExecTx(pactServerKeyPair, pactCode);
 const signedSampleCommand: ICommand = ensureSignedCommand(sampleCommand);
 const sendReq: ISendRequestBody = createSendRequest(signedSampleCommand);
 
 describe('[Pact Server] Makes /send request', () => {
   it('Receives request key of transaction', async () => {
-    const actual: SendResponse | Response = await send(
-      sendReq,
-      pactServerApiHost,
-    );
+    const actual: SendResponse | Response = await send(sendReq, pactServerApiHost);
     const expected = {
       requestKeys: [signedSampleCommand.hash],
     };
@@ -49,10 +43,7 @@ describe('[Pact Server] Makes /send request', () => {
 
 describe('[Pact Server] Makes /local request', () => {
   it('Receives the expected transaction result', async () => {
-    const actual: ICommandResult | Response = await local(
-      signedSampleCommand,
-      pactServerApiHost,
-    );
+    const actual: ICommandResult | Response = await local(signedSampleCommand, pactServerApiHost);
     const expected: ICommandResult = {
       reqKey: signedSampleCommand.hash,
       txId: null,
@@ -71,10 +62,7 @@ describe('[Pact Server] Makes /local request', () => {
 
 describe('[Pact Server] Makes /poll request', () => {
   it('Receives the expected transaction result', async () => {
-    const actual: IPollResponse | Response = await poll(
-      createPollRequest(sendReq),
-      pactServerApiHost,
-    );
+    const actual: IPollResponse | Response = await poll(createPollRequest(sendReq), pactServerApiHost);
     const actualInArray = Object.values(actual);
     const expected: ICommandResult = {
       continuation: null,
@@ -94,10 +82,7 @@ describe('[Pact Server] Makes /poll request', () => {
 
 describe('[Pact Server] Makes /listen request', () => {
   it('Receives the expected transaction result', async () => {
-    const actual: Response | ICommandResult = await listen(
-      createListenRequest(sendReq),
-      pactServerApiHost,
-    );
+    const actual: Response | ICommandResult = await listen(createListenRequest(sendReq), pactServerApiHost);
     const expected: ListenResponse = {
       continuation: null,
       gas: 0,

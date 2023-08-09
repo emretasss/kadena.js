@@ -1,18 +1,7 @@
-import {
-  Breadcrumbs,
-  Button,
-  ProductIcon,
-  SystemIcon,
-  TextField,
-  TrackerCard,
-} from '@kadena/react-ui';
+import { Breadcrumbs, Button, ProductIcon, SystemIcon, TextField, TrackerCard } from '@kadena/react-ui';
 
-import AccountNameField, {
-  NAME_VALIDATION,
-} from '@/components/Global/AccountNameField';
-import RequestKeyField, {
-  REQUEST_KEY_VALIDATION,
-} from '@/components/Global/RequestKeyField';
+import AccountNameField, { NAME_VALIDATION } from '@/components/Global/AccountNameField';
+import RequestKeyField, { REQUEST_KEY_VALIDATION } from '@/components/Global/RequestKeyField';
 import client from '@/constants/client';
 import { chainNetwork } from '@/constants/network';
 import Routes from '@/constants/routes';
@@ -38,14 +27,8 @@ import {
   StyledTotalChunk,
   StyledTotalContainer,
 } from '@/pages/transactions/cross-chain-transfer-finisher/styles';
-import {
-  finishXChainTransfer,
-  ITransferResult,
-} from '@/services/cross-chain-transfer-finish/finish-xchain-transfer';
-import {
-  getTransferData,
-  ITransferDataResult,
-} from '@/services/cross-chain-transfer-finish/get-transfer-data';
+import { finishXChainTransfer, ITransferResult } from '@/services/cross-chain-transfer-finish/finish-xchain-transfer';
+import { getTransferData, ITransferDataResult } from '@/services/cross-chain-transfer-finish/get-transfer-data';
 import { validateRequestKey } from '@/services/utils/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Debug from 'debug';
@@ -55,26 +38,19 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 // @see; https://www.geeksforgeeks.org/how-to-validate-a-domain-name-using-regular-expression/
-const DOMAIN_NAME_REGEX: RegExp =
-  /^(?!-)[A-Za-z0-9-]+([\-\.]{1}[a-z0-9]+)*\.[A-Za-z]{2,6}$/;
+const DOMAIN_NAME_REGEX: RegExp = /^(?!-)[A-Za-z0-9-]+([\-\.]{1}[a-z0-9]+)*\.[A-Za-z]{2,6}$/;
 
 const schema = z.object({
   requestKey: REQUEST_KEY_VALIDATION,
   advancedOptions: z.boolean().optional(),
-  server: z
-    .string()
-    .trim()
-    .regex(DOMAIN_NAME_REGEX, 'Invalid Domain Name')
-    .optional(),
+  server: z.string().trim().regex(DOMAIN_NAME_REGEX, 'Invalid Domain Name').optional(),
   gasPayer: NAME_VALIDATION.optional(),
 });
 
 type FormData = z.infer<typeof schema>;
 
 const CrossChainTransferFinisher: FC = () => {
-  const debug = Debug(
-    'kadena-transfer:pages:transfer:cross-chain-transfer-finisher',
-  );
+  const debug = Debug('kadena-transfer:pages:transfer:cross-chain-transfer-finisher');
   const { t } = useTranslation('common');
   const { network } = useAppContext();
 
@@ -101,9 +77,7 @@ const CrossChainTransferFinisher: FC = () => {
     },
   ]);
 
-  const checkRequestKey = async (
-    e: React.KeyboardEvent<HTMLInputElement>,
-  ): Promise<void> => {
+  const checkRequestKey = async (e: React.KeyboardEvent<HTMLInputElement>): Promise<void> => {
     e.preventDefault();
     debug(checkRequestKey.name);
 
@@ -147,10 +121,7 @@ const CrossChainTransferFinisher: FC = () => {
       chainId: pollResults.tx.sender.chain,
     };
 
-    const proof = await client.pollCreateSpv(
-      requestObject,
-      pollResults.tx.receiver.chain,
-    );
+    const proof = await client.pollCreateSpv(requestObject, pollResults.tx.receiver.chain);
 
     const status = await client.listen(requestObject);
 
@@ -212,10 +183,8 @@ const CrossChainTransferFinisher: FC = () => {
   const watchGasPayer = watch('gasPayer');
 
   const isGasStation = watchGasPayer === 'kadena-xchain-gas';
-  const showInputError =
-    pollResults.error === undefined ? undefined : 'negative';
-  const showInputHelper =
-    pollResults.error !== undefined ? pollResults.error : '';
+  const showInputError = pollResults.error === undefined ? undefined : 'negative';
+  const showInputHelper = pollResults.error !== undefined ? pollResults.error : '';
 
   useEffect(() => {
     resetField('requestKey');
@@ -241,9 +210,7 @@ const CrossChainTransferFinisher: FC = () => {
                   id="advanced-options"
                   placeholder={t('Enter private key to sign the transaction')}
                 />
-                <StyledCheckboxLabel htmlFor="advanced-options">
-                  {t('Advanced options')}
-                </StyledCheckboxLabel>
+                <StyledCheckboxLabel htmlFor="advanced-options">{t('Advanced options')}</StyledCheckboxLabel>
               </StyledFieldCheckbox>
             </StyledToggleContainer>
 
@@ -283,10 +250,7 @@ const CrossChainTransferFinisher: FC = () => {
             ) : null}
           </StyledAccountForm>
           <StyledFormButton>
-            <Button
-              title={t('Finish Cross Chain Transfer')}
-              disabled={!isGasStation}
-            >
+            <Button title={t('Finish Cross Chain Transfer')} disabled={!isGasStation}>
               {t('Finish Cross Chain Transfer')}
             </Button>
           </StyledFormButton>
@@ -377,9 +341,7 @@ const CrossChainTransferFinisher: FC = () => {
             {showMore ? (
               <StyledInfoItem>
                 <StyledInfoItemTitle>{t('Receiver guard')}</StyledInfoItemTitle>
-                <StyledInfoItemLine>{`${t('Pred')}: ${
-                  pollResults.tx.receiverGuard.pred
-                }`}</StyledInfoItemLine>
+                <StyledInfoItemLine>{`${t('Pred')}: ${pollResults.tx.receiverGuard.pred}`}</StyledInfoItemLine>
                 <StyledInfoItemLine>
                   {t('Keys')}:
                   {pollResults.tx.receiverGuard.keys.map((key, index) => (

@@ -10,19 +10,14 @@ const rejectAfter = (
 } => {
   let stopTimer = (): void => {};
   const promise = new Promise<void>((resolve, reject) => {
-    const timer = setTimeout(
-      () => reject(new Error('TIME_OUT_REJECT')),
-      timeout,
-    );
+    const timer = setTimeout(() => reject(new Error('TIME_OUT_REJECT')), timeout);
     stopTimer = () => clearTimeout(timer);
   });
   return { stopTimer: stopTimer, promise };
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const retry = <T extends object | string | void | boolean>(
-  task: () => Promise<T>,
-) =>
+export const retry = <T extends object | string | void | boolean>(task: () => Promise<T>) =>
   async function runTask(options?: IPollOptions, count = 0): Promise<T> {
     const startTime = Date.now();
 

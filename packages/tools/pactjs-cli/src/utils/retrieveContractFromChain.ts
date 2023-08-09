@@ -18,10 +18,7 @@ export async function retrieveContractFromChain(
 
   const hashFromResponse = textResponse?.split(' ').splice(-1, 1)[0];
 
-  const { jsonResponse } = await callLocal(
-    apiHost,
-    createBody(hashFromResponse),
-  );
+  const { jsonResponse } = await callLocal(apiHost, createBody(hashFromResponse));
 
   return jsonResponse?.result.data.code;
 }

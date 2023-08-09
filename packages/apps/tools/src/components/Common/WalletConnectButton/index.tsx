@@ -5,8 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import React, { FC } from 'react';
 
 const WalletConnectButton: FC = () => {
-  const { connect, isInitializing, disconnect, session } =
-    useWalletConnectClient();
+  const { connect, isInitializing, disconnect, session } = useWalletConnectClient();
   const { t } = useTranslation();
 
   const handleClick = async (): Promise<void> => {
@@ -18,9 +17,7 @@ const WalletConnectButton: FC = () => {
     await connect();
   };
 
-  const buttonTitle = session
-    ? t('Disconnect your wallet')
-    : t('Connect your wallet');
+  const buttonTitle = session ? t('Disconnect your wallet') : t('Connect your wallet');
 
   return (
     <Button

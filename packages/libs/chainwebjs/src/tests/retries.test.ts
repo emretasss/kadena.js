@@ -65,18 +65,11 @@ describe('request', () => {
   });
   it('should create a correct URL', async () => {
     const url = chainUrl(1, 'header/payload', config.network, config.host);
-    expect(url.href).toMatch(
-      'https://api.chainweb.com/chainweb/0.0/mainnet01/chain/1/header/payload',
-    );
+    expect(url.href).toMatch('https://api.chainweb.com/chainweb/0.0/mainnet01/chain/1/header/payload');
   });
   it('should throw when chain is missing', async () => {
     expect(() => {
-      chainUrl(
-        null as unknown as string,
-        'header/payload',
-        config.network,
-        config.host,
-      );
+      chainUrl(null as unknown as string, 'header/payload', config.network, config.host);
     }).toThrow('missing chainId parameter');
   });
 });

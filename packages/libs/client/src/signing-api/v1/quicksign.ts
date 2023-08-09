@@ -35,9 +35,7 @@ export type IQuicksignSig = string | null;
  * Response from {@link https://github.com/kadena-io/KIPs/blob/master/kip-0017.md | quicksign API}
  * @public
  */
-export type IQuicksignResponse =
-  | IQuicksignResponseError
-  | IQuicksignResponseOutcomes;
+export type IQuicksignResponse = IQuicksignResponseError | IQuicksignResponseOutcomes;
 
 /**
  * Succesful result from {@link https://github.com/kadena-io/KIPs/blob/master/kip-0017.md | quicksign API}

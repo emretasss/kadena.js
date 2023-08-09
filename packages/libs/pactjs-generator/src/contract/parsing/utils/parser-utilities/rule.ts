@@ -9,14 +9,9 @@ export interface IParser<T = unknown, F = typeof FAILED> {
   isRule?: boolean;
 }
 
-export type RuleReturn<T, N extends string | undefined = string | undefined> =
-  | typeof FAILED
-  | ExWrappedData<T, N>;
+export type RuleReturn<T, N extends string | undefined = string | undefined> = typeof FAILED | ExWrappedData<T, N>;
 
-export type RuleReturnType<T extends IParser> = Exclude<
-  ReturnType<T>,
-  typeof FAILED
->;
+export type RuleReturnType<T extends IParser> = Exclude<ReturnType<T>, typeof FAILED>;
 
 export const rule = <P extends IParser>(parser: P): P => {
   if (parser.isRule === true) return parser;

@@ -34,19 +34,13 @@ describe('isCommand', () => {
   });
 
   it("returns false if properties of the command object don't match ICommand interface", () => {
-    const deleteProperty = <T extends object>(
-      obj: T,
-      prop: string,
-    ): Partial<T> => {
+    const deleteProperty = <T extends object>(obj: T, prop: string): Partial<T> => {
       const parts = prop.split('.');
       if (parts.length > 1) {
         const [first, ...rest] = parts;
         return {
           ...obj,
-          [first]: deleteProperty(
-            (obj as Record<string, object>)[first],
-            rest.join('.'),
-          ),
+          [first]: deleteProperty((obj as Record<string, object>)[first], rest.join('.')),
         };
       }
       const newObj = { ...obj } as Record<string, object>;
@@ -82,9 +76,7 @@ describe('isCommand', () => {
     expect(isPactCommand(deleteProperty(command, 'nonce'))).toBe(false);
     expect(isPactCommand(deleteProperty(command, 'meta'))).toBe(false);
     expect(isPactCommand(deleteProperty(command, 'meta.chainId'))).toBe(false);
-    expect(isPactCommand(deleteProperty(command, 'meta.creationTime'))).toBe(
-      false,
-    );
+    expect(isPactCommand(deleteProperty(command, 'meta.creationTime'))).toBe(false);
     expect(isPactCommand(deleteProperty(command, 'meta.gasLimit'))).toBe(false);
     expect(isPactCommand(deleteProperty(command, 'meta.gasPrice'))).toBe(false);
     expect(isPactCommand(deleteProperty(command, 'meta.ttl'))).toBe(false);

@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
 
-const QuickStart: React.FC<SVGProps<SVGSVGElement>> = (
-  props: SVGProps<SVGSVGElement>,
-) => (
-  <svg
-    width={40}
-    height={40}
-    viewBox="0 0 40 40"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+const QuickStart: React.FC<SVGProps<SVGSVGElement>> = (props: SVGProps<SVGSVGElement>) => (
+  <svg width={40} height={40} viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" {...props}>
     <g clipPath="url(#clip0_1080_2292)">
       <path
         /* className="stroke" */

@@ -44,9 +44,7 @@ describe('ProgressBar', () => {
   });
 
   test('displays correct number of checkpoints', () => {
-    const { getByTestId } = render(
-      <ProgressBar checkpoints={checkpoints.splice(0, 2)} />,
-    );
+    const { getByTestId } = render(<ProgressBar checkpoints={checkpoints.splice(0, 2)} />);
 
     const firstCheckpointContainer = getByTestId('kda-checkpoint-container-0');
     const secondCheckpointContainer = getByTestId('kda-checkpoint-container-1');
@@ -54,8 +52,6 @@ describe('ProgressBar', () => {
     expect(firstCheckpointContainer).toBeInTheDocument();
     expect(secondCheckpointContainer).toBeInTheDocument();
 
-    expect(
-      screen.queryByTestId('kda-checkpoint-container-2'),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId('kda-checkpoint-container-2')).not.toBeInTheDocument();
   });
 });

@@ -17,9 +17,7 @@ export interface ICardHeadingProps {
   children: React.ReactNode;
 }
 
-const CardHeading: FC<ICardHeadingProps> = ({
-  children,
-}: ICardHeadingProps) => {
+const CardHeading: FC<ICardHeadingProps> = ({ children }: ICardHeadingProps) => {
   return <Heading as="h4">{children}</Heading>;
 };
 

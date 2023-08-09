@@ -1,7 +1,4 @@
-import {
-  ChainwebChainId,
-  ChainwebNetworkId,
-} from '@kadena/chainweb-node-client';
+import { ChainwebChainId, ChainwebNetworkId } from '@kadena/chainweb-node-client';
 import { createClient, isSignedTransaction, Pact } from '@kadena/client';
 import { genKeyPair, sign } from '@kadena/cryptography-utils';
 import { PactNumber } from '@kadena/pactjs';
@@ -13,14 +10,8 @@ import Debug from 'debug';
 const NETWORK_ID: ChainwebNetworkId = 'testnet04';
 const SENDER_ACCOUNT: string = 'coin-faucet';
 const SENDER_OPERATION_ACCOUNT: string = 'faucet-operation';
-const FAUCET_PUBLIC_KEY = env(
-  'FAUCET_PUBLIC_KEY',
-  '<PROVIDE_FAUCET_PUBLICKEY_HERE>',
-);
-const FAUCET_PRIVATE_KEY = env(
-  'FAUCET_PRIVATE_KEY',
-  '<PROVIDE_FAUCET_PRIVATEKEY_HERE>',
-);
+const FAUCET_PUBLIC_KEY = env('FAUCET_PUBLIC_KEY', '<PROVIDE_FAUCET_PUBLICKEY_HERE>');
+const FAUCET_PRIVATE_KEY = env('FAUCET_PRIVATE_KEY', '<PROVIDE_FAUCET_PRIVATEKEY_HERE>');
 
 const debug = Debug('kadena-transfer:services:faucet');
 
@@ -33,22 +24,12 @@ export const fundExistingAccount = async (
   const keyPair = genKeyPair();
 
   const transaction = Pact.builder
-    .execution(
-      Pact.modules['user.coin-faucet']['request-coin'](
-        account,
-        new PactNumber(amount).toPactDecimal(),
-      ),
-    )
+    .execution(Pact.modules['user.coin-faucet']['request-coin'](account, new PactNumber(amount).toPactDecimal()))
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .addSigner(FAUCET_PUBLIC_KEY, (withCap: any) => [withCap('coin.GAS')])
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .addSigner(keyPair.publicKey, (withCap: any) => [
-      withCap(
-        'coin.TRANSFER',
-        SENDER_ACCOUNT,
-        account,
-        new PactNumber(amount).toPactDecimal(),
-      ),
+      withCap('coin.TRANSFER', SENDER_ACCOUNT, account, new PactNumber(amount).toPactDecimal()),
     ])
     .setMeta({ senderAccount: SENDER_OPERATION_ACCOUNT, chainId })
     .setNetworkId(NETWORK_ID)

@@ -1,11 +1,7 @@
 import analyticsDataClient from './analyticsDataClient';
 import storeAnalyticsData from './storeAnalyticsData';
 
-import {
-  IMostPopularPage,
-  IRow,
-  IRunReportResponse,
-} from '@/types/MostPopularData';
+import { IMostPopularPage, IRow, IRunReportResponse } from '@/types/MostPopularData';
 import fs from 'fs';
 import path from 'path';
 
@@ -31,8 +27,7 @@ function getModifiedTimeInSeconds(file: string): number | undefined {
   const stats = fs.statSync(file, { bigint: false });
   if (!stats.isFile() || stats.mtime === undefined) return;
 
-  const seconds =
-    (new Date().getTime() - new Date(stats.mtime).getTime()) / 1000;
+  const seconds = (new Date().getTime() - new Date(stats.mtime).getTime()) / 1000;
   return seconds;
 }
 
@@ -40,8 +35,7 @@ function getModifiedTimeInSeconds(file: string): number | undefined {
 function validateCache(filePath: string): boolean {
   const dayInSecs = 86400; // 24 * 60 * 60
 
-  const fileLastModifiedTime: number | undefined =
-    getModifiedTimeInSeconds(filePath) ?? 0;
+  const fileLastModifiedTime: number | undefined = getModifiedTimeInSeconds(filePath) ?? 0;
 
   if (!fileLastModifiedTime) return true;
 
@@ -50,12 +44,8 @@ function validateCache(filePath: string): boolean {
   return false;
 }
 
-function pushToTopPages(
-  topPages: IMostPopularPage[],
-  row: IRow,
-): IMostPopularPage[] {
-  if (row === undefined || !row.dimensionValues || !row.metricValues)
-    return topPages;
+function pushToTopPages(topPages: IMostPopularPage[], row: IRow): IMostPopularPage[] {
+  if (row === undefined || !row.dimensionValues || !row.metricValues) return topPages;
 
   const isPageAlreadyExist: IMostPopularPage | undefined = topPages.find(
     (page) => page.path === row.dimensionValues?.[0]?.value,
@@ -63,8 +53,7 @@ function pushToTopPages(
 
   if (isPageAlreadyExist) {
     isPageAlreadyExist.views =
-      parseFloat(isPageAlreadyExist.views.toString()) +
-      parseFloat(row.metricValues?.[0]?.value ?? '0');
+      parseFloat(isPageAlreadyExist.views.toString()) + parseFloat(row.metricValues?.[0]?.value ?? '0');
   } else {
     const views = row.metricValues?.[0].value ?? '0';
     topPages.push({
@@ -77,11 +66,7 @@ function pushToTopPages(
   return topPages;
 }
 
-function getTopPages(
-  data: IRunReportResponse,
-  slug: string,
-  limit: number,
-): IMostPopularPage[] {
+function getTopPages(data: IRunReportResponse, slug: string, limit: number): IMostPopularPage[] {
   let topPages: IMostPopularPage[] = [];
   (data?.rows || []).forEach((row: IRow) => {
     if (row.dimensionValues?.[0]) {
@@ -104,21 +89,13 @@ function getTopPages(
   return topPages.sort((a, b) => b.views - a.views).slice(0, limit);
 }
 
-export default async function getMostPopularPages(
-  slug = '/',
-  limit = 5,
-): Promise<IMostPopularPage[]> {
+export default async function getMostPopularPages(slug = '/', limit = 5): Promise<IMostPopularPage[]> {
   const dataFilePath = path.join(process.cwd(), 'src/data/mostPopular.json');
 
   const GOOGLE_ANALYTICS_PROPERTY_ID = process.env.GOOGLE_ANALYTICS_PROPERTY_ID;
-  const GOOGLE_APPLICATION_CREDENTIALS =
-    process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  const GOOGLE_APPLICATION_CREDENTIALS = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
-  if (
-    GOOGLE_ANALYTICS_PROPERTY_ID === undefined ||
-    GOOGLE_APPLICATION_CREDENTIALS === undefined
-  )
-    return [];
+  if (GOOGLE_ANALYTICS_PROPERTY_ID === undefined || GOOGLE_APPLICATION_CREDENTIALS === undefined) return [];
 
   if (!validateCache(dataFilePath)) {
     const data: string = fs.readFileSync(dataFilePath, 'utf8');

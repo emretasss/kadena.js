@@ -13,9 +13,7 @@ export const TimeTicker = ({ date }: ITimeTickerProps): JSX.Element => {
     setTimeDiff(Math.round((new Date().valueOf() - date.valueOf()) / 1000));
 
     const intervalId = setInterval(() => {
-      const timeDiffSeconds: number = Math.round(
-        (new Date().valueOf() - date.valueOf()) / 1000,
-      );
+      const timeDiffSeconds: number = Math.round((new Date().valueOf() - date.valueOf()) / 1000);
 
       setTimeDiff(timeDiffSeconds);
       if (timeDiffSeconds >= 100) {

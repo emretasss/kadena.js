@@ -1,34 +1,19 @@
 import { ChainwebChainId } from '@kadena/chainweb-node-client';
-import {
-  Box,
-  Breadcrumbs,
-  Button,
-  ContentHeader,
-  Grid,
-  Heading,
-  SystemIcon,
-  Table,
-  Text,
-} from '@kadena/react-ui';
+import { Box, Breadcrumbs, Button, ContentHeader, Grid, Heading, SystemIcon, Table, Text } from '@kadena/react-ui';
 
 import { filterItemClass, headerButtonGroupClass } from './styles.css';
 
 import { Network } from '@/constants/kadena';
 import Routes from '@/constants/routes';
 import { useToolbar } from '@/context/layout-context';
-import {
-  getTransactions,
-  ITransaction,
-} from '@/services/accounts/get-transactions';
+import { getTransactions, ITransaction } from '@/services/accounts/get-transactions';
 import Debug from 'debug';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useEffect, useState } from 'react';
 
 const CheckTransactions: FC = () => {
-  const debug = Debug(
-    'kadena-transfer:pages:transfer:account-transactions:results',
-  );
+  const debug = Debug('kadena-transfer:pages:transfer:account-transactions:results');
 
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -54,11 +39,7 @@ const CheckTransactions: FC = () => {
 
   useEffect(() => {
     if (router.isReady) {
-      if (
-        !router.query.network ||
-        !router.query.chain ||
-        !router.query.account
-      ) {
+      if (!router.query.network || !router.query.chain || !router.query.account) {
         router.push(Routes.ACCOUNT_TRANSACTIONS_FILTERS).catch((e) => {
           debug(e);
         });
@@ -80,11 +61,7 @@ const CheckTransactions: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
-  async function getAndSetTransactions(
-    network: Network,
-    chain: ChainwebChainId,
-    account: string,
-  ): Promise<void> {
+  async function getAndSetTransactions(network: Network, chain: ChainwebChainId, account: string): Promise<void> {
     debug(getAndSetTransactions.name);
     if (!chain || !account || !network) return;
 
@@ -149,23 +126,13 @@ const CheckTransactions: FC = () => {
       <Box marginBottom="$1" />
       <Text color="emphasize">
         {t('Filtered by')}:
-        {router.query.chain ? (
-          <div className={filterItemClass}>Chain: {router.query.chain}</div>
-        ) : (
-          ''
-        )}
+        {router.query.chain ? <div className={filterItemClass}>Chain: {router.query.chain}</div> : ''}
         {router.query.account ? (
-          <div className={filterItemClass}>
-            {displayAccountName(router.query.account as string)}
-          </div>
+          <div className={filterItemClass}>{displayAccountName(router.query.account as string)}</div>
         ) : (
           ''
         )}
-        {router.query.network ? (
-          <div className={filterItemClass}>{router.query.network}</div>
-        ) : (
-          ''
-        )}
+        {router.query.network ? <div className={filterItemClass}>{router.query.network}</div> : ''}
       </Text>
       <Box marginBottom="$10" />
 
@@ -198,13 +165,9 @@ const CheckTransactions: FC = () => {
 
                 return (
                   <Table.Tr key={index} url={''}>
-                    <Table.Td>
-                      {new Date(result.blockTime).toLocaleString()}
-                    </Table.Td>
+                    <Table.Td>{new Date(result.blockTime).toLocaleString()}</Table.Td>
                     <Table.Td>{result.amount}</Table.Td>
-                    <Table.Td>
-                      {displayAccountName(result.fromAccount as string)}
-                    </Table.Td>
+                    <Table.Td>{displayAccountName(result.fromAccount as string)}</Table.Td>
                   </Table.Tr>
                 );
               })}
@@ -237,13 +200,9 @@ const CheckTransactions: FC = () => {
 
                 return (
                   <Table.Tr key={index} url={''}>
-                    <Table.Td>
-                      {new Date(result.blockTime).toLocaleString()}
-                    </Table.Td>
+                    <Table.Td>{new Date(result.blockTime).toLocaleString()}</Table.Td>
                     <Table.Td>{result.amount}</Table.Td>
-                    <Table.Td>
-                      {displayAccountName(result.toAccount as string)}
-                    </Table.Td>
+                    <Table.Td>{displayAccountName(result.toAccount as string)}</Table.Td>
                   </Table.Tr>
                 );
               })}

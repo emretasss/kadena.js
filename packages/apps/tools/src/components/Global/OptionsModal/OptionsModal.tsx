@@ -1,14 +1,4 @@
-import {
-  Button,
-  Card,
-  IconButton,
-  Modal,
-  Stack,
-  SystemIcon,
-  Tag,
-  Text,
-  useModal,
-} from '@kadena/react-ui';
+import { Button, Card, IconButton, Modal, Stack, SystemIcon, Tag, Text, useModal } from '@kadena/react-ui';
 
 import {
   largeIconStyle,
@@ -41,25 +31,19 @@ export const OptionsModal: FC = () => {
   } = {
     BASIC: {
       title: t('Basic User Interface'),
-      text: t(
-        'This view can be used for basic operations and handling things within the user interface.',
-      ),
+      text: t('This view can be used for basic operations and handling things within the user interface.'),
       icon: SystemIcon.Application,
     },
     BACKEND: {
       title: t('Backend Developers'),
       tag: t('for PACT developers'),
-      text: t(
-        'This option is meant for developers who need more sophisticated options within the user interface.',
-      ),
+      text: t('This option is meant for developers who need more sophisticated options within the user interface.'),
       icon: SystemIcon.ApplicationBrackets,
     },
     DAPP: {
       title: t('dApp Developers'),
       tag: t('for Javascript developers'),
-      text: t(
-        'This option is meant for developers who need more sophisticated options within the user interface.',
-      ),
+      text: t('This option is meant for developers who need more sophisticated options within the user interface.'),
       icon: SystemIcon.ApplicationBrackets,
     },
   };
@@ -73,32 +57,15 @@ export const OptionsModal: FC = () => {
           const [key, value] = item;
 
           return (
-            <div
-              key={value.title}
-              className={radioItemWrapperStyle}
-              onClick={() => setSelected(key as DevOption)}
-            >
+            <div key={value.title} className={radioItemWrapperStyle} onClick={() => setSelected(key as DevOption)}>
               <Card fullWidth>
                 <Stack>
                   {selected === key ? (
-                    <IconButton
-                      title="Radio"
-                      icon={SystemIcon.RadioboxMarked}
-                      color="default"
-                    />
+                    <IconButton title="Radio" icon={SystemIcon.RadioboxMarked} color="default" />
                   ) : (
-                    <IconButton
-                      title="Radio"
-                      icon={SystemIcon.RadioboxBlank}
-                      color="default"
-                    />
+                    <IconButton title="Radio" icon={SystemIcon.RadioboxBlank} color="default" />
                   )}
-                  <IconButton
-                    title="Radio"
-                    icon={value.icon}
-                    color="default"
-                    className={largeIconStyle}
-                  />
+                  <IconButton title="Radio" icon={value.icon} color="default" className={largeIconStyle} />
                   <Stack direction="column" marginX="$md">
                     <div className={titleTagStyle}>
                       <Text as="span">{value.title}</Text>
@@ -128,11 +95,7 @@ export const OptionsModal: FC = () => {
         {renderOptions()}
 
         <div className={modalButtonStyle}>
-          <Button
-            title={`${t('Save')}`}
-            onClick={() => handleSave()}
-            color="primary"
-          >
+          <Button title={`${t('Save')}`} onClick={() => handleSave()} color="primary">
             {`${t('Save')}`}
           </Button>
         </div>

@@ -9,10 +9,7 @@ const Document = (): JSX.Element => {
   return (
     <Html>
       <TypedHead>
-        <style
-          id="stitches"
-          dangerouslySetInnerHTML={{ __html: getCssText() }}
-        ></style>
+        <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }}></style>
       </TypedHead>
       <body>
         <Main />

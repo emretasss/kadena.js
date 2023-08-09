@@ -44,10 +44,7 @@ export const AccordionSection: FC<IAccordionSectionProps> = ({
       <div
         data-testid="kda-accordion-title"
         onClick={onToggle}
-        className={classNames(
-          accordionTitleClass,
-          accordionTitleVariants[isOpen ? 'opened' : 'closed'],
-        )}
+        className={classNames(accordionTitleClass, accordionTitleVariants[isOpen ? 'opened' : 'closed'])}
       >
         <span>{title}</span>
 

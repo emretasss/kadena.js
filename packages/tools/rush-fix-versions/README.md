@@ -11,13 +11,12 @@ Tool to assist with making consistent versions across rush monorepo
 
 <!-- genericHeader end -->
 
-Package allows to align versions to align with `ensureConsistentVersions=true`
-option in rush.json
+Package allows to align versions to align with `ensureConsistentVersions=true` option in rush.json
 
 ## Integrate with rush
 
-To use this as a command (e.g. `rush fix-versions`) you can add this as a
-autoinstalled package and add `fix-versions` command to the `command-line.json`.
+To use this as a command (e.g. `rush fix-versions`) you can add this as a autoinstalled package and add `fix-versions`
+command to the `command-line.json`.
 
 For reference see [maintaining autoinstallers][1]
 
@@ -25,8 +24,7 @@ For reference see [maintaining autoinstallers][1]
     ```sh
     rush init-autoinstaller --name rush-fix-versions
     ```
-2.  add `@kadena-dev/rush-fix-versions` to the
-    `autoinstallers/rush-fix-versions/package.json`
+2.  add `@kadena-dev/rush-fix-versions` to the `autoinstallers/rush-fix-versions/package.json`
 3.  update the lockfile for the autoinstaller
     ```sh
     cd common/autoinstallers/rush-fix-versions
@@ -44,7 +42,6 @@ For reference see [maintaining autoinstallers][1]
       "shellCommand": "rush-fix-versions"
     },
     ```
-5.  Now execute `rush fix-versions` and it'll present you the versions that are
-    misaligned
+5.  Now execute `rush fix-versions` and it'll present you the versions that are misaligned
 
 [1]: https://rushjs.io/pages/maintainer/autoinstallers/

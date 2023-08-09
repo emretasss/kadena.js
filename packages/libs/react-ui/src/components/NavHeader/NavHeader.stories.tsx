@@ -90,13 +90,7 @@ export const Dynamic: IStory = {
     linksCount: 3,
     customNavigation: sampleNavItems,
   },
-  render: ({
-    brand,
-    useCustomNavigation,
-    customNavigation,
-    linksCount,
-    renderSampleContent = false,
-  }) => {
+  render: ({ brand, useCustomNavigation, customNavigation, linksCount, renderSampleContent = false }) => {
     const navItems = useCustomNavigation ? customNavigation : sampleNavItems;
     return (
       <NavHeader.Root brand={brand}>

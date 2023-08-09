@@ -5,11 +5,7 @@ import PrismaPlugin from '@pothos/plugin-prisma';
 import type PrismaTypes from '@pothos/plugin-prisma/generated';
 import RelayPlugin from '@pothos/plugin-relay';
 import { Prisma } from '@prisma/client';
-import {
-  BigIntResolver,
-  DateTimeResolver,
-  PositiveFloatResolver,
-} from 'graphql-scalars';
+import { BigIntResolver, DateTimeResolver, PositiveFloatResolver } from 'graphql-scalars';
 
 interface IDefaultTypesExtension {
   Scalars: {
@@ -51,12 +47,11 @@ export const builder = new SchemaBuilder<
   },
 });
 
-type ScalarTypeResolver<TScalarInputShape, TScalarOutputShape> =
-  PothosSchemaTypes.ScalarTypeOptions<
-    PothosSchemaTypes.ExtendDefaultTypes<IDefaultTypesExtension>,
-    TScalarInputShape,
-    TScalarOutputShape
-  >;
+type ScalarTypeResolver<TScalarInputShape, TScalarOutputShape> = PothosSchemaTypes.ScalarTypeOptions<
+  PothosSchemaTypes.ExtendDefaultTypes<IDefaultTypesExtension>,
+  TScalarInputShape,
+  TScalarOutputShape
+>;
 
 // Defines the custom scalars
 // eslint-disable-next-line @rushstack/typedef-var

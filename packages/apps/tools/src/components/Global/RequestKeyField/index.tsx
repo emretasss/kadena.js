@@ -18,24 +18,16 @@ export const REQUEST_KEY_VALIDATION = z
       return val.length === RequestLength.MIN;
     },
     {
-      message:
-        'Your request key is invalid. Please provide a valid request key.',
+      message: 'Your request key is invalid. Please provide a valid request key.',
     },
   );
 
-interface IRequestKeyFieldProps
-  extends Partial<Omit<ITextFieldProps, 'inputProps'>> {
+interface IRequestKeyFieldProps extends Partial<Omit<ITextFieldProps, 'inputProps'>> {
   inputProps: Partial<ITextFieldProps['inputProps']>;
   error?: FieldError;
 }
 
-const RequestKeyField: FC<IRequestKeyFieldProps> = ({
-  error,
-  inputProps,
-  status,
-  helperText,
-  ...rest
-}) => {
+const RequestKeyField: FC<IRequestKeyFieldProps> = ({ error, inputProps, status, helperText, ...rest }) => {
   const { t } = useTranslation('common');
 
   return (

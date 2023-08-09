@@ -23,10 +23,7 @@ export function useParsedBlocks(): IUseParseBlocksReturn {
       const groupedNewBlocks: Record<number, IBlock[]> = {};
       newBlocks.forEach((block) =>
         groupedNewBlocks[block.height as number]?.length
-          ? (groupedNewBlocks[block.height] = [
-              ...groupedNewBlocks[block.height],
-              block,
-            ])
+          ? (groupedNewBlocks[block.height] = [...groupedNewBlocks[block.height], block])
           : (groupedNewBlocks[block.height] = [block]),
       );
 
@@ -42,9 +39,7 @@ export function useParsedBlocks(): IUseParseBlocksReturn {
           }
 
           if (index === blocks.length - 1) {
-            updatedBlocks[heightNum] = [...updatedBlocks[heightNum]].sort(
-              (a, b) => b.chainid - a.chainid,
-            );
+            updatedBlocks[heightNum] = [...updatedBlocks[heightNum]].sort((a, b) => b.chainid - a.chainid);
           }
         });
 

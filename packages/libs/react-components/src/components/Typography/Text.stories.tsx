@@ -1,11 +1,4 @@
-import {
-  boldVariant,
-  colorVariant,
-  elementVariant,
-  fontVariant,
-  textSizeVariant,
-  transformVariant,
-} from './styles';
+import { boldVariant, colorVariant, elementVariant, fontVariant, textSizeVariant, transformVariant } from './styles';
 import { Text } from './Text';
 
 import type { Meta, StoryObj } from '@storybook/react';
@@ -42,9 +35,7 @@ const meta: Meta<typeof Text> = {
       control: { type: 'select' },
     },
     transform: {
-      options: Object.keys(
-        transformVariant,
-      ) as (keyof typeof transformVariant)[],
+      options: Object.keys(transformVariant) as (keyof typeof transformVariant)[],
       control: { type: 'radio' },
     },
   },
@@ -66,15 +57,7 @@ export const Primary: Story = {
     transform: undefined,
   },
   render: ({ font, bold, size, as, variant, transform, children, color }) => (
-    <Text
-      font={font}
-      bold={bold}
-      size={size}
-      as={as}
-      variant={variant}
-      transform={transform}
-      color={color}
-    >
+    <Text font={font} bold={bold} size={size} as={as} variant={variant} transform={transform} color={color}>
       {children}
     </Text>
   ),

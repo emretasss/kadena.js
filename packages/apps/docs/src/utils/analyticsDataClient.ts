@@ -4,16 +4,13 @@
 
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 
-const GOOGLE_APPLICATION_CREDENTIALS: string | undefined =
-  process.env.GOOGLE_APPLICATION_CREDENTIALS ?? undefined;
+const GOOGLE_APPLICATION_CREDENTIALS: string | undefined = process.env.GOOGLE_APPLICATION_CREDENTIALS ?? undefined;
 
 // Using a default constructor instructs the client to use the credentials
 // specified in GOOGLE_APPLICATION_CREDENTIALS environment variable.
 const credential =
   GOOGLE_APPLICATION_CREDENTIALS !== undefined
-    ? JSON.parse(
-        Buffer.from(GOOGLE_APPLICATION_CREDENTIALS, 'base64').toString(),
-      )
+    ? JSON.parse(Buffer.from(GOOGLE_APPLICATION_CREDENTIALS, 'base64').toString())
     : {};
 
 const analyticsDataClient = new BetaAnalyticsDataClient({

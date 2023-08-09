@@ -49,8 +49,7 @@ export const StyledMenuItem = styled(Link, {
   },
 });
 
-export const StyledBurgerMenuButton: StyledComponent<typeof IconButton> =
-  styled(IconButton);
+export const StyledBurgerMenuButton: StyledComponent<typeof IconButton> = styled(IconButton);
 
 export const StyledMobileMenu = styled('div', {
   backgroundColor: '$gray90',

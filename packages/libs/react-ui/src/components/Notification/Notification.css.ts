@@ -1,11 +1,6 @@
 import { sprinkles } from '@theme/sprinkles.css';
 import { ColorType, vars } from '@theme/vars.css';
-import {
-  createVar,
-  fallbackVar,
-  style,
-  styleVariants,
-} from '@vanilla-extract/css';
+import { createVar, fallbackVar, style, styleVariants } from '@vanilla-extract/css';
 
 const contrastColor = createVar();
 

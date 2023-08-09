@@ -1,8 +1,8 @@
 ---
 title: Keysets
 description:
-  This document is a reference for the Pact smart-contract language, designed
-  for correct, transactional execution on a high-performance blockchain.
+  This document is a reference for the Pact smart-contract language, designed for correct, transactional execution on a
+  high-performance blockchain.
 menu: Keysets
 label: Keysets
 order: 5
@@ -17,9 +17,8 @@ _name_&nbsp;`string` _keyset_&nbsp;`string` _&rarr;_&nbsp;`string`
 
 _name_&nbsp;`string` _&rarr;_&nbsp;`string`
 
-Define keyset as NAME with KEYSET, or if unspecified, read NAME from message
-payload as keyset, similarly to 'read-keyset'. If keyset NAME already exists,
-keyset will be enforced before updating to new value.
+Define keyset as NAME with KEYSET, or if unspecified, read NAME from message payload as keyset, similarly to
+'read-keyset'. If keyset NAME already exists, keyset will be enforced before updating to new value.
 
 ```pact
 (define-keyset 'admin-keyset (read-keyset "keyset"))
@@ -77,8 +76,8 @@ true
 
 _key_&nbsp;`string` _&rarr;_&nbsp;`keyset`
 
-Read KEY from message data body as keyset (\{ "keys": KEYLIST, "pred": PREDFUN
-\}). PREDFUN should resolve to a keys predicate.
+Read KEY from message data body as keyset (\{ "keys": KEYLIST, "pred": PREDFUN \}). PREDFUN should resolve to a keys
+predicate.
 
 ```pact
 (read-keyset "admin-keyset")

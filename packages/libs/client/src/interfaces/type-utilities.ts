@@ -3,9 +3,7 @@ import { ICap } from '@kadena/types';
 /**
  * @internal
  */
-export type UnionToIntersection<T> = (
-  T extends unknown ? (k: T) => void : never
-) extends (k: infer I) => void
+export type UnionToIntersection<T> = (T extends unknown ? (k: T) => void : never) extends (k: infer I) => void
   ? I
   : never;
 
@@ -22,8 +20,9 @@ export interface IGeneralCapability {
  *
  * @public
  */
-export type WithCapability<TCode extends string & { capability: unknown }> =
-  ExtractCapabilityType<{ payload: { funs: [TCode] } }>;
+export type WithCapability<TCode extends string & { capability: unknown }> = ExtractCapabilityType<{
+  payload: { funs: [TCode] };
+}>;
 
 /**
  * @internal

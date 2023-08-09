@@ -15,11 +15,7 @@ export interface IAccountTextProps {
   defaultVisibility?: boolean;
 }
 
-export const AccountText: FC<IAccountTextProps> = ({
-  title,
-  account,
-  defaultVisibility = false,
-}): JSX.Element => {
+export const AccountText: FC<IAccountTextProps> = ({ title, account, defaultVisibility = false }): JSX.Element => {
   const [visible, setVisible] = useState(defaultVisibility);
 
   const hiddenAccountValue = `${account.slice(0, 6)}****${account.slice(-4)}`;
@@ -32,14 +28,8 @@ export const AccountText: FC<IAccountTextProps> = ({
     <StyledAccountText>
       <StyledTitle>{title}</StyledTitle>
       <StyledAccountContainer>
-        <StyledAccountNo>
-          {visible ? account : hiddenAccountValue}
-        </StyledAccountNo>
-        {visible ? (
-          <StyledEyeOffIcon onClick={toggleVisibility} />
-        ) : (
-          <StyledEyeIcon onClick={toggleVisibility} />
-        )}
+        <StyledAccountNo>{visible ? account : hiddenAccountValue}</StyledAccountNo>
+        {visible ? <StyledEyeOffIcon onClick={toggleVisibility} /> : <StyledEyeIcon onClick={toggleVisibility} />}
       </StyledAccountContainer>
     </StyledAccountText>
   );

@@ -96,8 +96,6 @@ describe('addSignature', () => {
       hash: 'test-hash',
       sigs: [undefined, undefined],
     };
-    expect(() =>
-      addSignatures(originalTr, { sig: '' }, { sig: '' }, { sig: '' }),
-    ).toThrowError();
+    expect(() => addSignatures(originalTr, { sig: '' }, { sig: '' }, { sig: '' })).toThrowError();
   });
 });

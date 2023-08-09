@@ -1,12 +1,7 @@
 import { colorPalette } from '@theme/colors';
 import { sprinkles } from '@theme/sprinkles.css';
 import { ColorType, darkThemeClass, vars } from '@theme/vars.css';
-import {
-  createVar,
-  keyframes,
-  style,
-  styleVariants,
-} from '@vanilla-extract/css';
+import { createVar, keyframes, style, styleVariants } from '@vanilla-extract/css';
 
 const bgHoverColor = createVar(),
   bgActiveColor = createVar(),

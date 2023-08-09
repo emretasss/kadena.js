@@ -37,9 +37,7 @@ describe('Accordion', () => {
   });
 
   test('opens a linked section when clicked and closes others', () => {
-    const { getAllByTestId } = render(
-      <Accordion sections={sections} linked={true} />,
-    );
+    const { getAllByTestId } = render(<Accordion sections={sections} linked={true} />);
 
     const sectionTitles = Array.from(getAllByTestId('kda-accordion-title'));
 
@@ -52,21 +50,13 @@ describe('Accordion', () => {
     expect(sections[0].onClose).toHaveBeenCalledTimes(1);
     expect(sections[1].onOpen).toHaveBeenCalledTimes(1);
 
-    expect(sectionTitles[0].querySelector('[role="button"]')).not.toHaveClass(
-      'isOpen',
-    );
-    expect(sectionTitles[1].querySelector('[role="button"]')).toHaveClass(
-      'isOpen',
-    );
-    expect(sectionTitles[2].querySelector('[role="button"]')).not.toHaveClass(
-      'isOpen',
-    );
+    expect(sectionTitles[0].querySelector('[role="button"]')).not.toHaveClass('isOpen');
+    expect(sectionTitles[1].querySelector('[role="button"]')).toHaveClass('isOpen');
+    expect(sectionTitles[2].querySelector('[role="button"]')).not.toHaveClass('isOpen');
   });
 
   test('allows multiple unlinked sections to be open at the same time', () => {
-    const { getAllByTestId } = render(
-      <Accordion sections={sections} linked={false} />,
-    );
+    const { getAllByTestId } = render(<Accordion sections={sections} linked={false} />);
 
     const sectionTitles = Array.from(getAllByTestId('kda-accordion-title'));
 
@@ -85,14 +75,8 @@ describe('Accordion', () => {
     expect(sections[1].onClose).toHaveBeenCalledTimes(0);
     expect(sections[2].onClose).toHaveBeenCalledTimes(0);
 
-    expect(sectionTitles[0].querySelector('[role="button"]')).toHaveClass(
-      'isOpen',
-    );
-    expect(sectionTitles[1].querySelector('[role="button"]')).not.toHaveClass(
-      'isOpen',
-    );
-    expect(sectionTitles[2].querySelector('[role="button"]')).toHaveClass(
-      'isOpen',
-    );
+    expect(sectionTitles[0].querySelector('[role="button"]')).toHaveClass('isOpen');
+    expect(sectionTitles[1].querySelector('[role="button"]')).not.toHaveClass('isOpen');
+    expect(sectionTitles[2].querySelector('[role="button"]')).toHaveClass('isOpen');
   });
 });

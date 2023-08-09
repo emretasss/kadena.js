@@ -1,14 +1,8 @@
 import { ICommandResult } from '@kadena/chainweb-node-client';
 import { Breadcrumbs, Button, Heading, SystemIcon } from '@kadena/react-ui';
 
-import {
-  ChainSelect,
-  FormStatus,
-  FormStatusNotification,
-} from '@/components/Global';
-import AccountNameField, {
-  NAME_VALIDATION,
-} from '@/components/Global/AccountNameField';
+import { ChainSelect, FormStatus, FormStatusNotification } from '@/components/Global';
+import AccountNameField, { NAME_VALIDATION } from '@/components/Global/AccountNameField';
 import Routes from '@/constants/routes';
 import { useToolbar } from '@/context/layout-context';
 import { usePersistentChainID } from '@/hooks';
@@ -48,8 +42,7 @@ interface IFundExistingAccountResponseBody {
   };
 }
 
-interface IFundExistingAccountResponse
-  extends Record<string, IFundExistingAccountResponseBody> {}
+interface IFundExistingAccountResponse extends Record<string, IFundExistingAccountResponseBody> {}
 
 const ExistingAccountFaucetPage: FC = () => {
   const { t } = useTranslation('common');
@@ -80,9 +73,7 @@ const ExistingAccountFaucetPage: FC = () => {
           AMOUNT_OF_COINS_FUNDED,
         )) as IFundExistingAccountResponse;
 
-        const error = Object.values(result).find(
-          (response) => response.result.status === 'failure',
-        );
+        const error = Object.values(result).find((response) => response.result.status === 'failure');
 
         if (error) {
           setRequestStatus({
@@ -141,11 +132,7 @@ const ExistingAccountFaucetPage: FC = () => {
             error={errors.name}
             label={t('The account name you would like to fund coins to')}
           />
-          <ChainSelect
-            onChange={onChainSelectChange}
-            value={chainID}
-            ariaLabel="Select Chain ID"
-          />
+          <ChainSelect onChange={onChainSelectChange} value={chainID} ariaLabel="Select Chain ID" />
         </StyledAccountForm>
         <StyledFormButton>
           <Button

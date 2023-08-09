@@ -1,13 +1,7 @@
 import { ThemeContext } from './ThemeProvider';
 import { ThemeScript } from './ThemeScript';
 import { IThemeProviderProps } from './types';
-import {
-  colorSchemes,
-  disableAnimation,
-  getSystemTheme,
-  getTheme,
-  MEDIA,
-} from './utils';
+import { colorSchemes, disableAnimation, getSystemTheme, getTheme, MEDIA } from './utils';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -26,12 +20,8 @@ export const Theme: React.FC<IThemeProviderProps> = ({
   children,
   nonce,
 }) => {
-  const [theme, setThemeState] = useState(() =>
-    getTheme(storageKey, defaultTheme),
-  );
-  const [resolvedTheme, setResolvedTheme] = useState(() =>
-    getTheme(storageKey),
-  );
+  const [theme, setThemeState] = useState(() => getTheme(storageKey, defaultTheme));
+  const [resolvedTheme, setResolvedTheme] = useState(() => getTheme(storageKey));
   const attrs = !value ? themes : Object.values(value);
 
   const applyTheme = useCallback(
@@ -67,27 +57,15 @@ export const Theme: React.FC<IThemeProviderProps> = ({
       }
 
       if (enableColorScheme) {
-        const fallback = colorSchemes.includes(defaultTheme)
-          ? defaultTheme
-          : null;
-        const colorScheme = colorSchemes.includes(resolved)
-          ? resolved
-          : fallback;
+        const fallback = colorSchemes.includes(defaultTheme) ? defaultTheme : null;
+        const colorScheme = colorSchemes.includes(resolved) ? resolved : fallback;
         // @ts-ignore
         d.style.colorScheme = colorScheme;
       }
 
       enable?.();
     },
-    [
-      attribute,
-      attrs,
-      defaultTheme,
-      disableTransitionOnChange,
-      enableSystem,
-      value,
-      enableColorScheme,
-    ],
+    [attribute, attrs, defaultTheme, disableTransitionOnChange, enableSystem, value, enableColorScheme],
   );
 
   const setTheme = useCallback(
@@ -155,10 +133,7 @@ export const Theme: React.FC<IThemeProviderProps> = ({
       forcedTheme,
       resolvedTheme: theme === 'system' ? resolvedTheme : theme,
       themes: enableSystem ? [...themes, 'system'] : themes,
-      systemTheme: (enableSystem ? resolvedTheme : undefined) as
-        | 'light'
-        | 'dark'
-        | undefined,
+      systemTheme: (enableSystem ? resolvedTheme : undefined) as 'light' | 'dark' | undefined,
     }),
     [theme, setTheme, forcedTheme, resolvedTheme, enableSystem, themes],
   );

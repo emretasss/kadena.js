@@ -11,14 +11,8 @@ import nacl from 'tweetnacl';
 
  * @alpha
 */
-export function signHash(
-  hash: string,
-  { secretKey, publicKey }: IKeyPair,
-): SignCommand {
+export function signHash(hash: string, { secretKey, publicKey }: IKeyPair): SignCommand {
   const hshBin = base64UrlDecodeArr(hash);
-  const sigBin = nacl.sign.detached(
-    hshBin,
-    toTweetNaclSecretKey({ secretKey, publicKey }),
-  );
+  const sigBin = nacl.sign.detached(hshBin, toTweetNaclSecretKey({ secretKey, publicKey }));
   return { hash, sig: binToHex(sigBin), pubKey: publicKey };
 }

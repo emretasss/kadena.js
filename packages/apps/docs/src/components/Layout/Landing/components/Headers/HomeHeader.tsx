@@ -23,9 +23,7 @@ export const HomeHeader: FC<IProps> = ({ popularPages }) => {
             <Heading as="h2" variant="h4">
               Build your <GradientText>own</GradientText> Internet
             </Heading>
-            <SubHeader>
-              Explore our guides and examples to build on Kadena
-            </SubHeader>
+            <SubHeader>Explore our guides and examples to build on Kadena</SubHeader>
           </Stack>
           {popularPages.length > 0 && (
             <div className={mostPopularWrapper}>

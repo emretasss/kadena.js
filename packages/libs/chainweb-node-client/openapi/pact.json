@@ -463,14 +463,7 @@
               {
                 "title": "Public metadata (Chainweb)",
                 "description": "Chainweb/public command metadata.",
-                "required": [
-                  "chainId",
-                  "sender",
-                  "gasLimit",
-                  "gasPrice",
-                  "ttl",
-                  "creationTime"
-                ],
+                "required": ["chainId", "sender", "gasLimit", "gasPrice", "ttl", "creationTime"],
                 "properties": {
                   "chainId": {
                     "type": "string",
@@ -1130,12 +1123,7 @@
     {
       "name": "std-pact-api",
       "x-displayName": "Standard Pact API",
-      "tags": [
-        "endpoint-local",
-        "endpoint-send",
-        "endpoint-poll",
-        "endpoint-listen"
-      ]
+      "tags": ["endpoint-local", "endpoint-send", "endpoint-poll", "endpoint-listen"]
     },
     {
       "name": "private-api",
@@ -1150,12 +1138,7 @@
     {
       "name": "models",
       "x-displayName": "Pact API models",
-      "tags": [
-        "model-command",
-        "model-command-result",
-        "model-payload",
-        "model-pact-value"
-      ]
+      "tags": ["model-command", "model-command-result", "model-payload", "model-pact-value"]
     }
   ],
   "tags": [

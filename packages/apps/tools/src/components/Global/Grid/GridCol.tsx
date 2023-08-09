@@ -15,16 +15,7 @@ export interface IGridRowProps {
   children: ReactNode;
 }
 
-const GridCol: FC<IGridRowProps> = ({
-  children,
-  className,
-  xs = {},
-  sm = {},
-  md = {},
-  lg = {},
-  xl = {},
-  xxl = {},
-}) => {
+const GridCol: FC<IGridRowProps> = ({ children, className, xs = {}, sm = {}, md = {}, lg = {}, xl = {}, xxl = {} }) => {
   const css: { [key: string]: IGridColMediaStyles } = {};
   css['@sm'] = getColumnStyles(sm);
   css['@md'] = getColumnStyles(md);
@@ -33,10 +24,7 @@ const GridCol: FC<IGridRowProps> = ({
   css['@2xl'] = getColumnStyles(xxl);
 
   return (
-    <StyledGridCol
-      className={className}
-      css={{ ...getColumnStyles(xs), ...css }}
-    >
+    <StyledGridCol className={className} css={{ ...getColumnStyles(xs), ...css }}>
       {children}
     </StyledGridCol>
   );

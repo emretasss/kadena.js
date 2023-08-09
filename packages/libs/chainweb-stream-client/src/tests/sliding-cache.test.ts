@@ -1,11 +1,7 @@
 import SlidingCache from '../sliding-cache';
 import { IAccountTransaction } from '../types';
 
-function makeTestObject(
-  height: number,
-  id: string,
-  confirmations: number,
-): IAccountTransaction {
+function makeTestObject(height: number, id: string, confirmations: number): IAccountTransaction {
   return {
     height,
     meta: {
@@ -137,10 +133,8 @@ describe('SlidingCache', () => {
 
     slidingCache!.addCache(txn, txn2);
 
-    const [inSpanRange, exists, existsIdentical, cacheIdx] =
-      slidingCache!.existsCache(txn);
-    const [inSpanRange2, exists2, existsIdentical2, cacheIdx2] =
-      slidingCache!.existsCache(txn2);
+    const [inSpanRange, exists, existsIdentical, cacheIdx] = slidingCache!.existsCache(txn);
+    const [inSpanRange2, exists2, existsIdentical2, cacheIdx2] = slidingCache!.existsCache(txn2);
 
     expect(inSpanRange).toBe(true);
     expect(exists).toBe(true);
@@ -160,10 +154,8 @@ describe('SlidingCache', () => {
     slidingCache!.addCache(txn);
     slidingCache!.addCache(txn2);
 
-    const [inSpanRange, exists, existsIdentical, cacheIdx] =
-      slidingCache!.existsCache(txn);
-    const [inSpanRange2, exists2, existsIdentical2, cacheIdx2] =
-      slidingCache!.existsCache(txn2);
+    const [inSpanRange, exists, existsIdentical, cacheIdx] = slidingCache!.existsCache(txn);
+    const [inSpanRange2, exists2, existsIdentical2, cacheIdx2] = slidingCache!.existsCache(txn2);
 
     expect(inSpanRange).toBe(true);
     expect(exists).toBe(true);
@@ -182,8 +174,7 @@ describe('SlidingCache', () => {
 
     slidingCache!.addCache(txn);
 
-    const [inSpanRange2, exists2, existsIdentical2, cacheIdx2] =
-      slidingCache!.existsCache(txn2);
+    const [inSpanRange2, exists2, existsIdentical2, cacheIdx2] = slidingCache!.existsCache(txn2);
 
     expect(inSpanRange2).toBe(true);
     expect(exists2).toBe(true);
@@ -197,8 +188,7 @@ describe('SlidingCache', () => {
 
     slidingCache!.addCache(txn);
 
-    const [inSpanRange2, exists2, existsIdentical2, cacheIdx2] =
-      slidingCache!.existsCache(txn2);
+    const [inSpanRange2, exists2, existsIdentical2, cacheIdx2] = slidingCache!.existsCache(txn2);
 
     expect(inSpanRange2).toBe(true);
     expect(exists2).toBe(false);

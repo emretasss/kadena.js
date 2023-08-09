@@ -1,12 +1,7 @@
 import { ensureSignedCommand } from '@kadena/pactjs';
 import type { ICommand, ISignatureJson, IUnsignedCommand } from '@kadena/types';
 
-import type {
-  ICommandResult,
-  ILocalCommandResult,
-  IPreflightResult,
-  LocalRequestBody,
-} from './interfaces/PactAPI';
+import type { ICommandResult, ILocalCommandResult, IPreflightResult, LocalRequestBody } from './interfaces/PactAPI';
 import { parsePreflight, parseResponse } from './parseResponse';
 import { stringifyAndMakePOSTRequest } from './stringifyAndMakePOSTRequest';
 
@@ -71,19 +66,13 @@ export async function local<T extends ILocalOptions>(
 export async function localRaw(
   requestBody: LocalRequestBody,
   apiHost: string,
-  {
-    preflight,
-    signatureVerification,
-  }: { signatureVerification: boolean; preflight: boolean },
+  { preflight, signatureVerification }: { signatureVerification: boolean; preflight: boolean },
 ): Promise<IPreflightResult | ICommandResult> {
   const request = stringifyAndMakePOSTRequest(requestBody);
   const localUrlWithQueries = new URL(`${apiHost}/api/v1/local`);
 
   localUrlWithQueries.searchParams.append('preflight', preflight.toString());
-  localUrlWithQueries.searchParams.append(
-    'signatureVerification',
-    signatureVerification.toString(),
-  );
+  localUrlWithQueries.searchParams.append('signatureVerification', signatureVerification.toString());
   try {
     const response = await fetch(localUrlWithQueries.toString(), request);
     return await parseResponse<IPreflightResult | ICommandResult>(response);
@@ -96,13 +85,9 @@ export async function localRaw(
 /**
  * @alpha
  */
-export function convertIUnsignedTransactionToNoSig(
-  transaction: IUnsignedCommand,
-): ICommand {
+export function convertIUnsignedTransactionToNoSig(transaction: IUnsignedCommand): ICommand {
   return {
     ...transaction,
-    sigs: transaction.sigs.map(
-      (s: ISignatureJson | undefined) => s ?? { sig: '' },
-    ),
+    sigs: transaction.sigs.map((s: ISignatureJson | undefined) => s ?? { sig: '' }),
   };
 }

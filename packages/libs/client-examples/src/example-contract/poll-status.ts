@@ -23,12 +23,7 @@ export async function pollRequestsAndWaitForEachPromiseExample(): Promise<void> 
         console.log('the request ', requestKey, 'result:', data);
       })
       .catch((error) => {
-        console.log(
-          'error while getting the status of ',
-          requestKey,
-          'error:',
-          error,
-        );
+        console.log('error while getting the status of ', requestKey, 'error:', error);
       }),
   );
 }

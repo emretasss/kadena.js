@@ -29,10 +29,7 @@ const meta: Meta<
       },
     },
     icon: {
-      options: [
-        ...['-'],
-        ...Object.keys(SystemIcon),
-      ] as (keyof typeof SystemIcon)[],
+      options: [...['-'], ...Object.keys(SystemIcon)] as (keyof typeof SystemIcon)[],
       control: {
         type: 'select',
       },

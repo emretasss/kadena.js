@@ -15,9 +15,7 @@ export interface IGridRootProps {
   spacing?: keyof typeof gapVariants;
 }
 
-const assembleColumnVariants = (
-  columns: ResponsiveInputType,
-): string | string[] => {
+const assembleColumnVariants = (columns: ResponsiveInputType): string | string[] => {
   if (typeof columns === 'number') {
     return explicitColumnVariant[columns];
   }
@@ -33,16 +31,8 @@ const assembleColumnVariants = (
   ];
 };
 
-const GridRoot: FC<IGridRootProps> = ({
-  children,
-  columns,
-  spacing = 'md',
-}) => {
-  const classList = classNames(
-    gapVariants[spacing],
-    gridContainerClass,
-    columns && assembleColumnVariants(columns),
-  );
+const GridRoot: FC<IGridRootProps> = ({ children, columns, spacing = 'md' }) => {
+  const classList = classNames(gapVariants[spacing], gridContainerClass, columns && assembleColumnVariants(columns));
   return (
     <div className={classList} data-testid="kda-grid-root">
       {children}

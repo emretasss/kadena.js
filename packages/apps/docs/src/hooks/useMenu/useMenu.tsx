@@ -10,5 +10,4 @@ const defaultContext: IUseMenuProps = {
   isMenuOpen: false,
 };
 
-export const useMenu = (): IUseMenuProps =>
-  useContext(MenuContext) ?? defaultContext;
+export const useMenu = (): IUseMenuProps => useContext(MenuContext) ?? defaultContext;

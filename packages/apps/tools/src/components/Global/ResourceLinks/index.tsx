@@ -1,12 +1,6 @@
 import { SystemIcon } from '@kadena/react-ui';
 
-import {
-  linkClass,
-  linksClass,
-  resourceLinksWrapperClass,
-  titleTextClass,
-  titleWrapperClass,
-} from './styles.css';
+import { linkClass, linksClass, resourceLinksWrapperClass, titleTextClass, titleWrapperClass } from './styles.css';
 
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
@@ -32,11 +26,7 @@ export const ResourceLinks: FC<IProps> = ({ links, ...rest }: IProps) => {
       <ul className={linksClass}>
         {links.map((link) => (
           <li key={link.title}>
-            <Link
-              className={linkClass}
-              href={link.href}
-              target={link?.target ?? '_blank'}
-            >
+            <Link className={linkClass} href={link.href} target={link?.target ?? '_blank'}>
               {link.title}
             </Link>
           </li>

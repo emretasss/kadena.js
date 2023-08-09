@@ -55,9 +55,7 @@ export const Primary: Story = {
             return (
               <Table.Tr key={`tr${idx}`}>
                 {Array.from(Array(columnCount)).map((id, tdIdx) => {
-                  return (
-                    <Table.Tr.Td key={`td${tdIdx}`}>test {tdIdx}</Table.Tr.Td>
-                  );
+                  return <Table.Tr.Td key={`td${tdIdx}`}>test {tdIdx}</Table.Tr.Td>;
                 })}
               </Table.Tr>
             );

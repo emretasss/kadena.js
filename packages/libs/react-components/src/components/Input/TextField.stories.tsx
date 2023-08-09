@@ -100,18 +100,7 @@ export const Primary: Story = {
     info: '(optional)',
     label: 'Label',
   },
-  render: ({
-    leadingText,
-    leftPanelIcon,
-    rightPanelIcon,
-    onChange,
-    disabled,
-    status,
-    tag,
-    helper,
-    info,
-    label,
-  }) => (
+  render: ({ leadingText, leftPanelIcon, rightPanelIcon, onChange, disabled, status, tag, helper, info, label }) => (
     <TextField
       disabled={disabled}
       status={status}

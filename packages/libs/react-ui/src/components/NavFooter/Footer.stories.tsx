@@ -54,10 +54,7 @@ const links: { title: string; href?: string; target?: Target }[] = [
   },
 ];
 
-const icons: (
-  | { icon: React.FC<IconType>; text: string }
-  | { icon: React.FC<IconType>; text?: undefined }
-)[] = [
+const icons: ({ icon: React.FC<IconType>; text: string } | { icon: React.FC<IconType>; text?: undefined })[] = [
   {
     icon: SystemIcon.Earth,
     text: 'English',
@@ -116,13 +113,7 @@ export const Primary: Story = {
         </NavFooter.Panel>
         <NavFooter.Panel>
           {iconButtons.map((item, index) => {
-            return (
-              <NavFooter.IconButton
-                key={index}
-                icon={item.icon}
-                text={item.text}
-              />
-            );
+            return <NavFooter.IconButton key={index} icon={item.icon} text={item.text} />;
           })}
         </NavFooter.Panel>
       </NavFooter.Root>

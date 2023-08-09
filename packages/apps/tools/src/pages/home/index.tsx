@@ -1,19 +1,10 @@
-import {
-  Breadcrumbs,
-  Card,
-  Heading,
-  SystemIcon,
-  Table,
-} from '@kadena/react-ui';
+import { Breadcrumbs, Card, Heading, SystemIcon, Table } from '@kadena/react-ui';
 
 import DrawerToolbar from '@/components/Common/DrawerToolbar';
 import ResourceLinks from '@/components/Global/ResourceLinks';
 import Routes from '@/constants/routes';
 import { useToolbar } from '@/context/layout-context';
-import {
-  helpCenterButtonClass,
-  homeWrapperClass,
-} from '@/pages/home/styles.css';
+import { helpCenterButtonClass, homeWrapperClass } from '@/pages/home/styles.css';
 import useTranslation from 'next-translate/useTranslation';
 import React, { FC, useRef } from 'react';
 
@@ -55,11 +46,9 @@ const Home: FC = () => {
             children: (
               <>
                 <p>
-                  Blockchain transactions are irreversible. If you make a
-                  mistake, your coins may not be recoverable. Before you
-                  transfer large sums, it is always best to do a small test
-                  transaction first and then send those coins back to the sender
-                  to verify that the receiver account works as expected.
+                  Blockchain transactions are irreversible. If you make a mistake, your coins may not be recoverable.
+                  Before you transfer large sums, it is always best to do a small test transaction first and then send
+                  those coins back to the sender to verify that the receiver account works as expected.
                 </p>
                 <ResourceLinks
                   links={[
@@ -90,16 +79,11 @@ const Home: FC = () => {
           <p>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             If you're seeking Help click{' '}
-            <span
-              className={helpCenterButtonClass}
-              onClick={handleOpenHelpCenter}
-            >
+            <span className={helpCenterButtonClass} onClick={handleOpenHelpCenter}>
               HERE
             </span>
           </p>
-          <p>
-            Changelog with the latest updates to the Kadena Development Tools.
-          </p>
+          <p>Changelog with the latest updates to the Kadena Development Tools.</p>
           <br />
           <Table.Root>
             <Table.Body>

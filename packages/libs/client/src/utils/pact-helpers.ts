@@ -9,6 +9,4 @@ export const readKeyset = (key: string) => () => `(read-keyset "${key}")`;
  * Will create a literal value without surrounding quotes `"`
  * @public
  */
-export const literal: <T extends string | Record<string, unknown>>(
-  value: T,
-) => () => T = (value) => () => value;
+export const literal: <T extends string | Record<string, unknown>>(value: T) => () => T = (value) => () => value;

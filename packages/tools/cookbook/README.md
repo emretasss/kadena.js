@@ -2,8 +2,7 @@
 
 # @kadena/cookbook
 
-Demonstrates common use cases for @kadena/client and @kadena/pact-cli for smart
-contracts
+Demonstrates common use cases for @kadena/client and @kadena/pact-cli for smart contracts
 
 <picture>
   <source srcset="https://raw.githubusercontent.com/kadena-community/kadena.js/main/common/images/Kadena.JS_logo-white.png" media="(prefers-color-scheme: dark)"/>
@@ -12,8 +11,7 @@ contracts
 
 <!-- genericHeader end -->
 
-This project demonstrates common use cases for `@kadena/client` and
-`@kadena/pact-cli` for _smart contracts_
+This project demonstrates common use cases for `@kadena/client` and `@kadena/pact-cli` for _smart contracts_
 
 <p align="center">
 
@@ -27,8 +25,7 @@ This project demonstrates common use cases for `@kadena/client` and
 
 </p>
 
-In depth documentation for setting up and using @kadena/client can be found at
-[@kadena/client][1]
+In depth documentation for setting up and using @kadena/client can be found at [@kadena/client][1]
 
 <hr>
 
@@ -56,24 +53,16 @@ ts-node src/accounts/transfer-create-with-chainweaver.ts senderAccount receiverA
 
 ## Notes
 
-- These scripts assume that accounts follow the recommended convention:
-  `k:publicKey`. If your account name does not follow this convention, you will
-  need to manually update it in the script.
-- All scripts are integrated with sign requests to Chainweaver desktop (this
-  will not work on the web client). If you would like to manually paste the
-  sigData into the Chainweaver application, you can use the `printSigData`
-  function provided in the utils directory.
-- If you would like to test a transaction without sending it to the blockchain
-  to be mined, you can use the `printLocal` function provided in the utils
-  directory to print the response for a non-transactional command execution.
+- These scripts assume that accounts follow the recommended convention: `k:publicKey`. If your account name does not
+  follow this convention, you will need to manually update it in the script.
+- All scripts are integrated with sign requests to Chainweaver desktop (this will not work on the web client). If you
+  would like to manually paste the sigData into the Chainweaver application, you can use the `printSigData` function
+  provided in the utils directory.
+- If you would like to test a transaction without sending it to the blockchain to be mined, you can use the `printLocal`
+  function provided in the utils directory to print the response for a non-transactional command execution.
 
-[1]:
-  https://github.com/kadena-community/kadena.js/tree/main/packages/libs/client#kadenajs---client
-[2]:
-  https://github.com/kadena-community/kadena.js/tree/main/packages/tools/cookbook/src/accounts/create-account.ts
-[3]:
-  https://github.com/kadena-community/kadena.js/tree/main/packages/tools/cookbook/src/accounts/transfer-create.ts
-[4]:
-  https://github.com/kadena-community/kadena.js/tree/main/packages/tools/cookbook/src/accounts/get-balance.ts
-[5]:
-  https://github.com/kadena-community/kadena.js/tree/main/packages/libs/client#load-contracts-from-the-blockchain
+[1]: https://github.com/kadena-community/kadena.js/tree/main/packages/libs/client#kadenajs---client
+[2]: https://github.com/kadena-community/kadena.js/tree/main/packages/tools/cookbook/src/accounts/create-account.ts
+[3]: https://github.com/kadena-community/kadena.js/tree/main/packages/tools/cookbook/src/accounts/transfer-create.ts
+[4]: https://github.com/kadena-community/kadena.js/tree/main/packages/tools/cookbook/src/accounts/get-balance.ts
+[5]: https://github.com/kadena-community/kadena.js/tree/main/packages/libs/client#load-contracts-from-the-blockchain

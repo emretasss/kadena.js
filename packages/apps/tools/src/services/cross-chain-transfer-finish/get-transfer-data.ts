@@ -4,10 +4,7 @@ import { IPactEvent, IPactExec, PactValue } from '@kadena/types';
 
 import { getKadenaConstantByNetwork, Network } from '@/constants/kadena';
 import { chainNetwork } from '@/constants/network';
-import {
-  convertIntToChainId,
-  validateRequestKey,
-} from '@/services/utils/utils';
+import { convertIntToChainId, validateRequestKey } from '@/services/utils/utils';
 import Debug from 'debug';
 import { Translate } from 'next-translate';
 

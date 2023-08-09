@@ -21,10 +21,7 @@ const replaceValue =
 
 const composeEnv = (servicePort: number, stratumPort: number): StringReducer =>
   compose(
-    replaceValue(
-      'CHAINWEB_NODE_IMAGE',
-      'ghcr.io/kadena-io/chainweb-node:sha-7e11817',
-    ),
+    replaceValue('CHAINWEB_NODE_IMAGE', 'ghcr.io/kadena-io/chainweb-node:sha-7e11817'),
     replaceValue('HOST_SERVICE_PORT', servicePort),
     replaceValue('HOST_STRATUM_PORT', stratumPort),
   );
@@ -40,8 +37,7 @@ const setupEnvFor = async (layer: 'l1' | 'l2'): Promise<void> => {
 };
 
 const getDockerFile = (env: 'l1' | 'l2'): string => {
-  if (env === 'l2')
-    return `${dotenv.HOME}/.devnet/${env}/docker-compose.minimal-l2.yaml`;
+  if (env === 'l2') return `${dotenv.HOME}/.devnet/${env}/docker-compose.minimal-l2.yaml`;
   return `${dotenv.HOME}/.devnet/${env}/docker-compose.minimal.yaml`;
 };
 const setupMacDockerCompose = (env: 'l1' | 'l2'): void => {
@@ -66,11 +62,7 @@ const setupMacDockerCompose = (env: 'l1' | 'l2'): void => {
     };
   }, services);
 
-  writeFileSync(
-    getDockerFile(env),
-    stringify({ ...dcJson, services: newServices }),
-    'utf-8',
-  );
+  writeFileSync(getDockerFile(env), stringify({ ...dcJson, services: newServices }), 'utf-8');
 };
 
 export const setupQuestions: IQuestion[] = [
@@ -168,8 +160,7 @@ export const startQuestions: IQuestion[] = [
     name: 'startDevnet',
     type: 'execute',
     when: ({ task }: IAnswers) => {
-      if (Array.isArray(task))
-        return task?.includes('start') || task?.includes('setup');
+      if (Array.isArray(task)) return task?.includes('start') || task?.includes('setup');
       return false;
     },
     action: async () => {
@@ -185,8 +176,7 @@ export const startQuestions: IQuestion[] = [
     name: 'startDevnetL2',
     type: 'execute',
     when: ({ task }: IAnswers) => {
-      if (Array.isArray(task))
-        return task?.includes('start') || task?.includes('setup');
+      if (Array.isArray(task)) return task?.includes('start') || task?.includes('setup');
       return false;
     },
     action: async () => {
@@ -211,10 +201,7 @@ const stopQuestions: IQuestion[] = [
       return false;
     },
     action: async (): Promise<IAnswers> => {
-      await spawned(
-        `cd ${dotenv.HOME}/.devnet/l1 && docker compose -f docker-compose.minimal.yaml down`,
-        true,
-      );
+      await spawned(`cd ${dotenv.HOME}/.devnet/l1 && docker compose -f docker-compose.minimal.yaml down`, true);
       return { stop: 'success' };
     },
   },
@@ -230,17 +217,10 @@ const stopQuestions: IQuestion[] = [
     action: async (): Promise<IAnswers> => {
       const exitCode = await spawned(`ls ${dotenv.HOME}/.devnet/l2`);
       if (exitCode !== 0) return { stop: 'skipped' };
-      await spawned(
-        `cd ${dotenv.HOME}/.devnet/l2 && docker compose -f docker-compose.minimal-l2.yaml down`,
-        true,
-      );
+      await spawned(`cd ${dotenv.HOME}/.devnet/l2 && docker compose -f docker-compose.minimal-l2.yaml down`, true);
       return { stop: 'success' };
     },
   },
 ];
 
-export const devnetQuestions: IQuestion[] = [
-  ...setupQuestions,
-  ...startQuestions,
-  ...stopQuestions,
-];
+export const devnetQuestions: IQuestion[] = [...setupQuestions, ...startQuestions, ...stopQuestions];

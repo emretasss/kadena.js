@@ -10,9 +10,7 @@ import { createYoga } from 'graphql-yoga';
 import { createServer } from 'node:http';
 
 if (dotenv.USE_EMBEDDED_POSTGRES) {
-  startDevelopmentWorker().catch((e) =>
-    console.error('Error in developmentWorker', e),
-  );
+  startDevelopmentWorker().catch((e) => console.error('Error in developmentWorker', e));
 }
 
 // eslint-disable-next-line @rushstack/typedef-var

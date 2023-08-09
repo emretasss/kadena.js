@@ -1,11 +1,4 @@
-import {
-  addSigner,
-  continuation,
-  execution,
-  setMeta,
-  setNetworkId,
-  setNonce,
-} from '../../fp';
+import { addSigner, continuation, execution, setMeta, setNetworkId, setNonce } from '../../fp';
 import { IPactCommand } from '../../interfaces/IPactCommand';
 import { getModule } from '../../pact';
 import { createTransaction } from '../../utils/createTransaction';
@@ -21,12 +14,8 @@ jest.useFakeTimers().setSystemTime(new Date('2023-07-27'));
 
 describe('execution', () => {
   it('returns a payload object of a exec command', () => {
-    const command = execution(
-      coin.transfer('alice', 'bob', { decimal: '12.1' }),
-    );
-    expect(command.payload.exec.code).toBe(
-      '(coin.transfer "alice" "bob" 12.1)',
-    );
+    const command = execution(coin.transfer('alice', 'bob', { decimal: '12.1' }));
+    expect(command.payload.exec.code).toBe('(coin.transfer "alice" "bob" 12.1)');
   });
 
   it('adds multiple command', () => {
@@ -34,9 +23,7 @@ describe('execution', () => {
       coin.transfer('alice', 'bob', { decimal: '0.1' }),
       coin.transfer('bob', 'alice', { decimal: '0.1' }),
     );
-    expect(command.payload.exec.code).toBe(
-      '(coin.transfer "alice" "bob" 0.1)(coin.transfer "bob" "alice" 0.1)',
-    );
+    expect(command.payload.exec.code).toBe('(coin.transfer "alice" "bob" 0.1)(coin.transfer "bob" "alice" 0.1)');
   });
 });
 
@@ -145,9 +132,7 @@ describe('composePactCommand', () => {
   });
 
   it('adds kjs nonce  if not presented in the input', () => {
-    const command = composePactCommand(
-      execution(coin.transfer('bob', 'alice', { decimal: '1' })),
-    )();
+    const command = composePactCommand(execution(coin.transfer('bob', 'alice', { decimal: '1' })))();
 
     expect(command.nonce).toBe('kjs:nonce:1690416000000');
   });
@@ -169,10 +154,7 @@ describe('composePactCommand', () => {
   it('merges payloads data if they are exec', () => {
     expect(
       composePactCommand(
-        execution(
-          coin.transfer('bob', 'alice', { decimal: '1' }),
-          coin.transfer('alice', 'bob', { decimal: '1' }),
-        ),
+        execution(coin.transfer('bob', 'alice', { decimal: '1' }), coin.transfer('alice', 'bob', { decimal: '1' })),
         addData('one', 'test'),
         addData('two', 'test'),
       )().payload,
@@ -187,19 +169,15 @@ describe('composePactCommand', () => {
   it('throws exception if payloads are not mergable', () => {
     expect(
       () =>
-        composePactCommand(
-          execution(coin.transfer('bob', 'alice', { decimal: '1' })),
-          continuation({ pactId: '1' }),
-        )().payload,
+        composePactCommand(execution(coin.transfer('bob', 'alice', { decimal: '1' })), continuation({ pactId: '1' }))()
+          .payload,
     ).toThrowError(new Error('PAYLOAD_NOT_MERGEABLE'));
   });
 
   it('accepts a signer without a capability', () => {
     expect(
-      composePactCommand(
-        execution(coin.transfer('bob', 'alice', { decimal: '1' })),
-        addSigner('bob_public_key'),
-      )().signers,
+      composePactCommand(execution(coin.transfer('bob', 'alice', { decimal: '1' })), addSigner('bob_public_key'))()
+        .signers,
     ).toEqual([{ pubKey: 'bob_public_key', scheme: 'ED25519' }]);
   });
 
@@ -207,9 +185,7 @@ describe('composePactCommand', () => {
     expect(
       composePactCommand(
         execution(coin.transfer('bob', 'alice', { decimal: '1' })),
-        addSigner('bob_public_key', (withCapability) => [
-          withCapability('coin.GAS'),
-        ]),
+        addSigner('bob_public_key', (withCapability) => [withCapability('coin.GAS')]),
         addSigner('bob_public_key', (withCapability) => [
           withCapability('coin.TRANSFER', 'bob', 'alice', { decimal: '1' }),
         ]),
@@ -237,18 +213,14 @@ describe('composePactCommand', () => {
       {
         pubKey: 'bob_public_key',
         scheme: 'ED25519',
-        clist: [
-          { args: ['bob', 'alice', { decimal: '1' }], name: 'coin.TRANSFER' },
-        ],
+        clist: [{ args: ['bob', 'alice', { decimal: '1' }], name: 'coin.TRANSFER' }],
       },
     ]);
   });
   it("adds creationTime if it's not presented in the meta property", () => {
     expect(
-      composePactCommand(
-        execution(coin.transfer('bob', 'alice', { decimal: '1' })),
-        setMeta({ chainId: '1' }),
-      )().meta?.creationTime,
+      composePactCommand(execution(coin.transfer('bob', 'alice', { decimal: '1' })), setMeta({ chainId: '1' }))().meta
+        ?.creationTime,
     ).toBe(1690416000);
   });
 
@@ -272,10 +244,7 @@ describe('composePactCommand', () => {
 
   it('adds does not set sender if its not presented', () => {
     const command: Partial<IPactCommand> = composePactCommand(
-      composePactCommand(
-        execution('(test)'),
-        setMeta({ senderAccount: 'test' }),
-      ),
+      composePactCommand(execution('(test)'), setMeta({ senderAccount: 'test' })),
       composePactCommand(execution('(test 2)'), setMeta({ chainId: '1' })),
       setMeta({
         gasLimit: 1,
@@ -304,9 +273,7 @@ describe('composePactCommand', () => {
 
 describe('mergePayload', () => {
   it('merge code part of two payload', () => {
-    expect(
-      mergePayload({ exec: { code: '(one)' } }, { exec: { code: '(two)' } }),
-    ).toEqual({
+    expect(mergePayload({ exec: { code: '(one)' } }, { exec: { code: '(two)' } })).toEqual({
       exec: {
         code: '(one)(two)',
       },
@@ -331,31 +298,8 @@ describe('mergePayload', () => {
   });
 
   it('returns the non-undefined if one of the inputs is undefined', () => {
-    expect(
-      mergePayload(
-        { exec: { code: '(one)', data: { one: 'test' } } },
-        undefined,
-      ),
-    ).toEqual({ exec: { code: '(one)', data: { one: 'test' } } });
-
-    expect(
-      mergePayload(undefined, {
-        exec: { code: '(one)', data: { one: 'test' } },
-      }),
-    ).toEqual({ exec: { code: '(one)', data: { one: 'test' } } });
-  });
-
-  it('returns merged data', () => {
-    expect(
-      mergePayload(
-        { cont: { data: { one: 'test' } } },
-        { cont: { pactId: '1', data: { two: 'test' } } },
-      ),
-    ).toEqual({
-      cont: {
-        pactId: '1',
-        data: { one: 'test', two: 'test' },
-      },
+    expect(mergePayload({ exec: { code: '(one)', data: { one: 'test' } } }, undefined)).toEqual({
+      exec: { code: '(one)', data: { one: 'test' } },
     });
 
     expect(
@@ -365,10 +309,27 @@ describe('mergePayload', () => {
     ).toEqual({ exec: { code: '(one)', data: { one: 'test' } } });
   });
 
+  it('returns merged data', () => {
+    expect(mergePayload({ cont: { data: { one: 'test' } } }, { cont: { pactId: '1', data: { two: 'test' } } })).toEqual(
+      {
+        cont: {
+          pactId: '1',
+          data: { one: 'test', two: 'test' },
+        },
+      },
+    );
+
+    expect(
+      mergePayload(undefined, {
+        exec: { code: '(one)', data: { one: 'test' } },
+      }),
+    ).toEqual({ exec: { code: '(one)', data: { one: 'test' } } });
+  });
+
   it('throws error if object are not the same brand', () => {
-    expect(() =>
-      mergePayload({ exec: { code: 'test' } }, { cont: { pactId: '1' } }),
-    ).toThrowError(new Error('PAYLOAD_NOT_MERGEABLE'));
+    expect(() => mergePayload({ exec: { code: 'test' } }, { cont: { pactId: '1' } })).toThrowError(
+      new Error('PAYLOAD_NOT_MERGEABLE'),
+    );
   });
 
   it('adds creationTime to metadata of mataData is presented but does not have creationTime', () => {

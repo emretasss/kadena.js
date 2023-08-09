@@ -53,9 +53,7 @@ describe('pactGrammar', () => {
     });
 
     it('should extract the parameters of the function', () => {
-      const pointer = getPointer(
-        '(defun test (a:integer b:boolean) @doc "test doc")',
-      );
+      const pointer = getPointer('(defun test (a:integer b:boolean) @doc "test doc")');
       const result = defun(pointer);
       const data = unwrapData(result);
       if (data === FAILED) {
@@ -69,9 +67,7 @@ describe('pactGrammar', () => {
     });
 
     it('should extract the documentation of the function', () => {
-      const pointer = getPointer(
-        '(defun test (a:integer b:boolean) @doc "test doc")',
-      );
+      const pointer = getPointer('(defun test (a:integer b:boolean) @doc "test doc")');
       const result = defun(pointer);
       const data = unwrapData(result);
       if (data === FAILED) {
@@ -144,9 +140,7 @@ describe('pactGrammar', () => {
     });
 
     it('should extract the parameters of the capability', () => {
-      const pointer = getPointer(
-        '(defcap test (a:integer b:boolean) @doc "test doc")',
-      );
+      const pointer = getPointer('(defcap test (a:integer b:boolean) @doc "test doc")');
       const result = defcap(pointer);
       if (result === FAILED) {
         expect(result).not.toEqual(FAILED);
@@ -184,9 +178,7 @@ describe('pactGrammar', () => {
     });
 
     it("should extract managed from the capability's body", () => {
-      const pointer = getPointer(
-        '(defcap test () @doc "test doc" @managed prop manager_fn)',
-      );
+      const pointer = getPointer('(defcap test () @doc "test doc" @managed prop manager_fn)');
       const result = defcap(pointer);
       if (result === FAILED) {
         expect(result).not.toEqual(FAILED);
@@ -285,9 +277,7 @@ describe('pactGrammar', () => {
         return;
       }
       const data = unwrapData(result);
-      expect(
-        data.capabilities?.map(({ name, doc }) => ({ name, doc })),
-      ).toEqual([
+      expect(data.capabilities?.map(({ name, doc }) => ({ name, doc }))).toEqual([
         {
           name: 'test',
           doc: 'test doc',

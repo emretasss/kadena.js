@@ -59,32 +59,16 @@ servers:
         default: '0.0'
 
   - url: 'https://{location}.chainweb.com/chainweb/{apiVersion}/mainnet01'
-    description:
-      Chainweb mainnet P2P bootstrap node. Only P2P API endpoints are served.
+    description: Chainweb mainnet P2P bootstrap node. Only P2P API endpoints are served.
     variables:
       location:
         default: us-e1
-        enum:
-          [
-            'us-e1',
-            'us-e2',
-            'us-e3',
-            'us-w1',
-            'us-w2',
-            'us-w3',
-            'fr1',
-            'fr2',
-            'fr3',
-            'jp1',
-            'jp2',
-            'jp3',
-          ]
+        enum: ['us-e1', 'us-e2', 'us-e3', 'us-w1', 'us-w2', 'us-w3', 'fr1', 'fr2', 'fr3', 'jp1', 'jp2', 'jp3']
       apiVersion:
         default: '0.0'
 
   - url: 'https://{location}.testnet.chainweb.com/chainweb/{apiVersion}/testnet04'
-    description:
-      Chainweb testnet P2P bootstrap node. Only P2P API endpoints are served.
+    description: Chainweb testnet P2P bootstrap node. Only P2P API endpoints are served.
     variables:
       location:
         default: us-e1
@@ -751,32 +735,25 @@ components:
       description: |
         Payload of a Block including the Merkle roots for transactions and
         transaction outputs.
-      required:
-        [transactions, minerData, transactionsHash, outputsHash, payloadHash]
+      required: [transactions, minerData, transactionsHash, outputsHash, payloadHash]
       example:
         value:
           $ref: '#/components/examples/payloads/value/1'
       properties:
         transactions:
           type: array
-          description:
-            Array of base64Url (without padding) encoded JSON texts of signed
-            Pact transactions
+          description: Array of base64Url (without padding) encoded JSON texts of signed Pact transactions
           items:
             type: string
             pattern: '[a-zA-Z0-9_-]+'
             # contentEncoding: base64Url
-            description:
-              Base64Url (without padding) encoded JSON text of a signed Pact
-              transaction
+            description: Base64Url (without padding) encoded JSON text of a signed Pact transaction
         minerData:
           type: string
           pattern: '[a-zA-Z0-9_-]+'
           # contentEncoding: base64Url
 
-          description:
-            Base64Url (without padding) encoded JSON text of the miner data of
-            the payload
+          description: Base64Url (without padding) encoded JSON text of the miner data of the payload
         transactionsHash:
           $ref: '#/components/schemas/sha256Hash'
         outputsHash:
@@ -790,15 +767,7 @@ components:
       description: |
         Payload with outputs of a Block including the Merkle roots for
         transactions and transaction outputs
-      required:
-        [
-          transactions,
-          minerData,
-          transactionsHash,
-          outputsHash,
-          payloadHash,
-          coinbase,
-        ]
+      required: [transactions, minerData, transactionsHash, outputsHash, payloadHash, coinbase]
       example:
         $ref: '#/components/examples/emptyPayload'
       properties:
@@ -816,22 +785,16 @@ components:
                 - type: string
                   pattern: '[a-zA-Z0-9_-]+'
                   # contentEncoding: base64Url
-                  description:
-                    Base64Url (without padding) encoded JSON text of a signed
-                    Pact transaction
+                  description: Base64Url (without padding) encoded JSON text of a signed Pact transaction
                 - type: string
                   pattern: '[a-zA-Z0-9_-]+'
                   # contentEncoding: base64Url
-                  description:
-                    Base64Url (without padding) encoded JSON text of a
-                    transaction output
+                  description: Base64Url (without padding) encoded JSON text of a transaction output
         minerData:
           type: string
           pattern: '[a-zA-Z0-9_-]+'
           # contentEncoding: base64Url
-          description:
-            Base64Url (without padding) encoded JSON text of the miner data of
-            the payload
+          description: Base64Url (without padding) encoded JSON text of the miner data of the payload
         transactionsHash:
           $ref: '#/components/schemas/sha256Hash'
         outputsHash:
@@ -842,9 +805,7 @@ components:
           type: string
           pattern: '[a-zA-Z0-9_-]+'
           # contentEncoding: base64Url
-          description:
-            Base64Url (without padding) encoded JSON text of coinbase output of
-            the block
+          description: Base64Url (without padding) encoded JSON text of coinbase output of the block
 
     # Peer Info
     peer:
@@ -923,11 +884,7 @@ components:
       title: Hash with block height
       description: A block hash and the height of that block
       required: [hash, height]
-      example:
-        {
-          'height': 1539924,
-          'hash': 'uP-pHW4QKrV9fN1mlDGwKuaiIDlJW7xYSj1nW53EHM4',
-        }
+      example: { 'height': 1539924, 'hash': 'uP-pHW4QKrV9fN1mlDGwKuaiIDlJW7xYSj1nW53EHM4' }
       type: object
       properties:
         hash:
@@ -941,14 +898,7 @@ components:
     nodeInfo:
       title: Chainweb Node Info
       description: General information about a chainweb node
-      required:
-        [
-          nodeNumberOfChains,
-          nodeApiVersion,
-          nodeChains,
-          nodeVersion,
-          nodeGraphHistory,
-        ]
+      required: [nodeNumberOfChains, nodeApiVersion, nodeChains, nodeVersion, nodeGraphHistory]
       example:
         $ref: '#/components/examples/info'
       properties:
@@ -979,8 +929,7 @@ components:
           minItems: 1
           items:
             description:
-              A pair consisting of the height of the first block of a chain
-              graph and the adjacency list of the graph.
+              A pair consisting of the height of the first block of a chain graph and the adjacency list of the graph.
             type: array
             minItems: 2
             maxItems: 2
@@ -992,9 +941,7 @@ components:
                 - description: adjacency list encoding of the chain graph.
                   type: array
                   items:
-                    description:
-                      A pair of the chain identifier and the list of chains
-                      adjacent to it.
+                    description: A pair of the chain identifier and the list of chains adjacent to it.
                     minItems: 2
                     maxItems: 2
                     type: array
@@ -1076,16 +1023,14 @@ components:
       properties:
         account:
           title: Account Name
-          description:
-            Miner account name. Usually this is the same as the public key.
+          description: Miner account name. Usually this is the same as the public key.
           type: string
           example: 'f880a433d6e2a13a32b6169030f56245efdd8c1b8a5027e9ce98a88e886bef27'
         predicate:
           title: Key Predicate
           enum: ['keys-all', 'keys-any']
           example: 'keys-all'
-          description:
-            key predicate. For a single key this is usually `keys-all`.
+          description: key predicate. For a single key this is usually `keys-all`.
         public-keys:
           type: array
           items:
@@ -1096,10 +1041,7 @@ components:
         {
           'account': 'miner',
           'predicate': 'keys-all',
-          'public-keys':
-            [
-              'f880a433d6e2a13a32b6169030f56245efdd8c1b8a5027e9ce98a88e886bef27',
-            ],
+          'public-keys': ['f880a433d6e2a13a32b6169030f56245efdd8c1b8a5027e9ce98a88e886bef27'],
         }
 
     nodeConfig:
@@ -1282,8 +1224,7 @@ components:
             ],
           'cmd':
             "{\"networkId\":\"mainnet01\",\"payload\":{\"exec\":{\"data\":{\"account-keyset\":{\"pred\":\"keys-all\",\"keys\":[\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\"]}},\"code\":\"(coin.transfer-create
-            \\\"60241f51ea34e05c61fbea9d\\\"
-            \\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\"
+            \\\"60241f51ea34e05c61fbea9d\\\" \\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\"
             (read-keyset \\\"account-keyset\\\")
             5007.0000)\"}},\"signers\":[{\"pubKey\":\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\",\"clist\":[{\"args\":[\"60241f51ea34e05c61fbea9d\",\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\",5007],\"name\":\"coin.TRANSFER\"},{\"args\":[],\"name\":\"coin.GAS\"}]}],\"meta\":{\"creationTime\":1618949714,\"ttl\":300,\"gasLimit\":600,\"chainId\":\"0\",\"gasPrice\":1.0e-7,\"sender\":\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\"},\"nonce\":\"\\\"2021-04-20T20:16:13.645Z\\\"\"}",
         }
@@ -1298,10 +1239,7 @@ components:
                 'address': { 'hostname': '85.238.99.91', 'port': 30004 },
                 'id': 'PRLmVUcc9AH3fyfMYiWeC4nV2i1iHwc0-aM7iAO8h18',
               },
-              {
-                'address': { 'hostname': 'us-w3.chainweb.com', 'port': 443 },
-                'id': null,
-              },
+              { 'address': { 'hostname': 'us-w3.chainweb.com', 'port': 443 }, 'id': null },
               {
                 'address': { 'hostname': '95.111.232.151', 'port': 30004 },
                 'id': 'DguFKLFMxp12vfl1z3cQIJQlh8xOpeZuBkpJU9Y-VLo',
@@ -1314,11 +1252,7 @@ components:
       value:
         {
           'next': 'inclusive:o1S4NNFhKWg8T1HEkmDvsTH9Ut9l3_qHRpp00yRKZIk',
-          'items':
-            [
-              'k0an0qEORusqQg9ZjKrxa-0Bo0-hQVYLXqWi5LHxg3k',
-              'vhVa6Deh10RXLRf3L-MSQTYqaL-_IY_mi-v58MjP9R8',
-            ],
+          'items': ['k0an0qEORusqQg9ZjKrxa-0Bo0-hQVYLXqWi5LHxg3k', 'vhVa6Deh10RXLRf3L-MSQTYqaL-_IY_mi-v58MjP9R8'],
           'limit': 2,
         }
 
@@ -1326,11 +1260,7 @@ components:
       value:
         {
           'next': 'inclusive:o1S4NNFhKWg8T1HEkmDvsTH9Ut9l3_qHRpp00yRKZIk',
-          'items':
-            [
-              'QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74',
-              'RClyuyZAacwvPpmLXKbTwrIRXWeUSjiNhJVP2esH8KM',
-            ],
+          'items': ['QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74', 'RClyuyZAacwvPpmLXKbTwrIRXWeUSjiNhJVP2esH8KM'],
           'limit': 2,
         }
 
@@ -1540,106 +1470,26 @@ components:
           'weight': 'b0wYplmNiTBXCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
           'hashes':
             {
-              '15':
-                {
-                  'height': 1539923,
-                  'hash': 'jsc9rugvcHXDiBAuoO9_j8R_b_jchtJJ8b5596i8wVg',
-                },
-              '7':
-                {
-                  'height': 1539923,
-                  'hash': 'j_hJ9iiH_ATyeQeeRN3auGXjbBWiFgnTU0dYPIz8cKM',
-                },
-              '13':
-                {
-                  'height': 1539923,
-                  'hash': 'S-4TqMgWGlK1k33XRlU9w0Lfwr0RvkO5Jn78Au1OglM',
-                },
-              '14':
-                {
-                  'height': 1539923,
-                  'hash': 'xSuULf--S4TrgYNz82deaGhnPLWrg3pXkynGeUPUGwA',
-                },
-              '0':
-                {
-                  'height': 1539923,
-                  'hash': 'qEaSmWt_tDcJC9AGbgWY9x12LW5VED7hGgfyz9x_S3w',
-                },
-              '19':
-                {
-                  'height': 1539923,
-                  'hash': '1PrRg20XyQ_2cfgGOgNK9K-cqIJ1vO8-A-RJlfN5m00',
-                },
-              '12':
-                {
-                  'height': 1539923,
-                  'hash': '-j1qcAS9Fs-WQmc3WEhzZ96VojxnlIA2TFpfyIv31Zs',
-                },
-              '17':
-                {
-                  'height': 1539924,
-                  'hash': 'xzVBXaQxzlUfUrakDgppUubQBRXGh-Uy0HBdMNwCq_Y',
-                },
-              '1':
-                {
-                  'height': 1539923,
-                  'hash': 'TJuC6nfhamfD517gspAZmqD9umR71nAgttDOi1JbBHw',
-                },
-              '18':
-                {
-                  'height': 1539924,
-                  'hash': '4VOHPAqwioySYRycdl5MxfscQHwtlwwCAt7AySYQT98',
-                },
-              '4':
-                {
-                  'height': 1539923,
-                  'hash': '0g0rOoSznVW2BJDBmK0Lbxz22F-sxTZUNIrUs_Q8Ye4',
-                },
-              '16':
-                {
-                  'height': 1539923,
-                  'hash': 'qs1aEY8kSxfUBb_JRVswv5dYINRXBjGJteC-6RC1hjc',
-                },
-              '2':
-                {
-                  'height': 1539924,
-                  'hash': '4ineCWfnO1rneWuBMLPzqTl2HF_sZpypT_3TEzf3VLc',
-                },
-              '5':
-                {
-                  'height': 1539923,
-                  'hash': '5y_TL-clnF_wELMBKyJk0Sz8RVShw_bGQETJdrMkADA',
-                },
-              '8':
-                {
-                  'height': 1539924,
-                  'hash': 's7c3B55VbDsS6EJ-nc9S5k2kNbPOBGI8xxF3vUg4d4Q',
-                },
-              '11':
-                {
-                  'height': 1539924,
-                  'hash': 'TIhegjZ0GEC73T4m0BVuFtfLNGuS56IUWEuf93AJ5UU',
-                },
-              '3':
-                {
-                  'height': 1539924,
-                  'hash': 'ZEOMXB2ByqzL2HfYVKIZKAnoe4wIeJ2SaltnXDir59k',
-                },
-              '6':
-                {
-                  'height': 1539923,
-                  'hash': 'YkQKv6P4_C4jRM3RqKK9FWPxIneeLzlkKQS9ATAQYRk',
-                },
-              '9':
-                {
-                  'height': 1539922,
-                  'hash': 'bowQf63xSY9owHKhK1yGee2Q0Fn8yL_oCLaEUn-CGoA',
-                },
-              '10':
-                {
-                  'height': 1539924,
-                  'hash': 'uP-pHW4QKrV9fN1mlDGwKuaiIDlJW7xYSj1nW53EHM4',
-                },
+              '15': { 'height': 1539923, 'hash': 'jsc9rugvcHXDiBAuoO9_j8R_b_jchtJJ8b5596i8wVg' },
+              '7': { 'height': 1539923, 'hash': 'j_hJ9iiH_ATyeQeeRN3auGXjbBWiFgnTU0dYPIz8cKM' },
+              '13': { 'height': 1539923, 'hash': 'S-4TqMgWGlK1k33XRlU9w0Lfwr0RvkO5Jn78Au1OglM' },
+              '14': { 'height': 1539923, 'hash': 'xSuULf--S4TrgYNz82deaGhnPLWrg3pXkynGeUPUGwA' },
+              '0': { 'height': 1539923, 'hash': 'qEaSmWt_tDcJC9AGbgWY9x12LW5VED7hGgfyz9x_S3w' },
+              '19': { 'height': 1539923, 'hash': '1PrRg20XyQ_2cfgGOgNK9K-cqIJ1vO8-A-RJlfN5m00' },
+              '12': { 'height': 1539923, 'hash': '-j1qcAS9Fs-WQmc3WEhzZ96VojxnlIA2TFpfyIv31Zs' },
+              '17': { 'height': 1539924, 'hash': 'xzVBXaQxzlUfUrakDgppUubQBRXGh-Uy0HBdMNwCq_Y' },
+              '1': { 'height': 1539923, 'hash': 'TJuC6nfhamfD517gspAZmqD9umR71nAgttDOi1JbBHw' },
+              '18': { 'height': 1539924, 'hash': '4VOHPAqwioySYRycdl5MxfscQHwtlwwCAt7AySYQT98' },
+              '4': { 'height': 1539923, 'hash': '0g0rOoSznVW2BJDBmK0Lbxz22F-sxTZUNIrUs_Q8Ye4' },
+              '16': { 'height': 1539923, 'hash': 'qs1aEY8kSxfUBb_JRVswv5dYINRXBjGJteC-6RC1hjc' },
+              '2': { 'height': 1539924, 'hash': '4ineCWfnO1rneWuBMLPzqTl2HF_sZpypT_3TEzf3VLc' },
+              '5': { 'height': 1539923, 'hash': '5y_TL-clnF_wELMBKyJk0Sz8RVShw_bGQETJdrMkADA' },
+              '8': { 'height': 1539924, 'hash': 's7c3B55VbDsS6EJ-nc9S5k2kNbPOBGI8xxF3vUg4d4Q' },
+              '11': { 'height': 1539924, 'hash': 'TIhegjZ0GEC73T4m0BVuFtfLNGuS56IUWEuf93AJ5UU' },
+              '3': { 'height': 1539924, 'hash': 'ZEOMXB2ByqzL2HfYVKIZKAnoe4wIeJ2SaltnXDir59k' },
+              '6': { 'height': 1539923, 'hash': 'YkQKv6P4_C4jRM3RqKK9FWPxIneeLzlkKQS9ATAQYRk' },
+              '9': { 'height': 1539922, 'hash': 'bowQf63xSY9owHKhK1yGee2Q0Fn8yL_oCLaEUn-CGoA' },
+              '10': { 'height': 1539924, 'hash': 'uP-pHW4QKrV9fN1mlDGwKuaiIDlJW7xYSj1nW53EHM4' },
             },
           'id': 'BBz7KeurYTeQ0hMGbwUbQC84cRbVcacoDQTye-3qkXI',
           'instance': 'mainnet01',
@@ -1649,11 +1499,7 @@ components:
       value: 'GpaWbHkHrCjRhY8hKE0qZ1WsBBaG3Y_zkFLV2sYumQA'
 
     payloadHashes:
-      value:
-        [
-          'GpaWbHkHrCjRhY8hKE0qZ1WsBBaG3Y_zkFLV2sYumQA',
-          'jcQOWz7K9qKnkUv4Z883D2ZjkFFGgccoSroWGaoogLM',
-        ]
+      value: ['GpaWbHkHrCjRhY8hKE0qZ1WsBBaG3Y_zkFLV2sYumQA', 'jcQOWz7K9qKnkUv4Z883D2ZjkFFGgccoSroWGaoogLM']
 
     payloads:
       value:
@@ -1706,19 +1552,14 @@ components:
         }
 
     payloadsWithOutputs:
-      value:
-        [
-          $ref: '#/components/examples/emptyPayload',
-          $ref: '#/components/examples/payloadWithTransactions',
-        ]
+      value: [$ref: '#/components/examples/emptyPayload', $ref: '#/components/examples/payloadWithTransactions']
 
     nodeConfig:
       value:
         {
           'allowReadsInLocal': false,
           'rosetta': true,
-          'throttling':
-            { 'local': 1, 'mining': 2, 'global': 200, 'putPeer': 21 },
+          'throttling': { 'local': 1, 'mining': 2, 'global': 200, 'putPeer': 21 },
           'serviceApi': { 'interface': 'invalid', 'port': 0 },
           'validateHashesOnReplay': false,
           'chainwebVersion': 'mainnet01',
@@ -1734,15 +1575,7 @@ components:
                   'miners': [],
                 },
               'nodeMining':
-                {
-                  'miner':
-                    {
-                      'account': '',
-                      'predicate': 'keys-all',
-                      'public-keys': [],
-                    },
-                  'enabled': false,
-                },
+                { 'miner': { 'account': '', 'predicate': 'keys-all', 'public-keys': [] }, 'enabled': false },
             },
           'p2p':
             {
@@ -1763,16 +1596,8 @@ components:
               'sessionTimeout': 300,
               'peers':
                 [
-                  {
-                    'address':
-                      { 'hostname': 'us-e1.chainweb.com', 'port': 443 },
-                    'id': null,
-                  },
-                  {
-                    'address':
-                      { 'hostname': 'us-w1.chainweb.com', 'port': 443 },
-                    'id': null,
-                  },
+                  { 'address': { 'hostname': 'us-e1.chainweb.com', 'port': 443 }, 'id': null },
+                  { 'address': { 'hostname': 'us-w1.chainweb.com', 'port': 443 }, 'id': null },
                 ],
             },
           'transactionIndex': { 'enabled': true, 'configuration': {} },
@@ -1780,22 +1605,9 @@ components:
           'reorgLimit': 480,
           'headerStream': true,
           'mempoolP2p':
-            {
-              'enabled': true,
-              'configuration':
-                {
-                  'pollInterval': 30,
-                  'maxSessionCount': 6,
-                  'sessionTimeout': 240,
-                },
-            },
+            { 'enabled': true, 'configuration': { 'pollInterval': 30, 'maxSessionCount': 6, 'sessionTimeout': 240 } },
           'reintroTxs': true,
-          'cuts':
-            {
-              'pruneChainDatabase': 'none',
-              'fetchTimeout': 3000000,
-              'initialCutHeightLimit': null,
-            },
+          'cuts': { 'pruneChainDatabase': 'none', 'fetchTimeout': 3000000, 'initialCutHeightLimit': null },
         }
 
 # ############################################################################ #
@@ -1866,8 +1678,7 @@ paths:
         required: true
       responses:
         '204':
-          description:
-            The cut was added to the cut processing pipeline of the remote node
+          description: The cut was added to the cut processing pipeline of the remote node
           headers:
             x-peer-addr:
               $ref: '#/components/headers/x-peer-addr'
@@ -1876,9 +1687,7 @@ paths:
             x-chainweb-node-version:
               $ref: '#/components/headers/x-chainweb-node-version'
         '401':
-          description:
-            The requester is not a peer of this node, and thus not allowed to
-            send it cuts
+          description: The requester is not a peer of this node, and thus not allowed to send it cuts
           headers:
             x-peer-addr:
               $ref: '#/components/headers/x-peer-addr'
@@ -1934,8 +1743,7 @@ paths:
                       nullable: true
       responses:
         '204':
-          description:
-            The peer got added to the peer database of the remote node.
+          description: The peer got added to the peer database of the remote node.
           headers:
             x-peer-addr:
               $ref: '#/components/headers/x-peer-addr'
@@ -1962,20 +1770,15 @@ paths:
             text/plain:
               description: 'The reason for the failure.'
               example:
-                'Invalid hostaddress: IsNotReachable (PeerInfo {_peerId =
-                Nothing, _peerAddr = HostAddress {_hostAddressHost =
-                us-w1.chainweb.com, _hostAddressPort = 444}})
-                "\"HttpExceptionRequest Request {\\n  host                 =
-                \\\"us-w1.chainweb.com\\\"\\n  port                 =
+                'Invalid hostaddress: IsNotReachable (PeerInfo {_peerId = Nothing, _peerAddr = HostAddress
+                {_hostAddressHost = us-w1.chainweb.com, _hostAddressPort = 444}}) "\"HttpExceptionRequest Request
+                {\\n  host                 = \\\"us-w1.chainweb.com\\\"\\n  port                 =
                 444\\n  secure               = True\\n  requestHeaders       =
                 [(\\\"X-Chainweb-Node-Version\\\",\\\"2.6\\\")]\\n  path                 =
-                \\\"/chainweb/0.0/mainnet01/cut/peer\\\"\\n  queryString          =
-                \\\"\\\"\\n  method               =
-                \\\"GET\\\"\\n  proxy                =
-                Nothing\\n  rawBody              =
-                False\\n  redirectCount        = 10\\n  responseTimeout      =
-                ResponseTimeoutMicro 2000000\\n  requestVersion       =
-                HTTP/1.1\\n}\\n ConnectionTimeout\""'
+                \\\"/chainweb/0.0/mainnet01/cut/peer\\\"\\n  queryString          = \\\"\\\"\\n  method               =
+                \\\"GET\\\"\\n  proxy                = Nothing\\n  rawBody              =
+                False\\n  redirectCount        = 10\\n  responseTimeout      = ResponseTimeoutMicro
+                2000000\\n  requestVersion       = HTTP/1.1\\n}\\n ConnectionTimeout\""'
 
   # ########################################################################## #
   # Block Hashes
@@ -2072,14 +1875,9 @@ paths:
                     'lower': ['RClyuyZAacwvPpmLXKbTwrIRXWeUSjiNhJVP2esH8KM'],
                     'upper': ['QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74'],
                   }
-                summary:
-                  Ancestors of block that are not acestors of another block
+                summary: Ancestors of block that are not acestors of another block
               singleton:
-                value:
-                  {
-                    'lower': [],
-                    'upper': ['QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74'],
-                  }
+                value: { 'lower': [], 'upper': ['QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74'] }
                 summary: Ancestors of one block
               empty:
                 value: { lower: [], upper: [] }
@@ -2311,14 +2109,9 @@ paths:
                     'lower': ['RClyuyZAacwvPpmLXKbTwrIRXWeUSjiNhJVP2esH8KM'],
                     'upper': ['QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74'],
                   }
-                summary:
-                  Ancestors of block that are not ancestors of another block
+                summary: Ancestors of block that are not ancestors of another block
               singleton:
-                value:
-                  {
-                    'lower': [],
-                    'upper': ['QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74'],
-                  }
+                value: { 'lower': [], 'upper': ['QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74'] }
                 summary: Ancestors of one block
               empty:
                 value: { lower: [], upper: [] }
@@ -2382,8 +2175,7 @@ paths:
               $ref: '#/components/headers/x-server-timestamp'
             x-chainweb-node-version:
               $ref: '#/components/headers/x-chainweb-node-version'
-          description:
-            A block header indicated by a required parameter was not found.
+          description: A block header indicated by a required parameter was not found.
           content:
             application/json:
               schema:
@@ -2444,11 +2236,7 @@ paths:
                     description: Failure message
                   key:
                     $ref: '#/components/schemas/payloadHash'
-              example:
-                {
-                  'reason': 'key not found',
-                  'key': 'k1H3DsInAPvJ0W_zPxnrpkeSNdPUT0S9U8bqDLG739w',
-                }
+              example: { 'reason': 'key not found', 'key': 'k1H3DsInAPvJ0W_zPxnrpkeSNdPUT0S9U8bqDLG739w' }
 
   /chain/{chain}/payload/batch:
     post:
@@ -2536,11 +2324,7 @@ paths:
                     description: Failure message
                   key:
                     $ref: '#/components/schemas/payloadHash'
-              example:
-                {
-                  'reason': 'key not found',
-                  'key': 'k1H3DsInAPvJ0W_zPxnrpkeSNdPUT0S9U8bqDLG739w',
-                }
+              example: { 'reason': 'key not found', 'key': 'k1H3DsInAPvJ0W_zPxnrpkeSNdPUT0S9U8bqDLG739w' }
 
   /chain/{chain}/payload/outputs/batch:
     post:
@@ -2617,8 +2401,7 @@ paths:
                       type: string
                   highwaterMark:
                     type: array
-                    description:
-                      'two-element array: `[nonce (integer), since (int64)]`'
+                    description: 'two-element array: `[nonce (integer), since (int64)]`'
                     items:
                       type: integer
               examples:
@@ -2630,11 +2413,7 @@ paths:
                     }
                   summary: Result with one transaction
                 empty:
-                  value:
-                    {
-                      'hashes': [],
-                      'highwaterMark': [-4683248684880063035, 436],
-                    }
+                  value: { 'hashes': [], 'highwaterMark': [-4683248684880063035, 436] }
                   summary: Empty result
 
   /chain/{chain}/mempool/member:
@@ -2716,8 +2495,8 @@ paths:
                         'contents':
                           "{\"hash\":\"y3aWL72-3wAy7vL9wcegGXnstH0lHi-q-cfxkhD5JCw\",\"sigs\":[{\"sig\":\"8ddc06b37c496f2cadc4f7412405a80faf3ab07482ff5553b9b5fcc73d1b4121275ad5948d9b4078e553b71f8b42eaf6b24135bf2fb4d5840c16bcdde0e35e0f\"}],\"cmd\":\"{\\\"networkId\\\":\\\"mainnet01\\\",\\\"payload\\\":{\\\"exec\\\":{\\\"data\\\":{\\\"account-keyset\\\":{\\\"pred\\\":\\\"keys-all\\\",\\\"keys\\\":[\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\"]}},\\\"code\\\":\\\"(coin.transfer-create
                           \\\\\\\"60241f51ea34e05c61fbea9d\\\\\\\"
-                          \\\\\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\\\\\"
-                          (read-keyset \\\\\\\"account-keyset\\\\\\\")
+                          \\\\\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\\\\\" (read-keyset
+                          \\\\\\\"account-keyset\\\\\\\")
                           5007.0000)\\\"}},\\\"signers\\\":[{\\\"pubKey\\\":\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\",\\\"clist\\\":[{\\\"args\\\":[\\\"60241f51ea34e05c61fbea9d\\\",\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\",5007],\\\"name\\\":\\\"coin.TRANSFER\\\"},{\\\"args\\\":[],\\\"name\\\":\\\"coin.GAS\\\"}]}],\\\"meta\\\":{\\\"creationTime\\\":1618949714,\\\"ttl\\\":300,\\\"gasLimit\\\":600,\\\"chainId\\\":\\\"0\\\",\\\"gasPrice\\\":1.0e-7,\\\"sender\\\":\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\"},\\\"nonce\\\":\\\"\\\\\\\"2021-04-20T20:16:13.645Z\\\\\\\"\\\"}\"}",
                       },
                     ]
@@ -2750,8 +2529,8 @@ paths:
                   [
                     "{\"hash\":\"y3aWL72-3wAy7vL9wcegGXnstH0lHi-q-cfxkhD5JCw\",\"sigs\":[{\"sig\":\"8ddc06b37c496f2cadc4f7412405a80faf3ab07482ff5553b9b5fcc73d1b4121275ad5948d9b4078e553b71f8b42eaf6b24135bf2fb4d5840c16bcdde0e35e0f\"}],\"cmd\":\"{\\\"networkId\\\":\\\"mainnet01\\\",\\\"payload\\\":{\\\"exec\\\":{\\\"data\\\":{\\\"account-keyset\\\":{\\\"pred\\\":\\\"keys-all\\\",\\\"keys\\\":[\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\"]}},\\\"code\\\":\\\"(coin.transfer-create
                     \\\\\\\"60241f51ea34e05c61fbea9d\\\\\\\"
-                    \\\\\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\\\\\"
-                    (read-keyset \\\\\\\"account-keyset\\\\\\\")
+                    \\\\\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\\\\\" (read-keyset
+                    \\\\\\\"account-keyset\\\\\\\")
                     5007.0000)\\\"}},\\\"signers\\\":[{\\\"pubKey\\\":\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\",\\\"clist\\\":[{\\\"args\\\":[\\\"60241f51ea34e05c61fbea9d\\\",\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\",5007],\\\"name\\\":\\\"coin.TRANSFER\\\"},{\\\"args\\\":[],\\\"name\\\":\\\"coin.GAS\\\"}]}],\\\"meta\\\":{\\\"creationTime\\\":1618949714,\\\"ttl\\\":300,\\\"gasLimit\\\":600,\\\"chainId\\\":\\\"0\\\",\\\"gasPrice\\\":1.0e-7,\\\"sender\\\":\\\"acc28032a1bb725b7ba0a3593ab86f393894fa6659281f3dfdfee0afe48559a2\\\"},\\\"nonce\\\":\\\"\\\\\\\"2021-04-20T20:16:13.645Z\\\\\\\"\\\"}\"}",
                   ]
               empty:
@@ -2819,8 +2598,7 @@ paths:
                       nullable: true
       responses:
         '204':
-          description:
-            The peer got added to the peer database of the remote node.
+          description: The peer got added to the peer database of the remote node.
           headers:
             x-peer-addr:
               $ref: '#/components/headers/x-peer-addr'
@@ -2846,20 +2624,15 @@ paths:
             text/plain:
               description: 'The reason for the failure.'
               example:
-                'Invalid hostaddress: IsNotReachable (PeerInfo {_peerId =
-                Nothing, _peerAddr = HostAddress {_hostAddressHost =
-                us-w1.chainweb.com, _hostAddressPort = 444}})
-                "\"HttpExceptionRequest Request {\\n  host                 =
-                \\\"us-w1.chainweb.com\\\"\\n  port                 =
+                'Invalid hostaddress: IsNotReachable (PeerInfo {_peerId = Nothing, _peerAddr = HostAddress
+                {_hostAddressHost = us-w1.chainweb.com, _hostAddressPort = 444}}) "\"HttpExceptionRequest Request
+                {\\n  host                 = \\\"us-w1.chainweb.com\\\"\\n  port                 =
                 444\\n  secure               = True\\n  requestHeaders       =
                 [(\\\"X-Chainweb-Node-Version\\\",\\\"2.6\\\")]\\n  path                 =
-                \\\"/chainweb/0.0/mainnet01/cut/peer\\\"\\n  queryString          =
-                \\\"\\\"\\n  method               =
-                \\\"GET\\\"\\n  proxy                =
-                Nothing\\n  rawBody              =
-                False\\n  redirectCount        = 10\\n  responseTimeout      =
-                ResponseTimeoutMicro 2000000\\n  requestVersion       =
-                HTTP/1.1\\n}\\n ConnectionTimeout\""'
+                \\\"/chainweb/0.0/mainnet01/cut/peer\\\"\\n  queryString          = \\\"\\\"\\n  method               =
+                \\\"GET\\\"\\n  proxy                = Nothing\\n  rawBody              =
+                False\\n  redirectCount        = 10\\n  responseTimeout      = ResponseTimeoutMicro
+                2000000\\n  requestVersion       = HTTP/1.1\\n}\\n ConnectionTimeout\""'
 
   # ########################################################################## #
   # Mining API
@@ -2895,10 +2668,7 @@ paths:
               {
                 'account': 'miner',
                 'predicate': 'keys-all',
-                'public-keys':
-                  [
-                    'f880a433d6e2a13a32b6169030f56245efdd8c1b8a5027e9ce98a88e886bef27',
-                  ],
+                'public-keys': ['f880a433d6e2a13a32b6169030f56245efdd8c1b8a5027e9ce98a88e886bef27'],
               }
             schema:
               $ref: '#/components/schemas/minerInfo'
@@ -3045,9 +2815,8 @@ paths:
         it is up to the client to request a new stream.
       requestBody:
         description:
-          The first 4 bytes received from a call to `/mining/work`. This tells
-          the Node to only inform the Miner of a new Cut when the specific chain
-          in question has updated.
+          The first 4 bytes received from a call to `/mining/work`. This tells the Node to only inform the Miner of a
+          new Cut when the specific chain in question has updated.
         content:
           application/octet-stream:
             schema:
@@ -3164,8 +2933,7 @@ paths:
         - $ref: '#/components/parameters/backupId'
       responses:
         '200':
-          description:
-            'A backup job with that identifier exists, here is its status'
+          description: 'A backup job with that identifier exists, here is its status'
           headers:
             x-peer-addr:
               $ref: '#/components/headers/x-peer-addr'
@@ -3250,12 +3018,10 @@ paths:
     get:
       tags: [misc]
       summary: General Node Info
-      description:
-        Provides general information about the node and the chainweb version
+      description: Provides general information about the node and the chainweb version
       responses:
         '200':
-          description:
-            General information about the node and the chainweb version
+          description: General information about the node and the chainweb version
           headers:
             x-peer-addr:
               $ref: '#/components/headers/x-peer-addr'
@@ -3329,16 +3095,12 @@ paths:
                           description: Number of transactions in the block
                         powHash:
                           type: string
-                          description:
-                            A custom representation of the POW hash for use in
-                            the block explorer UI
+                          description: A custom representation of the POW hash for use in the block explorer UI
                         header:
                           $ref: '#/components/schemas/blockHeader'
                         target:
                           type: string
-                          description:
-                            A custom representation of the POW target for use in
-                            the block explorer UI
+                          description: A custom representation of the POW target for use in the block explorer UI
 
               example: |
                 event:BlockHeader

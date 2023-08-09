@@ -11,11 +11,7 @@ export interface IResponse<T> {
 const APIKEY: string = process.env.MAILCHIMP_API ?? '';
 const SERVER_PREFIX: string = process.env.MAILCHIMP_SERVER_PREFIX ?? '';
 
-const CreateResponse = (
-  res: NextApiResponse<IResponse<{}>>,
-  status: number,
-  message: string,
-): void => {
+const CreateResponse = (res: NextApiResponse<IResponse<{}>>, status: number, message: string): void => {
   res.status(500).json({
     status,
     message,
@@ -28,10 +24,7 @@ mailchimp.setConfig({
   server: SERVER_PREFIX,
 });
 
-const subscribe = async (
-  req: NextApiRequest,
-  res: NextApiResponse<IResponse<{}>>,
-): Promise<void> => {
+const subscribe = async (req: NextApiRequest, res: NextApiResponse<IResponse<{}>>): Promise<void> => {
   if (req.method !== 'POST') {
     CreateResponse(res, 500, 'You can only use the method POST');
   }
@@ -60,10 +53,7 @@ const subscribe = async (
         status: 'subscribed',
       });
     } catch (err) {
-      if (
-        err.status === 400 &&
-        err.response.body.title.toLowerCase() === 'member exists'
-      ) {
+      if (err.status === 400 && err.response.body.title.toLowerCase() === 'member exists') {
         CreateResponse(res, 200, 'Thank you for subscribing...again');
       }
 

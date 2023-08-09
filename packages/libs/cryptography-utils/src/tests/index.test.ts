@@ -7,9 +7,7 @@ describe('MyLib', () => {
 
   it('should not have undefined exports', () => {
     Object.keys(crypto).forEach((exportKey) =>
-      expect(Boolean((crypto as Record<string, unknown>)[exportKey])).toBe(
-        true,
-      ),
+      expect(Boolean((crypto as Record<string, unknown>)[exportKey])).toBe(true),
     );
   });
 });

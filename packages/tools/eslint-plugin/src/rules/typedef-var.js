@@ -12,10 +12,7 @@ const typedefVar = {
   create: (context) => {
     // This rule implements the variableDeclarationIgnoreFunction=true behavior from
     function isVariableDeclarationIgnoreFunction(node) {
-      return (
-        node.type === AST_NODE_TYPES.FunctionExpression ||
-        node.type === AST_NODE_TYPES.ArrowFunctionExpression
-      );
+      return node.type === AST_NODE_TYPES.FunctionExpression || node.type === AST_NODE_TYPES.ArrowFunctionExpression;
     }
 
     function getNodeName(node) {
@@ -36,10 +33,8 @@ const typedefVar = {
 
         // These are @typescript-eslint/typedef exemptions
         if (
-          node.id.type ===
-            AST_NODE_TYPES.ArrayPattern /* ArrayDestructuring */ ||
-          node.id.type ===
-            AST_NODE_TYPES.ObjectPattern /* ObjectDestructuring */ ||
+          node.id.type === AST_NODE_TYPES.ArrayPattern /* ArrayDestructuring */ ||
+          node.id.type === AST_NODE_TYPES.ObjectPattern /* ObjectDestructuring */ ||
           (node.init && isVariableDeclarationIgnoreFunction(node.init))
         ) {
           return;

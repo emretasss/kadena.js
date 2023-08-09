@@ -6,11 +6,7 @@ jest.mock('cross-fetch', () => {
 });
 
 import { ICoin } from '../../../composePactCommand/test/coin-contract';
-import {
-  IQuicksignResponse,
-  IQuicksignResponseOutcomes,
-  Pact,
-} from '../../../index';
+import { IQuicksignResponse, IQuicksignResponseOutcomes, Pact } from '../../../index';
 import { getModule } from '../../../pact';
 import { signWithChainweaver } from '../signWithChainweaver';
 
@@ -133,10 +129,7 @@ describe('signWithChainweaver', () => {
 
     const txWithOneSig = await signWithChainweaver(unsignedTransaction);
 
-    expect(txWithOneSig.sigs).toStrictEqual([
-      { sig: 'gas-key-sig' },
-      undefined,
-    ]);
+    expect(txWithOneSig.sigs).toStrictEqual([{ sig: 'gas-key-sig' }, undefined]);
 
     // set a new mock response for the second signature
     const mockedResponse2: IQuicksignResponseOutcomes = {
@@ -144,9 +137,7 @@ describe('signWithChainweaver', () => {
         {
           commandSigData: {
             cmd: '',
-            sigs: [
-              { pubKey: 'transfer-signer-pubkey', sig: 'transfer-key-sig' },
-            ],
+            sigs: [{ pubKey: 'transfer-signer-pubkey', sig: 'transfer-key-sig' }],
           },
           outcome: {
             hash: '',
@@ -161,10 +152,7 @@ describe('signWithChainweaver', () => {
     });
 
     const signedTx = await signWithChainweaver(txWithOneSig);
-    expect(signedTx.sigs).toEqual([
-      { sig: 'gas-key-sig' },
-      { sig: 'transfer-key-sig' },
-    ]);
+    expect(signedTx.sigs).toEqual([{ sig: 'gas-key-sig' }, { sig: 'transfer-key-sig' }]);
   });
 
   it('signs but does not have the signer key and returns sig null', async () => {

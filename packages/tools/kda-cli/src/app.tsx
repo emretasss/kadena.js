@@ -2,11 +2,7 @@ import { OnAnswer, QuestionWrapper } from './components/question.js';
 import { Summary } from './components/summary.js';
 import { useHistory } from './hooks/use-history.js';
 import { questions } from './questions/init.js';
-import {
-  getNextQuestion,
-  IAnswers,
-  IQuestionAnswer,
-} from './questions/questions.js';
+import { getNextQuestion, IAnswers, IQuestionAnswer } from './questions/questions.js';
 
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -30,10 +26,7 @@ export default function App({ task = '' }: IProps): JSX.Element {
       const nextQNA = getNextQuestion({
         ...qna,
         answers: mergedAnswers,
-        answeredQuestions: [
-          ...qna.answeredQuestions,
-          { question: qna.current, answer },
-        ],
+        answeredQuestions: [...qna.answeredQuestions, { question: qna.current, answer }],
       });
       setQNA(nextQNA);
       return mergedAnswers;
@@ -45,21 +38,13 @@ export default function App({ task = '' }: IProps): JSX.Element {
     if (!qna.current)
       onSet({
         answers: qna.answers,
-        executions: qna.answeredQuestions.filter(
-          ({ question }) => question.type === 'execute',
-        ),
+        executions: qna.answeredQuestions.filter(({ question }) => question.type === 'execute'),
       });
   }, [onSet, qna.answers, qna.answeredQuestions, qna.current]);
   return (
     <>
       <Summary answeredQuestions={qna.answeredQuestions} />
-      {qna.current && (
-        <QuestionWrapper
-          {...qna.current}
-          onAnswer={onAnswer}
-          answers={qna.answers}
-        />
-      )}
+      {qna.current && <QuestionWrapper {...qna.current} onAnswer={onAnswer} answers={qna.answers} />}
     </>
   );
 }

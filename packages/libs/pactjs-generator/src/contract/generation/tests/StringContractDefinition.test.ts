@@ -30,8 +30,7 @@ describe('StringContractDefinition', () => {
 
   it('returns the defcaps of the contract', () => {
     const contractDefinition = new StringContractDefinition({
-      contract:
-        "(namespace 'free) (module foo (defcap bar:bool () true) (defcap foo:bool () false))",
+      contract: "(namespace 'free) (module foo (defcap bar:bool () true) (defcap foo:bool () false))",
     });
 
     expect(contractDefinition.getCapabilities('foo')).toEqual({
@@ -52,8 +51,7 @@ describe('StringContractDefinition', () => {
 
   it('returns the modules of the contract', () => {
     const contractDefinition = new StringContractDefinition({
-      contract:
-        "(namespace 'free) (module foo (defcap bar:bool () true) (defcap foo:bool () false))",
+      contract: "(namespace 'free) (module foo (defcap bar:bool () true) (defcap foo:bool () false))",
     });
 
     expect(contractDefinition.modules).toEqual(['foo']);
@@ -61,8 +59,7 @@ describe('StringContractDefinition', () => {
 
   it('returns the methods of the contract', () => {
     const contractDefinition = new StringContractDefinition({
-      contract:
-        "(namespace 'free) (module foo (defun bar:bool () true) (defun foo:bool () false))",
+      contract: "(namespace 'free) (module foo (defun bar:bool () true) (defun foo:bool () false))",
     });
 
     expect(contractDefinition.getMethods('foo')).toEqual({

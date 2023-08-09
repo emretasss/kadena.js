@@ -30,17 +30,13 @@ type SlidingCacheConfig<TShape extends ITransaction> = Pick<
   'spanValueGetter' | 'cacheSpan' | 'identityCheck' | 'equalityCheck'
 >;
 
-type SlidingCacheConstructor<TShape extends ITransaction> = Partial<
-  SlidingCacheConfig<TShape>
->;
+type SlidingCacheConstructor<TShape extends ITransaction> = Partial<SlidingCacheConfig<TShape>>;
 
 const defaults: SlidingCacheConfig<ITransaction> = {
   spanValueGetter: ({ height }) => height,
   cacheSpan: 3,
   identityCheck: (a, b) => a?.meta?.id === b?.meta?.id,
-  equalityCheck: (a, b) =>
-    a?.meta?.id === b?.meta?.id &&
-    a?.meta?.confirmations === b?.meta?.confirmations,
+  equalityCheck: (a, b) => a?.meta?.id === b?.meta?.id && a?.meta?.confirmations === b?.meta?.confirmations,
 };
 
 type InSpanRange = boolean;
@@ -48,9 +44,7 @@ type Exists = boolean;
 type ExistsIdentical = boolean;
 type CacheIdx = number;
 
-export default class SlidingCache<TShape extends ITransaction>
-  implements SlidingCacheConfig<TShape>
-{
+export default class SlidingCache<TShape extends ITransaction> implements SlidingCacheConfig<TShape> {
   public minSpanValue: number = Infinity;
   public maxSpanValue: number = -Infinity;
   public cache: TShape[] = [];
@@ -75,9 +69,7 @@ export default class SlidingCache<TShape extends ITransaction>
     const retVals = [];
     for (const elem of elems) {
       if (isUndefinedOrNull(elem)) {
-        console.error(
-          'Sliding cache: Received null or undefined data element. This should not happen!',
-        );
+        console.error('Sliding cache: Received null or undefined data element. This should not happen!');
         // do not emit this
         retVals.push(false);
         continue;
@@ -91,8 +83,7 @@ export default class SlidingCache<TShape extends ITransaction>
         needUpdate = true;
         newMaxCacheValue = cacheValue;
       }
-      const [inSpanRange, exists, existsIdentical, cacheIdx] =
-        this.existsCache(elem);
+      const [inSpanRange, exists, existsIdentical, cacheIdx] = this.existsCache(elem);
 
       if (!inSpanRange) {
         // outside of cache's sliding window, emit. possible duplicate
@@ -113,9 +104,7 @@ export default class SlidingCache<TShape extends ITransaction>
     return retVals;
   }
 
-  public existsCache(
-    needle: TShape,
-  ): [InSpanRange, Exists, ExistsIdentical, CacheIdx] {
+  public existsCache(needle: TShape): [InSpanRange, Exists, ExistsIdentical, CacheIdx] {
     // [in span range, exists (by id), exists with identical confirmation depth, cache index]
     const spanValue = this.spanValueGetter(needle);
     if (spanValue < this.minSpanValue) {
@@ -145,9 +134,7 @@ export default class SlidingCache<TShape extends ITransaction>
   }
 
   private _evict(): number {
-    const nextCache = this.cache.filter(
-      (elem) => this.spanValueGetter(elem) >= this.minSpanValue,
-    );
+    const nextCache = this.cache.filter((elem) => this.spanValueGetter(elem) >= this.minSpanValue);
     const evictedNum = this.cache.length - nextCache.length;
     this.cache = nextCache;
     return evictedNum;

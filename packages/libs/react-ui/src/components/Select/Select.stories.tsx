@@ -18,10 +18,7 @@ const meta: Meta<
       },
     },
     icon: {
-      options: [
-        undefined,
-        ...(Object.keys(SystemIcon) as (keyof typeof SystemIcon)[]),
-      ],
+      options: [undefined, ...(Object.keys(SystemIcon) as (keyof typeof SystemIcon)[])],
       control: {
         type: 'select',
       },

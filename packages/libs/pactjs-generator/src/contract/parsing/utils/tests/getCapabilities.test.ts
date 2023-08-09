@@ -25,11 +25,7 @@ describe('getCapabilities', () => {
         },
       ],
     });
-    const capabilities = getCapabilities(
-      modules,
-      'test_namespace.test_module',
-      'test-function',
-    );
+    const capabilities = getCapabilities(modules, 'test_namespace.test_module', 'test-function');
 
     expect(capabilities).toEqual([
       {
@@ -75,11 +71,7 @@ describe('getCapabilities', () => {
         },
       ],
     });
-    const capabilities = getCapabilities(
-      modules,
-      'test_namespace.test_module',
-      'test-function',
-    );
+    const capabilities = getCapabilities(modules, 'test_namespace.test_module', 'test-function');
 
     expect(capabilities).toEqual([
       {

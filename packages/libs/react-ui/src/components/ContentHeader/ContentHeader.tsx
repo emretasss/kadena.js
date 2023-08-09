@@ -10,11 +10,7 @@ export interface IContentHeaderProps {
   description?: string;
 }
 
-export const ContentHeader: FC<IContentHeaderProps> = ({
-  icon: Icon,
-  heading,
-  description,
-}) => {
+export const ContentHeader: FC<IContentHeaderProps> = ({ icon: Icon, heading, description }) => {
   return (
     <div className={containerClass}>
       <Icon size="md" />

@@ -20,8 +20,7 @@ export const keyPair: IKeyPair = {
 };
 export const keyPairs: Array<IKeyPair> = [keyPair];
 export const nonce: Nonce = 'step01';
-export const pactId: PactTransactionHash =
-  'TNgO7o8nSZILVCfJPcg5IjHADy-XKvQ7o5RfAieJvwY';
+export const pactId: PactTransactionHash = 'TNgO7o8nSZILVCfJPcg5IjHADy-XKvQ7o5RfAieJvwY';
 export const step: Step = 1;
 export const rollback: Rollback = false;
 export const envData: EnvData = {};
@@ -50,8 +49,7 @@ export const payload: ICommandPayload = {
   },
   signers: [
     {
-      pubKey:
-        'ba54b224d1924dd98403f5c751abdd10de6cd81b0121800bf7bdbdcfaec7388d',
+      pubKey: 'ba54b224d1924dd98403f5c751abdd10de6cd81b0121800bf7bdbdcfaec7388d',
     },
   ],
   meta: {

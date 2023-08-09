@@ -5,10 +5,7 @@ interface IIds {
   <T>(list: string[], mapper: (idx: number, list: string[]) => T): IParser<T>;
 }
 
-export const ids: IIds = (
-  list: string[],
-  mapper = (idx: number, list: string[]) => list[idx],
-) => {
+export const ids: IIds = (list: string[], mapper = (idx: number, list: string[]) => list[idx]) => {
   return rule((pointer) => {
     const token = pointer.next();
     if (!token) return FAILED;

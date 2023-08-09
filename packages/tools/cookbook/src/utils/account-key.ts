@@ -10,9 +10,7 @@ export function accountKey(account: string): string {
   const [, namespace, publicKey] = regExp.exec(account) || [];
 
   if (!namespace || !publicKey) {
-    console.info(
-      `Account name ${account} doesn't follow the recommended convention: '[a-z]:publicKey'`,
-    );
+    console.info(`Account name ${account} doesn't follow the recommended convention: '[a-z]:publicKey'`);
     process.exit(1);
   }
 

@@ -12,15 +12,9 @@ import { bigloadEnd } from './730-10';
 import { IPagedResponse, IBlockHeader } from '../../types';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const getItemsFromArrByAmount = (
-  obj: IPagedResponse<IBlockHeader>,
-  amount: number,
-  limit?: number | undefined,
-) => ({
+const getItemsFromArrByAmount = (obj: IPagedResponse<IBlockHeader>, amount: number, limit?: number | undefined) => ({
   limit: limit || obj.limit,
-  items: limit
-    ? obj.items.slice(Math.max(obj.items.length - limit, 0))
-    : obj.items.slice(0, amount),
+  items: limit ? obj.items.slice(Math.max(obj.items.length - limit, 0)) : obj.items.slice(0, amount),
   next: obj.next,
 });
 
@@ -38,5 +32,4 @@ const mocks = {
   730730: bigloadEnd,
 } as mockBlocks;
 
-export const blockRecentsRecentHeadersMock = (n: number): mockBlocks =>
-  mocks[n];
+export const blockRecentsRecentHeadersMock = (n: number): mockBlocks => mocks[n];

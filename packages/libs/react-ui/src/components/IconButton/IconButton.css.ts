@@ -49,8 +49,5 @@ export const colorVariants = styleVariants(colors, (color) => {
     return [container, sprinkles({ color: '$neutral2', bg: 'transparent' })];
   }
 
-  return [
-    container,
-    sprinkles({ color: `$${color}Contrast`, bg: `$${color}Surface` }),
-  ];
+  return [container, sprinkles({ color: `$${color}Contrast`, bg: `$${color}Surface` })];
 });

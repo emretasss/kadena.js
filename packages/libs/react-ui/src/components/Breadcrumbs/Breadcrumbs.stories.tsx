@@ -3,14 +3,7 @@ import { ProductIcon } from '@components/Icon';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-const ItemArray: string[] = [
-  'He-man',
-  'Skeletor',
-  'Orko',
-  'Teela-Na',
-  'Cringer',
-  'King Randor',
-];
+const ItemArray: string[] = ['He-man', 'Skeletor', 'Orko', 'Teela-Na', 'Cringer', 'King Randor'];
 
 const meta: Meta<
   {
@@ -59,10 +52,7 @@ export const Primary: Story = {
       <Breadcrumbs.Root icon={Icon}>
         {items.map((item, idx) => {
           return (
-            <Breadcrumbs.Item
-              key={item}
-              href={idx < items.length - 1 ? item : undefined}
-            >
+            <Breadcrumbs.Item key={item} href={idx < items.length - 1 ? item : undefined}>
               {item}
             </Breadcrumbs.Item>
           );

@@ -17,11 +17,8 @@ export interface INavHeaderNavigationProps {
   children: FunctionComponentElement<INavHeaderLinkProps>[];
 }
 
-export const NavHeaderNavigation: FC<INavHeaderNavigationProps> = ({
-  children,
-}) => {
-  const { glowX, animationDuration, glowRef, navRef, activeNav, setActiveNav } =
-    useGlow();
+export const NavHeaderNavigation: FC<INavHeaderNavigationProps> = ({ children }) => {
+  const { glowX, animationDuration, glowRef, navRef, activeNav, setActiveNav } = useGlow();
 
   return (
     <nav className={navWrapperClass} ref={navRef}>
@@ -41,8 +38,7 @@ export const NavHeaderNavigation: FC<INavHeaderNavigationProps> = ({
             {React.cloneElement(
               child as React.ReactElement<
                 HTMLElement | INavHeaderLinkProps,
-                | string
-                | React.JSXElementConstructor<JSX.Element & INavHeaderLinkProps>
+                string | React.JSXElementConstructor<JSX.Element & INavHeaderLinkProps>
               >,
               {
                 active: activeNav === index + 1,

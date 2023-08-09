@@ -14,8 +14,7 @@ import {
 import { IAnswers, IQuestion } from './questions.js';
 
 const fundCondition = ({ task }: IAnswers): boolean => {
-  if (Array.isArray(task))
-    return task?.includes('fund') || task?.includes('setup');
+  if (Array.isArray(task)) return task?.includes('fund') || task?.includes('setup');
   return false;
 };
 
@@ -61,13 +60,7 @@ export const fundQuestions: IQuestion[] = [
     name: 'fundDevnet',
     type: 'execute',
     when: fundCondition,
-    action: async ({
-      account,
-      chainId,
-      network,
-      endpoint,
-      publicKey,
-    }: IAnswers) => {
+    action: async ({ account, chainId, network, endpoint, publicKey }: IAnswers) => {
       if (
         typeof account !== 'string' ||
         typeof chainId !== 'string' ||
@@ -94,22 +87,18 @@ export const fundQuestions: IQuestion[] = [
         addCapability({
           name: 'coin.GAS',
           args: [],
-          signer:
-            '368820f80c324bbc7c2b0610688a7da43e39f91d118732671cd9c7500ff43cca',
+          signer: '368820f80c324bbc7c2b0610688a7da43e39f91d118732671cd9c7500ff43cca',
         }),
         addCapability({
           name: 'coin.TRANSFER',
           args: ['sender00', account, 100],
-          signer:
-            '368820f80c324bbc7c2b0610688a7da43e39f91d118732671cd9c7500ff43cca',
+          signer: '368820f80c324bbc7c2b0610688a7da43e39f91d118732671cd9c7500ff43cca',
         }),
         setNetworkId(network),
         setDomain(endpoint),
         signWithKeypair({
-          publicKey:
-            '368820f80c324bbc7c2b0610688a7da43e39f91d118732671cd9c7500ff43cca',
-          secretKey:
-            '251a920c403ae8c8f65f59142316af3c82b631fba46ddea92ee8c95035bd2898',
+          publicKey: '368820f80c324bbc7c2b0610688a7da43e39f91d118732671cd9c7500ff43cca',
+          secretKey: '251a920c403ae8c8f65f59142316af3c82b631fba46ddea92ee8c95035bd2898',
         }),
         send,
         listen,

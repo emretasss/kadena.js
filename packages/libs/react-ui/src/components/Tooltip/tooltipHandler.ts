@@ -2,10 +2,7 @@ import { visibleClass } from './Tooltip.css';
 
 import React from 'react';
 
-export const tooltipHandler = (
-  event: React.MouseEvent<HTMLElement>,
-  ref: React.RefObject<HTMLDivElement>,
-): void => {
+export const tooltipHandler = (event: React.MouseEvent<HTMLElement>, ref: React.RefObject<HTMLDivElement>): void => {
   const target = event.target as HTMLElement;
   const rect = target.getBoundingClientRect();
   const node = ref.current;
@@ -19,26 +16,18 @@ export const tooltipHandler = (
   switch (placement) {
     case 'top':
       node.style.top = `${rect.top - node.offsetHeight}px`;
-      node.style.left = `${
-        rect.left + rect.width / 2 - node.offsetWidth / 2
-      }px`;
+      node.style.left = `${rect.left + rect.width / 2 - node.offsetWidth / 2}px`;
       break;
     case 'bottom':
       node.style.top = `${rect.top + rect.height}px`;
-      node.style.left = `${
-        rect.left + rect.width / 2 - node.offsetWidth / 2
-      }px`;
+      node.style.left = `${rect.left + rect.width / 2 - node.offsetWidth / 2}px`;
       break;
     case 'left':
-      node.style.top = `${
-        rect.top + rect.height / 2 - node.offsetHeight / 2
-      }px`;
+      node.style.top = `${rect.top + rect.height / 2 - node.offsetHeight / 2}px`;
       node.style.left = `${rect.left - node.offsetWidth}px`;
       break;
     case 'right':
-      node.style.top = `${
-        rect.top + rect.height / 2 - node.offsetHeight / 2
-      }px`;
+      node.style.top = `${rect.top + rect.height / 2 - node.offsetHeight / 2}px`;
       node.style.left = `${rect.left + rect.width}px`;
       break;
   }

@@ -31,21 +31,15 @@ const meta: Meta<typeof Stack> = {
       control: { type: 'select' },
     },
     justifyContent: {
-      options: Object.keys(
-        justifyContentVariant,
-      ) as (keyof typeof justifyContentVariant)[],
+      options: Object.keys(justifyContentVariant) as (keyof typeof justifyContentVariant)[],
       control: { type: 'radio' },
     },
     alignItems: {
-      options: Object.keys(
-        alignItemsVariant,
-      ) as (keyof typeof alignItemsVariant)[],
+      options: Object.keys(alignItemsVariant) as (keyof typeof alignItemsVariant)[],
       control: { type: 'radio' },
     },
     direction: {
-      options: Object.keys(
-        directionVariant,
-      ) as (keyof typeof directionVariant)[],
+      options: Object.keys(directionVariant) as (keyof typeof directionVariant)[],
       control: { type: 'radio' },
     },
     flexWrap: {
@@ -108,12 +102,7 @@ export const Centered: Story = {
   },
   render: ({ spacing, direction, alignItems, justifyContent }) => (
     <>
-      <Stack
-        spacing={spacing}
-        direction={direction}
-        alignItems={alignItems}
-        justifyContent={justifyContent}
-      >
+      <Stack spacing={spacing} direction={direction} alignItems={alignItems} justifyContent={justifyContent}>
         <Item css={{ size: '$40' }}>Item 1</Item>
         <Item css={{ size: '$12' }}>Item 2</Item>
         <Item css={{ size: '$40' }}>Item 3</Item>
@@ -135,12 +124,7 @@ export const SpaceBetween: Story = {
   },
   render: ({ spacing, direction, alignItems, justifyContent }) => (
     <>
-      <Stack
-        spacing={spacing}
-        direction={direction}
-        alignItems={alignItems}
-        justifyContent={justifyContent}
-      >
+      <Stack spacing={spacing} direction={direction} alignItems={alignItems} justifyContent={justifyContent}>
         <Item css={{ size: '$40' }}>Item 1</Item>
         <Item css={{ size: '$12' }}>Item 2</Item>
         <Item css={{ size: '$40' }}>Item 3</Item>

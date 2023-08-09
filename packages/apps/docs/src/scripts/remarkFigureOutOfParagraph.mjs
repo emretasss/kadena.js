@@ -9,11 +9,7 @@ const remarkFigureOutOfParagraph = () => {
     const children = tree.children.map((node) => {
       const { type } = node;
 
-      if (
-        type == 'paragraph' &&
-        node.children &&
-        node.children[0].type === 'image'
-      ) {
+      if (type == 'paragraph' && node.children && node.children[0].type === 'image') {
         const leaf = node.children[0] ?? null;
 
         const newNode = {

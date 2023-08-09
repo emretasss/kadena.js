@@ -55,9 +55,7 @@ export const NotificationContainer: FC<INotificationProps> = ({
       </div>
 
       {hasCloseButton && (
-        <span
-          className={expanded ? iconContainerExpandedClass : iconContainerClass}
-        >
+        <span className={expanded ? iconContainerExpandedClass : iconContainerClass}>
           <button className={closeButtonClass} onClick={onClose}>
             <SystemIcon.Close color={color} size={'md'} />
           </button>

@@ -10,12 +10,7 @@ export interface ITabProps {
   value: string;
 }
 
-export const Tab: FC<ITabProps> = ({
-  children,
-  selected = false,
-  handleClick,
-  value,
-}) => {
+export const Tab: FC<ITabProps> = ({ children, selected = false, handleClick, value }) => {
   if (handleClick === undefined || value === undefined) return null;
   return (
     <button

@@ -10,9 +10,7 @@ const coin: ICoin = getModule('coin');
 describe('createTransactionBuilder', () => {
   it('returns exec payload', () => {
     const builder = createTransactionBuilder();
-    const command = builder
-      .execution(coin.transfer('bob', 'alice', { decimal: '12' }))
-      .getCommand();
+    const command = builder.execution(coin.transfer('bob', 'alice', { decimal: '12' })).getCommand();
 
     expect(command).toStrictEqual({
       payload: {
@@ -114,9 +112,7 @@ describe('createTransactionBuilder', () => {
     const command = builder
       .execution(coin.transfer('bob', 'alice', { decimal: '12' }))
       .setNonce((cmd) => {
-        return `test-nonce:${
-          (cmd.payload as IExecutionPayloadObject).exec.code
-        }`;
+        return `test-nonce:${(cmd.payload as IExecutionPayloadObject).exec.code}`;
       })
       .getCommand();
 
@@ -182,10 +178,7 @@ describe('createTransactionBuilder', () => {
 
   it('returns cont command with data', () => {
     const builder = createTransactionBuilder();
-    const command = builder
-      .continuation({ pactId: '1' })
-      .addData('test', 'value')
-      .getCommand();
+    const command = builder.continuation({ pactId: '1' }).addData('test', 'value').getCommand();
 
     expect(command).toEqual({
       nonce: 'kjs:nonce:1690416000000',

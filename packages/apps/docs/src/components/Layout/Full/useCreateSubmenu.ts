@@ -26,8 +26,7 @@ export const useCreateSubMenu = (): IReturn => {
 
       let parent = startArray[0];
 
-      const elements: NodeListOf<HTMLHeadingElement> =
-        doc.querySelectorAll('h2,h3,h4,h5,h6');
+      const elements: NodeListOf<HTMLHeadingElement> = doc.querySelectorAll('h2,h3,h4,h5,h6');
       Array.from(elements).forEach((item) => {
         parent = getParentHeading(startArray[0], item);
 

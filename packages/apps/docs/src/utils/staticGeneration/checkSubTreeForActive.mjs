@@ -25,8 +25,7 @@ export const getPathName = (filename) => {
   return `/${newPath}${lastInPath(path.parse(filename).name)}`;
 };
 
-const IsMenuOpen = (pathname, itemRoot) =>
-  `${pathname}/`.startsWith(`${itemRoot}/`);
+const IsMenuOpen = (pathname, itemRoot) => `${pathname}/`.startsWith(`${itemRoot}/`);
 
 const isPathRoot = (pathname, itemRoot) => itemRoot === pathname;
 

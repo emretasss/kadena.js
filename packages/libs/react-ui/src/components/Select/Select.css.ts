@@ -13,10 +13,7 @@ export const containerClass = style([
     border: 'solid 1px',
   },
 ]);
-export const containerClassDisabled = style([
-  sprinkles({ pointerEvents: 'none' }),
-  { opacity: 0.5 },
-]);
+export const containerClassDisabled = style([sprinkles({ pointerEvents: 'none' }), { opacity: 0.5 }]);
 
 export const selectContainerClass = style([
   sprinkles({

@@ -2,16 +2,7 @@ import { ICommand } from '@kadena/types';
 
 import { prepareContCommand } from '../prepareContCommand';
 
-import {
-  command,
-  envData,
-  keyPairs,
-  meta,
-  nonce,
-  pactId,
-  rollback,
-  step,
-} from './mockdata/contCommand';
+import { command, envData, keyPairs, meta, nonce, pactId, rollback, step } from './mockdata/contCommand';
 
 describe('prepareContCommand', () => {
   it('Creates a signed Pact ContICommandObject with undefined `proof` and `networkId`', () => {
@@ -32,17 +23,7 @@ describe('prepareContCommand', () => {
   });
 
   it('Creates a signed Pact ContICommandObject with networkId=Mainnet01 and a mock proof', () => {
-    const actual = prepareContCommand(
-      keyPairs,
-      nonce,
-      'fakeProof',
-      pactId,
-      rollback,
-      step,
-      meta,
-      'Mainnet01',
-      envData,
-    );
+    const actual = prepareContCommand(keyPairs, nonce, 'fakeProof', pactId, rollback, step, meta, 'Mainnet01', envData);
 
     const expected: ICommand = {
       hash: 'gKL0Hd4kzpgVVkjytvwNbhG4_QROpLWr2wjE9VGMwqI',

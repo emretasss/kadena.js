@@ -14,10 +14,7 @@ import fetch from 'cross-fetch';
  * @param apiHost - API host running a Pact-enabled server.
  * @alpha
  */
-export async function send(
-  requestBody: ISendRequestBody,
-  apiHost: string,
-): Promise<SendResponse> {
+export async function send(requestBody: ISendRequestBody, apiHost: string): Promise<SendResponse> {
   const request = stringifyAndMakePOSTRequest(requestBody);
   const sendUrl = new URL(`${apiHost}/api/v1/send`);
 

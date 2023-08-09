@@ -75,9 +75,10 @@ export function createWalletConnectQuicksign(
             );
           }
 
-          const sigs = signedCommand.commandSigData.sigs.filter(
-            (sig) => sig.sig !== null,
-          ) as { pubKey: string; sig: string }[];
+          const sigs = signedCommand.commandSigData.sigs.filter((sig) => sig.sig !== null) as {
+            pubKey: string;
+            sig: string;
+          }[];
 
           // Add the signature(s) that we received from the wallet to the PactCommand(s)
           transactions[i] = addSignatures(transactions[i], ...sigs);

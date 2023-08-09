@@ -1,7 +1,4 @@
-import {
-  useGetBlocksSubscription,
-  useGetRecentHeightsQuery,
-} from '../__generated__/sdk';
+import { useGetBlocksSubscription, useGetRecentHeightsQuery } from '../__generated__/sdk';
 import { ChainwebGraph } from '../components/chainweb';
 import { Text } from '../components/text';
 import { styled } from '../styles/stitches.config';
@@ -21,21 +18,15 @@ const StyledMain = styled('main', {
 });
 
 export default function Home(): JSX.Element {
-  const { loading: loadingNewBlocks, data: newBlocks } =
-    useGetBlocksSubscription();
-  const { loading: loadingRecentBlocks, data: recentBlocks } =
-    useGetRecentHeightsQuery({ variables: { count: 3 } });
+  const { loading: loadingNewBlocks, data: newBlocks } = useGetBlocksSubscription();
+  const { loading: loadingRecentBlocks, data: recentBlocks } = useGetRecentHeightsQuery({ variables: { count: 3 } });
   const previousNewBlocks = usePrevious(newBlocks);
   const previousRecentBlocks = usePrevious(recentBlocks);
 
   const { allBlocks, addBlocks } = useParsedBlocks();
 
   useEffect(() => {
-    if (
-      isEqual(previousNewBlocks, newBlocks) === false &&
-      newBlocks?.newBlocks &&
-      newBlocks?.newBlocks?.length > 0
-    ) {
+    if (isEqual(previousNewBlocks, newBlocks) === false && newBlocks?.newBlocks && newBlocks?.newBlocks?.length > 0) {
       addBlocks(newBlocks?.newBlocks);
     }
   }, [newBlocks]);
@@ -58,20 +49,11 @@ export default function Home(): JSX.Element {
       </Head>
 
       <StyledMain>
-        <Text
-          as="h1"
-          css={{ display: 'block', color: '$mauve12', fontSize: 48, my: '$12' }}
-        >
+        <Text as="h1" css={{ display: 'block', color: '$mauve12', fontSize: 48, my: '$12' }}>
           Kadena Graph Client
         </Text>
 
-        <div>
-          {loadingRecentBlocks || loadingNewBlocks ? (
-            'Loading...'
-          ) : (
-            <ChainwebGraph blocks={allBlocks} />
-          )}
-        </div>
+        <div>{loadingRecentBlocks || loadingNewBlocks ? 'Loading...' : <ChainwebGraph blocks={allBlocks} />}</div>
       </StyledMain>
     </div>
   );

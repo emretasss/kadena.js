@@ -17,10 +17,7 @@ export interface IHeader {
   children: string;
 }
 
-const StyledHeader: StyledComponent<
-  typeof Heading,
-  { as?: TagType; variant?: TagType }
-> = styled(Heading, {
+const StyledHeader: StyledComponent<typeof Heading, { as?: TagType; variant?: TagType }> = styled(Heading, {
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
@@ -67,13 +64,7 @@ const StyledLinkIcon = styled('a', {
   scrollSnapMarginTop: '$20',
 });
 
-export const TaggedHeading: FC<IProp> = ({
-  children,
-  as,
-  variant,
-  index,
-  parentTitle,
-}) => {
+export const TaggedHeading: FC<IProp> = ({ children, as, variant, index, parentTitle }) => {
   let slugInputStr = '';
 
   if (Array.isArray(children)) {
@@ -81,8 +72,7 @@ export const TaggedHeading: FC<IProp> = ({
       .flat()
       .map((child) => {
         if (typeof child === 'string') return child.trim();
-        if (typeof child.props.children === 'string')
-          return child.props.children.trim();
+        if (typeof child.props.children === 'string') return child.props.children.trim();
         return '';
       })
       .filter((child) => child !== '') // remove empty strings to avoid join adding extra spaces

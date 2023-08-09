@@ -45,10 +45,7 @@ class BlocksService {
     if (this._mocks) {
       if (this._i % 10 === 0) {
         console.log('publish 2 block');
-        this.pubsub.publish('NEW_BLOCKS', [
-          this._mocks[this._i],
-          this._mocks[this._i + 1],
-        ]);
+        this.pubsub.publish('NEW_BLOCKS', [this._mocks[this._i], this._mocks[this._i + 1]]);
         this._i += 2;
       } else {
         console.log('publish 1 block');
@@ -91,10 +88,7 @@ class BlocksService {
 
 let blocksSingleton: BlocksService | undefined = undefined;
 
-export function getBlocks(
-  pubsub: PubSub<{ NEW_BLOCKS: [NEW_BLOCKS: Block[]] }>,
-  mocks?: Block[],
-): BlocksService {
+export function getBlocks(pubsub: PubSub<{ NEW_BLOCKS: [NEW_BLOCKS: Block[]] }>, mocks?: Block[]): BlocksService {
   if (!blocksSingleton) {
     blocksSingleton = new BlocksService(pubsub, mocks);
   }

@@ -32,45 +32,33 @@ async function main(): Promise<void> {
 
   // read rush.json in root of git repo
   const gitRootPath = (await $`git rev-parse --show-toplevel`).stdout;
-  const rushJson: IRushJson = parse(
-    readFileSync(`${gitRootPath}/rush.json`, 'utf-8'),
-  );
+  const rushJson: IRushJson = parse(readFileSync(`${gitRootPath}/rush.json`, 'utf-8'));
 
   if (rushCheckJson.mismatchedVersions.length === 0) {
     console.log('No mismatched versions found');
     return;
   }
 
-  const questions = rushCheckJson.mismatchedVersions.map(
-    (mismatchedVersion) => ({
-      type: 'list',
-      name: mismatchedVersion.dependencyName,
-      message: `Which version of ${
-        mismatchedVersion.dependencyName
-      } should be used?
-${mismatchedVersion.versions
-  .map((mv) => `${mv.version} used by:\n  - ${mv.projects.join(',\n  - ')}`)
-  .join('\n')}
+  const questions = rushCheckJson.mismatchedVersions.map((mismatchedVersion) => ({
+    type: 'list',
+    name: mismatchedVersion.dependencyName,
+    message: `Which version of ${mismatchedVersion.dependencyName} should be used?
+${mismatchedVersion.versions.map((mv) => `${mv.version} used by:\n  - ${mv.projects.join(',\n  - ')}`).join('\n')}
       `,
-      choices: mismatchedVersion.versions.map((version) => version.version),
-    }),
-  );
+    choices: mismatchedVersion.versions.map((version) => version.version),
+  }));
 
   type PackageName = string;
   type Version = string;
 
   // ask which version to use
-  const newVersions: { [key: PackageName]: Version } = await inquirer.prompt(
-    questions,
-  );
+  const newVersions: { [key: PackageName]: Version } = await inquirer.prompt(questions);
 
   const packageJsonsToFix = Object.keys(newVersions)
     .map((newVersionPackageName) => {
       const projects = rushCheckJson.mismatchedVersions
         .find((m) => m.dependencyName === newVersionPackageName)
-        ?.versions.filter(
-          (v) => v.version !== newVersions[newVersionPackageName],
-        )
+        ?.versions.filter((v) => v.version !== newVersions[newVersionPackageName])
         .map((v) => v.projects)
         .reduce((a, b) => a.concat(b), []);
       if (!projects) {
@@ -106,9 +94,7 @@ ${mismatchedVersion.versions
       if (contents.devDependencies[newVersionPackageName] !== undefined) {
         contents.devDependencies[newVersionPackageName] = newVersion;
         fixedPackages.push(newVersionPackageName);
-        console.log(
-          `  updating ${newVersionPackageName} to ${newVersion} (dev)`,
-        );
+        console.log(`  updating ${newVersionPackageName} to ${newVersion} (dev)`);
       }
     });
 
@@ -128,21 +114,13 @@ function getPackageJson(
   path: string;
   contents: IPackageJson;
 } {
-  const project = rushJson.projects.find(
-    (project) => project.packageName === p,
-  );
+  const project = rushJson.projects.find((project) => project.packageName === p);
   if (!project) {
     throw new Error(`Could not find project ${p} in rush.json`);
   }
 
-  const packageJsonPath = join(
-    gitRootPath,
-    project.projectFolder,
-    'package.json',
-  );
-  const packageJsonContents = JSON.parse(
-    readFileSync(packageJsonPath, 'utf-8'),
-  );
+  const packageJsonPath = join(gitRootPath, project.projectFolder, 'package.json');
+  const packageJsonContents = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
 
   return {
     path: packageJsonPath,

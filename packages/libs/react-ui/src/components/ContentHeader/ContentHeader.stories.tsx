@@ -47,13 +47,10 @@ export const Primary: Story = {
   args: {
     selectIcon: 'Account',
     heading: 'Incoming Transactions',
-    description:
-      'This table is listing all the incoming transaction sorted by date descending descriptive text.',
+    description: 'This table is listing all the incoming transaction sorted by date descending descriptive text.',
   },
   render: ({ selectIcon, heading, description }) => {
     const Icon = SystemIcon[selectIcon];
-    return (
-      <ContentHeader heading={heading} icon={Icon} description={description} />
-    );
+    return <ContentHeader heading={heading} icon={Icon} description={description} />;
   },
 };

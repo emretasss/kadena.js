@@ -11,9 +11,7 @@ export const setItem = (key: string, value: unknown): void => {
 export const getItem = (key: string): unknown | undefined => {
   try {
     const cookie = Cookies.get(getName(key));
-    return cookie !== undefined
-      ? JSON.parse(decodeURIComponent(cookie))
-      : undefined;
+    return cookie !== undefined ? JSON.parse(decodeURIComponent(cookie)) : undefined;
   } catch (e) {
     return undefined;
   }

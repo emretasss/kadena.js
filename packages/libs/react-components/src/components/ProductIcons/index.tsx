@@ -29,10 +29,7 @@ const IconWrapper = (
   // eslint-disable-next-line @typescript-eslint/naming-convention
   Component: React.FC<SVGProps<SVGSVGElement>>,
 ): React.FC<ProductIconType> => {
-  const WrappedIcon: React.FC<SVGProps<SVGSVGElement> & IProductIconProps> = ({
-    size = 'md',
-    ...props
-  }) => (
+  const WrappedIcon: React.FC<SVGProps<SVGSVGElement> & IProductIconProps> = ({ size = 'md', ...props }) => (
     <ProductIconContainer size={size}>
       <Component {...props} height={undefined} width={undefined} />
     </ProductIconContainer>

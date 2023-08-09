@@ -36,8 +36,7 @@ export const kadenaConstants: KadenaConstants = {
     },
     apiHost: ({ networkId, chainId }) =>
       `https://${kadenaConstants.TESTNET.API}/chainweb/0.0/${networkId}/chain/${chainId}/pact`,
-    estatsHost: () =>
-      env('KADENA_TESTNET_ESTATS', 'estats.testnet.chainweb.com'),
+    estatsHost: () => env('KADENA_TESTNET_ESTATS', 'estats.testnet.chainweb.com'),
   },
   GAS_LIMIT: Number(env('GAS_LIMIT', 850)),
   GAS_PRICE: Number(env('GAS_PRICE', 0.00000001)),
@@ -45,8 +44,6 @@ export const kadenaConstants: KadenaConstants = {
   DEFAULT_SENDER: env('DEFAULT_SENDER', 'not-real'),
 };
 
-export const getKadenaConstantByNetwork = (
-  network: Network,
-): KadenaConstants[Network] => {
+export const getKadenaConstantByNetwork = (network: Network): KadenaConstants[Network] => {
   return kadenaConstants[network];
 };

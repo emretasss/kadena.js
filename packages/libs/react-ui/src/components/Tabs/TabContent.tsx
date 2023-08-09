@@ -6,10 +6,7 @@ export interface ITabContentProps {
   value: string;
 }
 
-export const TabContent: FC<ITabContentProps> = ({
-  children,
-  selected = false,
-}) => {
+export const TabContent: FC<ITabContentProps> = ({ children, selected = false }) => {
   if (!selected) return null;
 
   return <div>{children}</div>;

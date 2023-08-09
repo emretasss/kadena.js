@@ -40,16 +40,11 @@ const getComponent = (
   }
 };
 
-const resolveDefaultValue = (
-  defaultValue: string | string[] | undefined,
-): string | undefined => {
+const resolveDefaultValue = (defaultValue: string | string[] | undefined): string | undefined => {
   if (Array.isArray(defaultValue)) return defaultValue[0];
   return defaultValue;
 };
-const getDefaultValue = (
-  history: unknown,
-  defaultValue: string | string[] | undefined,
-): string | undefined => {
+const getDefaultValue = (history: unknown, defaultValue: string | string[] | undefined): string | undefined => {
   if (!Array.isArray(history)) return resolveDefaultValue(defaultValue);
   if (history[0] === undefined) return resolveDefaultValue(defaultValue);
   return history[0];
@@ -63,9 +58,7 @@ export const QuestionWrapper = ({
   defaultValue,
   answers,
   action,
-}: IQuestion & { onAnswer: OnAnswer; answers: IAnswers }): ReturnType<
-  typeof Box
-> => {
+}: IQuestion & { onAnswer: OnAnswer; answers: IAnswers }): ReturnType<typeof Box> => {
   const Component = getComponent(type);
   const { history, onSave } = useHistory(name);
 

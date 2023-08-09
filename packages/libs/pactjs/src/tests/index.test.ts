@@ -7,9 +7,7 @@ describe('MyLib', () => {
 
   it('should not have undefined exports', () => {
     Object.keys(thisModule).forEach((exportKey) =>
-      expect(Boolean((thisModule as Record<string, unknown>)[exportKey])).toBe(
-        true,
-      ),
+      expect(Boolean((thisModule as Record<string, unknown>)[exportKey])).toBe(true),
     );
   });
 });

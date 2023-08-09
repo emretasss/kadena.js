@@ -8,8 +8,5 @@ export const writeSchema = (): void => {
   const schema = builder.toSchema();
   const schemaAsString = printSchema(lexicographicSortSchema(schema));
 
-  writeFileSync(
-    join(__dirname, '../../generated-schema.graphql'),
-    schemaAsString,
-  );
+  writeFileSync(join(__dirname, '../../generated-schema.graphql'), schemaAsString);
 };

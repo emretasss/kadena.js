@@ -9,17 +9,14 @@ export const pactTestCommand: ICommandPayload = {
   payload: {
     exec: {
       data: {
-        'accounts-admin-keyset': [
-          'ba54b224d1924dd98403f5c751abdd10de6cd81b0121800bf7bdbdcfaec7388d',
-        ],
+        'accounts-admin-keyset': ['ba54b224d1924dd98403f5c751abdd10de6cd81b0121800bf7bdbdcfaec7388d'],
       },
       code: '(define-keyset \'k (read-keyset "accounts-admin-keyset"))\n(module system \'k\n  (defun get-system-time ()\n    (time "2017-10-31T12:00:00Z")))\n(get-system-time)',
     },
   },
   signers: [
     {
-      pubKey:
-        'ba54b224d1924dd98403f5c751abdd10de6cd81b0121800bf7bdbdcfaec7388d',
+      pubKey: 'ba54b224d1924dd98403f5c751abdd10de6cd81b0121800bf7bdbdcfaec7388d',
     },
   ],
   meta: {
@@ -40,14 +37,11 @@ export const testInitiateSPV: object = {
       status: 'success',
       data: {
         amount: 0.01,
-        receiver:
-          '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
+        receiver: '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
         'source-chain': '0',
         'receiver-guard': {
           pred: 'keys-all',
-          keys: [
-            '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
-          ],
+          keys: ['4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc'],
         },
       },
     },
@@ -76,11 +70,7 @@ export const testInitiateSPV: object = {
         moduleHash: 'rE7DU8jlQL9x_MPYuniZJf5ICBTAEHAIFQCB4blofP4',
       },
       {
-        params: [
-          '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
-          '',
-          0.01,
-        ],
+        params: ['4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc', '', 0.01],
         name: 'TRANSFER',
         module: { namespace: null, name: 'coin' },
         moduleHash: 'rE7DU8jlQL9x_MPYuniZJf5ICBTAEHAIFQCB4blofP4',
@@ -94,9 +84,7 @@ export const testInitiateSPV: object = {
             '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
             {
               pred: 'keys-all',
-              keys: [
-                '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
-              ],
+              keys: ['4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc'],
             },
             '1',
             0.01,
@@ -121,14 +109,11 @@ export const testInitiateSPV: object = {
       yield: {
         data: {
           amount: 0.01,
-          receiver:
-            '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
+          receiver: '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
           'source-chain': '0',
           'receiver-guard': {
             pred: 'keys-all',
-            keys: [
-              '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
-            ],
+            keys: ['4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc'],
           },
         },
         source: '0',
@@ -143,9 +128,7 @@ export const testInitiateSPV: object = {
           '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
           {
             pred: 'keys-all',
-            keys: [
-              '4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc',
-            ],
+            keys: ['4f9c46df2fe874d7c1b60f68f8440a444dd716e6b2efba8ee141afdd58c993dc'],
           },
           '1',
           0.01,

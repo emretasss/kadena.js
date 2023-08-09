@@ -1,20 +1,10 @@
-import {
-  containerClass,
-  containerClassDisabled,
-  iconClass,
-  selectClass,
-  selectContainerClass,
-} from './Select.css';
+import { containerClass, containerClassDisabled, iconClass, selectClass, selectContainerClass } from './Select.css';
 
 import { SystemIcon } from '@components/Icon';
 import classNames from 'classnames';
 import React, { FC, forwardRef } from 'react';
 
-export interface ISelectProps
-  extends Omit<
-    React.HTMLAttributes<HTMLSelectElement>,
-    'aria-label' | 'as' | 'className'
-  > {
+export interface ISelectProps extends Omit<React.HTMLAttributes<HTMLSelectElement>, 'aria-label' | 'as' | 'className'> {
   children: React.ReactNode;
   icon?: (typeof SystemIcon)[keyof typeof SystemIcon];
   disabled?: boolean;
@@ -24,10 +14,7 @@ export interface ISelectProps
   ariaLabel: string;
 }
 
-export const Select: FC<ISelectProps> = forwardRef<
-  HTMLSelectElement,
-  ISelectProps
->(function Select(
+export const Select: FC<ISelectProps> = forwardRef<HTMLSelectElement, ISelectProps>(function Select(
   {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     icon: Icon,
@@ -39,26 +26,14 @@ export const Select: FC<ISelectProps> = forwardRef<
   ref,
 ) {
   return (
-    <div
-      className={classNames(
-        containerClass,
-        disabled ? containerClassDisabled : '',
-      )}
-      data-testid="kda-select"
-    >
+    <div className={classNames(containerClass, disabled ? containerClassDisabled : '')} data-testid="kda-select">
       <div className={selectContainerClass}>
         {Icon && (
           <span className={iconClass}>
             <Icon size="md" />
           </span>
         )}
-        <select
-          aria-label={ariaLabel}
-          ref={ref}
-          className={selectClass}
-          disabled={Boolean(disabled)}
-          {...rest}
-        >
+        <select aria-label={ariaLabel} ref={ref} className={selectClass} disabled={Boolean(disabled)} {...rest}>
           {children}
         </select>
       </div>

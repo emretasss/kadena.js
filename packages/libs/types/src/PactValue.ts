@@ -41,13 +41,7 @@ export interface IPactDecimal {
  * TODO: add `UTCTime` literal.
  * @alpha
  */
-export type PactLiteral =
-  | string
-  | number
-  | IPactInt
-  | IPactDecimal
-  | boolean
-  | Date;
+export type PactLiteral = string | number | IPactInt | IPactDecimal | boolean | Date;
 
 /**
  * A sum type representing a `pact` value.

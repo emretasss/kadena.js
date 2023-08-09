@@ -6,18 +6,14 @@ import type { ICommand, IUnsignedCommand } from '@kadena/types';
  * @param command -  command The command to check.
  * @returns True if the command is signed, false otherwise.
  */
-export function isSignedCommand(
-  command: IUnsignedCommand | ICommand,
-): command is ICommand {
+export function isSignedCommand(command: IUnsignedCommand | ICommand): command is ICommand {
   return command.sigs.every((s) => s?.sig !== undefined);
 }
 
 /**
  * @alpha
  */
-export function ensureSignedCommand(
-  command: IUnsignedCommand | ICommand,
-): ICommand {
+export function ensureSignedCommand(command: IUnsignedCommand | ICommand): ICommand {
   if (isSignedCommand(command)) {
     return command;
   } else {

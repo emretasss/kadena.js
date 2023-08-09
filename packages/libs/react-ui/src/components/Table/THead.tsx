@@ -11,11 +11,7 @@ export const THead: FC<ITHeadProps> = ({ children }) => {
   return (
     <thead>
       {React.Children.map(children, (child) => {
-        if (
-          !React.isValidElement(child) ||
-          (Boolean(child) && child.type !== Tr)
-        )
-          return null;
+        if (!React.isValidElement(child) || (Boolean(child) && child.type !== Tr)) return null;
 
         return child;
       })}

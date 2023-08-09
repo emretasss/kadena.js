@@ -52,12 +52,7 @@ const FooterWrapper: FC = () => {
           return (
             <NavFooter.Link key={index}>
               {item.href !== undefined ? (
-                <Link
-                  className={linkClass}
-                  href={item.href}
-                  target={item.target}
-                  passHref
-                >
+                <Link className={linkClass} href={item.href} target={item.target} passHref>
                   {item.title}
                 </Link>
               ) : (
@@ -68,18 +63,9 @@ const FooterWrapper: FC = () => {
         })}
       </NavFooter.Panel>
       <NavFooter.Panel>
-        <NavFooter.IconButton
-          icon={SystemIcon.ApplicationBrackets}
-          onClick={() => openModal()}
-        />
-        <NavFooter.IconButton
-          icon={SystemIcon.ThemeLightDark}
-          onClick={() => toggleTheme()}
-        />
-        <NavFooter.IconButton
-          icon={SystemIcon.ApplicationBrackets}
-          text="English"
-        />
+        <NavFooter.IconButton icon={SystemIcon.ApplicationBrackets} onClick={() => openModal()} />
+        <NavFooter.IconButton icon={SystemIcon.ThemeLightDark} onClick={() => toggleTheme()} />
+        <NavFooter.IconButton icon={SystemIcon.ApplicationBrackets} text="English" />
       </NavFooter.Panel>
     </NavFooter.Root>
   );

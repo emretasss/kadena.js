@@ -1,11 +1,5 @@
 import { ISidebarToolbarItem } from '@/types/Layout';
-import React, {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 
 interface ILayoutContext {
   toolbar: ISidebarToolbarItem[];
@@ -67,8 +61,7 @@ const LayoutContextProvider = (props: PropsWithChildren): JSX.Element => {
         isMenuOpen,
         activeMenuIndex,
         setActiveMenuIndex,
-        activeMenu:
-          activeMenuIndex !== undefined ? toolbar[activeMenuIndex] : undefined,
+        activeMenu: activeMenuIndex !== undefined ? toolbar[activeMenuIndex] : undefined,
         resetLayout,
       }}
     >

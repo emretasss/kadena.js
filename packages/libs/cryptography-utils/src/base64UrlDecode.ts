@@ -2,8 +2,7 @@ import type { IBase64Url } from '@kadena/types';
 
 import { InvalidCharacterError } from './InvalidCharacterError';
 
-const chars: string =
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=';
+const chars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=';
 
 /**
  * Takes in Base64 Url encoded string and outputs decoded string
@@ -14,9 +13,7 @@ const chars: string =
 export function base64UrlDecode(str: IBase64Url): string {
   const newString = String(str).replace(/[=]+$/, ''); // #31: ExtendScript bad parse of /=
   if (newString.length % 4 === 1) {
-    throw new InvalidCharacterError(
-      "'atob' failed: The string to be decoded is not correctly encoded.",
-    );
+    throw new InvalidCharacterError("'atob' failed: The string to be decoded is not correctly encoded.");
   }
   let output = '';
   for (

@@ -3,16 +3,7 @@ import React, { createElement, ElementType } from 'react';
 
 export interface IBoxProps
   extends Partial<
-    Pick<
-      Sprinkles,
-      | 'margin'
-      | 'marginX'
-      | 'marginY'
-      | 'marginTop'
-      | 'marginBottom'
-      | 'marginLeft'
-      | 'marginRight'
-    >
+    Pick<Sprinkles, 'margin' | 'marginX' | 'marginY' | 'marginTop' | 'marginBottom' | 'marginLeft' | 'marginRight'>
   > {
   component?: ElementType;
   children?: React.ReactNode;

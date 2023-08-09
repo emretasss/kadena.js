@@ -2,8 +2,7 @@ import type { IBase64Url } from '@kadena/types';
 
 import { InvalidCharacterError } from './InvalidCharacterError';
 
-const chars: string =
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=';
+const chars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=';
 
 /**
  * Takes in string and outputs Base64 Url encoded string

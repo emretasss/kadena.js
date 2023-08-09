@@ -3,10 +3,7 @@ import { Heading, Stack, Text } from '@kadena/react-ui';
 import { browseSectionWrapper } from '../../../styles/index.css';
 
 import { BrowseSection } from '@/components';
-import {
-  checkSubTreeForActive,
-  getPathName,
-} from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
+import { checkSubTreeForActive, getPathName } from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import React, { FC } from 'react';
@@ -20,19 +17,12 @@ const Home: FC = () => {
           <a href="https://www.kadena.io" target="_blank" rel="noreferrer">
             Kadena
           </a>{' '}
-          was founded on the idea that blockchain could revolutionize how the
-          world interacts and transacts. But to get to mass adoption, chain
-          technology and the ecosystem connecting it to the business world
-          needed to be reimagined from the ground up. Our founders built a
-          proprietary chain architecture and created the tools to make
-          blockchain work for business – at speed, scale, and energy efficiency
-          previously thought unachievable.&#x20; Don&apos;t forget to follow us
-          on{' '}
-          <a
-            href="ttps://twitter.com/kadena_io"
-            target="_blank"
-            rel="noreferrer"
-          >
+          was founded on the idea that blockchain could revolutionize how the world interacts and transacts. But to get
+          to mass adoption, chain technology and the ecosystem connecting it to the business world needed to be
+          reimagined from the ground up. Our founders built a proprietary chain architecture and created the tools to
+          make blockchain work for business – at speed, scale, and energy efficiency previously thought
+          unachievable.&#x20; Don&apos;t forget to follow us on{' '}
+          <a href="ttps://twitter.com/kadena_io" target="_blank" rel="noreferrer">
             Twitter
           </a>{' '}
           for the latest updates.&#x20;
@@ -48,20 +38,14 @@ const Home: FC = () => {
         </BrowseSection>
         <BrowseSection title="Support" className={browseSectionWrapper}>
           <Link href="/docs/kadena/support">FAQ</Link>
-          <Link href="/docs/kadena/support/developer-program">
-            Developer Program
-          </Link>
-          <Link href="/docs/kadena/support/technical-grants">
-            Technical Grants
-          </Link>
+          <Link href="/docs/kadena/support/developer-program">Developer Program</Link>
+          <Link href="/docs/kadena/support/technical-grants">Technical Grants</Link>
         </BrowseSection>
         <BrowseSection title="Resources" className={browseSectionWrapper}>
           <Link href="/docs/kadena/resources">Overview</Link>
           <Link href="/docs/kadena/resources/press-kit">Press Kit</Link>
           <Link href="/docs/kadena/resources/glossary">Glossary</Link>
-          <Link href="/docs/kadena/resources/glossary/kadena-content-repository">
-            Content Repo
-          </Link>
+          <Link href="/docs/kadena/resources/glossary/kadena-content-repository">Content Repo</Link>
         </BrowseSection>
       </Stack>
     </Stack>

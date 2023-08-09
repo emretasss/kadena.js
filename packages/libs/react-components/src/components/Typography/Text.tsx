@@ -14,26 +14,9 @@ export interface ITextProps {
   children: React.ReactNode;
 }
 
-export const Text: FC<ITextProps> = ({
-  as,
-  variant,
-  font,
-  bold,
-  size,
-  color,
-  transform,
-  children,
-}) => {
+export const Text: FC<ITextProps> = ({ as, variant, font, bold, size, color, transform, children }) => {
   return (
-    <StyledText
-      as={as}
-      variant={variant ?? as}
-      font={font}
-      bold={bold}
-      size={size}
-      transform={transform}
-      color={color}
-    >
+    <StyledText as={as} variant={variant ?? as} font={font} bold={bold} size={size} transform={transform} color={color}>
       {children}
     </StyledText>
   );

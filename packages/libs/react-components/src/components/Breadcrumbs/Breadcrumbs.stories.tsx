@@ -5,14 +5,7 @@ import { BreadcrumbItem, Breadcrumbs, IBreadcrumbs } from '.';
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-const ItemArray: string[] = [
-  'He-man',
-  'Skeletor',
-  'Orko',
-  'Teela-Na',
-  'Cringer',
-  'King Randor',
-];
+const ItemArray: string[] = ['He-man', 'Skeletor', 'Orko', 'Teela-Na', 'Cringer', 'King Randor'];
 
 const meta: Meta<
   {

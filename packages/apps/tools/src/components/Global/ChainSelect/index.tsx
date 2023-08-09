@@ -1,11 +1,6 @@
 import { CHAINS, ChainwebChainId } from '@kadena/chainweb-node-client';
 import { SystemIcons } from '@kadena/react-components';
-import {
-  type ISelectProps,
-  InputWrapper,
-  Option,
-  Select,
-} from '@kadena/react-ui';
+import { type ISelectProps, InputWrapper, Option, Select } from '@kadena/react-ui';
 
 import React, { type FC, type FormEventHandler, useCallback } from 'react';
 

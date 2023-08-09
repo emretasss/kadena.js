@@ -10,8 +10,7 @@ import mkdirp from 'mkdirp';
 import { dirname, join } from 'path';
 import rimraf from 'rimraf';
 
-export const TARGET_PACKAGE: '.kadena/pactjs-generated' =
-  '.kadena/pactjs-generated' as const;
+export const TARGET_PACKAGE: '.kadena/pactjs-generated' = '.kadena/pactjs-generated' as const;
 
 const shallowFindFile = (path: string, file: string): string | undefined => {
   while (!existsSync(join(path, file))) {
@@ -23,10 +22,7 @@ const shallowFindFile = (path: string, file: string): string | undefined => {
   return join(path, file);
 };
 
-function verifyTsconfigTypings(
-  tsconfigPath: string | undefined,
-  program: Command,
-): void {
+function verifyTsconfigTypings(tsconfigPath: string | undefined, program: Command): void {
   if (tsconfigPath === undefined || tsconfigPath.length === 0) {
     console.error('Could not find tsconfig.json, skipping types verification');
   } else {
@@ -42,34 +38,19 @@ function verifyTsconfigTypings(
   }
 }
 
-async function generator(
-  args: IContractGenerateOptions,
-): Promise<Map<string, string>> {
+async function generator(args: IContractGenerateOptions): Promise<Map<string, string>> {
   if (args.contract !== undefined) {
-    console.log(
-      `Generating pact contracts from chainweb for ${args.contract.join(',')}`,
-    );
+    console.log(`Generating pact contracts from chainweb for ${args.contract.join(',')}`);
   }
 
   if (args.file !== undefined) {
-    console.log(
-      `Generating pact contracts from files for ${args.file.join(',')}`,
-    );
+    console.log(`Generating pact contracts from files for ${args.file.join(',')}`);
   }
 
   const getContract = async (name: string): Promise<string> => {
     console.log('fetching', name);
-    if (
-      args.api !== undefined &&
-      args.chain !== undefined &&
-      args.network !== undefined
-    ) {
-      const content = await retrieveContractFromChain(
-        name,
-        args.api,
-        args.chain,
-        args.network,
-      );
+    if (args.api !== undefined && args.chain !== undefined && args.network !== undefined) {
+      const content = await retrieveContractFromChain(name, args.api, args.chain, args.network);
       return content ?? '';
     }
     console.log(`
@@ -81,11 +62,7 @@ async function generator(
   };
 
   const files: string[] =
-    args.file === undefined
-      ? []
-      : args.file.map((file) =>
-          readFileSync(join(process.cwd(), file), 'utf-8'),
-        );
+    args.file === undefined ? [] : args.file.map((file) => readFileSync(join(process.cwd(), file), 'utf-8'));
 
   const modules = await pactParser({
     contractNames: args.contract,
@@ -95,10 +72,7 @@ async function generator(
   });
 
   if (process.env.DEBUG === 'dev') {
-    writeFileSync(
-      join(process.cwd(), 'modules.json'),
-      JSON.stringify(modules, undefined, 2),
-    );
+    writeFileSync(join(process.cwd(), 'modules.json'), JSON.stringify(modules, undefined, 2));
   }
 
   const moduleDtss = new Map();
@@ -115,16 +89,9 @@ interface IGenerate {
 }
 export const generate: IGenerate = (program, version) => async (args) => {
   // walk up in file tree from process.cwd() to get the package.json
-  const targetPackageJson: string | undefined = shallowFindFile(
-    process.cwd(),
-    'package.json',
-  );
+  const targetPackageJson: string | undefined = shallowFindFile(process.cwd(), 'package.json');
 
-  if (
-    targetPackageJson === undefined ||
-    targetPackageJson.length === 0 ||
-    targetPackageJson === '/'
-  ) {
+  if (targetPackageJson === undefined || targetPackageJson.length === 0 || targetPackageJson === '/') {
     program.error('Could not find package.json');
     return;
   }
@@ -133,11 +100,7 @@ export const generate: IGenerate = (program, version) => async (args) => {
 
   console.log(`Using package.json at ${targetPackageJson}`);
 
-  const targetDirectory: string = join(
-    dirname(targetPackageJson),
-    'node_modules',
-    TARGET_PACKAGE,
-  );
+  const targetDirectory: string = join(dirname(targetPackageJson), 'node_modules', TARGET_PACKAGE);
 
   if (args.clean === true) {
     console.log(`Cleaning ${targetDirectory}`);
@@ -207,10 +170,7 @@ export const generate: IGenerate = (program, version) => async (args) => {
     );
   }
 
-  const tsconfigPath: string | undefined = shallowFindFile(
-    join(process.cwd()),
-    'tsconfig.json',
-  );
+  const tsconfigPath: string | undefined = shallowFindFile(join(process.cwd()), 'tsconfig.json');
 
   verifyTsconfigTypings(tsconfigPath, program);
 };

@@ -3,16 +3,7 @@ import { WalletConnectModal } from '@walletconnect/modal';
 import Client from '@walletconnect/sign-client';
 import { PairingTypes, SessionTypes } from '@walletconnect/types';
 import { getSdkError } from '@walletconnect/utils';
-import React, {
-  createContext,
-  FC,
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { createContext, FC, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 /**
  * Types
@@ -30,8 +21,7 @@ interface IWalletConnectClientContext {
 /**
  * Context
  */
-export const WalletConnectClientContext =
-  createContext<IWalletConnectClientContext>({} as IWalletConnectClientContext);
+export const WalletConnectClientContext = createContext<IWalletConnectClientContext>({} as IWalletConnectClientContext);
 
 /**
  * walletConnectModal Config
@@ -48,9 +38,7 @@ interface IWalletConnectClientContextProviderProps {
 /**
  * Provider
  */
-export const WalletConnectClientContextProvider: FC<
-  IWalletConnectClientContextProviderProps
-> = ({ children }) => {
+export const WalletConnectClientContextProvider: FC<IWalletConnectClientContextProviderProps> = ({ children }) => {
   const [client, setClient] = useState<Client>();
   const [pairings, setPairings] = useState<PairingTypes.Struct[]>([]);
   const [session, setSession] = useState<SessionTypes.Struct>();
@@ -63,13 +51,10 @@ export const WalletConnectClientContextProvider: FC<
     setAccounts(undefined as unknown as string[]);
   };
 
-  const onSessionConnected = useCallback(
-    async (clientSession: SessionTypes.Struct) => {
-      setSession(clientSession);
-      setAccounts(clientSession?.namespaces?.kadena?.accounts);
-    },
-    [],
-  );
+  const onSessionConnected = useCallback(async (clientSession: SessionTypes.Struct) => {
+    setSession(clientSession);
+    setAccounts(clientSession?.namespaces?.kadena?.accounts);
+  }, []);
 
   const connect = useCallback(
     async (pairing?: { topic: string }) => {
@@ -83,16 +68,8 @@ export const WalletConnectClientContextProvider: FC<
 
           requiredNamespaces: {
             kadena: {
-              methods: [
-                'kadena_getAccounts_v1',
-                'kadena_sign_v1',
-                'kadena_quicksign_v1',
-              ],
-              chains: [
-                'kadena:mainnet01',
-                'kadena:testnet04',
-                'kadena:development',
-              ],
+              methods: ['kadena_getAccounts_v1', 'kadena_sign_v1', 'kadena_quicksign_v1'],
+              chains: ['kadena:mainnet01', 'kadena:testnet04', 'kadena:development'],
               events: [],
             },
           },
@@ -149,9 +126,7 @@ export const WalletConnectClientContextProvider: FC<
         const { namespaces } = params;
         const clientSession = signClient.session.get(topic);
         const updatedSession = { ...clientSession, namespaces };
-        onSessionConnected(updatedSession)
-          .then(console.log)
-          .catch(console.error);
+        onSessionConnected(updatedSession).then(console.log).catch(console.error);
       });
 
       signClient.on('session_delete', () => {
@@ -173,9 +148,7 @@ export const WalletConnectClientContextProvider: FC<
       // populates (the last) existing session to state
       if (signClient.session.length) {
         const lastKeyIndex = signClient.session.keys.length - 1;
-        const clientSession = signClient.session.get(
-          signClient.session.keys[lastKeyIndex],
-        );
+        const clientSession = signClient.session.get(signClient.session.keys[lastKeyIndex]);
         await onSessionConnected(clientSession);
         return clientSession;
       }
@@ -236,9 +209,7 @@ export const WalletConnectClientContextProvider: FC<
 export const useWalletConnectClient = (): IWalletConnectClientContext => {
   const context = useContext(WalletConnectClientContext);
   if (!context) {
-    throw new Error(
-      'useWalletConnectClient must be used within a WalletConnectClientContextProvider',
-    );
+    throw new Error('useWalletConnectClient must be used within a WalletConnectClientContextProvider');
   }
   return context;
 };

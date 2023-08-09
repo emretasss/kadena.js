@@ -8,8 +8,7 @@ import { processLines } from './process-lines';
 import { join } from 'path';
 import { stdout } from 'process';
 
-const REGEX_STATEMENT_INSERT_INTO: RegExp =
-  /"statement: INSERT INTO.*?(?<!")",/;
+const REGEX_STATEMENT_INSERT_INTO: RegExp = /"statement: INSERT INTO.*?(?<!")",/;
 const REGEX_STATEMENT_BEGIN: RegExp = /"statement: BEGIN.*?(?<!")",/;
 const REGEX_STATEMENT_COMMIT: RegExp = /"statement: COMMIT.*?(?<!")",/;
 
@@ -23,9 +22,7 @@ export async function startDevelopmentWorker(): Promise<void> {
   console.log('Embedded Postgres started');
 
   // execute shell command `prisma db push`
-  console.log(
-    await execShellCommand('prisma db push --force-reset', PRISMA_ENV_OPTIONS),
-  );
+  console.log(await execShellCommand('prisma db push --force-reset', PRISMA_ENV_OPTIONS));
 
   let begin = false;
   const statements: string[] = [];
@@ -66,11 +63,7 @@ export async function startDevelopmentWorker(): Promise<void> {
 
             stdout.write('.');
             await prismaClient
-              .$transaction(
-                statements.map((statement) =>
-                  prismaClient.$executeRawUnsafe(statement),
-                ),
-              )
+              .$transaction(statements.map((statement) => prismaClient.$executeRawUnsafe(statement)))
               .catch(console.error);
 
             if (i > 38 && statements.length > 0) {
@@ -89,11 +82,7 @@ interface IPostgresLogLine {
   statement?: string;
 }
 
-function parseCsvLine(
-  line: string,
-  condition: (line: string) => boolean,
-  regex: RegExp,
-): IPostgresLogLine {
+function parseCsvLine(line: string, condition: (line: string) => boolean, regex: RegExp): IPostgresLogLine {
   if (!condition(line)) {
     return { statement: undefined };
   }

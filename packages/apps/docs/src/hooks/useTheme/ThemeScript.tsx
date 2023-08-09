@@ -20,9 +20,7 @@ export const ThemeScript = memo(
     // Code-golfing the amount of characters in the script
     const optimization = (() => {
       if (attribute === 'class') {
-        const removeClasses = `c.remove(${attrs
-          .map((t: string) => `'${t}'`)
-          .join(',')})`;
+        const removeClasses = `c.remove(${attrs.map((t: string) => `'${t}'`).join(',')})`;
 
         return `var d=document.documentElement,c=d.classList;${removeClasses};`;
       } else {
@@ -35,9 +33,7 @@ export const ThemeScript = memo(
         return '';
       }
 
-      const fallback = colorSchemes.includes(defaultTheme)
-        ? defaultTheme
-        : null;
+      const fallback = colorSchemes.includes(defaultTheme) ? defaultTheme : null;
 
       if (fallback) {
         return `if(e==='light'||e==='dark'||!e)d.style.colorScheme=e||'${defaultTheme}'`;
@@ -46,11 +42,7 @@ export const ThemeScript = memo(
       }
     })();
 
-    const updateDOM = (
-      name: string,
-      literal: boolean = false,
-      setColorScheme = true,
-    ): string => {
+    const updateDOM = (name: string, literal: boolean = false, setColorScheme = true): string => {
       const resolvedName = value ? value[name] : name;
       const val = literal ? `${name}|| ''` : `'${resolvedName}'`;
       let text = '';
@@ -58,12 +50,7 @@ export const ThemeScript = memo(
       // MUCH faster to set colorScheme alongside HTML attribute/class
       // as it only incurs 1 style recalculation rather than 2
       // This can save over 250ms of work for pages with big DOM
-      if (
-        enableColorScheme &&
-        setColorScheme &&
-        !literal &&
-        colorSchemes.includes(name)
-      ) {
+      if (enableColorScheme && setColorScheme && !literal && colorSchemes.includes(name)) {
         text += `d.style.colorScheme = '${name}';`;
       }
 
@@ -90,9 +77,10 @@ export const ThemeScript = memo(
       if (enableSystem) {
         return `!function(){try{${optimization}var e=localStorage.getItem('${storageKey}');if('system'===e||(!e&&${defaultSystem})){var t='${MEDIA}',m=window.matchMedia(t);if(m.media!==t||m.matches){${updateDOM(
           'dark',
-        )}}else{${updateDOM('light')}}}else if(e){${
-          value ? `var x=${JSON.stringify(value)};` : ''
-        }${updateDOM(value ? `x[e]` : 'e', true)}}${
+        )}}else{${updateDOM('light')}}}else if(e){${value ? `var x=${JSON.stringify(value)};` : ''}${updateDOM(
+          value ? `x[e]` : 'e',
+          true,
+        )}}${
           !defaultSystem ? `else{${updateDOM(defaultTheme, false, false)}}` : ''
         }${fallbackColorScheme}}catch(e){}}()`;
       }
@@ -106,9 +94,7 @@ export const ThemeScript = memo(
       )};}${fallbackColorScheme}}catch(t){}}();`;
     })();
 
-    return (
-      <script nonce={nonce} dangerouslySetInnerHTML={{ __html: scriptSrc }} />
-    );
+    return <script nonce={nonce} dangerouslySetInnerHTML={{ __html: scriptSrc }} />;
   },
   // Never re-render this component
   () => true,

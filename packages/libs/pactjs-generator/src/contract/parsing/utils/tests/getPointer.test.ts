@@ -13,9 +13,7 @@ describe('getPointer functionality', () => {
 
   describe('pointer.next', () => {
     it("should skip 'model', 'comment', 'ws', 'nl'", () => {
-      const pointer = getPointer(
-        '; this is a comment\n     (module free GOVERNANCE \r\n @model [(test-model)])',
-      );
+      const pointer = getPointer('; this is a comment\n     (module free GOVERNANCE \r\n @model [(test-model)])');
       const tokens = ['(', 'module', 'free', 'GOVERNANCE', ')'];
       while (!pointer.done()) {
         const token = pointer.next();
@@ -38,17 +36,7 @@ describe('getPointer functionality', () => {
 
     it('should return all tokens from the contract', () => {
       const pointer = getPointer('(namespace free)(module test GOVERNANCE)');
-      const tokens = [
-        '(',
-        'namespace',
-        'free',
-        ')',
-        '(',
-        'module',
-        'test',
-        'GOVERNANCE',
-        ')',
-      ];
+      const tokens = ['(', 'namespace', 'free', ')', '(', 'module', 'test', 'GOVERNANCE', ')'];
       let idx = 0;
       while (!pointer.done()) {
         const token = pointer.next();

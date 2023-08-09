@@ -25,20 +25,10 @@ describe('full layout', () => {
       aside().find('ul:first').children('li').should('have.length', 3);
 
       // first li child ("section 1") will not have children
-      aside()
-        .find('ul:first')
-        .children('li')
-        .first()
-        .children('ul')
-        .should('not.exist');
+      aside().find('ul:first').children('li').first().children('ul').should('not.exist');
 
       // second li child ("section 2") will have 2 children
-      aside()
-        .find('ul:first > li:nth-child(2)')
-        .children('ul')
-        .should('exist')
-        .children('li')
-        .should('have.length', 2);
+      aside().find('ul:first > li:nth-child(2)').children('ul').should('exist').children('li').should('have.length', 2);
 
       // second li child ("section 2.2") will have 1 children
       aside()
@@ -86,11 +76,7 @@ describe('full layout', () => {
 
         QuickStart().contains('Quickstart');
 
-        Atom()
-          .find(' > ul')
-          .should('be.visible')
-          .children('li')
-          .should('have.length', 2);
+        Atom().find(' > ul').should('be.visible').children('li').should('have.length', 2);
       });
 
       it('opens and closes the basics menu when clicked', () => {
@@ -100,10 +86,7 @@ describe('full layout', () => {
         basics().find('ul').should('not.be.visible');
         basics().click();
         basics().find('ul').should('be.visible');
-        basics()
-          .children('ul')
-          .children('li > [data-active="true"]')
-          .should('have.length', 0);
+        basics().children('ul').children('li > [data-active="true"]').should('have.length', 0);
         basics().children('ul').children('li').should('have.length', 2);
         basics().children('ul').children('li').eq(1).click();
         basics()

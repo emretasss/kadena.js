@@ -18,9 +18,7 @@ export const useSubscribe = (): IReturn => {
   const canSubmit = Boolean(email) && !hasError;
   const hasSuccess = Boolean(message) && !hasError;
 
-  const handleSubscribe = async (
-    event: MouseEvent<HTMLButtonElement, SubmitEvent>,
-  ): Promise<void> => {
+  const handleSubscribe = async (event: MouseEvent<HTMLButtonElement, SubmitEvent>): Promise<void> => {
     event.preventDefault();
 
     try {

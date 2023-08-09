@@ -1,24 +1,15 @@
 import { ICap } from '@kadena/types';
 
 import { IPactCommand } from '../../interfaces/IPactCommand';
-import {
-  ExtractCapabilityType,
-  IGeneralCapability,
-} from '../../interfaces/type-utilities';
+import { ExtractCapabilityType, IGeneralCapability } from '../../interfaces/type-utilities';
 
 import { patchCommand } from './patchCommand';
 
 interface IAddSigner {
-  (
-    first:
-      | string
-      | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
-  ): () => Partial<IPactCommand>;
+  (first: string | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string }): () => Partial<IPactCommand>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   <TCommand extends any>(
-    first:
-      | string
-      | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
+    first: string | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
     capability: (withCapability: ExtractType<TCommand>) => ICap[],
   ): TCommand;
 }
@@ -29,21 +20,10 @@ interface IAddSigner {
  * @public
  */
 export const addSigner: IAddSigner = ((
-  first:
-    | string
-    | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
-  capability: (
-    withCapability: (
-      name: string,
-      ...args: unknown[]
-    ) => { name: string; args: unknown[] },
-  ) => ICap[],
+  first: string | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
+  capability: (withCapability: (name: string, ...args: unknown[]) => { name: string; args: unknown[] }) => ICap[],
 ): unknown => {
-  const {
-    pubKey,
-    scheme = 'ED25519',
-    address = undefined,
-  } = typeof first === 'object' ? first : { pubKey: first };
+  const { pubKey, scheme = 'ED25519', address = undefined } = typeof first === 'object' ? first : { pubKey: first };
   let clist: undefined | Array<{ name: string; args: unknown[] }>;
   if (typeof capability === 'function') {
     clist = capability((name: string, ...args: unknown[]) => ({
@@ -67,8 +47,6 @@ export const addSigner: IAddSigner = ((
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }) as any;
 
-type ExtractType<TCmdReducer> = TCmdReducer extends (cmd: {
-  payload: infer TPayload;
-}) => unknown
+type ExtractType<TCmdReducer> = TCmdReducer extends (cmd: { payload: infer TPayload }) => unknown
   ? ExtractCapabilityType<{ payload: TPayload }>
   : IGeneralCapability;

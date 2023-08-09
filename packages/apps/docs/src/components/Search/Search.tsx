@@ -13,13 +13,7 @@ interface IProps {
 
 export const Search: FC<IProps> = ({ query, hasScroll, limitResults }) => {
   const [tabName, setTabName] = useState<string | undefined>();
-  const {
-    outputStream,
-    handleSubmit: handleSearchSubmit,
-    conversation,
-    error,
-    isLoading,
-  } = useSearch();
+  const { outputStream, handleSubmit: handleSearchSubmit, conversation, error, isLoading } = useSearch();
   const {
     results: semanticResults,
     error: semanticError,
@@ -37,13 +31,10 @@ export const Search: FC<IProps> = ({ query, hasScroll, limitResults }) => {
         handleSemanticSubmit(query);
       }
 
-      analyticsEvent(
-        EVENT_NAMES[tabName === 'qa' ? 'search:qa' : 'search:docs'],
-        {
-          label: query,
-          url: window.location.href,
-        },
-      );
+      analyticsEvent(EVENT_NAMES[tabName === 'qa' ? 'search:qa' : 'search:docs'], {
+        label: query,
+        url: window.location.href,
+      });
     }
   }, [query, tabName, handleSemanticSubmit, handleSearchSubmit]);
 

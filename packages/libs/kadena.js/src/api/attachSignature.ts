@@ -1,9 +1,5 @@
 import { base64UrlEncodeArr, hashBin, sign } from '@kadena/cryptography-utils';
-import type {
-  CommandPayloadStringifiedJSON,
-  IKeyPair,
-  SignatureWithHash,
-} from '@kadena/types';
+import type { CommandPayloadStringifiedJSON, IKeyPair, SignatureWithHash } from '@kadena/types';
 
 /**
  * Attach signature to hashed data

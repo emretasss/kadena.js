@@ -21,8 +21,7 @@ const getActiveItem = (
     const anchor = innerItem.firstChild as HTMLAnchorElement;
     if (
       clickedElement === anchor ||
-      (!clickedElement &&
-        hasSameBasePath(pathname, anchor?.getAttribute('href') ?? ''))
+      (!clickedElement && hasSameBasePath(pathname, anchor?.getAttribute('href') ?? ''))
     ) {
       item = innerItem as HTMLLIElement;
       idx = innerIdx;
@@ -41,28 +40,19 @@ export const useHeaderAnimation = (): IUseHeaderReturn => {
   const router = useRouter();
 
   const selectItem = useCallback(
-    (
-      active: number,
-      pathname: string,
-      clickedElement?: HTMLAnchorElement,
-    ): void => {
+    (active: number, pathname: string, clickedElement?: HTMLAnchorElement): void => {
       const list = listRef.current;
       const bg = backgroundRef.current;
 
       if (!list || !bg) return;
-      const { item: activeItem, idx } = getActiveItem(
-        list,
-        pathname,
-        clickedElement,
-      );
+      const { item: activeItem, idx } = getActiveItem(list, pathname, clickedElement);
 
       setHasPath(false);
 
       if (idx === undefined || !activeItem) return;
       setHasPath(true);
       //slow down the animation, when the distance between current and new Item is larger
-      const newPosition =
-        activeItem.offsetLeft + activeItem.offsetWidth / 2 - bg.offsetWidth / 2;
+      const newPosition = activeItem.offsetLeft + activeItem.offsetWidth / 2 - bg.offsetWidth / 2;
 
       bg.style.transform = `translateX(${newPosition}px)`;
       bg.style.transitionDuration = `${0.3 + 0.1 * Math.abs(active - idx)}s`;

@@ -196,12 +196,7 @@ const importDocs = (filename, destination, parentTitle, options) => {
 
     fs.writeFileSync(
       `${DOCSROOT}${destination}/${slug}.mdx`,
-      createFrontMatter(
-        title,
-        menuTitle,
-        order,
-        createEditOverwrite(filename, options),
-      ) + doc,
+      createFrontMatter(title, menuTitle, order, createEditOverwrite(filename, options)) + doc,
       {
         flag: 'w',
       },

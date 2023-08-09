@@ -1,11 +1,4 @@
-import {
-  Button,
-  Heading,
-  Notification,
-  Stack,
-  SystemIcon,
-  TextField,
-} from '@kadena/react-ui';
+import { Button, Heading, Notification, Stack, SystemIcon, TextField } from '@kadena/react-ui';
 
 import { useSubscribe } from './useSubscribe';
 
@@ -17,8 +10,7 @@ import React, { FC } from 'react';
  *
  */
 export const Subscribe: FC = () => {
-  const { handleFormState, handleSubscribe, message, canSubmit, hasSuccess } =
-    useSubscribe();
+  const { handleFormState, handleSubscribe, message, canSubmit, hasSuccess } = useSubscribe();
 
   return (
     <section data-cy="subscribe">
@@ -39,11 +31,7 @@ export const Subscribe: FC = () => {
                     leftIcon: SystemIcon.At,
                   }}
                 />
-                <Button
-                  disabled={!canSubmit}
-                  onClick={handleSubscribe}
-                  title="Subscribe"
-                >
+                <Button disabled={!canSubmit} onClick={handleSubscribe} title="Subscribe">
                   Subscribe
                 </Button>
               </Stack>

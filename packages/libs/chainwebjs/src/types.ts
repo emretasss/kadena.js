@@ -82,10 +82,7 @@ export interface IBlockPayloads<T> {
 }
 
 export interface IBlockPayloadMap<T>
-  extends Pick<
-    IBlockPayload<T>,
-    'transactions' | 'payloadHash' | 'transactionsHash' | 'outputsHash'
-  > {
+  extends Pick<IBlockPayload<T>, 'transactions' | 'payloadHash' | 'transactionsHash' | 'outputsHash'> {
   minerData: IMinerData;
   coinbase: ICoinbase;
 }

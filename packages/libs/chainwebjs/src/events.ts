@@ -1,16 +1,6 @@
-import {
-  blockByBlockHash,
-  blocks,
-  headers2blocks,
-  recentBlocks,
-} from './blocks';
+import { blockByBlockHash, blocks, headers2blocks, recentBlocks } from './blocks';
 import { chainUpdates } from './headers';
-import {
-  IBlockHeader,
-  IBlockPayloads,
-  IEventData,
-  ITransactionElement,
-} from './types';
+import { IBlockHeader, IBlockPayloads, IEventData, ITransactionElement } from './types';
 
 import EventSource from 'eventsource';
 
@@ -21,17 +11,12 @@ import EventSource from 'eventsource';
  *
  * @alpha
  */
-const filterEvents = (
-  blocks: IBlockPayloads<ITransactionElement>[],
-): IEventData[] => {
+const filterEvents = (blocks: IBlockPayloads<ITransactionElement>[]): IEventData[] => {
   return blocks
     .filter((x) => x.payload.transactions.length > 0)
     .flatMap((x) =>
       x.payload.transactions.flatMap((y) => {
-        const es =
-          y.output.events !== null && y.output.events !== undefined
-            ? y.output.events
-            : [];
+        const es = y.output.events !== null && y.output.events !== undefined ? y.output.events : [];
         es.forEach((e) => (e.height = x.header.height));
         return es;
       }),
@@ -102,10 +87,7 @@ export function eventStream(
   host: string,
 ): EventSource {
   const ro = depth > 1 ? {} : { retry404: true, minTimeout: 1000 };
-  const cb = async (u: {
-    txCount: number;
-    header: IBlockHeader;
-  }): Promise<void> => {
+  const cb = async (u: { txCount: number; header: IBlockHeader }): Promise<void> => {
     if (u.txCount > 0) {
       const blocks = await headers2blocks([u.header], network, host, ro);
       filterEvents(blocks).forEach(callback);

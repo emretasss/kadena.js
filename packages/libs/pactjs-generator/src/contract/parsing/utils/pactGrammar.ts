@@ -38,41 +38,26 @@ export const typeRule = seq(
 );
 
 // (defun|defcap name (a:string,b:object{schema-one},c) @doc "test doc")
-export const method = <T extends IParser>(
-  type: 'defun' | 'defcap' | 'defpact',
-  bodyParser: T = skipTheRest as T,
-) =>
+export const method = <T extends IParser>(type: 'defun' | 'defcap' | 'defpact', bodyParser: T = skipTheRest as T) =>
   block(
     $('kind', id(type)),
     $('name', atom),
     maybe($('returnType', typeRule)),
-    block(
-      maybe(
-        repeat(
-          $('parameters', seq($('name', atom), $('type', maybe(typeRule)))),
-        ),
-      ),
-    ),
+    block(maybe(repeat($('parameters', seq($('name', atom), $('type', maybe(typeRule))))))),
     maybe(id('@doc')),
     maybe($('doc', str)),
     bodyParser,
   );
 
 // \@managed property manager | \@managed
-const managed = oneOf(
-  seq(id('@managed'), $('property', atom), $('manager', atom)),
-  id('@managed', true),
-);
+const managed = oneOf(seq(id('@managed'), $('property', atom), $('manager', atom)), id('@managed', true));
 
 // .... (compose-capability CAP)
 const capabilityBody = seq(
   // TODO: fix the issue with typing here
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   maybe($('managed', managed) as IParser<IWrappedData<any, 'managed'>>),
-  repeat(
-    $('composeCapabilities', seq(id('compose-capability'), id('('), $(atom))),
-    skipToken,
-  ),
+  repeat($('composeCapabilities', seq(id('compose-capability'), id('('), $(atom))), skipToken),
 );
 
 const functionBody = seq(
@@ -87,13 +72,7 @@ const functionBody = seq(
         id('('),
         oneOf(
           // namespace.module.function
-          seq(
-            $('namespace', atom),
-            id('.'),
-            $('module', atom),
-            id('.'),
-            $('func', atom),
-          ),
+          seq($('namespace', atom), id('.'), $('module', atom), id('.'), $('func', atom)),
           // module.function
           seq($('module', atom), id('.'), $('func', atom)),
         ),

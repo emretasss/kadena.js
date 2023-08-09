@@ -13,14 +13,7 @@ import { Tr } from './Tr';
 
 import { FC } from 'react';
 
-export type {
-  ITableProps,
-  ITBodyProps,
-  ITHeadProps,
-  ITrProps,
-  IThProps,
-  ITdProps,
-};
+export type { ITableProps, ITBodyProps, ITHeadProps, ITrProps, IThProps, ITdProps };
 
 interface ITable {
   Root: FC<ITableProps>;

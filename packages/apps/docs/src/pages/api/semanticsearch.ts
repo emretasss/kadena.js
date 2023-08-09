@@ -10,11 +10,9 @@ const PINECONE_URL = process.env.PINECONE_URL;
 const PINECONE_API_KEY = process.env.PINECONE_API_KEY;
 const PINECONE_ENVIRONMENT = process.env.PINECONE_ENVIRONMENT;
 
-if (PINECONE_ENVIRONMENT === undefined)
-  throw new Error('Env var PINECONE_ENVIRONMENT missing');
+if (PINECONE_ENVIRONMENT === undefined) throw new Error('Env var PINECONE_ENVIRONMENT missing');
 if (PINECONE_URL === undefined) throw new Error('Env var PINECONE_URL missing');
-if (PINECONE_API_KEY === undefined)
-  throw new Error('Env var PINECONE_API_KEY missing');
+if (PINECONE_API_KEY === undefined) throw new Error('Env var PINECONE_API_KEY missing');
 
 let pineconeClient: PineconeClient | undefined;
 
@@ -104,10 +102,7 @@ const mapMatches = (match: ScoredVector): ISearchResult => {
   } as ISearchResult;
 };
 
-const reduceMatches = (
-  acc: ScoredVector[],
-  val: ScoredVector,
-): ScoredVector[] => {
+const reduceMatches = (acc: ScoredVector[], val: ScoredVector): ScoredVector[] => {
   //taking out double results
   const metadata = (val.metadata as IScoredVectorMetaData) ?? {};
   if (
@@ -123,10 +118,7 @@ const reduceMatches = (
   return acc;
 };
 
-const search = async (
-  req: NextApiRequest,
-  res: NextApiResponse<ISearchResult[] | IResponseError>,
-): Promise<void> => {
+const search = async (req: NextApiRequest, res: NextApiResponse<ISearchResult[] | IResponseError>): Promise<void> => {
   const client = await getPineconeClient();
   const index = client.Index(namespace);
   const { query, limit = 50 } = req.query;
@@ -151,8 +143,7 @@ const search = async (
     },
   });
 
-  const newResults =
-    result.matches?.reduce(reduceMatches, []).map(mapMatches) ?? [];
+  const newResults = result.matches?.reduce(reduceMatches, []).map(mapMatches) ?? [];
 
   res.status(200).json(newResults);
   res.end();

@@ -11,9 +11,7 @@ describe('parseTemplate', () => {
   });
 
   it('parses a command template', () => {
-    const result = parseTemplate(
-      `(coin.transfer "{{sender}}", "{{receiver}}", {{amount}})`,
-    );
+    const result = parseTemplate(`(coin.transfer "{{sender}}", "{{receiver}}", {{amount}})`);
     const expected = {
       parts: ['(coin.transfer "', '", "', '", ', ')'],
       holes: ['sender', 'receiver', 'amount'],
@@ -22,10 +20,7 @@ describe('parseTemplate', () => {
   });
 
   it('parses a YAML template', () => {
-    const template = readFileSync(
-      join(__dirname, './simple-transfer.yaml'),
-      'utf8',
-    );
+    const template = readFileSync(join(__dirname, './simple-transfer.yaml'), 'utf8');
     const result = parseTemplate(template);
     expect(result).toMatchSnapshot();
   });

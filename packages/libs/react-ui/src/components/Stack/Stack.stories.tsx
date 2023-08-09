@@ -65,31 +65,15 @@ const meta: Meta<typeof Stack> = {
       },
     },
     justifyContent: {
-      options: [
-        'flex-start',
-        'center',
-        'flex-end',
-        'space-around',
-        'space-between',
-      ] as Sprinkles['justifyContent'][],
+      options: ['flex-start', 'center', 'flex-end', 'space-around', 'space-between'] as Sprinkles['justifyContent'][],
       control: { type: 'select' },
     },
     alignItems: {
-      options: [
-        'flex-start',
-        'center',
-        'flex-end',
-        'stretch',
-      ] as Sprinkles['alignItems'][],
+      options: ['flex-start', 'center', 'flex-end', 'stretch'] as Sprinkles['alignItems'][],
       control: { type: 'select' },
     },
     direction: {
-      options: [
-        'row',
-        'row-reverse',
-        'column',
-        'column-reverse',
-      ] as Sprinkles['flexDirection'][],
+      options: ['row', 'row-reverse', 'column', 'column-reverse'] as Sprinkles['flexDirection'][],
       control: { type: 'select' },
     },
     wrap: {
@@ -194,12 +178,7 @@ export const Centered: Story = {
   },
   render: ({ spacing, direction, alignItems, justifyContent }) => (
     <>
-      <Stack
-        spacing={spacing}
-        direction={direction}
-        alignItems={alignItems}
-        justifyContent={justifyContent}
-      >
+      <Stack spacing={spacing} direction={direction} alignItems={alignItems} justifyContent={justifyContent}>
         <div className={className(itemClass, itemSizeClass.$40)}>Item 1</div>
         <div className={className(itemClass, itemSizeClass.$12)}>Item 2</div>
         <div className={className(itemClass, itemSizeClass.$40)}>Item 3</div>
@@ -221,12 +200,7 @@ export const SpaceBetween: Story = {
   },
   render: ({ spacing, direction, alignItems, justifyContent }) => (
     <>
-      <Stack
-        spacing={spacing}
-        direction={direction}
-        alignItems={alignItems}
-        justifyContent={justifyContent}
-      >
+      <Stack spacing={spacing} direction={direction} alignItems={alignItems} justifyContent={justifyContent}>
         <div className={className(itemClass, itemSizeClass.$40)}>Item 1</div>
         <div className={className(itemClass, itemSizeClass.$12)}>Item 2</div>
         <div className={className(itemClass, itemSizeClass.$40)}>Item 3</div>

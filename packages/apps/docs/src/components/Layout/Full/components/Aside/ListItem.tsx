@@ -14,12 +14,7 @@ interface IProps {
   activeItem?: string;
 }
 
-export const ListItem: FC<IProps> = ({
-  item,
-  setActiveItem,
-  activeItem,
-  scrollArea,
-}) => {
+export const ListItem: FC<IProps> = ({ item, setActiveItem, activeItem, scrollArea }) => {
   const router = useRouter();
 
   if (item.title === undefined || item.title === '') return null;
@@ -44,13 +39,7 @@ export const ListItem: FC<IProps> = ({
   };
 
   return (
-    <AsideLink
-      href={slug}
-      key={slug}
-      label={item.title}
-      isActive={activeItem === slug}
-      onClick={handleItemClick}
-    >
+    <AsideLink href={slug} key={slug} label={item.title} isActive={activeItem === slug} onClick={handleItemClick}>
       {item.children.length > 0 && (
         <AsideList inner={true}>
           {item.children.map((innerItem) => {

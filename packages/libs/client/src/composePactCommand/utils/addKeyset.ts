@@ -5,8 +5,5 @@ import { addData, IAddKeyset } from './addData';
  *
  * @public
  */
-export const addKeyset: IAddKeyset = (
-  name: string,
-  pred: string,
-  ...publicKeys: string[]
-) => addData(name, { keys: publicKeys, pred });
+export const addKeyset: IAddKeyset = (name: string, pred: string, ...publicKeys: string[]) =>
+  addData(name, { keys: publicKeys, pred });

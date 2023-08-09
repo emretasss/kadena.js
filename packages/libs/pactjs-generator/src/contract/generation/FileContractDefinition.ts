@@ -13,15 +13,7 @@ export class FileContractDefinition implements IContractDefinition {
   private _logger: ILogger;
   private _raw: Output;
 
-  public constructor({
-    path,
-    namespace,
-    logger = () => {},
-  }: {
-    path: PathLike;
-    namespace?: string;
-    logger?: ILogger;
-  }) {
+  public constructor({ path, namespace, logger = () => {} }: { path: PathLike; namespace?: string; logger?: ILogger }) {
     this._path = path;
     this._logger = logger;
     this._raw = parser(readFileSync(this._path, 'utf8'), this._logger);
@@ -37,9 +29,7 @@ export class FileContractDefinition implements IContractDefinition {
     });
   }
 
-  public getCapabilities(
-    moduleName: string,
-  ): Record<string, Defcap> | undefined {
+  public getCapabilities(moduleName: string): Record<string, Defcap> | undefined {
     return this._raw[moduleName].defcaps;
   }
 

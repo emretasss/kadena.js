@@ -10,9 +10,7 @@ import { makeFetchResponse, mockFetch, urlHelper } from './mokker';
 import fetch from 'cross-fetch';
 
 const mockedFunctionFetch = fetch as jest.MockedFunction<typeof fetch>;
-mockedFunctionFetch.mockImplementation(
-  mockFetch as jest.MockedFunction<typeof fetch>,
-);
+mockedFunctionFetch.mockImplementation(mockFetch as jest.MockedFunction<typeof fetch>);
 import { IBlockHeader, IBlockPayload, IPagedResponse } from '../types';
 import chainweb from '..';
 
@@ -34,9 +32,7 @@ const logg = (...args: unknown[]): void => {
 };
 
 beforeEach(() => {
-  mockedFunctionFetch.mockImplementation(
-    mockFetch as jest.MockedFunction<typeof fetch>,
-  );
+  mockedFunctionFetch.mockImplementation(mockFetch as jest.MockedFunction<typeof fetch>);
 });
 /* ************************************************************************** */
 /* Blocks */
@@ -49,12 +45,7 @@ describe('chainweb.block', () => {
   /* By Height */
 
   it('gets the block by height an validates', async () => {
-    const r = await chainweb.block.height(
-      0,
-      height,
-      config.network,
-      config.host,
-    );
+    const r = await chainweb.block.height(0, height, config.network, config.host);
     logg('Block:', r);
     expect(r).toHaveProperty('header');
     expect(r.header).toEqual(header);
@@ -66,12 +57,7 @@ describe('chainweb.block', () => {
   /* By Block Hash */
 
   it('gets the block by block hash an validates', async () => {
-    const r = await chainweb.block.blockHash(
-      0,
-      blockHash,
-      config.network,
-      config.host,
-    );
+    const r = await chainweb.block.blockHash(0, blockHash, config.network, config.host);
     logg('Block:', r);
     expect(r).toHaveProperty('header');
     expect(r.header).toEqual(header);
@@ -84,9 +70,7 @@ describe('chainweb.block', () => {
       const path = urlHelper(url);
       switch (path) {
         case 'https://api.chainweb.com/chainweb/0.0/mainnet01/chain/0/payload/outputs/batch':
-          return makeFetchResponse<IBlockPayload<string[]>[]>(
-            [] as unknown as IBlockPayload<string[]>[],
-          );
+          return makeFetchResponse<IBlockPayload<string[]>[]>([] as unknown as IBlockPayload<string[]>[]);
         default:
           return makeFetchResponse<IPagedResponse<IBlockHeader>>({
             limit: 1,
@@ -119,16 +103,9 @@ describe('chainweb.block', () => {
       }
     };
 
-    mockedFunctionFetch.mockImplementation(
-      localMockFetch as jest.MockedFunction<typeof fetch>,
-    );
+    mockedFunctionFetch.mockImplementation(localMockFetch as jest.MockedFunction<typeof fetch>);
     try {
-      const r = await chainweb.block.blockHash(
-        0,
-        blockHash,
-        config.network,
-        config.host,
-      );
+      const r = await chainweb.block.blockHash(0, blockHash, config.network, config.host);
       logg('Block:', r);
     } catch (err) {
       const error =
@@ -176,9 +153,7 @@ describe('chainweb.block', () => {
       expect(v.header.chainwebVersion).toBe(header.chainwebVersion);
       if (i > 1) {
         expect(v.header.creationTime).toBeGreaterThan(header.creationTime);
-        expect(v.header.creationTime).toBeGreaterThan(
-          r[i - 1].header.creationTime,
-        );
+        expect(v.header.creationTime).toBeGreaterThan(r[i - 1].header.creationTime);
       }
     });
   });
@@ -186,41 +161,25 @@ describe('chainweb.block', () => {
   /* ************************************************************************** */
   /* By Recent */
 
-  it.each([10, 100, 359, 360, 730])(
-    'gets recent blocks with limit %p',
-    async (n) => {
-      const cur = (await chainweb.cut.current(config.network, config.host))
-        .hashes[0].height;
-      const r = await chainweb.block.recent(
-        0,
-        10,
-        n,
-        config.network,
-        config.host,
-      );
-      logg('Block:', r);
-      expect(r).toBeTruthy();
-      expect(r.length).toBe(n);
-      r.forEach((v, i) => {
-        expect(v.header.height).toBeLessThanOrEqual(cur - 10);
-        expect(v.payload).toHaveProperty('coinbase');
-        expect(v.header.chainwebVersion).toBe('mainnet01');
-        expect(v.payload.payloadHash).toEqual(v.header.payloadHash);
-        if (i > 0) {
-          expect(v.header.height).toBe(r[i - 1].header.height + 1);
-        }
-      });
-    },
-  );
+  it.each([10, 100, 359, 360, 730])('gets recent blocks with limit %p', async (n) => {
+    const cur = (await chainweb.cut.current(config.network, config.host)).hashes[0].height;
+    const r = await chainweb.block.recent(0, 10, n, config.network, config.host);
+    logg('Block:', r);
+    expect(r).toBeTruthy();
+    expect(r.length).toBe(n);
+    r.forEach((v, i) => {
+      expect(v.header.height).toBeLessThanOrEqual(cur - 10);
+      expect(v.payload).toHaveProperty('coinbase');
+      expect(v.header.chainwebVersion).toBe('mainnet01');
+      expect(v.payload.payloadHash).toEqual(v.header.payloadHash);
+      if (i > 0) {
+        expect(v.header.height).toBe(r[i - 1].header.height + 1);
+      }
+    });
+  });
 
   it('recgets recent blocks with low dept', async () => {
-    const r = await chainweb.block.recent(
-      0,
-      0,
-      10,
-      config.network,
-      config.host,
-    );
+    const r = await chainweb.block.recent(0, 0, 10, config.network, config.host);
     logg('Block:', r);
     expect(r).toBeTruthy();
     expect(r.length).toBe(10);
@@ -228,18 +187,10 @@ describe('chainweb.block', () => {
 
   it('throws when payload is not in sync with headers', async () => {
     await expect(async () => {
-      const r = await chainweb.block.recent(
-        0,
-        9,
-        9,
-        config.network,
-        config.host,
-      );
+      const r = await chainweb.block.recent(0, 9, 9, config.network, config.host);
       logg('Block:', r);
       expect(r).toBeTruthy();
       expect(r.length).toBe(10);
-    }).rejects.toThrow(
-      'failed to get payloads for some headers. Missing jvstHn1mXqNjPqeGDGkEvtBN4yKy5JglL-BbVr-a76A',
-    );
+    }).rejects.toThrow('failed to get payloads for some headers. Missing jvstHn1mXqNjPqeGDGkEvtBN4yKy5JglL-BbVr-a76A');
   });
 });

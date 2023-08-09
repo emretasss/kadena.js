@@ -26,10 +26,7 @@ const meta: Meta<
       control: {
         type: 'select',
       },
-      options: [
-        undefined,
-        ...Object.keys(vars.sizes).map((key) => key as keyof typeof vars.sizes),
-      ],
+      options: [undefined, ...Object.keys(vars.sizes).map((key) => key as keyof typeof vars.sizes)],
     },
     tag: {
       control: {
@@ -47,10 +44,7 @@ const meta: Meta<
       },
     },
     status: {
-      options: [
-        undefined,
-        ...(Object.keys(statusVariant) as (keyof typeof statusVariant)[]),
-      ],
+      options: [undefined, ...(Object.keys(statusVariant) as (keyof typeof statusVariant)[])],
       control: {
         type: 'select',
       },
@@ -89,15 +83,7 @@ export const Group: Story = {
     disabled: false,
     status: undefined,
   },
-  render: ({
-    disabled,
-    status,
-    tag,
-    helperText,
-    info,
-    label,
-    leadingTextWidth,
-  }) => {
+  render: ({ disabled, status, tag, helperText, info, label, leadingTextWidth }) => {
     return (
       <InputWrapper
         tag={tag}
@@ -109,18 +95,8 @@ export const Group: Story = {
         helperText={helperText}
         htmlFor="inputStory"
       >
-        <Input
-          id="inputStory"
-          placeholder="Input 1"
-          disabled={disabled}
-          leadingText="Leading"
-        />
-        <Input
-          id="inputStory2"
-          placeholder="Input 2"
-          disabled={disabled}
-          leadingText="Leading 2"
-        />
+        <Input id="inputStory" placeholder="Input 1" disabled={disabled} leadingText="Leading" />
+        <Input id="inputStory2" placeholder="Input 2" disabled={disabled} leadingText="Leading 2" />
       </InputWrapper>
     );
   },

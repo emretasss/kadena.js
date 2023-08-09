@@ -19,10 +19,7 @@ export const StyledItem: StyledComponent<'li'> = styled('li', {
   padding: '$4 0 $2',
 });
 
-export const StyledLink: StyledComponent<
-  typeof Link,
-  { hassubmenu?: boolean | 'true' | 'false' }
-> = styled(Link, {
+export const StyledLink: StyledComponent<typeof Link, { hassubmenu?: boolean | 'true' | 'false' }> = styled(Link, {
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
@@ -110,38 +107,32 @@ const TitleStyleBase: Record<string, string | number> = {
   cursor: 'pointer',
 };
 
-export const SideMenuTitle: StyledComponent<'div'> = styled(
-  'div',
-  TitleStyleBase,
-);
+export const SideMenuTitle: StyledComponent<'div'> = styled('div', TitleStyleBase);
 
-export const SideMenuTitleBackButton: StyledComponent<'button'> = styled(
-  'button',
-  {
-    ...TitleStyleBase,
-    '&:hover': {
-      '&::before': {
-        transform: 'translate(0, $sizes$2) rotate(45deg) ',
-      },
-    },
-
+export const SideMenuTitleBackButton: StyledComponent<'button'> = styled('button', {
+  ...TitleStyleBase,
+  '&:hover': {
     '&::before': {
-      position: 'absolute',
-      left: '$2',
-      content: '',
-      width: '$2',
-      height: '$2',
-      borderLeft: '2px solid $borderColor',
-      borderBottom: '2px solid $borderColor',
-      transform: 'translate($sizes$2, $sizes$2) rotate(45deg)',
-      transition: 'transform .2s ease ',
-    },
-
-    '@md': {
-      display: 'none',
+      transform: 'translate(0, $sizes$2) rotate(45deg) ',
     },
   },
-);
+
+  '&::before': {
+    position: 'absolute',
+    left: '$2',
+    content: '',
+    width: '$2',
+    height: '$2',
+    borderLeft: '2px solid $borderColor',
+    borderBottom: '2px solid $borderColor',
+    transform: 'translate($sizes$2, $sizes$2) rotate(45deg)',
+    transition: 'transform .2s ease ',
+  },
+
+  '@md': {
+    display: 'none',
+  },
+});
 
 export const ShowOnMobile: StyledComponent<'div'> = styled('div', {
   display: 'block',

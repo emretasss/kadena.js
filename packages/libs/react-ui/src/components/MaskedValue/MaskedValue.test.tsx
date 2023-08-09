@@ -17,13 +17,7 @@ describe('MaskedValue', () => {
   });
 
   test('shows correct masked value when non default characters set', () => {
-    render(
-      <MaskedValue
-        value="TestValue1234"
-        startUnmaskedValues={1}
-        endUnmaskedValues={3}
-      />,
-    );
+    render(<MaskedValue value="TestValue1234" startUnmaskedValues={1} endUnmaskedValues={3} />);
 
     expect(screen.getByText('T****234')).toBeInTheDocument();
   });
@@ -35,13 +29,7 @@ describe('MaskedValue', () => {
   });
 
   test('shows unmasked value when unmasked characters are greater or equal than value size', () => {
-    render(
-      <MaskedValue
-        value="TestValue1234"
-        startUnmaskedValues={8}
-        endUnmaskedValues={5}
-      />,
-    );
+    render(<MaskedValue value="TestValue1234" startUnmaskedValues={8} endUnmaskedValues={5} />);
 
     expect(screen.getByText('TestValue1234')).toBeInTheDocument();
   });

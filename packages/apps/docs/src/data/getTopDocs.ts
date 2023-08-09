@@ -55,12 +55,8 @@ export const getTopDocs = async (): Promise<ITopDoc[]> => {
 
   const topDocs =
     response.rows?.map((item): ITopDoc => {
-      const label = item.dimensionValues
-        ? `${item.dimensionValues[0].value}`
-        : '';
-      const url = item.dimensionValues
-        ? `${item.dimensionValues[1].value}`
-        : '';
+      const label = item.dimensionValues ? `${item.dimensionValues[0].value}` : '';
+      const url = item.dimensionValues ? `${item.dimensionValues[1].value}` : '';
       return {
         label,
         url,

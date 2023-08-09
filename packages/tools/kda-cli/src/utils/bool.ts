@@ -1,6 +1,4 @@
-export const isTruthy = (
-  value?: boolean | object | number | string | string[],
-): boolean => {
+export const isTruthy = (value?: boolean | object | number | string | string[]): boolean => {
   if (typeof value === 'boolean') return value;
   if (value === undefined) return false;
   if (value === null) return false;
@@ -9,8 +7,6 @@ export const isTruthy = (
   return true;
 };
 
-export const isFalsy = (
-  value?: boolean | object | number | string | string[],
-): boolean => {
+export const isFalsy = (value?: boolean | object | number | string | string[]): boolean => {
   return !isTruthy(value);
 };

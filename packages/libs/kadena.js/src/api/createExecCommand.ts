@@ -1,16 +1,6 @@
-import {
-  createSendRequest,
-  ISendRequestBody,
-} from '@kadena/chainweb-node-client';
+import { createSendRequest, ISendRequestBody } from '@kadena/chainweb-node-client';
 import { ensureSignedCommand } from '@kadena/pactjs';
-import type {
-  EnvData,
-  IKeyPair,
-  IMetaData,
-  NetworkId,
-  Nonce,
-  PactCode,
-} from '@kadena/types';
+import type { EnvData, IKeyPair, IMetaData, NetworkId, Nonce, PactCode } from '@kadena/types';
 
 import { prepareExecCommand } from './prepareExecCommand';
 
@@ -25,14 +15,7 @@ export function createExecCommand(
   meta: IMetaData,
   networkId?: NetworkId,
 ): ISendRequestBody {
-  const command = prepareExecCommand(
-    keyPairs,
-    nonce,
-    pactCode,
-    meta,
-    networkId,
-    envData,
-  );
+  const command = prepareExecCommand(keyPairs, nonce, pactCode, meta, networkId, envData);
   const signedCommand = ensureSignedCommand(command);
   return createSendRequest(signedCommand);
 }

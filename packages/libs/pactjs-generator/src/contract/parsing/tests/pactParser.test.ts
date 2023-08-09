@@ -20,9 +20,7 @@ describe('pactParser', () => {
     const contract = `this is an invalid syntax`;
 
     const getContract = (name: string): Promise<string> => Promise.resolve('');
-    await expect(() =>
-      pactParser({ files: [contract], getContract }),
-    ).rejects.toEqual(Error('NO_MODULE_LOADED'));
+    await expect(() => pactParser({ files: [contract], getContract })).rejects.toEqual(Error('NO_MODULE_LOADED'));
   });
 
   it('should throw an exception if the getContent returns an invalid module', async () => {
@@ -33,9 +31,7 @@ describe('pactParser', () => {
         )
       )`;
 
-    const getContract = jest
-      .fn()
-      .mockResolvedValue('return invalid module content');
+    const getContract = jest.fn().mockResolvedValue('return invalid module content');
 
     await pactParser({ files: [contract], getContract });
 
@@ -69,8 +65,7 @@ describe('pactParser', () => {
       (namespace "test_namespace_3")
       `;
 
-    const getContract = (name: string): Promise<string> =>
-      Promise.resolve(name);
+    const getContract = (name: string): Promise<string> => Promise.resolve(name);
     const modules = await pactParser({ files: [contract], getContract });
     expect(Object.keys(modules)).toHaveLength(1);
     const testModule = modules['test_namespace_2.test_module'];

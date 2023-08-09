@@ -4,13 +4,10 @@ import { IPactCommand } from '../interfaces/IPactCommand';
  * Typescript utility to verify that the passed object is a {@link IPactCommand}
  * @internal
  */
-export const isPactCommand = (
-  command: Partial<IPactCommand>,
-): command is IPactCommand => {
+export const isPactCommand = (command: Partial<IPactCommand>): command is IPactCommand => {
   if (command.payload === undefined) return false;
 
-  if (!('exec' in command.payload) && !('cont' in command.payload))
-    return false;
+  if (!('exec' in command.payload) && !('cont' in command.payload)) return false;
   if (command.networkId === undefined) return false;
   if (command.nonce === undefined) return false;
   if (command.meta === undefined) return false;

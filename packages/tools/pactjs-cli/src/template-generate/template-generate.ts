@@ -4,14 +4,7 @@ import { TTemplateGenerateOptions } from '.';
 
 import { Command } from 'commander';
 import debug from 'debug';
-import {
-  existsSync,
-  lstatSync,
-  mkdirSync,
-  readdirSync,
-  readFileSync,
-  writeFileSync,
-} from 'fs';
+import { existsSync, lstatSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { basename, extname, join } from 'path';
 import { sync as rimrafSync } from 'rimraf';
 import { z } from 'zod';
@@ -29,8 +22,7 @@ export const templateGenerate =
       const filesAndContents = files.map((filepath, __, filesArr) => {
         console.log(`Parsing template(s) from ${filepath}`);
         const name = basename(filepath, extname(filepath));
-        const isUniqueName: boolean =
-          filesArr.filter((f) => basename(f, extname(f)) === name).length === 1;
+        const isUniqueName: boolean = filesArr.filter((f) => basename(f, extname(f)) === name).length === 1;
 
         return {
           name: isUniqueName ? name : basename(filepath),
@@ -38,10 +30,7 @@ export const templateGenerate =
         };
       });
 
-      const generatedTemplateClient = generateTemplates(
-        filesAndContents,
-        version,
-      );
+      const generatedTemplateClient = generateTemplates(filesAndContents, version);
       const outputDirOrFile = join(process.cwd(), out);
 
       if (outputDirOrFile.endsWith('ts')) {
@@ -85,9 +74,7 @@ function getTemplateFilesPaths(fileOrDirectory: string): string[] {
   const lstat = lstatSync(join(process.cwd(), fileOrDirectory));
 
   if (lstat.isDirectory()) {
-    return readdirSync(fileOrDirectory, 'utf8').map((filename) =>
-      join(process.cwd(), fileOrDirectory, filename),
-    );
+    return readdirSync(fileOrDirectory, 'utf8').map((filename) => join(process.cwd(), fileOrDirectory, filename));
   }
   return [fileOrDirectory];
 }

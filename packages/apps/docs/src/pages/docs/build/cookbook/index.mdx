@@ -84,10 +84,7 @@ async function createAccount(newAccount) {
   const response = await Pact.fetch.send(cmd, API_HOST);
   console.log(`Request key: ${response.requestKeys[0]}`);
   console.log('Transaction pending...');
-  const txResult = await Pact.fetch.listen(
-    { listen: response.requestKeys[0] },
-    API_HOST,
-  );
+  const txResult = await Pact.fetch.listen({ listen: response.requestKeys[0] }, API_HOST);
   console.log('Transaction mined!');
   console.log(txResult);
 }
@@ -127,18 +124,12 @@ async function transferCreate(sender, newAccount, amount) {
     keyPairs: [
       Object.assign(KEY_PAIR, {
         clist: [
-          Pact.lang.mkCap(
-            'GAS',
-            'Capability to allow buying gas',
-            'coin.GAS',
-            [],
-          ).cap,
-          Pact.lang.mkCap(
-            'Transfer',
-            'Capability to allow coin transfer',
-            'coin.TRANSFER',
-            [sender, newAccount, { decimal: amount }],
-          ).cap,
+          Pact.lang.mkCap('GAS', 'Capability to allow buying gas', 'coin.GAS', []).cap,
+          Pact.lang.mkCap('Transfer', 'Capability to allow coin transfer', 'coin.TRANSFER', [
+            sender,
+            newAccount,
+            { decimal: amount },
+          ]).cap,
         ],
       }),
     ],
@@ -166,10 +157,7 @@ async function transferCreate(sender, newAccount, amount) {
   console.log(`Request key: ${response.requestKeys[0]}`);
   console.log('Transaction pending...');
 
-  const txResult = await Pact.fetch.listen(
-    { listen: response.requestKeys[0] },
-    API_HOST,
-  );
+  const txResult = await Pact.fetch.listen({ listen: response.requestKeys[0] }, API_HOST);
   console.log('Transaction mined!');
   console.log(txResult);
 }
@@ -209,18 +197,8 @@ async function rotate(account, newKey) {
     keyPairs: [
       Object.assign(KEY_PAIR, {
         clist: [
-          Pact.lang.mkCap(
-            'GAS',
-            'Capability to allow buying gas',
-            'coin.GAS',
-            [],
-          ).cap,
-          Pact.lang.mkCap(
-            'Rotate',
-            'Capability to allow rotating account guard',
-            'coin.ROTATE',
-            [account],
-          ).cap,
+          Pact.lang.mkCap('GAS', 'Capability to allow buying gas', 'coin.GAS', []).cap,
+          Pact.lang.mkCap('Rotate', 'Capability to allow rotating account guard', 'coin.ROTATE', [account]).cap,
         ],
       }),
     ],
@@ -246,10 +224,7 @@ async function rotate(account, newKey) {
   console.log(response);
   console.log(`Request key: ${response.requestKeys[0]}`);
   console.log('Transaction pending...');
-  const txResult = await Pact.fetch.listen(
-    { listen: response.requestKeys[0] },
-    API_HOST,
-  );
+  const txResult = await Pact.fetch.listen({ listen: response.requestKeys[0] }, API_HOST);
   console.log('Transaction mined!');
   console.log(txResult);
 }
@@ -372,10 +347,7 @@ async function deployContract() {
   const response = await Pact.fetch.send(cmd, API_HOST);
   console.log(`Request key: ${response.requestKeys[0]}`);
   console.log('Transaction pending...');
-  const txResult = await Pact.fetch.listen(
-    { listen: response.requestKeys[0] },
-    API_HOST,
-  );
+  const txResult = await Pact.fetch.listen({ listen: response.requestKeys[0] }, API_HOST);
   console.log('Transaction mined!');
   console.log(txResult);
 }
@@ -399,8 +371,7 @@ if (process.argv.length !== 2) {
 getState();
 
 async function getState() {
-  const account =
-    'f6b0e0d0bcae2e397104e0f6536492f01ce35977eb6fe5868a0efaff556bf80b';
+  const account = 'f6b0e0d0bcae2e397104e0f6536492f01ce35977eb6fe5868a0efaff556bf80b';
   const cmd = {
     pactCode: `(coin.details "${account}")`,
     meta: {
@@ -436,8 +407,6 @@ function verifySig() {
     Pact.crypto.hexToBin(KEY_PAIR.publicKey),
   );
 
-  isValid
-    ? console.log('Signature is valid!')
-    : console.log('Signature is invalid!');
+  isValid ? console.log('Signature is valid!') : console.log('Signature is invalid!');
 }
 ```

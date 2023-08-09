@@ -5,10 +5,6 @@ import nacl from 'tweetnacl';
  *
  * @alpha
  */
-export function verifySig(
-  msg: Uint8Array,
-  sig: Uint8Array,
-  pubKey: Uint8Array,
-): boolean {
+export function verifySig(msg: Uint8Array, sig: Uint8Array, pubKey: Uint8Array): boolean {
   return nacl.sign.detached.verify(msg, sig, pubKey);
 }

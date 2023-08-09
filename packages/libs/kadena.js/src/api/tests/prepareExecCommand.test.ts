@@ -2,14 +2,7 @@ import { ICommand } from '@kadena/types';
 
 import { prepareExecCommand } from '../prepareExecCommand';
 
-import {
-  command,
-  envData,
-  keyPairs,
-  meta,
-  nonce,
-  pactCode,
-} from './mockdata/execCommand';
+import { command, envData, keyPairs, meta, nonce, pactCode } from './mockdata/execCommand';
 
 test('Creates a signed Pact PactIExecCommand with undefined `networkId`', () => {
   const actual = prepareExecCommand(

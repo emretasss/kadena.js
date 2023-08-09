@@ -2,13 +2,7 @@ import { IConversation, useConversation } from './useConversation';
 import { useStream } from './useStream';
 
 import { useRouter } from 'next/router';
-import {
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 interface IProps {
   //eslint-disable-next-line @rushstack/no-new-null
@@ -23,8 +17,7 @@ interface IProps {
 export const useSearch = (): IProps => {
   const [query, setQuery] = useState<string | undefined>();
   const [conversation, dispatch] = useConversation();
-  const [startStream, isStreaming, outputStream, metadata, error, isLoading] =
-    useStream();
+  const [startStream, isStreaming, outputStream, metadata, error, isLoading] = useStream();
   const router = useRouter();
 
   const searchInputRef = useRef<HTMLInputElement | null>(null);

@@ -1,17 +1,6 @@
-import {
-  Button,
-  Notification,
-  Stack,
-  SystemIcon,
-  Tabs,
-  useModal,
-} from '@kadena/react-ui';
+import { Button, Notification, Stack, SystemIcon, Tabs, useModal } from '@kadena/react-ui';
 
-import {
-  loadingWrapperClass,
-  scrollBoxClass,
-  scrollBoxEnabledClass,
-} from './../styles.css';
+import { loadingWrapperClass, scrollBoxClass, scrollBoxEnabledClass } from './../styles.css';
 import { ResultCount } from './ResultCount';
 import { StaticResults } from './StaticResults';
 
@@ -91,29 +80,17 @@ export const SearchResults: FC<IProps> = ({
               </div>
             )}
             {semanticError ? (
-              <Notification.Root
-                color={'negative'}
-                expanded={true}
-                icon={SystemIcon.AlertBox}
-              >
+              <Notification.Root color={'negative'} expanded={true} icon={SystemIcon.AlertBox}>
                 {semanticError}
               </Notification.Root>
             ) : (
               <>
                 <ResultCount count={semanticResults.length} />
-                <StaticResults
-                  limitResults={limitResults}
-                  results={semanticResults}
-                />
+                <StaticResults limitResults={limitResults} results={semanticResults} />
                 {limitResults !== undefined && query !== undefined ? (
                   <Stack justifyContent="flex-end">
                     <Link href={`/search?q=${query}`} passHref legacyBehavior>
-                      <Button
-                        icon={'TrailingIcon'}
-                        iconAlign="right"
-                        title="Go to search results"
-                        onClick={clearModal}
-                      >
+                      <Button icon={'TrailingIcon'} iconAlign="right" title="Go to search results" onClick={clearModal}>
                         Go to search results
                       </Button>
                     </Link>
@@ -132,11 +109,7 @@ export const SearchResults: FC<IProps> = ({
               </div>
             )}
             {error && (
-              <Notification.Root
-                color={'negative'}
-                expanded={true}
-                icon={SystemIcon.AlertBox}
-              >
+              <Notification.Root color={'negative'} expanded={true} icon={SystemIcon.AlertBox}>
                 {error}
               </Notification.Root>
             )}

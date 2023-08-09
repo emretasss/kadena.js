@@ -69,14 +69,7 @@ export const Primary: Story = {
     disabled: false,
     status: undefined,
   },
-  render: ({
-    leadingText,
-    leftPanelIcon,
-    rightPanelIcon,
-    onChange,
-    disabled,
-    status,
-  }) => {
+  render: ({ leadingText, leftPanelIcon, rightPanelIcon, onChange, disabled, status }) => {
     return (
       <Input
         onChange={onChange}

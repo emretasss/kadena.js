@@ -25,10 +25,7 @@ import fetch from 'cross-fetch';
  * @alpha
  */
 async function reversePages<T>(
-  query: (
-    next: string | undefined,
-    limit: number | undefined,
-  ) => Promise<IPagedResponse<T>>,
+  query: (next: string | undefined, limit: number | undefined) => Promise<IPagedResponse<T>>,
   n: number | undefined,
 ): Promise<T[]> {
   const iter = pageIterator(query, n);
@@ -91,10 +88,7 @@ export async function cutPeerPage(
   host: string,
   retryOptions?: IRetryOptions,
 ): Promise<IPagedResponse<ICutPeerItem>> {
-  const result = await retryFetch(
-    () => fetch(transFormUrl(baseUrl(network, host, 'cut/peer'))),
-    retryOptions,
-  );
+  const result = await retryFetch(() => fetch(transFormUrl(baseUrl(network, host, 'cut/peer'))), retryOptions);
   return parseResponse<IPagedResponse<ICutPeerItem>>(result);
 }
 
@@ -199,19 +193,7 @@ export async function branch(
   retryOptions?: IRetryOptions,
 ): Promise<IBlockHeader[]> {
   return reversePages<IBlockHeader>(async (next, limit) => {
-    return branchPage(
-      chainId,
-      upper,
-      lower,
-      minHeight,
-      maxHeight,
-      limit,
-      next,
-      format,
-      network,
-      host,
-      retryOptions,
-    );
+    return branchPage(chainId, upper, lower, minHeight, maxHeight, limit, next, format, network, host, retryOptions);
   }, n);
 }
 
@@ -238,17 +220,7 @@ export async function currentBranch(
   host: string,
 ): Promise<IBlockHeader[]> {
   const { hashes } = await currentCut(network, host);
-  return branch(
-    chainId,
-    [hashes[`${chainId}`].hash],
-    [],
-    start,
-    end,
-    n,
-    format,
-    network,
-    host,
-  );
+  return branch(chainId, [hashes[`${chainId}`].hash], [], start, end, n, format, network, host);
 }
 
 /**
@@ -273,8 +245,7 @@ export async function payloads(
   retryOptions?: IRetryOptions,
   n?: number,
 ): Promise<IBlockPayload<ITransactionElement>[]> {
-  const path =
-    n !== undefined ? `payload/outputs/batch?${n}` : 'payload/outputs/batch';
+  const path = n !== undefined ? `payload/outputs/batch?${n}` : 'payload/outputs/batch';
   const url = chainUrl(chainId, path, network, host);
 
   const response = await retryFetch(

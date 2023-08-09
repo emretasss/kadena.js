@@ -64,13 +64,6 @@ export const ConsentModal: FC = () => {
 
       'Cookie consent',
     );
-  }, [
-    clearModal,
-    cookieConsent,
-    mounted,
-    handleAccept,
-    handleReject,
-    renderModal,
-  ]);
+  }, [clearModal, cookieConsent, mounted, handleAccept, handleReject, renderModal]);
   return null;
 };

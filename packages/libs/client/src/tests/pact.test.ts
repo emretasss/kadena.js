@@ -12,16 +12,10 @@ describe('Pact.modules', () => {
 
   it('returns pact string equivalent of a defpact call', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const code = (Pact.modules as any).coin.defpact['transfer-crosschain'](
-      'alice',
-      'bob',
-      () => 'myGuard',
-      '1',
-      { decimal: '1' },
-    );
-    expect(code).toBe(
-      '(coin.transfer-crosschain "alice" "bob" myGuard "1" 1.0)',
-    );
+    const code = (Pact.modules as any).coin.defpact['transfer-crosschain']('alice', 'bob', () => 'myGuard', '1', {
+      decimal: '1',
+    });
+    expect(code).toBe('(coin.transfer-crosschain "alice" "bob" myGuard "1" 1.0)');
   });
 
   it('returns code for time and module reference', () => {

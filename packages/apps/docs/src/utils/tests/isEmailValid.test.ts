@@ -2,11 +2,7 @@ import { isEmailValid } from '../isEmailValid';
 
 describe('utils isEmailValid', () => {
   it('should validate a valid email address', () => {
-    const validEmails = [
-      'he-man@theuniverse.com',
-      'snarfer.snarf@thundercats.co.uk',
-      'miles.mayhem+venom@venom.com',
-    ];
+    const validEmails = ['he-man@theuniverse.com', 'snarfer.snarf@thundercats.co.uk', 'miles.mayhem+venom@venom.com'];
 
     validEmails.forEach((email) => {
       expect(isEmailValid(email)).toBe(true);

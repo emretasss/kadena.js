@@ -59,11 +59,7 @@ test.before((t) => {
 });
 
 const nextQuestionTest = test.macro(
-  async (
-    t,
-    { current, answers }: { current?: number; answers: IAnswers },
-    expected: number,
-  ) => {
+  async (t, { current, answers }: { current?: number; answers: IAnswers }, expected: number) => {
     const { questions } = t.context;
     const res = getNextQuestion({
       current: t.context.questions[current ?? -1],

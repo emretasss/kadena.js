@@ -81,10 +81,7 @@ const IconWrapper = (
   // eslint-disable-next-line @typescript-eslint/naming-convention
   Component: React.FC<SVGProps<SVGSVGElement>>,
 ): React.FC<IconType> => {
-  const WrappedIcon: React.FC<SVGProps<SVGSVGElement> & IIconProps> = ({
-    size = 'md',
-    ...props
-  }) => (
+  const WrappedIcon: React.FC<SVGProps<SVGSVGElement> & IIconProps> = ({ size = 'md', ...props }) => (
     <IconContainer size={size}>
       <Component {...props} height={undefined} width={undefined} />
     </IconContainer>

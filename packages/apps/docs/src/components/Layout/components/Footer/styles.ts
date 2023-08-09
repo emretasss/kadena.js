@@ -1,9 +1,4 @@
-import {
-  darkTheme,
-  Stack,
-  styled,
-  StyledComponent,
-} from '@kadena/react-components';
+import { darkTheme, Stack, styled, StyledComponent } from '@kadena/react-components';
 
 import { InnerWrapper } from '../styles';
 
@@ -26,12 +21,9 @@ export const Box: StyledComponent<typeof Stack> = styled(Stack, {
   },
 });
 
-export const InnerFooterWrapper: StyledComponent<typeof InnerWrapper> = styled(
-  InnerWrapper,
-  {
-    flexDirection: 'column',
-    '@md': {
-      flexDirection: 'row',
-    },
+export const InnerFooterWrapper: StyledComponent<typeof InnerWrapper> = styled(InnerWrapper, {
+  flexDirection: 'column',
+  '@md': {
+    flexDirection: 'row',
   },
-);
+});

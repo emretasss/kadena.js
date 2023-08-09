@@ -2,12 +2,7 @@ import { createCap } from '../createCap';
 
 describe('createCap', () => {
   it('Takes in Pact Capability arguments and outputs Pact Capability object', () => {
-    const actual = createCap(
-      'Gas',
-      'Grants gas payment capability',
-      'coin.GAS',
-      [],
-    );
+    const actual = createCap('Gas', 'Grants gas payment capability', 'coin.GAS', []);
     const expected = {
       role: 'Gas',
       description: 'Grants gas payment capability',
@@ -20,12 +15,7 @@ describe('createCap', () => {
   });
 
   it('has a default value for args', () => {
-    const actual = createCap(
-      'Gas',
-      'Grants gas payment capability',
-      'coin.GAS',
-      [],
-    );
+    const actual = createCap('Gas', 'Grants gas payment capability', 'coin.GAS', []);
     const expected = {
       role: 'Gas',
       description: 'Grants gas payment capability',

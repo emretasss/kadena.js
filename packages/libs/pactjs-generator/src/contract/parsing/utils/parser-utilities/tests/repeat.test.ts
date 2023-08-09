@@ -24,18 +24,13 @@ describe('repeat parser', () => {
 
   it('should return wrapped value with empty object as data if token does not match any of the rules', () => {
     const pointer = getPointer('not matched with rules');
-    const result = repeat(
-      seq(id('first'), id('rule')),
-      seq(id('second'), id('rule')),
-    )(pointer);
+    const result = repeat(seq(id('first'), id('rule')), seq(id('second'), id('rule')))(pointer);
     expect(typeof result.data).toBe('object');
     expect(Object.keys(result.data)).toHaveLength(0);
   });
 
   it('should return wrapped value with object as data that has a key for each inspected value in the child rules', () => {
-    const pointer = getPointer(
-      'name: alice title: developer name:bob title: manager',
-    );
+    const pointer = getPointer('name: alice title: developer name:bob title: manager');
     const result = repeat(
       $('names', seq(id('name'), id(':'), $(atom))),
       $('titles', seq(id('title'), id(':'), $(atom))),
@@ -47,9 +42,7 @@ describe('repeat parser', () => {
   });
 
   it('should merge objects as a list if the keys are same', () => {
-    const pointer = getPointer(
-      'name: alice title: developer name:bob title: manager',
-    );
+    const pointer = getPointer('name: alice title: developer name:bob title: manager');
     const result = repeat(
       seq(id('name'), id(':'), $('name', atom)),
       seq(id('title'), id(':'), $('title', atom)),

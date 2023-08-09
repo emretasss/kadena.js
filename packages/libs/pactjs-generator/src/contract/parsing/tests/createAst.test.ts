@@ -82,10 +82,7 @@ interface ISimpleAstNode {
 }
 
 function simplifyTree(ast: IAst): SimpleAst {
-  return ast.map(function simplify({
-    value,
-    children,
-  }: IAstNode): ISimpleAstNode {
+  return ast.map(function simplify({ value, children }: IAstNode): ISimpleAstNode {
     if (children) {
       return { value, children: children.map(simplify) };
     }

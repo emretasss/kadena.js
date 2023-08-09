@@ -16,11 +16,7 @@ export const Tr: ITrComp = ({ children }) => {
   return (
     <StyledTr>
       {React.Children.map(children, (child) => {
-        if (
-          !React.isValidElement(child) ||
-          (Boolean(child) && child.type !== Th && child.type !== Td)
-        )
-          return null;
+        if (!React.isValidElement(child) || (Boolean(child) && child.type !== Th && child.type !== Td)) return null;
 
         return child;
       })}

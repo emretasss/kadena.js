@@ -44,11 +44,7 @@ const getFileNameInPackage = (file) => {
 const flat = (acc, val) => {
   const { children, ...newVal } = val;
 
-  return [
-    ...acc,
-    newVal,
-    children ? children.reduce(flat, []).flat() : undefined,
-  ];
+  return [...acc, newVal, children ? children.reduce(flat, []).flat() : undefined];
 };
 /**
  * create a navigation object with the next and previous link in the navigation json.
@@ -76,9 +72,7 @@ const remarkFrontmatterToProps = () => {
         data: {
           frontmatter: {
             ...getReadTime(file.value),
-            editLink:
-              process.env.NEXT_PUBLIC_GIT_EDIT_ROOT +
-              getFileNameInPackage(file),
+            editLink: process.env.NEXT_PUBLIC_GIT_EDIT_ROOT + getFileNameInPackage(file),
             lastModifiedDate: getModifiedDate(getFileName(file)),
             navigation: createNavigation(file),
             ...data,

@@ -1,17 +1,5 @@
-import {
-  ChainId,
-  createTransaction,
-  isSignedTransaction,
-  Pact,
-  signWithChainweaver,
-} from '@kadena/client';
-import {
-  addSigner,
-  composePactCommand,
-  execution,
-  setMeta,
-  setNetworkId,
-} from '@kadena/client/fp';
+import { ChainId, createTransaction, isSignedTransaction, Pact, signWithChainweaver } from '@kadena/client';
+import { addSigner, composePactCommand, execution, setMeta, setNetworkId } from '@kadena/client/fp';
 
 import { pollStatus, preflight, submit } from '../util/client';
 import { asyncPipe, inspect } from '../util/fp-helpers';
@@ -33,9 +21,7 @@ const getTransferCommand = ({
   networkId: string;
 }) =>
   composePactCommand(
-    execution(
-      Pact.modules.coin.transfer(sender, receiver, { decimal: amount }),
-    ),
+    execution(Pact.modules.coin.transfer(sender, receiver, { decimal: amount })),
     addSigner(signerPublicKey, (withCapability) => [
       withCapability('coin.GAS'),
       withCapability('coin.TRANSFER', sender, receiver, {
@@ -70,13 +56,10 @@ const doTransfer = asyncPipe(
 
 doTransfer(
   getTransferCommand({
-    sender:
-      'k:dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46',
-    receiver:
-      'k:2f48080efe54e6eb670487f664bcaac7684b4ebfcfc8a3330ef080c9c97f7e11',
+    sender: 'k:dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46',
+    receiver: 'k:2f48080efe54e6eb670487f664bcaac7684b4ebfcfc8a3330ef080c9c97f7e11',
     amount: '0.1337',
-    signerPublicKey:
-      'dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46',
+    signerPublicKey: 'dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46',
     chainId: '0',
     networkId: 'fast-development',
   }),

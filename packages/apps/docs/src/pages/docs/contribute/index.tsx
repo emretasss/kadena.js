@@ -1,10 +1,7 @@
 import { Stack } from '@kadena/react-ui';
 
 import { BrowseSection } from '@/components';
-import {
-  checkSubTreeForActive,
-  getPathName,
-} from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
+import { checkSubTreeForActive, getPathName } from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
 import { GetStaticProps } from 'next';
 import React, { FC } from 'react';
 
@@ -12,24 +9,9 @@ const Home: FC = () => {
   return (
     <Stack direction="column" spacing="$2xl">
       <BrowseSection>
-        <BrowseSection.LinkBlock
-          title="Run a Node"
-          subtitle=" "
-          icon="RestApi"
-          href="node/overview"
-        />
-        <BrowseSection.LinkBlock
-          title="Ambassadors"
-          subtitle=" "
-          icon="Contribute"
-          href="ambassadors/overview"
-        />
-        <BrowseSection.LinkBlock
-          title="Kadena DAO"
-          subtitle=" "
-          icon="Concepts"
-          href="kadena-dao"
-        />
+        <BrowseSection.LinkBlock title="Run a Node" subtitle=" " icon="RestApi" href="node/overview" />
+        <BrowseSection.LinkBlock title="Ambassadors" subtitle=" " icon="Contribute" href="ambassadors/overview" />
+        <BrowseSection.LinkBlock title="Kadena DAO" subtitle=" " icon="Concepts" href="kadena-dao" />
       </BrowseSection>
     </Stack>
   );

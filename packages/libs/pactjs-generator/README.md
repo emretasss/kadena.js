@@ -15,5 +15,4 @@ Generates TypeScript definitions of Pact contracts, for use in @kadena/pactjs
 
 API Reference can be found here [pactjs-generator.api.md][1]
 
-[1]:
-  https://github.com/kadena-community/kadena.js/tree/main/packages/libs/pactjs-generator/etc/pactjs-generator.api.md
+[1]: https://github.com/kadena-community/kadena.js/tree/main/packages/libs/pactjs-generator/etc/pactjs-generator.api.md

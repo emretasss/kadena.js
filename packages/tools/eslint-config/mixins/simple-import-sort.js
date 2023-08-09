@@ -24,9 +24,7 @@ module.exports = {
               ['^@kadena(/.*|$)'],
               // Aliases from tsconfig.json
               ...(tsconfig?.compilerOptions?.paths
-                ? Object.keys(tsconfig.compilerOptions.paths).map((alias) => [
-                    `^${alias}(/.*|$)`,
-                  ])
+                ? Object.keys(tsconfig.compilerOptions.paths).map((alias) => [`^${alias}(/.*|$)`])
                 : []),
               // Parent imports. Put `..` last.
               ['^\\.\\.(?!/?$)', '^\\.\\./?$'],

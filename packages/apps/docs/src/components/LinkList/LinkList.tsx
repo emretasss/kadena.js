@@ -16,10 +16,7 @@ export const LinkList: FC<ILinkList> = ({ children, title }) => {
       {Boolean(title) && <Heading as="h6">{title}</Heading>}
       <ul className={listClass}>
         {React.Children.map(children, (child) => {
-          if (
-            !React.isValidElement(child) ||
-            (child.type !== Link && child.props.href === undefined)
-          ) {
+          if (!React.isValidElement(child) || (child.type !== Link && child.props.href === undefined)) {
             throw new Error('not a valid linkClass');
           }
           const childWithProps = React.cloneElement(child, {

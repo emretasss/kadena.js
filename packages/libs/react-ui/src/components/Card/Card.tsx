@@ -1,9 +1,4 @@
-import {
-  container,
-  disabledClass,
-  fullWidthClass,
-  stackClass,
-} from './Card.css';
+import { container, disabledClass, fullWidthClass, stackClass } from './Card.css';
 
 import className from 'classnames';
 import React, { FC } from 'react';
@@ -19,12 +14,7 @@ export interface ICardProps {
   disabled?: boolean;
 }
 
-export const Card: FC<ICardProps> = ({
-  children,
-  fullWidth,
-  stack,
-  disabled,
-}) => {
+export const Card: FC<ICardProps> = ({ children, fullWidth, stack, disabled }) => {
   const classList = className(container, {
     [stackClass]: stack,
     [fullWidthClass]: fullWidth,

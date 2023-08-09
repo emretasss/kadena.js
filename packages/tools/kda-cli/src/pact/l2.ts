@@ -34,11 +34,7 @@ export interface ITransactionPayload {
 
 export interface IDepositPayload {
   command: `(n_560eefcee4a090a24f12d7cf68cd48f11d8d2bd9.l2.deposit "${string}" "${string}" ${Decimal})`;
-  caps: [
-    coin.ICapabilities['Transfer'],
-    coin.ICapabilities['Gas'],
-    IGasCapability,
-  ];
+  caps: [coin.ICapabilities['Transfer'], coin.ICapabilities['Gas'], IGasCapability];
   data: unknown;
 }
 
@@ -47,13 +43,10 @@ export interface IWithdrawPayload {
   caps: [IWithdrawCapability, coin.ICapabilities['Gas'], IGasCapability];
   data: unknown;
 }
-export const decimalFormatter: Intl.NumberFormat = new Intl.NumberFormat(
-  'en-US',
-  {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 12,
-  },
-);
+export const decimalFormatter: Intl.NumberFormat = new Intl.NumberFormat('en-US', {
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 12,
+});
 
 export const setTransactionCommand =
   (from: string, to: string, amount: number): Reducer =>

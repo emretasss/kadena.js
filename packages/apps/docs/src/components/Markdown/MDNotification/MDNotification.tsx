@@ -1,8 +1,4 @@
-import {
-  Notification,
-  NotificationBody,
-  styled,
-} from '@kadena/react-components';
+import { Notification, NotificationBody, styled } from '@kadena/react-components';
 
 import { getColor, getIcon, LabelType } from './utils';
 
@@ -21,12 +17,7 @@ interface IProps {
 export const MDNotification: FC<IProps> = ({ children, title = '', label }) => {
   return (
     <Wrapper>
-      <Notification
-        color={getColor(label)}
-        title={title}
-        expand
-        icon={getIcon(label)}
-      >
+      <Notification color={getColor(label)} title={title} expand icon={getIcon(label)}>
         <NotificationBody>{children}</NotificationBody>
       </Notification>
     </Wrapper>

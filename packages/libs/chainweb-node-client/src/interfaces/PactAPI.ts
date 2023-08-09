@@ -138,10 +138,7 @@ export type ILocalResult = IPreflightResult | ICommandResult;
 /**
  * @alpha
  */
-export type LocalResultWithoutPreflight = Omit<
-  ILocalCommandResult,
-  'preflightWarnings'
->;
+export type LocalResultWithoutPreflight = Omit<ILocalCommandResult, 'preflightWarnings'>;
 
 /**
  * Request type of /poll endpoint.

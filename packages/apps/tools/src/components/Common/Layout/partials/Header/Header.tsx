@@ -49,9 +49,7 @@ const Header: FC<IHeaderProps> = ({ logo, appTitle, rightPanel, menu }) => {
           <GridCol xs={11} lg={2}>
             <StyledLeftPanelWrapper>
               {Boolean(logo) && <StyledLogoWrapper>{logo}</StyledLogoWrapper>}
-              {Boolean(appTitle) && (
-                <StyledTitle href={Routes.HOME}>{appTitle}</StyledTitle>
-              )}
+              {Boolean(appTitle) && <StyledTitle href={Routes.HOME}>{appTitle}</StyledTitle>}
             </StyledLeftPanelWrapper>
           </GridCol>
           {hasMenu && (
@@ -60,10 +58,7 @@ const Header: FC<IHeaderProps> = ({ logo, appTitle, rightPanel, menu }) => {
             </GridCol>
           )}
           {Boolean(rightPanel) && (
-            <GridCol
-              xs={{ hidden: true }}
-              lg={{ size: 3, hidden: false, push: hasMenu ? 0 : 7 }}
-            >
+            <GridCol xs={{ hidden: true }} lg={{ size: 3, hidden: false, push: hasMenu ? 0 : 7 }}>
               {rightPanel}
             </GridCol>
           )}

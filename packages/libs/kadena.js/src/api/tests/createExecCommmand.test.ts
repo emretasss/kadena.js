@@ -2,14 +2,7 @@ import { createSendRequest } from '@kadena/chainweb-node-client';
 
 import { createExecCommand } from '../createExecCommand';
 
-import {
-  command,
-  envData,
-  keyPairs,
-  meta,
-  nonce,
-  pactCode,
-} from './mockdata/execCommand';
+import { command, envData, keyPairs, meta, nonce, pactCode } from './mockdata/execCommand';
 
 test('Takes in exec command parameters and outputs a command formatted for /send endpoint', () => {
   const actual = createExecCommand(keyPairs, nonce, pactCode, envData, meta);

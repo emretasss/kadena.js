@@ -5,8 +5,7 @@ import { StyledButton } from './styles';
 import { VariantProps } from '@stitches/react';
 import React, { FC } from 'react';
 
-export interface IIconButtonProps
-  extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'color'> {
+export interface IIconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'color'> {
   as?: 'button' | 'a';
   icon: (typeof SystemIcons)[keyof typeof SystemIcons];
   onClick?: React.MouseEventHandler<HTMLButtonElement>;

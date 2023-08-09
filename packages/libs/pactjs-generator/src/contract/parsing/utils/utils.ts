@@ -21,7 +21,5 @@ export interface IModuleLike {
   namespace?: string;
 }
 
-export const getModuleFullName = ({
-  name,
-  namespace = '',
-}: IModuleLike): string => (namespace !== '' ? `${namespace}.${name}` : name);
+export const getModuleFullName = ({ name, namespace = '' }: IModuleLike): string =>
+  namespace !== '' ? `${namespace}.${name}` : name;

@@ -14,16 +14,10 @@ export const FooterLink: FC<IFooterLinkProps> = ({ children }) => {
   };
 
   const clones = React.Children.map(children, (child) => {
-    return React.cloneElement(
-      child as React.ReactElement<
-        any,
-        string | React.JSXElementConstructor<any>
-      >,
-      {
-        className: [linkClass],
-        style: colorStyles,
-      },
-    );
+    return React.cloneElement(child as React.ReactElement<any, string | React.JSXElementConstructor<any>>, {
+      className: [linkClass],
+      style: colorStyles,
+    });
   });
 
   return (

@@ -2,9 +2,7 @@ import { IPactCommand } from '../interfaces/IPactCommand';
 
 import { patchCommand } from './utils/patchCommand';
 
-type NoPayload<TCommand> = TCommand extends { payload: unknown }
-  ? never
-  : TCommand;
+type NoPayload<TCommand> = TCommand extends { payload: unknown } ? never : TCommand;
 
 type DataOrFunction<TData> = TData | ((a: TData) => TData);
 
@@ -14,12 +12,7 @@ type InitialInput = Partial<IPactCommand> | (() => Partial<IPactCommand>);
 interface IComposePactCommand {
   <TPayload extends Pick<IPactCommand, 'payload'>>(
     payload: TPayload,
-    ...rest: [
-      ...Array<
-        | Partial<IPactCommand>
-        | ((payload: TPayload & Partial<IPactCommand>) => Partial<IPactCommand>)
-      >,
-    ]
+    ...rest: [...Array<Partial<IPactCommand> | ((payload: TPayload & Partial<IPactCommand>) => Partial<IPactCommand>)>]
   ): (cmd?: InitialInput) => Partial<IPactCommand>;
 
   (
@@ -28,9 +21,7 @@ interface IComposePactCommand {
   ): (cmd?: InitialInput) => Partial<IPactCommand>;
 }
 
-const finalizeCommand = (
-  command: Partial<IPactCommand>,
-): Partial<IPactCommand> => {
+const finalizeCommand = (command: Partial<IPactCommand>): Partial<IPactCommand> => {
   const dateInMs = Date.now();
   const finalCommand = { ...command };
   finalCommand.nonce ??= `kjs:nonce:${dateInMs}`;
@@ -61,15 +52,13 @@ export const composePactCommand: IComposePactCommand =
     ...rest: Array<DataOrFunction<Partial<IPactCommand>>>
   ): ((cmd?: InitialInput) => Partial<IPactCommand>) =>
   (initial: InitialInput = {}) => {
-    const args: Array<
-      | Partial<IPactCommand>
-      | ((cmd: Partial<IPactCommand>) => Partial<IPactCommand>)
-    > = [first, ...rest];
+    const args: Array<Partial<IPactCommand> | ((cmd: Partial<IPactCommand>) => Partial<IPactCommand>)> = [
+      first,
+      ...rest,
+    ];
     const command = args.reduce<Partial<IPactCommand>>(
       (acc, next: unknown) => {
-        return typeof next === 'function'
-          ? next(acc)
-          : patchCommand(acc, next as Partial<IPactCommand>);
+        return typeof next === 'function' ? next(acc) : patchCommand(acc, next as Partial<IPactCommand>);
       },
       typeof initial === 'function' ? initial() : initial,
     );

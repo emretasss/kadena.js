@@ -11,10 +11,7 @@ import fetch from 'cross-fetch';
  * @param apiHost - API host running a Pact-enabled server.
  * @alpha
  */
-export async function listen(
-  requestBody: IListenRequestBody,
-  apiHost: string,
-): Promise<ICommandResult> {
+export async function listen(requestBody: IListenRequestBody, apiHost: string): Promise<ICommandResult> {
   const request = stringifyAndMakePOSTRequest(requestBody);
   const listenUrl = new URL(`${apiHost}/api/v1/listen`);
 

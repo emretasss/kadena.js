@@ -13,25 +13,15 @@ import {
 } from '../composePactCommand';
 import { ValidDataTypes } from '../composePactCommand/utils/addData';
 import { patchCommand } from '../composePactCommand/utils/patchCommand';
-import {
-  IContinuationPayloadObject,
-  IPactCommand,
-} from '../interfaces/IPactCommand';
-import {
-  ExtractCapabilityType,
-  IGeneralCapability,
-} from '../interfaces/type-utilities';
+import { IContinuationPayloadObject, IPactCommand } from '../interfaces/IPactCommand';
+import { ExtractCapabilityType, IGeneralCapability } from '../interfaces/type-utilities';
 import { createTransaction } from '../utils/createTransaction';
 
 interface IAddSigner<TCommand> {
   /**
    * Add signer without capability
    */
-  (
-    first:
-      | string
-      | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
-  ): IBuilder<TCommand>;
+  (first: string | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string }): IBuilder<TCommand>;
   /**
    * Add a signer including capabilities. The withCapability function is obtained from
    * the function you call in the execution part.
@@ -44,9 +34,7 @@ interface IAddSigner<TCommand> {
    * ])
    */
   (
-    first:
-      | string
-      | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
+    first: string | { pubKey: string; scheme?: 'ED25519' | 'ETH'; address?: string },
     capability: (withCapability: ExtractCapabilityType<TCommand>) => ICap[],
   ): IBuilder<TCommand>;
 }
@@ -70,11 +58,7 @@ interface IAddKeyset<TCommand> {
     ...publicKeys: string[]
   ): IBuilder<TCommand>;
 
-  <TKey extends string, PRED extends string>(
-    key: TKey,
-    pred: PRED,
-    ...publicKeys: string[]
-  ): IBuilder<TCommand>;
+  <TKey extends string, PRED extends string>(key: TKey, pred: PRED, ...publicKeys: string[]): IBuilder<TCommand>;
 }
 /**
  * The interface of the return value `Pact.builder.execution` or `Pact.builder.continuation`
@@ -242,21 +226,14 @@ export interface ITransactionBuilder {
 }
 
 interface IStatefulCompose {
-  composeWith: (
-    patch:
-      | Partial<IPactCommand>
-      | ((cmd: Partial<IPactCommand>) => Partial<IPactCommand>),
-  ) => void;
+  composeWith: (patch: Partial<IPactCommand> | ((cmd: Partial<IPactCommand>) => Partial<IPactCommand>)) => void;
   readonly finalize: (command: Partial<IPactCommand>) => Partial<IPactCommand>;
 }
 
 const statefulCompose = (init: Partial<IPactCommand>): IStatefulCompose => {
-  let reducer: (command: Partial<IPactCommand>) => Partial<IPactCommand> =
-    composePactCommand(init);
+  let reducer: (command: Partial<IPactCommand>) => Partial<IPactCommand> = composePactCommand(init);
   const composeWith = (
-    patch:
-      | Partial<IPactCommand>
-      | ((cmd: Partial<IPactCommand>) => Partial<IPactCommand>),
+    patch: Partial<IPactCommand> | ((cmd: Partial<IPactCommand>) => Partial<IPactCommand>),
   ): void => {
     reducer = composePactCommand(reducer, patch);
   };
@@ -281,10 +258,9 @@ const getBuilder = <T>(init: Partial<IPactCommand>): IBuilder<T> => {
     },
     addSigner: (pubKey, cap?: unknown) => {
       state.composeWith(
-        addSigner(
-          pubKey,
-          cap as (withCapability: IGeneralCapability) => ICap[],
-        ) as (cmd: Partial<IPactCommand>) => Partial<IPactCommand>,
+        addSigner(pubKey, cap as (withCapability: IGeneralCapability) => ICap[]) as (
+          cmd: Partial<IPactCommand>,
+        ) => Partial<IPactCommand>,
       );
       return builder;
     },
@@ -317,21 +293,15 @@ const getBuilder = <T>(init: Partial<IPactCommand>): IBuilder<T> => {
  *
  * @public
  */
-export const createTransactionBuilder = (
-  initial?: Partial<IPactCommand>,
-): ITransactionBuilder => {
+export const createTransactionBuilder = (initial?: Partial<IPactCommand>): ITransactionBuilder => {
   return {
     execution: (...pactExpressions: string[]) => {
-      const init = initial
-        ? patchCommand(initial, execution(...pactExpressions))
-        : execution(...pactExpressions);
+      const init = initial ? patchCommand(initial, execution(...pactExpressions)) : execution(...pactExpressions);
 
       return getBuilder(init);
     },
     continuation: (contOptions: IContinuationPayloadObject['cont']) => {
-      const init = initial
-        ? patchCommand(initial, continuation(contOptions))
-        : continuation(contOptions);
+      const init = initial ? patchCommand(initial, continuation(contOptions)) : continuation(contOptions);
 
       return getBuilder(init);
     },

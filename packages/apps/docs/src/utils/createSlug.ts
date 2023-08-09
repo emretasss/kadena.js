@@ -1,8 +1,4 @@
-export const createSlug = (
-  str?: string,
-  index?: number,
-  parentTitle = 'menu',
-): string => {
+export const createSlug = (str?: string, index?: number, parentTitle = 'menu'): string => {
   if (str === undefined) return '';
 
   const normalizedSlug = str
@@ -16,8 +12,7 @@ export const createSlug = (
 
   const normalizedParentTitle = parentTitle.toLowerCase().replace(/ /g, '-');
 
-  if (normalizedSlug === '' && index !== undefined)
-    return `${normalizedParentTitle}-${index}`;
+  if (normalizedSlug === '' && index !== undefined) return `${normalizedParentTitle}-${index}`;
 
   if (normalizedSlug === '') return normalizedParentTitle;
 

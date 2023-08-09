@@ -4,9 +4,7 @@ import React from 'react';
 
 describe('Button', () => {
   it('renders correctly', () => {
-    const { getByTestId } = render(
-      <Button title="Button">Hello, Button!</Button>,
-    );
+    const { getByTestId } = render(<Button title="Button">Hello, Button!</Button>);
 
     const buttonContainer = getByTestId('kda-button');
     expect(buttonContainer).toBeInTheDocument();

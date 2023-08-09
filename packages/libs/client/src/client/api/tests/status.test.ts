@@ -11,16 +11,9 @@ import { pollStatus } from '../status';
 
 describe('pollStatus', () => {
   it('calls the /poll endpoint several times till it gets the status of all request keys', async () => {
-    const responses = [
-      {},
-      { 'key-1': { reqKey: 'key-1' } },
-      {},
-      { 'key-2': { reqKey: 'key-2' } },
-    ];
+    const responses = [{}, { 'key-1': { reqKey: 'key-1' } }, {}, { 'key-2': { reqKey: 'key-2' } }];
 
-    (poll as jest.Mock).mockImplementation(
-      withCounter((counter) => responses[counter - 1] ?? {}),
-    );
+    (poll as jest.Mock).mockImplementation(withCounter((counter) => responses[counter - 1] ?? {}));
 
     const hostUrl = "http://test-blockchain-host.com'";
 
@@ -39,12 +32,7 @@ describe('pollStatus', () => {
   });
 
   it('throws TIME_OUT_REJECT if the task get longer that in timeout option', async () => {
-    const responses = [
-      {},
-      { 'key-1': { reqKey: 'key-1' } },
-      {},
-      { 'key-2': { reqKey: 'key-2' } },
-    ];
+    const responses = [{}, { 'key-1': { reqKey: 'key-1' } }, {}, { 'key-2': { reqKey: 'key-2' } }];
 
     (poll as jest.Mock).mockImplementation(
       withCounter(async (counter) => {
@@ -66,16 +54,9 @@ describe('pollStatus', () => {
   });
 
   it('calls onPoll call back before fetching each request key in each try', async () => {
-    const responses = [
-      {},
-      { 'key-1': { reqKey: 'key-1' } },
-      {},
-      { 'key-2': { reqKey: 'key-2' } },
-    ];
+    const responses = [{}, { 'key-1': { reqKey: 'key-1' } }, {}, { 'key-2': { reqKey: 'key-2' } }];
 
-    (poll as jest.Mock).mockImplementation(
-      withCounter((counter) => responses[counter - 1] ?? {}),
-    );
+    (poll as jest.Mock).mockImplementation(withCounter((counter) => responses[counter - 1] ?? {}));
 
     const onPoll = jest.fn();
 
@@ -106,13 +87,9 @@ describe('pollStatus', () => {
   });
 
   it("uses default options if they aren't provided", async () => {
-    const responses = [
-      { 'key-1': { reqKey: 'key-1' }, 'key-2': { reqKey: 'key-2' } },
-    ];
+    const responses = [{ 'key-1': { reqKey: 'key-1' }, 'key-2': { reqKey: 'key-2' } }];
 
-    (poll as jest.Mock).mockImplementation(
-      withCounter((counter) => responses[counter - 1] ?? {}),
-    );
+    (poll as jest.Mock).mockImplementation(withCounter((counter) => responses[counter - 1] ?? {}));
 
     const hostUrl = "http://test-blockchain-host.com'";
 

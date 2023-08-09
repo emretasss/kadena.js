@@ -15,9 +15,7 @@ export const Breadcrumbs: FC<IBreadcrumbs> = ({ children, icon }) => {
     <StyledBreadcrumbs>
       {React.Children.map(children, (child, idx) => {
         if (child === undefined || child.type !== BreadcrumbItem) {
-          throw new Error(
-            `${child?.type} is not a valid child for Breadcrumbs`,
-          );
+          throw new Error(`${child?.type} is not a valid child for Breadcrumbs`);
         }
 
         if (idx === 0) {

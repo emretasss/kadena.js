@@ -21,29 +21,18 @@ export interface ITreeItemProps {
   onClose?: () => void;
 }
 
-export const TreeItem: FC<ITreeItemProps> = ({
-  title,
-  items,
-  isOpen,
-  linked = false,
-  onOpen,
-  onClose,
-}) => {
+export const TreeItem: FC<ITreeItemProps> = ({ title, items, isOpen, linked = false, onOpen, onClose }) => {
   const hasTitle = !!title;
   const hasChildren = !!items?.length;
   const initialExpandedChildren: number[] = items
     ?.map((item, index) => (item.isOpen ? index : undefined))
     .filter((item) => item !== undefined) as number[];
 
-  const [expandedChildren, setExpandedChildren] = useState<number[]>(
-    initialExpandedChildren,
-  );
+  const [expandedChildren, setExpandedChildren] = useState<number[]>(initialExpandedChildren);
 
   const handleExpandChildren = (index: number): void => {
     if (linked) {
-      expandedChildren.forEach(
-        (childrenIndex) => items?.[childrenIndex]?.onClose?.(),
-      );
+      expandedChildren.forEach((childrenIndex) => items?.[childrenIndex]?.onClose?.());
       setExpandedChildren([index]);
     } else setExpandedChildren([...expandedChildren, index]);
 
@@ -71,35 +60,17 @@ export const TreeItem: FC<ITreeItemProps> = ({
           aria-selected={Boolean(isOpen)}
           data-testid="kda-tree-title"
         >
-          <span
-            className={classNames(
-              treeToggleClass,
-              treeToggleVariant[isOpen ? 'opened' : 'closed'],
-            )}
-          >
-            {hasChildren ? (
-              <SystemIcon.ChevronDown size="md" />
-            ) : (
-              <SystemIcon.Circle size="md" />
-            )}
+          <span className={classNames(treeToggleClass, treeToggleVariant[isOpen ? 'opened' : 'closed'])}>
+            {hasChildren ? <SystemIcon.ChevronDown size="md" /> : <SystemIcon.Circle size="md" />}
           </span>
-          <span
-            className={classNames(
-              treeTitleClass,
-              treeTitleVariant[hasChildren ? 'isParent' : 'isChild'],
-            )}
-          >
+          <span className={classNames(treeTitleClass, treeTitleVariant[hasChildren ? 'isParent' : 'isChild'])}>
             {title}
           </span>
         </div>
       )}
 
       {isOpen && (
-        <div
-          className={
-            treeBranchWrapperVariant[hasTitle ? 'isChild' : 'isParent']
-          }
-        >
+        <div className={treeBranchWrapperVariant[hasTitle ? 'isChild' : 'isParent']}>
           {items?.map((item, index) => (
             <TreeItem
               key={String(item.title)}

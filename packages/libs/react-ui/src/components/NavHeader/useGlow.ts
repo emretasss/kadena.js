@@ -20,9 +20,7 @@ const useGlow = (): IUseGlowReturn => {
   const glowAnimationSpeed = useRef<number>(0);
 
   useEffect(() => {
-    const activeNavElement = navRef.current?.querySelector(
-      `li:nth-child(${activeNav}) a`,
-    );
+    const activeNavElement = navRef.current?.querySelector(`li:nth-child(${activeNav}) a`);
     const activeNavBounds = activeNavElement?.getBoundingClientRect();
     const glowBounds = glowRef.current?.getBoundingClientRect();
     const headerBounds = navRef.current?.parentElement?.getBoundingClientRect();
@@ -31,12 +29,7 @@ const useGlow = (): IUseGlowReturn => {
 
     if (noActiveNav && glowBounds) setGlowX(-glowBounds.width / 2);
     else if (activeNavBounds && glowBounds && headerBounds)
-      setGlowX(
-        activeNavBounds.x -
-          headerBounds.x -
-          glowBounds.width / 2 +
-          activeNavBounds.width / 2,
-      );
+      setGlowX(activeNavBounds.x - headerBounds.x - glowBounds.width / 2 + activeNavBounds.width / 2);
   }, [glowX, activeNav]);
 
   useEffect(() => {

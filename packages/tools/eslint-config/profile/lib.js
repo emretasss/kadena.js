@@ -9,9 +9,7 @@ const findUp = (filename, dir = process.cwd()) => {
   return findUp(filename, parentDir);
 };
 
-const prettierOptions = JSON.parse(
-  fs.readFileSync(findUp('.prettierrc'), 'utf8'),
-);
+const prettierOptions = JSON.parse(fs.readFileSync(findUp('.prettierrc'), 'utf8'));
 
 module.exports = {
   root: true,
@@ -25,13 +23,7 @@ module.exports = {
     '../mixins/simple-import-sort.js',
     '../mixins/typedef-allow-implicitly-typed-parameters.js',
   ],
-  plugins: [
-    '@kadena-dev/eslint-plugin',
-    'import',
-    'simple-import-sort',
-    'prettier',
-    'json-files',
-  ],
+  plugins: ['@kadena-dev/eslint-plugin', 'import', 'simple-import-sort', 'prettier', 'json-files'],
   rules: {
     '@kadena-dev/no-eslint-disable': 'error',
     'prettier/prettier': ['warn', prettierOptions],

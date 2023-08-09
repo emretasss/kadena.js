@@ -39,13 +39,7 @@ describe('Footer', () => {
         </NavFooter.Panel>
         <NavFooter.Panel>
           {icons.map((item, index) => {
-            return (
-              <NavFooter.IconButton
-                key={index}
-                icon={item.icon}
-                text={item.text}
-              />
-            );
+            return <NavFooter.IconButton key={index} icon={item.icon} text={item.text} />;
           })}
         </NavFooter.Panel>
       </NavFooter.Root>,
@@ -90,13 +84,7 @@ describe('Footer', () => {
         </NavFooter.Panel>
         <NavFooter.Panel>
           {icons.map((item, index) => {
-            return (
-              <NavFooter.IconButton
-                key={index}
-                icon={item.icon}
-                text={item.text}
-              />
-            );
+            return <NavFooter.IconButton key={index} icon={item.icon} text={item.text} />;
           })}
         </NavFooter.Panel>
       </NavFooter.Root>,

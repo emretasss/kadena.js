@@ -61,16 +61,7 @@ export const media: ConfigType.Media<{
   '2xl': `(min-width: ${1440 / 16}rem)`,
 } as const;
 
-export const {
-  styled,
-  css,
-  config,
-  theme,
-  getCssText,
-  createTheme,
-  globalCss,
-  keyframes,
-} = createStitches({
+export const { styled, css, config, theme, getCssText, createTheme, globalCss, keyframes } = createStitches({
   theme: {
     colors: {
       ...colors,

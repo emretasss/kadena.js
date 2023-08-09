@@ -7,10 +7,7 @@ export interface IBreadcrumbItemProps {
   href?: string;
 }
 
-export const BreadcrumbsItem: FC<IBreadcrumbItemProps> = ({
-  children,
-  href,
-}) => {
+export const BreadcrumbsItem: FC<IBreadcrumbItemProps> = ({ children, href }) => {
   return (
     <li className={itemClass}>
       {href !== undefined ? (

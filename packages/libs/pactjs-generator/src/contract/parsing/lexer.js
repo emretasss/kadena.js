@@ -119,25 +119,18 @@ function getModuleAndMethods(contract, logger) {
         break;
       case KW_ATOM:
         if (state.stack.includes(STACK_DEFUN_TYPE)) {
-          output[state.moduleName].defuns[state.defunName].returnType =
-            token.value;
+          output[state.moduleName].defuns[state.defunName].returnType = token.value;
           logger('pop '.concat(STACK_DEFUN_TYPE));
           state.stack.pop();
           break;
         }
         if (state.stack.includes(STACK_ARGS_TYPE)) {
-          output[state.moduleName].defuns[state.defunName].args[
-            state.argName
-          ].type = token.value;
+          output[state.moduleName].defuns[state.defunName].args[state.argName].type = token.value;
           logger('pop '.concat(STACK_ARGS_TYPE));
           state.stack.pop();
           break;
         }
-        if (
-          state.stack.includes(KW_MODULE) &&
-          !state.stack.includes(KW_DEFUN) &&
-          !state.stack.includes(STACK_ARGS)
-        ) {
+        if (state.stack.includes(KW_MODULE) && !state.stack.includes(KW_DEFUN) && !state.stack.includes(STACK_ARGS)) {
           // module
           if (!state.moduleName) {
             state.moduleName = token.value;
@@ -212,21 +205,14 @@ function getModuleAndMethods(contract, logger) {
         }
         break;
       case 'colon':
-        if (
-          state.stack.includes(KW_DEFUN) &&
-          !state.stack.includes(STACK_ARGS) &&
-          lastThreeTokens[1].type === 'atom'
-        ) {
+        if (state.stack.includes(KW_DEFUN) && !state.stack.includes(STACK_ARGS) && lastThreeTokens[1].type === 'atom') {
           // in defun, but not in args
           // last one is atom
           logger('push '.concat(STACK_DEFUN_TYPE));
           state.stack.push(STACK_DEFUN_TYPE);
           break;
         }
-        if (
-          state.stack.includes(STACK_ARGS) &&
-          lastThreeTokens[1].type === 'atom'
-        ) {
+        if (state.stack.includes(STACK_ARGS) && lastThreeTokens[1].type === 'atom') {
           // in args
           // last one is atom
           state.stack.push(STACK_ARGS_TYPE);
@@ -242,10 +228,7 @@ function getModuleAndMethods(contract, logger) {
         }
         break;
       case 'lparen':
-        if (
-          state.stack.includes(KW_DEFUN) &&
-          !state.stack.includes(STACK_ARGS)
-        ) {
+        if (state.stack.includes(KW_DEFUN) && !state.stack.includes(STACK_ARGS)) {
           state.stack.push(STACK_ARGS);
           logger('push '.concat(STACK_ARGS));
         }

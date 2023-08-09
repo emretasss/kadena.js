@@ -17,14 +17,7 @@ const meta: Meta<
   },
 };
 
-const ItemArray: string[] = [
-  'He-man',
-  'Skeletor',
-  'Orko',
-  'Teela-Na',
-  'Cringer',
-  'King Randor',
-];
+const ItemArray: string[] = ['He-man', 'Skeletor', 'Orko', 'Teela-Na', 'Cringer', 'King Randor'];
 
 export default meta;
 type Story = StoryObj<ITabsContainerProps & { itemsCount: number }>;

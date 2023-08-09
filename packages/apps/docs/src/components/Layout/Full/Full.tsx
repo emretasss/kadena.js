@@ -3,14 +3,7 @@ import { Heading } from '@kadena/react-ui';
 import { Article, Content } from '../components';
 import { Template } from '../components/Template';
 
-import {
-  Aside,
-  AsideBackground,
-  AsideList,
-  ListItem,
-  StickyAside,
-  StickyAsideWrapper,
-} from './components/Aside';
+import { Aside, AsideBackground, AsideList, ListItem, StickyAside, StickyAsideWrapper } from './components/Aside';
 import { PageGrid } from './styles';
 
 import { BottomPageSection } from '@/components/BottomPageSection';
@@ -21,12 +14,7 @@ import { createSlug } from '@/utils';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
-export const Full: FC<IPageProps> = ({
-  children,
-  aSideMenuTree = [],
-  frontmatter,
-  leftMenuTree,
-}) => {
+export const Full: FC<IPageProps> = ({ children, aSideMenuTree = [], frontmatter, leftMenuTree }) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
   const menuRef = useRef<HTMLUListElement | null>(null);
@@ -54,9 +42,7 @@ export const Full: FC<IPageProps> = ({
       rootMargin: '20% 0% -65% 0px',
     });
 
-    const headings = scrollRef.current.querySelectorAll(
-      'h1 > a, h2 > a, h3 > a, h4 > a, h5 > a, h6 > a',
-    );
+    const headings = scrollRef.current.querySelectorAll('h1 > a, h2 > a, h3 > a, h4 > a, h5 > a, h6 > a');
 
     Array.from(headings).map((heading) => {
       observer.observe(heading);
@@ -65,8 +51,7 @@ export const Full: FC<IPageProps> = ({
     return () => observer.disconnect();
   }, [activeItem, router.asPath]);
 
-  const showSideMenu: boolean =
-    aSideMenuTree.length > 1 || aSideMenuTree[0]?.children.length > 0;
+  const showSideMenu: boolean = aSideMenuTree.length > 1 || aSideMenuTree[0]?.children.length > 0;
 
   return (
     <PageGrid>
@@ -76,10 +61,7 @@ export const Full: FC<IPageProps> = ({
             <Breadcrumbs menuItems={leftMenuTree} />
             <LastModifiedDate date={frontmatter.lastModifiedDate} />
             {children}
-            <BottomPageSection
-              editLink={frontmatter.editLink}
-              navigation={frontmatter.navigation}
-            />
+            <BottomPageSection editLink={frontmatter.editLink} navigation={frontmatter.navigation} />
           </Article>
         </Content>
         <AsideBackground />

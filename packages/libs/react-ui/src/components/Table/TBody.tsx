@@ -11,11 +11,7 @@ export const TBody: FC<ITBodyProps> = ({ children }) => {
   return (
     <tbody>
       {React.Children.map(children, (child) => {
-        if (
-          !React.isValidElement(child) ||
-          (Boolean(child) && child.type !== Tr)
-        )
-          return null;
+        if (!React.isValidElement(child) || (Boolean(child) && child.type !== Tr)) return null;
 
         return child;
       })}

@@ -13,23 +13,13 @@ interface IProps {
   hideSideMenu?: boolean;
 }
 
-export const Template: FC<IProps> = ({
-  children,
-  menuItems,
-  layout = 'normal',
-  hideSideMenu = false,
-}) => {
+export const Template: FC<IProps> = ({ children, menuItems, layout = 'normal', hideSideMenu = false }) => {
   const { isMenuOpen, closeMenu } = useMenu();
 
   return (
     <>
       <MenuBack isOpen={isMenuOpen} onClick={closeMenu} />
-      <Menu
-        data-cy="menu"
-        isOpen={isMenuOpen}
-        inLayout={!hideSideMenu}
-        layout={layout}
-      >
+      <Menu data-cy="menu" isOpen={isMenuOpen} inLayout={!hideSideMenu} layout={layout}>
         <SideMenu closeMenu={closeMenu} menuItems={menuItems} />
       </Menu>
       {children}

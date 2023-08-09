@@ -113,21 +113,17 @@ describe('parser', () => {
 
     expect(fileContractDefinition.modules).toEqual(['coin']);
     const methods = fileContractDefinition.getMethods('coin')!;
-    expect(Object.keys(methods)).toEqual([
-      'transfer',
-      'account-guard',
-      'get-policy-info',
+    expect(Object.keys(methods)).toEqual(['transfer', 'account-guard', 'get-policy-info']);
+    expect(Object.keys(methods.transfer.args).map((a) => methods.transfer.args[a].name)).toEqual([
+      'sender',
+      'receiver',
+      'amount',
     ]);
-    expect(
-      Object.keys(methods.transfer.args).map(
-        (a) => methods.transfer.args[a].name,
-      ),
-    ).toEqual(['sender', 'receiver', 'amount']);
-    expect(
-      Object.keys(methods.transfer.args).map(
-        (a) => methods.transfer.args[a].type,
-      ),
-    ).toEqual(['string', 'string', 'number']);
+    expect(Object.keys(methods.transfer.args).map((a) => methods.transfer.args[a].type)).toEqual([
+      'string',
+      'string',
+      'number',
+    ]);
   });
 
   it('marmalade.contract.pact', () => {
@@ -155,11 +151,7 @@ describe('parser', () => {
     expect(contractDefinition.modules).toEqual(['coin']);
     const capabilities = contractDefinition.getCapabilities('coin')!;
     expect(Object.keys(capabilities)).toEqual(['GAS', 'TRANSFER']);
-    expect(Object.keys(capabilities.TRANSFER.args)).toEqual([
-      'sender',
-      'receiver',
-      'amount',
-    ]);
+    expect(Object.keys(capabilities.TRANSFER.args)).toEqual(['sender', 'receiver', 'amount']);
     expect(capabilities.TRANSFER.args.sender.type).toBe('string');
     expect(capabilities.TRANSFER.args.receiver.type).toBe('string');
     expect(capabilities.TRANSFER.args.amount.type).toBe('decimal');

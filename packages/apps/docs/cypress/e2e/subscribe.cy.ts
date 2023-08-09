@@ -27,9 +27,7 @@ describe('Subscribe to mailList', () => {
     cy.percySnapshot('test');
     subscribe().should('be.visible');
 
-    subscribe()
-      .find('input[type="email"]')
-      .type('he-man@masteroftheuniverse.com{enter}', { delay: 10 });
+    subscribe().find('input[type="email"]').type('he-man@masteroftheuniverse.com{enter}', { delay: 10 });
 
     subscribe().find('input[type="email"]').should('not.exist');
 
@@ -42,9 +40,7 @@ describe('Subscribe to mailList', () => {
       message: 'Something went wrong',
     });
 
-    subscribe()
-      .find('input[type="email"]')
-      .type('he-man@masteroftheuniverse.com{enter}', { delay: 10 });
+    subscribe().find('input[type="email"]').type('he-man@masteroftheuniverse.com{enter}', { delay: 10 });
 
     subscribe().find('input[type="email"]').should('exist');
     subscribe().contains('Something went wrong');
@@ -56,12 +52,8 @@ describe('Subscribe to mailList', () => {
       message: 'Thank you for subscribing',
     });
 
-    subscribe()
-      .find('input[type="email"]')
-      .type('!!skeletor@thundercars.com', { delay: 10 });
-    subscribe()
-      .find('button[type="submit"]')
-      .should('have.attr', 'disabled', 'disabled');
+    subscribe().find('input[type="email"]').type('!!skeletor@thundercars.com', { delay: 10 });
+    subscribe().find('button[type="submit"]').should('have.attr', 'disabled', 'disabled');
   });
 });
 

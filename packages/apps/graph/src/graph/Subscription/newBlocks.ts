@@ -14,8 +14,7 @@ builder.subscriptionField('newBlocks', (t) => {
     },
     type: ['Block'],
     nullable: true,
-    subscribe: (parent, args, context, info) =>
-      iteratorFn(args.chainIds as number[] | undefined),
+    subscribe: (parent, args, context, info) => iteratorFn(args.chainIds as number[] | undefined),
     // TODO: find out why this needs `as Block[]`
     // without it we get the error from
     resolve: (__, block) => block as Block[],
@@ -23,9 +22,7 @@ builder.subscriptionField('newBlocks', (t) => {
 });
 
 async function* iteratorFn(
-  chainIds: number[] = Array.from(new Array(dotenv.CHAIN_COUNT)).map(
-    (__, i) => i,
-  ),
+  chainIds: number[] = Array.from(new Array(dotenv.CHAIN_COUNT)).map((__, i) => i),
 ): AsyncGenerator<Block[], void, unknown> {
   let lastBlock = (await getLastBlocks(chainIds))[0];
 
@@ -43,10 +40,7 @@ async function* iteratorFn(
   }
 }
 
-async function getLastBlocks(
-  chainIds: number[],
-  id?: number,
-): Promise<Block[]> {
+async function getLastBlocks(chainIds: number[], id?: number): Promise<Block[]> {
   const defaultFilter: Parameters<typeof prismaClient.block.findMany>[0] = {
     orderBy: {
       id: 'desc',

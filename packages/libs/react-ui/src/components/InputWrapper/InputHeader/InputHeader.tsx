@@ -12,12 +12,7 @@ export interface IInputHeaderProps {
   info?: string;
 }
 
-export const InputHeader: FC<IInputHeaderProps> = ({
-  label,
-  htmlFor,
-  tag,
-  info,
-}) => {
+export const InputHeader: FC<IInputHeaderProps> = ({ label, htmlFor, tag, info }) => {
   return (
     <div className={headerClass}>
       {Boolean(label) && <Label htmlFor={htmlFor}>{label}</Label>}

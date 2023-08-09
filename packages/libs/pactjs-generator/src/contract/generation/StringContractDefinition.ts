@@ -35,9 +35,7 @@ export class StringContractDefinition implements IContractDefinition {
     });
   }
 
-  public getCapabilities(
-    moduleName: string,
-  ): Record<string, Defcap> | undefined {
+  public getCapabilities(moduleName: string): Record<string, Defcap> | undefined {
     return this._raw[moduleName].defcaps;
   }
 

@@ -1,19 +1,9 @@
-import {
-  Box,
-  Breadcrumbs,
-  Button,
-  Card,
-  Grid,
-  Heading,
-  SystemIcon,
-} from '@kadena/react-ui';
+import { Box, Breadcrumbs, Button, Card, Grid, Heading, SystemIcon } from '@kadena/react-ui';
 
 import { mainContentClass, submitClass } from './styles.css';
 
 import { ChainSelect } from '@/components/Global';
-import AccountNameField, {
-  NAME_VALIDATION,
-} from '@/components/Global/AccountNameField';
+import AccountNameField, { NAME_VALIDATION } from '@/components/Global/AccountNameField';
 import Routes from '@/constants/routes';
 import { useAppContext } from '@/context';
 import { useToolbar } from '@/context/layout-context';
@@ -33,9 +23,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const CheckTransactions: FC = () => {
-  const debug = Debug(
-    'kadena-transfer:pages:transfer:account-transactions:filters',
-  );
+  const debug = Debug('kadena-transfer:pages:transfer:account-transactions:filters');
 
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -94,18 +82,10 @@ const CheckTransactions: FC = () => {
             <Box marginBottom="$4" />
             <Grid.Root columns={2}>
               <Grid.Item>
-                <ChainSelect
-                  onChange={onChainSelectChange}
-                  value={chainID}
-                  ariaLabel="Select Chain ID"
-                />
+                <ChainSelect onChange={onChainSelectChange} value={chainID} ariaLabel="Select Chain ID" />
               </Grid.Item>
               <Grid.Item>
-                <AccountNameField
-                  inputProps={register('name')}
-                  error={errors.name}
-                  label={t('Account')}
-                />
+                <AccountNameField inputProps={register('name')} error={errors.name} label={t('Account')} />
               </Grid.Item>
             </Grid.Root>
           </Card>

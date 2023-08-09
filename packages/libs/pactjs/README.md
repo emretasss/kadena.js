@@ -20,5 +20,4 @@ crypto:
 - `createExp`
 - `PactNumber`
 
-[1]:
-  https://github.com/kadena-community/kadena.js/blob/main/packages/libs/pactjs/etc/pactjs.api.md
+[1]: https://github.com/kadena-community/kadena.js/blob/main/packages/libs/pactjs/etc/pactjs.api.md

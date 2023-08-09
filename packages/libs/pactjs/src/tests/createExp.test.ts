@@ -10,11 +10,7 @@ describe('createExp', () => {
   });
 
   it('Takes in Pact function and arguments using PactNumber and outputs Pact code', () => {
-    const actual = createExp(
-      '+',
-      new PactNumber('2').toInteger(),
-      new PactNumber('3').toDecimal(),
-    );
+    const actual = createExp('+', new PactNumber('2').toInteger(), new PactNumber('3').toDecimal());
     const expected = '(+ 2 3.0)';
 
     expect(expected).toEqual(actual);

@@ -13,11 +13,7 @@ export const Menu: FC = () => {
     <div className={gridItemMenuStyle}>
       <div className={subMenuTitleClass}>
         <span>{activeMenu.title}</span>
-        <IconButton
-          icon={SystemIcon.Close}
-          onClick={() => setActiveMenuIndex(undefined)}
-          title={activeMenu.title}
-        />
+        <IconButton icon={SystemIcon.Close} onClick={() => setActiveMenuIndex(undefined)} title={activeMenu.title} />
       </div>
       <Accordion
         sections={

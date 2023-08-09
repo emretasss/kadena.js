@@ -10,13 +10,11 @@ export interface ITooltipProps {
 export const Tooltip: React.ForwardRefExoticComponent<
   Omit<ITooltipProps, 'ref'> & React.RefAttributes<HTMLDivElement>
   // eslint-disable-next-line react/display-name
-> = forwardRef<HTMLDivElement, ITooltipProps>(
-  ({ children, placement = 'right' }, ref) => {
-    return (
-      <div className={container} ref={ref} data-placement={placement}>
-        <div className={arrowVariants[placement]} />
-        {children}
-      </div>
-    );
-  },
-);
+> = forwardRef<HTMLDivElement, ITooltipProps>(({ children, placement = 'right' }, ref) => {
+  return (
+    <div className={container} ref={ref} data-placement={placement}>
+      <div className={arrowVariants[placement]} />
+      {children}
+    </div>
+  );
+});

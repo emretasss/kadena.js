@@ -233,11 +233,4 @@ export const darkThemeClass = createTheme(vars.colors, {
   $neutral6: colorPalette.$gray10,
 });
 
-export type ColorType =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'info'
-  | 'positive'
-  | 'warning'
-  | 'negative';
+export type ColorType = 'primary' | 'secondary' | 'tertiary' | 'info' | 'positive' | 'warning' | 'negative';

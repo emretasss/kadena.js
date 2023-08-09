@@ -53,8 +53,8 @@ Example:
 <!--mySection end -->
 ```
 
-Make sure `directives/index.js` exports the `mySection` function and returns an
-[mdast tree][1]. Must be sync (not `async`).
+Make sure `directives/index.js` exports the `mySection` function and returns an [mdast tree][1]. Must be sync (not
+`async`).
 
 Restrictions (from the `mdast-comment-marker` and `mdast-zone` plugins):
 

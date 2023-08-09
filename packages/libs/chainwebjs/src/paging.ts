@@ -12,10 +12,7 @@ import { IPagedResponse } from './types';
  */
 
 export async function* pageIterator<T>(
-  query: (
-    next: string | undefined,
-    limit: number | undefined,
-  ) => Promise<IPagedResponse<T>>,
+  query: (next: string | undefined, limit: number | undefined) => Promise<IPagedResponse<T>>,
   n: number | undefined,
 ): AsyncGenerator<T[], void, unknown> {
   let next = undefined;

@@ -5,11 +5,7 @@ import { retry } from '../utils/retry';
 import { getPromise, IExtPromise, mapRecord, mergeAll } from '../utils/utils';
 
 export interface IPollStatus {
-  (
-    host: string,
-    requestIds: string[],
-    options?: IPollOptions,
-  ): IPollRequestPromise<ICommandResult>;
+  (host: string, requestIds: string[], options?: IPollOptions): IPollRequestPromise<ICommandResult>;
 }
 
 /**
@@ -52,9 +48,7 @@ export const pollStatus: IPollStatus = (
 
   const returnPromise: IPollRequestPromise<ICommandResult> = Object.assign(
     Promise.all(
-      Object.entries(prs).map(([requestKey, pr]) =>
-        pr.promise.then((data) => ({ [requestKey]: data })),
-      ),
+      Object.entries(prs).map(([requestKey, pr]) => pr.promise.then((data) => ({ [requestKey]: data }))),
     ).then(mergeAll),
     { requests: mapRecord(prs, ({ promise }) => promise) },
   );

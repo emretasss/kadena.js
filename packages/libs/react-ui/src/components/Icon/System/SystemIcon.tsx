@@ -89,9 +89,7 @@ export const BellRing = IconWrapper(BellRingSvg);
 export const CarBrakeParking = IconWrapper(CarBrakeParkingSvg);
 export const Check = IconWrapper(CheckSvg);
 export const CheckboxBlankOutline = IconWrapper(CheckboxBlankOutlineSvg);
-export const CheckboxIntermediateVariant = IconWrapper(
-  CheckboxIntermediateVariantSvg,
-);
+export const CheckboxIntermediateVariant = IconWrapper(CheckboxIntermediateVariantSvg);
 export const CheckboxMarked = IconWrapper(CheckboxMarkedSvg);
 export const CheckDecagram = IconWrapper(CheckDecagramSvg);
 export const CheckDecagramOutline = IconWrapper(CheckDecagramOutlineSvg);
@@ -134,9 +132,7 @@ export const RadioboxMarked = IconWrapper(RadioboxMarkedSvg);
 export const Refresh = IconWrapper(RefreshSvg);
 export const ScriptTextKey = IconWrapper(ScriptTextKeySvg);
 export const ScriptTextKeyNew = IconWrapper(ScriptTextKeyNewSvg);
-export const ShieldAccountVariantOutline = IconWrapper(
-  ShieldAccountVariantOutlineSvg,
-);
+export const ShieldAccountVariantOutline = IconWrapper(ShieldAccountVariantOutlineSvg);
 export const SignatureFreehand = IconWrapper(SignatureFreehandSvg);
 export const SlashForward = IconWrapper(SlashForwardSvg);
 export const StopCircle = IconWrapper(StopCircleSvg);

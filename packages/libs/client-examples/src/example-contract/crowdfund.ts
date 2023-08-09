@@ -1,11 +1,4 @@
-import {
-  createClient,
-  isSignedTransaction,
-  literal,
-  Pact,
-  readKeyset,
-  signWithChainweaver,
-} from '@kadena/client';
+import { createClient, isSignedTransaction, literal, Pact, readKeyset, signWithChainweaver } from '@kadena/client';
 import { PactNumber } from '@kadena/pactjs';
 
 import { keyFromAccount } from './util/keyFromAccount';
@@ -54,8 +47,7 @@ export async function createProject(
   }
 }
 
-const senderAccount: string =
-  'k:2f48080efe54e6eb670487f664bcaac7684b4ebfcfc8a3330ef080c9c97f7e11';
+const senderAccount: string = 'k:2f48080efe54e6eb670487f664bcaac7684b4ebfcfc8a3330ef080c9c97f7e11';
 
 createProject(`id:${Date.now()}`, 'An awesome project', {
   account: senderAccount,

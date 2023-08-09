@@ -9,31 +9,21 @@ const readOrCreateHistory = (): Record<string, HistoryValue> => {
   }
 };
 
-export type HistoryValue =
-  | string
-  | boolean
-  | string[]
-  | Record<string, unknown>;
+export type HistoryValue = string | boolean | string[] | Record<string, unknown>;
 
 const isSuggestable = (value: unknown): value is string[] => {
   return Array.isArray(value);
 };
 
 type Callback = (newValue: HistoryValue) => void;
-export const useHistory = (
-  name: string,
-): { history: HistoryValue; onSave: Callback; onSet: Callback } => {
-  const [history, setHistory] = useState<Record<string, HistoryValue>>(
-    readOrCreateHistory(),
-  );
+export const useHistory = (name: string): { history: HistoryValue; onSave: Callback; onSet: Callback } => {
+  const [history, setHistory] = useState<Record<string, HistoryValue>>(readOrCreateHistory());
   const onSave = useCallback(
     (newValues: HistoryValue): void => {
       const h = readOrCreateHistory();
       const v = Array.isArray(newValues) ? newValues : [newValues];
       const readSuggestions = h[name];
-      const suggestions: string[] = isSuggestable(readSuggestions)
-        ? readSuggestions
-        : [];
+      const suggestions: string[] = isSuggestable(readSuggestions) ? readSuggestions : [];
       fs.writeFileSync(
         '.kda-history.json',
         JSON.stringify(

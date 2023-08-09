@@ -30,43 +30,14 @@ export const ProgressBar: FC<IProgressBarProps> = ({ checkpoints }) => {
           <>
             {index !== 0 ? (
               <div className={lineContainerStyle}>
-                <div
-                  className={classNames(
-                    lineStyle,
-                    lineColorVariant[checkpoint.status],
-                  )}
-                />
-                <div
-                  className={classNames(
-                    lineStyle,
-                    lineColorVariant[checkpoint.status],
-                  )}
-                />
-                <div
-                  className={classNames(
-                    lineStyle,
-                    lineColorVariant[checkpoint.status],
-                  )}
-                />
+                <div className={classNames(lineStyle, lineColorVariant[checkpoint.status])} />
+                <div className={classNames(lineStyle, lineColorVariant[checkpoint.status])} />
+                <div className={classNames(lineStyle, lineColorVariant[checkpoint.status])} />
               </div>
             ) : null}
-            <div
-              className={checkpointContainerStyle}
-              key={index}
-              data-testid={`kda-checkpoint-container-${index}`}
-            >
-              <div
-                className={classNames(
-                  circleStyle,
-                  circleColorVariant[checkpoint.status],
-                )}
-              />
-              <div
-                className={classNames(
-                  textContainerStyle,
-                  textColorVariant[checkpoint.status],
-                )}
-              >
+            <div className={checkpointContainerStyle} key={index} data-testid={`kda-checkpoint-container-${index}`}>
+              <div className={classNames(circleStyle, circleColorVariant[checkpoint.status])} />
+              <div className={classNames(textContainerStyle, textColorVariant[checkpoint.status])}>
                 {checkpoint.title}
               </div>
             </div>

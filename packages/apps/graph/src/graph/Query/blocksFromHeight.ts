@@ -15,10 +15,7 @@ builder.queryField('blocksFromHeight', (t) => {
     resolve: async (
       __query,
       __parent,
-      {
-        startHeight,
-        chainIds = Array.from(new Array(dotenv.CHAIN_COUNT)).map((__, i) => i),
-      },
+      { startHeight, chainIds = Array.from(new Array(dotenv.CHAIN_COUNT)).map((__, i) => i) },
     ) => {
       return prismaClient.block.findMany({
         where: {

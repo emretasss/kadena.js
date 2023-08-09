@@ -1,9 +1,6 @@
 import { ICapability, IModule } from '../pactParser';
 
-export const getCapabilityDetails = (
-  module: IModule,
-  capability: string,
-): ICapability | undefined =>
+export const getCapabilityDetails = (module: IModule, capability: string): ICapability | undefined =>
   module.capabilities?.find((cap) => cap.name === capability);
 
 const asArray = <T>(value: T[] | undefined): T[] => (value ? value : []);
@@ -48,10 +45,7 @@ export const getCapabilities = (
 
   const directCaps = [...withCapabilities, ...composeCapabilities]
     // remove duplicates. we might need to revisit this by considering all possible cases
-    .filter(
-      (capability, idx, list) =>
-        idx === list.findIndex((cap) => cap.name === capability.name),
-    );
+    .filter((capability, idx, list) => idx === list.findIndex((cap) => cap.name === capability.name));
 
   if (!func.functionCalls) return directCaps;
 
@@ -62,17 +56,12 @@ export const getCapabilities = (
     funcName,
   }));
 
-  const externalCalls = external.map(
-    ({ namespace, module: moduleName, func }) => ({
-      modName:
-        namespace !== undefined && namespace.length
-          ? `${namespace}.${moduleName}`
-          : moduleName,
-      funcName: func,
-    }),
-  );
-  const indirectCaps = [...internalCalls, ...externalCalls].flatMap(
-    ({ modName, funcName }) => getCapabilities(modules, modName, funcName),
+  const externalCalls = external.map(({ namespace, module: moduleName, func }) => ({
+    modName: namespace !== undefined && namespace.length ? `${namespace}.${moduleName}` : moduleName,
+    funcName: func,
+  }));
+  const indirectCaps = [...internalCalls, ...externalCalls].flatMap(({ modName, funcName }) =>
+    getCapabilities(modules, modName, funcName),
   );
   return [...directCaps, ...indirectCaps];
 };

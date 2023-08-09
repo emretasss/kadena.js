@@ -7,13 +7,7 @@ import React, { FC } from 'react';
 
 export const NotFound: FC = () => {
   return (
-    <Stack
-      spacing="$2"
-      paddingTop="$20"
-      paddingX={0}
-      direction="column"
-      alignItems="center"
-    >
+    <Stack spacing="$2" paddingTop="$20" paddingX={0} direction="column" alignItems="center">
       <Heading as="h5">Not finding the help you need?</Heading>
       <Text>Contact our support desk.</Text>
       <Link href="/help" passHref legacyBehavior>

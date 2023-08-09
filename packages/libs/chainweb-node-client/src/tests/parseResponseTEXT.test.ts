@@ -9,9 +9,7 @@ test('should parse successful Response as expected type', async () => {
 
   const mockedData = await mockPromise;
 
-  const parsedResponse: MockTestType = await parseResponseTEXT(
-    mockedData as Response,
-  );
+  const parsedResponse: MockTestType = await parseResponseTEXT(mockedData as Response);
   expect(mockSuccessResponse).toEqual(parsedResponse);
 });
 
@@ -31,9 +29,7 @@ test('should fail if Response promise was an error', async () => {
 test('should fail if Response status not `ok`', async () => {
   const mockFailureResponse = 'Some API error message.';
   async function parseFailedResponse(): Promise<string> {
-    const mockPromise = Promise.resolve(
-      new Response(mockFailureResponse, { status: 404 }),
-    );
+    const mockPromise = Promise.resolve(new Response(mockFailureResponse, { status: 404 }));
 
     const mockedData = await mockPromise;
 

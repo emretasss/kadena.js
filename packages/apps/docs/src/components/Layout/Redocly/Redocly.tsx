@@ -42,11 +42,7 @@ export const options: RedocRawOptions = {
   expandResponses: '200,201,204',
 };
 
-export const Redocly: FC<IPageProps> = ({
-  children,
-  frontmatter,
-  leftMenuTree,
-}) => {
+export const Redocly: FC<IPageProps> = ({ children, frontmatter, leftMenuTree }) => {
   return (
     <PageGrid>
       <Template menuItems={leftMenuTree}>
@@ -55,11 +51,7 @@ export const Redocly: FC<IPageProps> = ({
             <Breadcrumbs menuItems={leftMenuTree} />
             <LastModifiedDate date={frontmatter.lastModifiedDate} />
             {children}
-            <BottomPageSection
-              editLink={frontmatter.editLink}
-              navigation={frontmatter.navigation}
-              layout="code"
-            />
+            <BottomPageSection editLink={frontmatter.editLink} navigation={frontmatter.navigation} layout="code" />
           </Article>
         </Content>
         <CodeBackground />

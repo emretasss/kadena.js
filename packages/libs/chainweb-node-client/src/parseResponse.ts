@@ -26,9 +26,7 @@ export async function parseResponse<T>(response: Response): Promise<T> {
 /**
  * @alpha
  */
-export function parsePreflight(
-  commandResult: ILocalResult,
-): ILocalCommandResult {
+export function parsePreflight(commandResult: ILocalResult): ILocalCommandResult {
   if ('preflightResult' in commandResult) {
     return {
       ...commandResult.preflightResult,

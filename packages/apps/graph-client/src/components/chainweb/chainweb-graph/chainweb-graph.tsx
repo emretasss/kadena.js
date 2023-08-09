@@ -16,11 +16,7 @@ export const ChainwebGraph = ({ blocks }: IChainwebGraphProps): JSX.Element => {
       {Object.entries(blocks)
         .reverse()
         .map(([height, rowBlocks]) => (
-          <ChainwebRow
-            key={height}
-            height={Number(height)}
-            blocks={rowBlocks}
-          />
+          <ChainwebRow key={height} height={Number(height)} blocks={rowBlocks} />
         ))}
     </>
   );

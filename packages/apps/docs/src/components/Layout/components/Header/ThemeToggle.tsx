@@ -22,12 +22,5 @@ export const ThemeToggle: FC = () => {
 
   if (!isMounted) return null;
 
-  return (
-    <IconButton
-      title="Toggle theme"
-      onClick={toggleTheme}
-      icon={SystemIcon.ThemeLightDark}
-      color="inverted"
-    />
-  );
+  return <IconButton title="Toggle theme" onClick={toggleTheme} icon={SystemIcon.ThemeLightDark} color="inverted" />;
 };

@@ -6,10 +6,7 @@ import { Article, Content, TitleHeader } from '@/components/Layout/components';
 import { useGetBlogs } from '@/hooks';
 import { getInitBlogPosts } from '@/hooks/useBlog/utils';
 import { IMenuData, IPageProps } from '@/types/Layout';
-import {
-  checkSubTreeForActive,
-  getPathName,
-} from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
+import { checkSubTreeForActive, getPathName } from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
 import { getData } from '@/utils/staticGeneration/getData.mjs';
 import { GetStaticProps } from 'next';
 import React, { FC } from 'react';
@@ -19,13 +16,7 @@ interface IProps extends IPageProps {
 }
 
 const BlogChainHome: FC<IProps> = ({ frontmatter, posts }) => {
-  const {
-    handleLoad,
-    error,
-    isLoading,
-    isDone,
-    data: extraPosts,
-  } = useGetBlogs();
+  const { handleLoad, error, isLoading, isDone, data: extraPosts } = useGetBlogs();
 
   const startRetry = (isRetry: boolean = false): void => {
     handleLoad(isRetry);
@@ -35,11 +26,7 @@ const BlogChainHome: FC<IProps> = ({ frontmatter, posts }) => {
 
   return (
     <>
-      <TitleHeader
-        title={frontmatter.title}
-        subTitle={frontmatter.subTitle}
-        icon={frontmatter.icon}
-      />
+      <TitleHeader title={frontmatter.title} subTitle={frontmatter.subTitle} icon={frontmatter.icon} />
       <Content id="maincontent" layout="home">
         <Article>
           {firstPost && (
@@ -55,12 +42,7 @@ const BlogChainHome: FC<IProps> = ({ frontmatter, posts }) => {
               {extraPosts.map((item) => (
                 <BlogItem key={item.root} item={item} />
               ))}
-              <InfiniteScroll
-                handleLoad={startRetry}
-                isLoading={isLoading}
-                error={error}
-                isDone={isDone}
-              />
+              <InfiniteScroll handleLoad={startRetry} isLoading={isLoading} error={error} isDone={isDone} />
             </BlogList>
             <div>sidemenu</div>
           </Stack>

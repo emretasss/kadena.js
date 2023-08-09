@@ -1,8 +1,4 @@
-import {
-  ConnectTimeoutError,
-  HeartbeatTimeoutError,
-  parseError,
-} from './errors';
+import { ConnectTimeoutError, HeartbeatTimeoutError, parseError } from './errors';
 import { isClientAhead, isMajorCompatible, isMinorCompatible } from './semver';
 import SlidingCache from './sliding-cache';
 import {
@@ -170,9 +166,7 @@ class ChainwebStream extends EventEmitter {
     this._debug('_handleConnect', { consecutiveFailedAttempts, totalAttempts });
     this._failedConnectionAttempts = 0;
     if (!_eventSource) {
-      throw new Error(
-        'ChainwebStream._handleConnect called without an _eventSource. This should never happen',
-      );
+      throw new Error('ChainwebStream._handleConnect called without an _eventSource. This should never happen');
     }
     _eventSource.addEventListener('initial', this._handleInitial);
     _eventSource.addEventListener('heights', this._handleHeights);
@@ -189,9 +183,7 @@ class ChainwebStream extends EventEmitter {
    * Chrome has different reconnecting strategy (some) vs Firefox (none)
    * so we disable reconnections and handle them manually
    */
-  private _handleError = (
-    err: HeartbeatTimeoutError | ConnectTimeoutError | Event,
-  ): void => {
+  private _handleError = (err: HeartbeatTimeoutError | ConnectTimeoutError | Event): void => {
     this._failedConnectionAttempts += 1;
     this._totalConnectionAttempts += 1;
 
@@ -233,10 +225,7 @@ class ChainwebStream extends EventEmitter {
   private _handleInitial = (msg: MessageEvent<string>): void => {
     this._debug('_handleData', { length: msg.data?.length });
 
-    const message: IInitialEvent | undefined = this._jsonParse(
-      msg.data,
-      'initial',
-    );
+    const message: IInitialEvent | undefined = this._jsonParse(msg.data, 'initial');
 
     if (message === undefined) {
       // initial event unparsable is a fatal condition
@@ -254,10 +243,7 @@ class ChainwebStream extends EventEmitter {
   };
 
   private _handleHeights = (msg: MessageEvent<string>): void => {
-    const data: IHeightsEvent | undefined = this._jsonParse(
-      msg.data,
-      'heights',
-    );
+    const data: IHeightsEvent | undefined = this._jsonParse(msg.data, 'heights');
 
     if (data === undefined) {
       return;
@@ -332,13 +318,7 @@ class ChainwebStream extends EventEmitter {
     try {
       return JSON.parse(data);
     } catch (e) {
-      this.emit(
-        'warn',
-        `Could not parse ${label} event JSON data starting with: ${data?.slice(
-          0,
-          80,
-        )}`,
-      );
+      this.emit('warn', `Could not parse ${label} event JSON data starting with: ${data?.slice(0, 80)}`);
       return undefined;
     }
   }
@@ -355,19 +335,10 @@ class ChainwebStream extends EventEmitter {
   }
 
   private _validateServerConfig(config: IChainwebStreamConfig): boolean {
-    const {
-      network,
-      type,
-      id,
-      maxConf,
-      heartbeat,
-      v: serverProtocolVersion,
-    } = config;
+    const { network, type, id, maxConf, heartbeat, v: serverProtocolVersion } = config;
 
     if (network !== this.network) {
-      return this._fail(
-        `Network mismatch: wanted ${this.network}, server is ${network}.`,
-      );
+      return this._fail(`Network mismatch: wanted ${this.network}, server is ${network}.`);
     }
 
     if (type !== this.type) {
@@ -439,10 +410,7 @@ class ChainwebStream extends EventEmitter {
 
   private _resetHeartbeatTimeout = (): void => {
     this._stopHeartbeatMonitor();
-    this._heartbeatTimer = setTimeout(
-      this._handleHeartbeatTimeout,
-      this.heartbeatTimeoutMs,
-    );
+    this._heartbeatTimer = setTimeout(this._handleHeartbeatTimeout, this.heartbeatTimeoutMs);
   };
 
   private _handleHeartbeatTimeout = (): void => {
@@ -467,12 +435,7 @@ class ChainwebStream extends EventEmitter {
     // for current chainweb chain count (20)
     // Discussion here: https://github.com/kadena-community/kadena.js/issues/275
     if (this._lastHeight !== undefined) {
-      urlParamArgs.push([
-        'minHeight',
-        String(
-          this._lastHeight - this.confirmationDepth - MAX_CHAIN_HEIGHT_SPAN,
-        ),
-      ]);
+      urlParamArgs.push(['minHeight', String(this._lastHeight - this.confirmationDepth - MAX_CHAIN_HEIGHT_SPAN)]);
     }
     if (urlParamArgs.length) {
       path += `?${new URLSearchParams(urlParamArgs).toString()}`;

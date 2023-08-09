@@ -1,10 +1,4 @@
-import {
-  background,
-  closeButton,
-  modal,
-  titleWrapper,
-  wrapper,
-} from './Modal.css';
+import { background, closeButton, modal, titleWrapper, wrapper } from './Modal.css';
 import { useModal } from './ModalProvider';
 
 import { Card } from '@components/Card';
@@ -28,11 +22,7 @@ export const Modal: FC<IModalProps> = ({ children, title }) => {
         }}
       >
         <div>
-          <button
-            data-cy="modal-background"
-            className={background}
-            onClick={clearModal}
-          />
+          <button data-cy="modal-background" className={background} onClick={clearModal} />
           <div className={wrapper} data-cy="modal" data-testid="kda-modal">
             <section className={modal}>
               <Card fullWidth>
@@ -40,11 +30,7 @@ export const Modal: FC<IModalProps> = ({ children, title }) => {
                   <Heading as="h2">{title}</Heading>
                 </div>
 
-                <button
-                  className={closeButton}
-                  onClick={clearModal}
-                  title="Close modal"
-                >
+                <button className={closeButton} onClick={clearModal} title="Close modal">
                   Close
                   <SystemIcon.Close />
                 </button>

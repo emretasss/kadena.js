@@ -24,13 +24,8 @@ export class ConnectTimeoutError extends Error {
   }
 }
 
-export const parseError = (
-  err: HeartbeatTimeoutError | ConnectTimeoutError | Event,
-): string => {
-  if (
-    err instanceof HeartbeatTimeoutError ||
-    err instanceof ConnectTimeoutError
-  ) {
+export const parseError = (err: HeartbeatTimeoutError | ConnectTimeoutError | Event): string => {
+  if (err instanceof HeartbeatTimeoutError || err instanceof ConnectTimeoutError) {
     return err.toString();
   }
 

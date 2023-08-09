@@ -1,11 +1,6 @@
 import { Button, SystemIcons } from './../../';
 import { colorVariant } from './styles';
-import {
-  INotificationProps,
-  Notification,
-  NotificationBody,
-  NotificationFooter,
-} from '.';
+import { INotificationProps, Notification, NotificationBody, NotificationFooter } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
@@ -77,14 +72,7 @@ export const Primary: Story = {
     color: 'default',
     simple: false,
   },
-  render: ({
-    selectIcon,
-    title,
-    displayCloseButton,
-    expand,
-    color,
-    simple,
-  }) => {
+  render: ({ selectIcon, title, displayCloseButton, expand, color, simple }) => {
     const Icon = SystemIcons[selectIcon];
     return (
       <>
@@ -96,9 +84,7 @@ export const Primary: Story = {
           displayCloseButton={displayCloseButton}
           expand={expand}
         >
-          <NotificationBody>
-            Notification text to inform users about the event that occurred!
-          </NotificationBody>
+          <NotificationBody>Notification text to inform users about the event that occurred!</NotificationBody>
           <NotificationFooter>
             <Button title="Action label" icon={SystemIcons.TrailingIcon}>
               Action label

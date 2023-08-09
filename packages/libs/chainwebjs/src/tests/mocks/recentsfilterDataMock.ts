@@ -55,8 +55,7 @@ export const filterData = [
                       args: [],
                     },
                   ],
-                  pubKey:
-                    '5cac5e5fa9aec2e1672b51af8b90319567ea9e2bcbf6d32a9ca4f970e6984987',
+                  pubKey: '5cac5e5fa9aec2e1672b51af8b90319567ea9e2bcbf6d32a9ca4f970e6984987',
                 },
               ],
               meta: {
@@ -65,8 +64,7 @@ export const filterData = [
                 gasLimit: 3000,
                 chainId: '0',
                 gasPrice: 0.00001,
-                sender:
-                  'k:5cac5e5fa9aec2e1672b51af8b90319567ea9e2bcbf6d32a9ca4f970e6984987',
+                sender: 'k:5cac5e5fa9aec2e1672b51af8b90319567ea9e2bcbf6d32a9ca4f970e6984987',
               },
               nonce: '"2022-12-21 12:38:58.963823"',
             },
@@ -114,12 +112,9 @@ export const filterData = [
         },
       ],
       minerData: {
-        account:
-          '99cb7008d7d70c94f138cc366a825f0d9c83a8a2f4ba82c86c666e0ab6fecf3a',
+        account: '99cb7008d7d70c94f138cc366a825f0d9c83a8a2f4ba82c86c666e0ab6fecf3a',
         predicate: 'keys-all',
-        'public-keys': [
-          '99cb7008d7d70c94f138cc366a825f0d9c83a8a2f4ba82c86c666e0ab6fecf3a',
-        ],
+        'public-keys': ['99cb7008d7d70c94f138cc366a825f0d9c83a8a2f4ba82c86c666e0ab6fecf3a'],
       },
       coinbase: {
         gas: 0,
@@ -131,11 +126,7 @@ export const filterData = [
         logs: 'VXHKWMqDUcEx0cMF7Lbq56y1zTEUc0IeGrDFThPln0E',
         events: [
           {
-            params: [
-              '',
-              '99cb7008d7d70c94f138cc366a825f0d9c83a8a2f4ba82c86c666e0ab6fecf3a',
-              1.0354825,
-            ],
+            params: ['', '99cb7008d7d70c94f138cc366a825f0d9c83a8a2f4ba82c86c666e0ab6fecf3a', 1.0354825],
             name: 'TRANSFER',
             module: {
               namespace: null,
@@ -206,8 +197,7 @@ export const filterDataFormatted = [
           creationTime: 1671626338,
           gasLimit: 3000,
           gasPrice: 0.00001,
-          sender:
-            'k:5cac5e5fa9aec2e1672b51af8b90319567ea9e2bcbf6d32a9ca4f970e6984987',
+          sender: 'k:5cac5e5fa9aec2e1672b51af8b90319567ea9e2bcbf6d32a9ca4f970e6984987',
           ttl: 600,
         },
         networkId: 'mainnet01',
@@ -231,8 +221,7 @@ export const filterDataFormatted = [
               },
               { args: [], name: 'coin.GAS' },
             ],
-            pubKey:
-              '5cac5e5fa9aec2e1672b51af8b90319567ea9e2bcbf6d32a9ca4f970e6984987',
+            pubKey: '5cac5e5fa9aec2e1672b51af8b90319567ea9e2bcbf6d32a9ca4f970e6984987',
           },
         ],
       },

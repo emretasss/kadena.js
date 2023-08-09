@@ -14,13 +14,8 @@ import { ChainId } from '@kadena/types';
 import { createClient } from '../client';
 import { kadenaHostGenerator, withCounter } from '../utils/utils';
 
-const hostApiGenerator = ({
-  networkId,
-  chainId,
-}: {
-  networkId: string;
-  chainId: ChainId;
-}): string => `http://${networkId}/${chainId}`;
+const hostApiGenerator = ({ networkId, chainId }: { networkId: string; chainId: ChainId }): string =>
+  `http://${networkId}/${chainId}`;
 
 describe('client', () => {
   it('uses the string input as the host for all requests', async () => {
@@ -42,10 +37,7 @@ describe('client', () => {
 
     expect(result).toEqual(response);
 
-    expect((chainwebClient.local as jest.Mock).mock.calls[0]).toEqual([
-      body,
-      hostUrl,
-    ]);
+    expect((chainwebClient.local as jest.Mock).mock.calls[0]).toEqual([body, hostUrl]);
   });
 
   it('uses kadenaHostGenerator if called without argument', async () => {
@@ -117,10 +109,7 @@ describe('client', () => {
 
       await submit(body);
 
-      expect(chainwebClient.send).toBeCalledWith(
-        { cmds: [body] },
-        hostApiGenerator({ networkId, chainId }),
-      );
+      expect(chainwebClient.send).toBeCalledWith({ cmds: [body] }, hostApiGenerator({ networkId, chainId }));
     });
 
     it('returns requestKey if input is a single command', async () => {
@@ -166,16 +155,12 @@ describe('client', () => {
 
       const transactionDescriptors = await submit([body]);
 
-      expect(transactionDescriptors).toEqual([
-        { requestKey: 'test-key', chainId: '1', networkId: 'mainnet01' },
-      ]);
+      expect(transactionDescriptors).toEqual([{ requestKey: 'test-key', chainId: '1', networkId: 'mainnet01' }]);
     });
 
     it('throes an error if the command list is empty', async () => {
       const { submit } = createClient(() => 'http://test-host.com');
-      await expect(submit([])).rejects.toThrowError(
-        new Error('EMPTY_COMMAND_LIST'),
-      );
+      await expect(submit([])).rejects.toThrowError(new Error('EMPTY_COMMAND_LIST'));
     });
   });
 

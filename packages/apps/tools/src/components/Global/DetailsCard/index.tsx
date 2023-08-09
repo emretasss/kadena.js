@@ -50,9 +50,7 @@ export const DetailCard: FC<IDetailCardProps> = ({
             <StyledInfoItemLine>{secondContent}</StyledInfoItemLine>
           </div>
           {helperText ? (
-            <StyledWarningContainer typedMessage={helperTextType}>
-              {helperText}
-            </StyledWarningContainer>
+            <StyledWarningContainer typedMessage={helperTextType}>{helperText}</StyledWarningContainer>
           ) : null}
         </StyledContentContainer>
       </StyledInfoContainer>

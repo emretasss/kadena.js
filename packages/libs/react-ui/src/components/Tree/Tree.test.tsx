@@ -21,12 +21,7 @@ describe('Tree', () => {
     const onClose = jest.fn();
 
     const { getAllByTestId } = render(
-      <Tree
-        title={'Example Title'}
-        items={[{ title: 'Child Title' }]}
-        onOpen={onOpen}
-        onClose={onClose}
-      />,
+      <Tree title={'Example Title'} items={[{ title: 'Child Title' }]} onOpen={onOpen} onClose={onClose} />,
     );
 
     const treeTitleElement = getAllByTestId('kda-tree-title')[0];

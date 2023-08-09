@@ -7,9 +7,7 @@ import React, { FC, FunctionComponentElement } from 'react';
 import { vars } from 'src/styles';
 
 export interface IInputWrapperProps extends Omit<IInputHeaderProps, 'label'> {
-  children:
-    | FunctionComponentElement<IInputProps>
-    | FunctionComponentElement<IInputProps>[];
+  children: FunctionComponentElement<IInputProps> | FunctionComponentElement<IInputProps>[];
   status?: Status;
   disabled?: boolean;
   helperText?: string;
@@ -32,9 +30,7 @@ export const InputWrapper: FC<IInputWrapperProps> = ({
 
   return (
     <div className={statusVal ? statusVariant[statusVal] : undefined}>
-      {label !== undefined && (
-        <InputHeader htmlFor={htmlFor} label={label} tag={tag} info={info} />
-      )}
+      {label !== undefined && <InputHeader htmlFor={htmlFor} label={label} tag={tag} info={info} />}
       <div className="inputGroup">
         {React.Children.map(children, (child) => {
           if (!React.isValidElement(child)) return null;

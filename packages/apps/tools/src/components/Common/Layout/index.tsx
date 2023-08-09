@@ -34,16 +34,10 @@ export const Layout: FC<IProps> = ({ children }: IProps) => {
   return (
     <div>
       <header className={headerStyle}>
-        <Header
-          appTitle={t('Developer Tools')}
-          menu={menu}
-          rightPanel={<WalletConnectButton />}
-        />
+        <Header appTitle={t('Developer Tools')} menu={menu} rightPanel={<WalletConnectButton />} />
       </header>
       <Sidebar />
-      <main className={classNames(gridItemMainStyle, { isMenuOpen })}>
-        {children}
-      </main>
+      <main className={classNames(gridItemMainStyle, { isMenuOpen })}>{children}</main>
       <div className={footerStyle}>
         <FooterWrapper />
       </div>

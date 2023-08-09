@@ -57,20 +57,7 @@
       "variables": {
         "location": {
           "default": "us-e1",
-          "enum": [
-            "us-e1",
-            "us-e2",
-            "us-e3",
-            "us-w1",
-            "us-w2",
-            "us-w3",
-            "fr1",
-            "fr2",
-            "fr3",
-            "jp1",
-            "jp2",
-            "jp3"
-          ]
+          "enum": ["us-e1", "us-e2", "us-e3", "us-w1", "us-w2", "us-w3", "fr1", "fr2", "fr3", "jp1", "jp2", "jp3"]
         },
         "apiVersion": {
           "default": "0.0"
@@ -220,16 +207,7 @@
     {
       "name": "chainweb_p2p",
       "x-displayName": "Chainweb P2P API",
-      "tags": [
-        "p2p_api",
-        "cut",
-        "blockhash",
-        "header",
-        "payload",
-        "mempool",
-        "peer",
-        "config"
-      ]
+      "tags": ["p2p_api", "cut", "blockhash", "header", "payload", "mempool", "peer", "config"]
     },
     {
       "name": "chainweb_service",
@@ -483,13 +461,7 @@
       "payload": {
         "title": "Block Payload",
         "description": "Payload of a Block including the Merkle roots for transactions and\ntransaction outputs.\n",
-        "required": [
-          "transactions",
-          "minerData",
-          "transactionsHash",
-          "outputsHash",
-          "payloadHash"
-        ],
+        "required": ["transactions", "minerData", "transactionsHash", "outputsHash", "payloadHash"],
         "example": {
           "value": {
             "$ref": "#/components/examples/payloads/value/1"
@@ -524,14 +496,7 @@
       "payloadWithOutputs": {
         "title": "Block Payload With Outputs",
         "description": "Payload with outputs of a Block including the Merkle roots for\ntransactions and transaction outputs\n",
-        "required": [
-          "transactions",
-          "minerData",
-          "transactionsHash",
-          "outputsHash",
-          "payloadHash",
-          "coinbase"
-        ],
+        "required": ["transactions", "minerData", "transactionsHash", "outputsHash", "payloadHash", "coinbase"],
         "example": {
           "value": {
             "transactions": [],
@@ -744,19 +709,7 @@
           },
           "hashes": {
             "type": "object",
-            "required": [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "10"
-            ],
+            "required": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
             "description": "An object that maps chain Ids to their respective block hash and\nblock height\n",
             "additionalProperties": {
               "$ref": "#/components/schemas/hashWithBlockHeight"
@@ -793,13 +746,7 @@
       "nodeInfo": {
         "title": "Chainweb Node Info",
         "description": "General information about a chainweb node",
-        "required": [
-          "nodeNumberOfChains",
-          "nodeApiVersion",
-          "nodeChains",
-          "nodeVersion",
-          "nodeGraphHistory"
-        ],
+        "required": ["nodeNumberOfChains", "nodeApiVersion", "nodeChains", "nodeVersion", "nodeGraphHistory"],
         "example": {
           "value": {
             "nodeNumberOfChains": 20,
@@ -1031,9 +978,7 @@
         "example": {
           "account": "miner",
           "predicate": "keys-all",
-          "public-keys": [
-            "f880a433d6e2a13a32b6169030f56245efdd8c1b8a5027e9ce98a88e886bef27"
-          ]
+          "public-keys": ["f880a433d6e2a13a32b6169030f56245efdd8c1b8a5027e9ce98a88e886bef27"]
         }
       },
       "nodeConfig": {
@@ -1355,20 +1300,14 @@
       "blockHashPage": {
         "value": {
           "next": "inclusive:o1S4NNFhKWg8T1HEkmDvsTH9Ut9l3_qHRpp00yRKZIk",
-          "items": [
-            "k0an0qEORusqQg9ZjKrxa-0Bo0-hQVYLXqWi5LHxg3k",
-            "vhVa6Deh10RXLRf3L-MSQTYqaL-_IY_mi-v58MjP9R8"
-          ],
+          "items": ["k0an0qEORusqQg9ZjKrxa-0Bo0-hQVYLXqWi5LHxg3k", "vhVa6Deh10RXLRf3L-MSQTYqaL-_IY_mi-v58MjP9R8"],
           "limit": 2
         }
       },
       "blockHashBranchPage": {
         "value": {
           "next": "inclusive:o1S4NNFhKWg8T1HEkmDvsTH9Ut9l3_qHRpp00yRKZIk",
-          "items": [
-            "QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74",
-            "RClyuyZAacwvPpmLXKbTwrIRXWeUSjiNhJVP2esH8KM"
-          ],
+          "items": ["QxGCAz5AY1Y41nh1yWtgqhKhZ9pPiPRagFdIKNqBH74", "RClyuyZAacwvPpmLXKbTwrIRXWeUSjiNhJVP2esH8KM"],
           "limit": 2
         }
       },
@@ -1650,10 +1589,7 @@
         "value": "GpaWbHkHrCjRhY8hKE0qZ1WsBBaG3Y_zkFLV2sYumQA"
       },
       "payloadHashes": {
-        "value": [
-          "GpaWbHkHrCjRhY8hKE0qZ1WsBBaG3Y_zkFLV2sYumQA",
-          "jcQOWz7K9qKnkUv4Z883D2ZjkFFGgccoSroWGaoogLM"
-        ]
+        "value": ["GpaWbHkHrCjRhY8hKE0qZ1WsBBaG3Y_zkFLV2sYumQA", "jcQOWz7K9qKnkUv4Z883D2ZjkFFGgccoSroWGaoogLM"]
       },
       "payloads": {
         "value": [
@@ -3715,12 +3651,7 @@
             },
             "chainwebVersion": {
               "default": "mainnet01",
-              "enum": [
-                "test-singleton",
-                "development",
-                "mainnet01",
-                "testnet04"
-              ]
+              "enum": ["test-singleton", "development", "mainnet01", "testnet04"]
             },
             "apiVersion": {
               "default": "0.0"
@@ -3739,9 +3670,7 @@
               "example": {
                 "account": "miner",
                 "predicate": "keys-all",
-                "public-keys": [
-                  "f880a433d6e2a13a32b6169030f56245efdd8c1b8a5027e9ce98a88e886bef27"
-                ]
+                "public-keys": ["f880a433d6e2a13a32b6169030f56245efdd8c1b8a5027e9ce98a88e886bef27"]
               },
               "schema": {
                 "$ref": "#/components/schemas/minerInfo"
@@ -3813,12 +3742,7 @@
             },
             "chainwebVersion": {
               "default": "mainnet01",
-              "enum": [
-                "test-singleton",
-                "development",
-                "mainnet01",
-                "testnet04"
-              ]
+              "enum": ["test-singleton", "development", "mainnet01", "testnet04"]
             },
             "apiVersion": {
               "default": "0.0"
@@ -3879,12 +3803,7 @@
             },
             "chainwebVersion": {
               "default": "mainnet01",
-              "enum": [
-                "test-singleton",
-                "development",
-                "mainnet01",
-                "testnet04"
-              ]
+              "enum": ["test-singleton", "development", "mainnet01", "testnet04"]
             },
             "apiVersion": {
               "default": "0.0"

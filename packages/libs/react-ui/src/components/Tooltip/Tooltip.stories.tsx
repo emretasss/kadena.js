@@ -49,12 +49,8 @@ export const Dynamic: Story = {
         <IconButton
           title="hover me"
           icon={SystemIcon.Information}
-          onMouseEnter={(e: React.MouseEvent<HTMLElement>) =>
-            Tooltip.handler(e, ref)
-          }
-          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) =>
-            Tooltip.handler(e, ref)
-          }
+          onMouseEnter={(e: React.MouseEvent<HTMLElement>) => Tooltip.handler(e, ref)}
+          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => Tooltip.handler(e, ref)}
         />
 
         <Tooltip.Root placement={placement} ref={ref}>

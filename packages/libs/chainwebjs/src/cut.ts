@@ -14,11 +14,7 @@ import fetch from 'cross-fetch';
  * @alpha
  */
 
-export async function currentCut(
-  network: string,
-  host: string,
-  retryOptions?: IRetryOptions,
-): Promise<ICutResponse> {
+export async function currentCut(network: string, host: string, retryOptions?: IRetryOptions): Promise<ICutResponse> {
   const u = transFormUrl(baseUrl(network, host, 'cut'));
   const result = await retryFetch(() => fetch(u), retryOptions);
   return parseResponse<ICutResponse>(result);
@@ -33,11 +29,7 @@ export async function currentCut(
  *
  * @alpha
  */
-export async function cutPeers(
-  network: string,
-  host: string,
-  retryOptions?: IRetryOptions,
-): Promise<ICutPeerItem[]> {
+export async function cutPeers(network: string, host: string, retryOptions?: IRetryOptions): Promise<ICutPeerItem[]> {
   const page = await cutPeerPage(network, host, retryOptions);
   return page.items.reverse();
 }

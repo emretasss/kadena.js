@@ -1,8 +1,4 @@
-import {
-  IContinuationPayloadObject,
-  IExecutionPayloadObject,
-  IPactCommand,
-} from '../../interfaces/IPactCommand';
+import { IContinuationPayloadObject, IExecutionPayloadObject, IPactCommand } from '../../interfaces/IPactCommand';
 
 /**
  * @internal
@@ -11,8 +7,7 @@ export const mergePayload = (
   payload: IPactCommand['payload'] | undefined,
   newPayload: IPactCommand['payload'] | undefined,
 ): IExecutionPayloadObject | IContinuationPayloadObject | undefined => {
-  if (payload === undefined || newPayload === undefined)
-    return newPayload ?? payload;
+  if (payload === undefined || newPayload === undefined) return newPayload ?? payload;
 
   if ('exec' in payload && 'exec' in newPayload) {
     return {
@@ -60,10 +55,7 @@ export const mergePayload = (
  * @param patch - the properties to patch on top of the target command
  * @public
  */
-export function patchCommand(
-  command: Partial<IPactCommand>,
-  patch: Partial<IPactCommand>,
-): Partial<IPactCommand> {
+export function patchCommand(command: Partial<IPactCommand>, patch: Partial<IPactCommand>): Partial<IPactCommand> {
   const state = { ...command };
   if (patch.payload !== undefined) {
     state.payload = mergePayload(state.payload, patch.payload);
@@ -80,14 +72,9 @@ export function patchCommand(
   if (patch.signers !== undefined) {
     patch.signers.forEach((signer) => {
       state.signers ??= [];
-      const foundSigner = state.signers.find(
-        ({ pubKey }) => signer.pubKey === pubKey,
-      );
+      const foundSigner = state.signers.find(({ pubKey }) => signer.pubKey === pubKey);
       if (foundSigner !== undefined) {
-        foundSigner.clist = [
-          ...(foundSigner.clist ?? []),
-          ...(signer.clist ?? []),
-        ];
+        foundSigner.clist = [...(foundSigner.clist ?? []), ...(signer.clist ?? [])];
       } else {
         state.signers.push(signer);
       }

@@ -8,6 +8,4 @@ import { seq } from './seq';
 /**
  * @example namespace.module.function
  */
-export const dotedAtom: IParser<string> = asString(
-  seq(seq(atom, id('.')), repeat(seq(atom, id('.'))), atom),
-);
+export const dotedAtom: IParser<string> = asString(seq(seq(atom, id('.')), repeat(seq(atom, id('.'))), atom));

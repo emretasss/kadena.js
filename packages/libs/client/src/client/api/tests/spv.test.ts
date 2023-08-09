@@ -37,9 +37,9 @@ describe('getSpv', () => {
     const requestKey = 'request-key';
     const targetChainId = '1';
 
-    await expect(() =>
-      getSpv(hostUrl, requestKey, targetChainId),
-    ).rejects.toThrowError(new Error('PROOF_IS_NOT_AVAILABLE'));
+    await expect(() => getSpv(hostUrl, requestKey, targetChainId)).rejects.toThrowError(
+      new Error('PROOF_IS_NOT_AVAILABLE'),
+    );
 
     expect(spv).toBeCalledWith({ requestKey, targetChainId }, hostUrl);
   });

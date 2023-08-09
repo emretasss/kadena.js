@@ -15,9 +15,7 @@ const meta: Meta<ICardProps> = {
       },
     },
     fullWidth: {
-      options: Object.keys(
-        fullWidthVariant,
-      ) as (keyof typeof fullWidthVariant)[],
+      options: Object.keys(fullWidthVariant) as (keyof typeof fullWidthVariant)[],
       control: {
         type: 'select',
       },
@@ -39,10 +37,7 @@ export const Primary: Story = {
       <>
         <Card.Container stack={stack} fullWidth={fullWidth}>
           <Card.Heading>Getting Started is Simple</Card.Heading>
-          <Card.Body>
-            Learn Kadena&apos;s core concepts & tools for development in 15
-            minutes
-          </Card.Body>
+          <Card.Body>Learn Kadena&apos;s core concepts & tools for development in 15 minutes</Card.Body>
           <Card.Footer>
             <Button title={'Button'} icon={SystemIcons.Information}>
               Get Started
@@ -53,10 +48,7 @@ export const Primary: Story = {
 
         <Card.Container stack={stack} fullWidth={fullWidth}>
           <Card.Heading>Getting Started is Simple</Card.Heading>
-          <Card.Body>
-            Learn Kadena&apos;s core concepts & tools for development in 15
-            minutes
-          </Card.Body>
+          <Card.Body>Learn Kadena&apos;s core concepts & tools for development in 15 minutes</Card.Body>
           <Card.Footer>
             <Button title={'Button'} icon={SystemIcons.Information}>
               Get Started

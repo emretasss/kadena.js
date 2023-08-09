@@ -1,11 +1,4 @@
-import {
-  boldClass,
-  colorVariant,
-  elementVariant,
-  fontVariant,
-  sizeVariant,
-  transformVariant,
-} from './Text.css';
+import { boldClass, colorVariant, elementVariant, fontVariant, sizeVariant, transformVariant } from './Text.css';
 
 import cn from 'classnames';
 import React, { FC } from 'react';

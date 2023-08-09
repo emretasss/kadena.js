@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
 
-const ManageKda: React.FC<SVGProps<SVGSVGElement>> = (
-  props: SVGProps<SVGSVGElement>,
-) => (
-  <svg
-    width={40}
-    height={40}
-    viewBox="0 0 40 40"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+const ManageKda: React.FC<SVGProps<SVGSVGElement>> = (props: SVGProps<SVGSVGElement>) => (
+  <svg width={40} height={40} viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" {...props}>
     <g clipPath="url(#clip0_1080_2288)">
       <path
         d="M324,40.58H113.59A73.6,73.6,0,0,0,40,114.18V308.31A31.69,31.69,0,0,0,71.69,340H201.36A53.28,53.28,0,0,0,243,320H274.3a16,16,0,0,0,16-16V285.76H302a16,16,0,0,0,16-16V254.93h6a16,16,0,0,0,16-16V56.58A16,16,0,0,0,324,40.58Z"

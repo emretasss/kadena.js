@@ -89,9 +89,7 @@ describe('generateDts', () => {
       getContract: () => Promise.resolve(''),
     });
 
-    expect(() => generateDts('user.test-module-2', modules)).toThrowError(
-      `Module user.test-module-2 not found`,
-    );
+    expect(() => generateDts('user.test-module-2', modules)).toThrowError(`Module user.test-module-2 not found`);
   });
 
   it('throws an exception if requested module does not have any functions', async () => {
@@ -106,9 +104,7 @@ describe('generateDts', () => {
 
     modules['user.test-module'].functions = undefined;
 
-    expect(() => generateDts('user.test-module', modules)).toThrowError(
-      `Module user.test-module has no functions`,
-    );
+    expect(() => generateDts('user.test-module', modules)).toThrowError(`Module user.test-module has no functions`);
   });
 
   it('uses the property type if there is no mapped value for that', async () => {

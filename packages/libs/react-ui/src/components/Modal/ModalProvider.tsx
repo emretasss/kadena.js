@@ -1,16 +1,7 @@
 import { Modal } from './Modal';
 import { openModal } from './Modal.css';
 
-import React, {
-  createContext,
-  FC,
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { createContext, FC, ReactNode, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 //Defining context

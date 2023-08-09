@@ -23,14 +23,7 @@ export const Heading: FC<IHeadingProps> = ({
   children,
 }) => {
   return (
-    <BaseText
-      as={as}
-      variant={variant ?? as}
-      font={font}
-      bold={bold}
-      color={color}
-      transform={transform}
-    >
+    <BaseText as={as} variant={variant ?? as} font={font} bold={bold} color={color} transform={transform}>
       {children}
     </BaseText>
   );

@@ -22,9 +22,7 @@ export const MenuProvider: React.FC<ITMenuProviderProps> = (props) => {
 
   if (context) return <>{props.children}</>;
   return (
-    <MenuContext.Provider
-      value={{ toggleMenu, toggleAside, closeMenu, isMenuOpen, isAsideOpen }}
-    >
+    <MenuContext.Provider value={{ toggleMenu, toggleAside, closeMenu, isMenuOpen, isAsideOpen }}>
       {props.children}
     </MenuContext.Provider>
   );

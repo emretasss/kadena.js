@@ -10,35 +10,32 @@ export const ArticleMetadataItem: StyledComponent<'span'> = styled('span', {
   },
 });
 
-export const PageGrid: StyledComponent<typeof BasePageGrid> = styled(
-  BasePageGrid,
-  {
-    gridTemplateColumns: 'auto auto',
-    gridTemplateAreas: `
+export const PageGrid: StyledComponent<typeof BasePageGrid> = styled(BasePageGrid, {
+  gridTemplateColumns: 'auto auto',
+  gridTemplateAreas: `
             "header header"
             "pageheader pageheader"
             "content"
             "footer footer"
           `,
 
-    '@md': {
-      gridTemplateColumns: '0% 5% auto 5%',
+  '@md': {
+    gridTemplateColumns: '0% 5% auto 5%',
 
-      gridTemplateAreas: `
+    gridTemplateAreas: `
               "header header header header"
               "pageheader pageheader pageheader pageheader"
               ". content . ."
               "footer footer footer footer"
             `,
-    },
-    '@2xl': {
-      gridTemplateColumns: '0% minmax(20%, auto) auto minmax(20%, auto)',
-      gridTemplateAreas: `
+  },
+  '@2xl': {
+    gridTemplateColumns: '0% minmax(20%, auto) auto minmax(20%, auto)',
+    gridTemplateAreas: `
               "header header header header"
               "pageheader pageheader pageheader pageheader"
               ". content ."
               "footer footer footer footer"
             `,
-    },
   },
-);
+});

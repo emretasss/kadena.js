@@ -36,29 +36,16 @@ const Options = z.object({
 
 export type TOptions = z.infer<typeof Options>;
 
-export function retrieveContractCommand(
-  program: Command,
-  version: string,
-): void {
+export function retrieveContractCommand(program: Command, version: string): void {
   program
     .command('retrieve-contract')
     .description(
       'Retrieve contract from a chainweb-api in a /local call (see also: https://github.com/kadena-io/chainweb-node#configuring-running-and-monitoring-the-health-of-a-chainweb-node).',
     )
-    .option(
-      '-m, --module <module>',
-      'The module you want to retrieve (e.g. "coin")',
-    )
+    .option('-m, --module <module>', 'The module you want to retrieve (e.g. "coin")')
     .option('-o, --out <file>', 'File to write the contract to')
-    .option(
-      '--api <url>',
-      'API to retrieve from (e.g. "https://api.chainweb.com/chainweb/0.0/mainnet01/chain/8/pact")',
-    )
-    .option(
-      '-n, --network <network>',
-      'Network to retrieve from (default "mainnet")',
-      'mainnet',
-    )
+    .option('--api <url>', 'API to retrieve from (e.g. "https://api.chainweb.com/chainweb/0.0/mainnet01/chain/8/pact")')
+    .option('-n, --network <network>', 'Network to retrieve from (default "mainnet")', 'mainnet')
     .addOption(
       new Option('-c, --chain <number>', 'Chain to retrieve from (default 1)')
         .argParser((value) => parseInt(value, 10))
@@ -77,9 +64,7 @@ export function retrieveContractCommand(
               }
               return err.message;
             })
-            .reduce(
-              (a, b) => `${a}\n${b}`,
-            )}\nReceived arguments ${JSON.stringify(args)}` +
+            .reduce((a, b) => `${a}\n${b}`)}\nReceived arguments ${JSON.stringify(args)}` +
             `\n${program.helpInformation(e)}`,
         );
       }

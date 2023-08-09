@@ -30,9 +30,7 @@ const ModulePage: FC = () => {
       return;
     }
 
-    const typedNetwork = (network instanceof Array
-      ? network[0]
-      : network) as unknown as Network;
+    const typedNetwork = (network instanceof Array ? network[0] : network) as unknown as Network;
     const chainId: ChainwebChainId = convertIntToChainId(
       (chain instanceof Array ? chain[0] : chain) as unknown as number,
     );
@@ -63,13 +61,11 @@ const ModulePage: FC = () => {
       setPactCode(pactCode);
 
       const moduleNameParts = moduleName.split('.');
-      const namespace =
-        moduleNameParts.length > 1 ? moduleNameParts[0] : undefined;
+      const namespace = moduleNameParts.length > 1 ? moduleNameParts[0] : undefined;
 
       const [pactModules] = contractParser(pactCode, namespace);
       const pactModule = pactModules.find(
-        ({ name, namespace }) =>
-          (namespace ? `${namespace}.${name}` : name) === moduleName,
+        ({ name, namespace }) => (namespace ? `${namespace}.${name}` : name) === moduleName,
       );
       if (pactModule) {
         setFunctions(pactModule.functions ?? []);

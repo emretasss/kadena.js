@@ -9,12 +9,7 @@ export interface INotificationButtonProps {
   onClick?: () => void;
   children: React.ReactNode;
 }
-export const NotificationButton: FC<INotificationButtonProps> = ({
-  icon,
-  color,
-  onClick,
-  children,
-}) => {
+export const NotificationButton: FC<INotificationButtonProps> = ({ icon, color, onClick, children }) => {
   const Icon = icon;
   return (
     <button onClick={onClick} className={colorVariants[color]}>

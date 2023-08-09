@@ -2,12 +2,7 @@ import { Heading, IHeadingProps } from '@kadena/react-ui';
 
 import { ILinkBlock, LinkBlock } from './LinkBlock';
 import { ILinkList, LinkList } from './LinkList';
-import {
-  columnLinkClass,
-  columnLinkListItemClass,
-  directionVariants,
-  sectionRowContainerClass,
-} from './styles.css';
+import { columnLinkClass, columnLinkListItemClass, directionVariants, sectionRowContainerClass } from './styles.css';
 
 import classnames from 'classnames';
 import Link from 'next/link';
@@ -16,9 +11,7 @@ import React, { FC, FunctionComponentElement } from 'react';
 export interface IBrowseSectionProps {
   title?: string;
   titleAs?: IHeadingProps['as'];
-  children?:
-    | FunctionComponentElement<ILinkBlock>[]
-    | FunctionComponentElement<ILinkBlock>;
+  children?: FunctionComponentElement<ILinkBlock>[] | FunctionComponentElement<ILinkBlock>;
   direction?: 'column' | 'row';
   className?: string;
 }
@@ -53,12 +46,7 @@ const BrowseSection: BrowseSectionType = ({
       {Boolean(title) && <Heading as={titleAs}>{title}</Heading>}
       <ul className={directionVariants[direction]}>
         {React.Children.map(children, (child) => {
-          if (
-            !React.isValidElement(child) ||
-            (child.type !== LinkBlock &&
-              child.type !== Link &&
-              child.type !== 'a')
-          ) {
+          if (!React.isValidElement(child) || (child.type !== LinkBlock && child.type !== Link && child.type !== 'a')) {
             throw new Error('not a child for the BrowseSection Component');
           }
 
@@ -73,9 +61,7 @@ const BrowseSection: BrowseSectionType = ({
                 className: columnLinkClass,
               });
 
-              return (
-                <li className={columnLinkListItemClass}>{childWithProps}</li>
-              );
+              return <li className={columnLinkListItemClass}>{childWithProps}</li>;
             }
           }
 

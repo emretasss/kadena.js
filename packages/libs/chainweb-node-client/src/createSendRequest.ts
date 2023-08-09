@@ -7,9 +7,7 @@ import type { ISendRequestBody } from './interfaces/PactAPI';
  * @alpha
  * @param commands - one or an array of commands, see mkSingleCmd
  */
-export function createSendRequest(
-  commands: ICommand | ICommand[],
-): ISendRequestBody {
+export function createSendRequest(commands: ICommand | ICommand[]): ISendRequestBody {
   return {
     cmds: Array.isArray(commands) ? commands : [commands],
   };

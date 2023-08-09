@@ -59,10 +59,7 @@ const deploy = async ({
 }): Promise<unknown> => {
   try {
     for (const chainId of chainIds) {
-      const res = await buildCommand(
-        setDeployChainSettings(chainId),
-        setDeploySettings,
-      )({});
+      const res = await buildCommand(setDeployChainSettings(chainId), setDeploySettings)({});
       console.log('res', res);
     }
     return { success: true };
@@ -181,12 +178,9 @@ export const deployQuestions: IQuestion[] = [
       l1Chains = [],
       l2Chains = [],
     }: IAnswers) => {
-      if (typeof pactFile !== 'string' || pactFile === '')
-        throw new Error('No pact file provided');
-      if (typeof dataFile !== 'string' || dataFile === '')
-        throw new Error('No data file provided');
-      if (typeof signer !== 'string' || signer === '')
-        throw new Error('No signer provided');
+      if (typeof pactFile !== 'string' || pactFile === '') throw new Error('No pact file provided');
+      if (typeof dataFile !== 'string' || dataFile === '') throw new Error('No data file provided');
+      if (typeof signer !== 'string' || signer === '') throw new Error('No signer provided');
       if (deployTargets === '') throw new Error('No deploy targets provided');
       const pactCode = readFileSync(pactFile, 'utf8');
       const data = JSON.parse(readFileSync(dataFile, 'utf8'));
@@ -194,10 +188,8 @@ export const deployQuestions: IQuestion[] = [
       const deployCommand = setDeploySettings({
         pactCode,
         data,
-        publicKey:
-          '368820f80c324bbc7c2b0610688a7da43e39f91d118732671cd9c7500ff43cca',
-        secretKey:
-          '251a920c403ae8c8f65f59142316af3c82b631fba46ddea92ee8c95035bd2898',
+        publicKey: '368820f80c324bbc7c2b0610688a7da43e39f91d118732671cd9c7500ff43cca',
+        secretKey: '251a920c403ae8c8f65f59142316af3c82b631fba46ddea92ee8c95035bd2898',
         useChainWeaver: false,
       });
       if (isL1({ deployTargets }) && Array.isArray(l1Chains)) {

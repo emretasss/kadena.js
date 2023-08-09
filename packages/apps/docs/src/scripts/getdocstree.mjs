@@ -53,11 +53,7 @@ const minimumZeroValue = (value) => {
 
 const pushToParent = (parent, child) => {
   let added = false;
-  if (
-    !parent.length ||
-    child.order > parent.at(-1).order ||
-    child.order === undefined
-  ) {
+  if (!parent.length || child.order > parent.at(-1).order || child.order === undefined) {
     added = true;
     parent.push(child);
 

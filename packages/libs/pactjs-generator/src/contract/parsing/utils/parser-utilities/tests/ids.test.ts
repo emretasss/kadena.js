@@ -17,10 +17,7 @@ describe('ids parser', () => {
 
   it('should use the mapper function to map the token to the expected value', () => {
     const pointer = getPointer('test');
-    const result = ids(
-      ['test', 'ok'],
-      (idx, list) => list[idx].length,
-    )(pointer);
+    const result = ids(['test', 'ok'], (idx, list) => list[idx].length)(pointer);
     expect(result).toBe(4);
   });
 });

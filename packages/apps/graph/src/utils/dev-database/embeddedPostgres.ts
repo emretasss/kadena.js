@@ -25,9 +25,7 @@ export async function embeddedPostgres(): Promise<void> {
     // Create the cluster config files
     await pg.initialise();
   } catch (e) {
-    console.log(
-      'INFO: Postgres already initialized, remove the data/db folder to reinitialize',
-    );
+    console.log('INFO: Postgres already initialized, remove the data/db folder to reinitialize');
   }
 
   // Start the server
@@ -36,9 +34,7 @@ export async function embeddedPostgres(): Promise<void> {
     await pg.createDatabase('chainweb-data');
   } catch (e) {
     if (e.code === '42P04') {
-      console.log(
-        'INFO: Database already exists, remove the data/db folder to reinitialize',
-      );
+      console.log('INFO: Database already exists, remove the data/db folder to reinitialize');
     } else {
       throw e;
     }

@@ -50,17 +50,14 @@ export const StyledHeader: StyledComponent<'header'> = styled('header', {
   zIndex: 3,
 });
 
-export const Wrapper: StyledComponent<typeof InnerWrapper> = styled(
-  InnerWrapper,
-  {
-    justifyContent: 'center',
-    flexDirection: 'column',
+export const Wrapper: StyledComponent<typeof InnerWrapper> = styled(InnerWrapper, {
+  justifyContent: 'center',
+  flexDirection: 'column',
 
-    paddingTop: '$20',
-    paddingBottom: '$10',
-    marginBottom: '$6',
-  },
-);
+  paddingTop: '$20',
+  paddingBottom: '$10',
+  marginBottom: '$6',
+});
 
 export const SubHeader: StyledComponent<'span'> = styled('span', {
   color: '$neutral4',

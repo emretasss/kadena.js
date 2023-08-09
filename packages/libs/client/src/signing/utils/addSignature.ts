@@ -25,18 +25,14 @@ export const addSignatures: (
   const parsedTransaction = parseTransactionCommand(transaction);
   if (allSignaturesHavePubKeys(signatures)) {
     // signatures have pubKeys, use pubKeys to identify order
-    const pubKeyOrder = parsedTransaction.signers.map(
-      (signer) => signer.pubKey,
-    );
+    const pubKeyOrder = parsedTransaction.signers.map((signer) => signer.pubKey);
     debug(`Adding signatures based on pubKeys`);
 
     return {
       cmd,
       hash,
       sigs: pubKeyOrder.map((pubKey, i) => {
-        const signature = signatures.find(
-          (signature) => signature.pubKey === pubKey,
-        );
+        const signature = signatures.find((signature) => signature.pubKey === pubKey);
         // this allows for overriding the signature
         // when a signature is found, the new signature will be used
         if (signature === undefined) {

@@ -11,9 +11,7 @@ import { mockFetch } from './mokker';
 import fetch from 'cross-fetch';
 
 const mockedFunctionFetch = fetch as jest.MockedFunction<typeof fetch>;
-mockedFunctionFetch.mockImplementation(
-  mockFetch as jest.MockedFunction<typeof fetch>,
-);
+mockedFunctionFetch.mockImplementation(mockFetch as jest.MockedFunction<typeof fetch>);
 
 import chainweb from '..';
 
@@ -59,12 +57,7 @@ describe('chainweb.event', () => {
   /* By Height */
 
   it('gets event by height and validates', async () => {
-    const r = await chainweb.event.height(
-      0,
-      height,
-      config.network,
-      config.host,
-    );
+    const r = await chainweb.event.height(0, height, config.network, config.host);
     logg('Events:', r);
     expect(r.length).toBe(1);
     expect(r[0]).toEqual(pactEvent);
@@ -74,12 +67,7 @@ describe('chainweb.event', () => {
   /* By Block Hash */
 
   it('Gets event blockhash and validates', async () => {
-    const r = await chainweb.event.blockHash(
-      0,
-      blockHash,
-      config.network,
-      config.host,
-    );
+    const r = await chainweb.event.blockHash(0, blockHash, config.network, config.host);
     logg('Events:', r);
     expect(r.length).toBe(1);
     expect(r[0]).toEqual(pactEvent);
@@ -102,15 +90,8 @@ describe('chainweb.event', () => {
   /* By Recent */
 
   it('gets items from recent block by event', async () => {
-    const cur = (await chainweb.cut.current(config.network, config.host))
-      .hashes[0].height;
-    const r = await chainweb.event.recent(
-      0,
-      10,
-      15,
-      config.network,
-      config.host,
-    );
+    const cur = (await chainweb.cut.current(config.network, config.host)).hashes[0].height;
+    const r = await chainweb.event.recent(0, 10, 15, config.network, config.host);
     logg('Events:', r);
     expect(r).toBeTruthy();
     r.forEach((v, i) => {

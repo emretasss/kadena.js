@@ -19,19 +19,13 @@ const meta: Meta<
       },
     },
     leftIcon: {
-      options: [
-        undefined,
-        ...(Object.keys(SystemIcon) as (keyof typeof SystemIcon)[]),
-      ],
+      options: [undefined, ...(Object.keys(SystemIcon) as (keyof typeof SystemIcon)[])],
       control: {
         type: 'select',
       },
     },
     rightIcon: {
-      options: [
-        undefined,
-        ...(Object.keys(SystemIcon) as (keyof typeof SystemIcon)[]),
-      ],
+      options: [undefined, ...(Object.keys(SystemIcon) as (keyof typeof SystemIcon)[])],
       control: {
         type: 'select',
       },
@@ -45,10 +39,7 @@ const meta: Meta<
       control: {
         type: 'select',
       },
-      options: [
-        undefined,
-        ...Object.keys(vars.sizes).map((key) => key as keyof typeof vars.sizes),
-      ],
+      options: [undefined, ...Object.keys(vars.sizes).map((key) => key as keyof typeof vars.sizes)],
     },
     outlined: {
       control: {
@@ -76,15 +67,7 @@ export const Dynamic: Story = {
     leadingTextWidth: undefined,
     outlined: false,
   },
-  render: ({
-    leftIcon,
-    rightIcon,
-    outlined,
-    leadingText,
-    leadingTextWidth,
-    onChange,
-    disabled,
-  }) => (
+  render: ({ leftIcon, rightIcon, outlined, leadingText, leadingTextWidth, onChange, disabled }) => (
     <Input
       id="inlineInputStory"
       leftIcon={SystemIcon[leftIcon]}

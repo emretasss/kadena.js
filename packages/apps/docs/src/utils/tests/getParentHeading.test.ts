@@ -17,9 +17,7 @@ describe('utils getParentHeading', () => {
   test('should return the parent H2 if the tag is H3', () => {
     const root: ISubHeaderElement = {
       tag: 'h1',
-      children: [
-        { tag: 'h2', title: 'Section 1', slug: 'section-1', children: [] },
-      ],
+      children: [{ tag: 'h2', title: 'Section 1', slug: 'section-1', children: [] }],
     };
     const expectedResult = {
       tag: 'h2',
@@ -38,9 +36,7 @@ describe('utils getParentHeading', () => {
   test('should return the parent H1 if the tag is H2 and there is already an H2 as a child', () => {
     const root: ISubHeaderElement = {
       tag: 'h1',
-      children: [
-        { tag: 'h2', title: 'Section 1', slug: 'section-1', children: [] },
-      ],
+      children: [{ tag: 'h2', title: 'Section 1', slug: 'section-1', children: [] }],
     };
     const expectedResult = root;
 

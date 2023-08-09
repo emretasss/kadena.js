@@ -3,10 +3,7 @@ export const MEDIA = '(prefers-color-scheme: dark)';
 const isServer = typeof window === 'undefined';
 
 // Helpers
-export const getTheme = (
-  key: string,
-  fallback?: string,
-): string | undefined => {
+export const getTheme = (key: string, fallback?: string): string | undefined => {
   if (isServer) return undefined;
   let theme;
   try {
@@ -40,9 +37,7 @@ export const disableAnimation = (): (() => void) => {
   };
 };
 
-export const getSystemTheme = (
-  e?: MediaQueryList | MediaQueryListEvent,
-): 'light' | 'dark' => {
+export const getSystemTheme = (e?: MediaQueryList | MediaQueryListEvent): 'light' | 'dark' => {
   if (!e) e = window.matchMedia(MEDIA);
   const isDark = e.matches;
   const systemTheme = isDark ? 'dark' : 'light';

@@ -42,11 +42,7 @@ export const TrackerCard: FC<ITrackerCardProps> = ({
   helperTextType = 'mild',
   variant,
 }): JSX.Element => {
-  const classCardContainer = classNames(
-    CardContainer,
-    icon ? layoutVariant[variant] : null,
-    gridVariant[variant],
-  );
+  const classCardContainer = classNames(CardContainer, icon ? layoutVariant[variant] : null, gridVariant[variant]);
 
   const classLabelValue = classNames(
     LabelValueContainer,
@@ -55,10 +51,7 @@ export const TrackerCard: FC<ITrackerCardProps> = ({
     gapValueLabelVariant[variant],
   );
 
-  const classWarningContainer = classNames(
-    TrackerWarningContainer,
-    warningVariant[helperTextType],
-  );
+  const classWarningContainer = classNames(TrackerWarningContainer, warningVariant[helperTextType]);
 
   const Icon = icon;
 
@@ -74,11 +67,7 @@ export const TrackerCard: FC<ITrackerCardProps> = ({
                 key={`label-value-container-${index}`}
                 data-testid={`kda-label-value-container-${index}`}
               >
-                <div
-                  className={LabelTitle}
-                  key={`label-${index}`}
-                  data-testid={`kda-label-${index}`}
-                >
+                <div className={LabelTitle} key={`label-${index}`} data-testid={`kda-label-${index}`}>
                   {item.label}
                 </div>
                 {item.isAccount && item.value ? (
@@ -91,11 +80,7 @@ export const TrackerCard: FC<ITrackerCardProps> = ({
                     data-testid={`kda-masked-value-${index}`}
                   />
                 ) : (
-                  <div
-                    className={LabelValue}
-                    key={`value-${index}`}
-                    data-testid={`kda-value-${index}`}
-                  >
+                  <div className={LabelValue} key={`value-${index}`} data-testid={`kda-value-${index}`}>
                     {item.value}
                   </div>
                 )}

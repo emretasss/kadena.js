@@ -15,11 +15,7 @@ interface IProps {
   layout?: 'default' | 'code';
 }
 
-export const BottomPageSection: FC<IProps> = ({
-  editLink,
-  navigation,
-  layout = 'default',
-}) => {
+export const BottomPageSection: FC<IProps> = ({ editLink, navigation, layout = 'default' }) => {
   const classes = classnames(bottomWrapperClass, {
     [bottomWrapperCodeLayoutClass]: layout === 'code',
   });

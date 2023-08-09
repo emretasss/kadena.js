@@ -3,13 +3,7 @@ import { ChainwebChainId } from '@kadena/chainweb-node-client';
 import { DevOption, Network } from '@/constants/kadena';
 import { useDidUpdateEffect } from '@/hooks';
 import { getItem, setItem } from '@/utils/persist';
-import React, {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useLayoutEffect,
-  useState,
-} from 'react';
+import React, { createContext, PropsWithChildren, useContext, useLayoutEffect, useState } from 'react';
 
 interface INetworkState {
   network: Network;

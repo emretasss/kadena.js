@@ -1,13 +1,5 @@
 import { ChainwebChainId } from '@kadena/chainweb-node-client';
-import {
-  EnvData,
-  IKeyPair,
-  IMetaData,
-  IUnsignedCommand,
-  NetworkId,
-  PactTransactionHash,
-  Proof,
-} from '@kadena/types';
+import { EnvData, IKeyPair, IMetaData, IUnsignedCommand, NetworkId, PactTransactionHash, Proof } from '@kadena/types';
 
 import { prepareContCommand, prepareExecCommand } from 'kadena.js';
 
@@ -48,15 +40,5 @@ export function createSampleContTx(
   };
   const step = 1;
   const rollback = false;
-  return prepareContCommand(
-    [keyPair],
-    nonce,
-    proof,
-    pactId,
-    rollback,
-    step,
-    meta,
-    network,
-    envData,
-  );
+  return prepareContCommand([keyPair], nonce, proof, pactId, rollback, step, meta, network, envData);
 }

@@ -59,8 +59,8 @@ const command = {
 
 ## `addSigner`
 
-add a signer and capabilities they sign for, to the command it also uses the the
-typing from the payload part and recommends the relevant capabilities
+add a signer and capabilities they sign for, to the command it also uses the the typing from the payload part and
+recommends the relevant capabilities
 
 | parameter          | type                                                                       | description                                                                                |
 | ------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |

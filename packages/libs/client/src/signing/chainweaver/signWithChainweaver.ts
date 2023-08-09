@@ -1,10 +1,6 @@
 import { ICommand, IUnsignedCommand } from '@kadena/types';
 
-import {
-  IQuickSignRequestBody,
-  IQuicksignResponse,
-  IQuicksignSigner,
-} from '../../signing-api/v1/quicksign';
+import { IQuickSignRequestBody, IQuicksignResponse, IQuicksignSigner } from '../../signing-api/v1/quicksign';
 import { ISignFunction } from '../ISignFunction';
 import { addSignatures } from '../utils/addSignature';
 import { parseTransactionCommand } from '../utils/parseTransactionCommand';
@@ -68,10 +64,7 @@ export const signWithChainweaver: ISignFunction = (async (
     }
 
     result.responses.map((signedCommand, i) => {
-      transactions[i] = addSignatures(
-        transactions[i],
-        ...signedCommand.commandSigData.sigs.filter(isASigner),
-      );
+      transactions[i] = addSignatures(transactions[i], ...signedCommand.commandSigData.sigs.filter(isASigner));
     });
 
     return isList ? transactions : transactions[0];
@@ -90,10 +83,5 @@ function isASigner(signer: IQuicksignSigner): signer is {
   pubKey: string;
   sig: string;
 } {
-  return (
-    'pubKey' in signer &&
-    'sig' in signer &&
-    signer.sig !== null &&
-    signer.pubKey.length > 0
-  );
+  return 'pubKey' in signer && 'sig' in signer && signer.sig !== null && signer.pubKey.length > 0;
 }

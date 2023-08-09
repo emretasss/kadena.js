@@ -23,8 +23,7 @@ export const embed = async (text: string): Promise<IEmbedding> => {
 
   if (error !== undefined) throw new Error(error.message);
 
-  if (data[0].embedding === undefined)
-    throw new Error('No vector returned from the embeddings endpoint');
+  if (data[0].embedding === undefined) throw new Error('No vector returned from the embeddings endpoint');
 
   return {
     values: data.map((d: ICreateEmbeddingResponseDataInner) => {

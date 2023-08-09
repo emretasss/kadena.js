@@ -25,12 +25,7 @@ export const BreadcrumbItem: FC<IBreadcrumbItem> = ({ children, icon }) => {
           return null;
         }
 
-        return React.cloneElement(
-          child,
-          {},
-          Icon && <Icon size="sm" />,
-          child.props.children,
-        );
+        return React.cloneElement(child, {}, Icon && <Icon size="sm" />, child.props.children);
       })}
     </StyledBreadcrumbItem>
   );

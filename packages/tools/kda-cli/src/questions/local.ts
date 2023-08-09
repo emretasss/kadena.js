@@ -23,23 +23,17 @@ type ValidSigningAnswers = IAnswers & {
   network: string;
   endpoint: string;
 };
-const isValidSigningAnswers = (
-  answers: IAnswers,
-): answers is ValidSigningAnswers => {
+const isValidSigningAnswers = (answers: IAnswers): answers is ValidSigningAnswers => {
   if (typeof answers.command !== 'string') throw new Error('Invalid command');
-  if (!Array.isArray(answers.capabilities))
-    throw new Error('Invalid capabilities');
+  if (!Array.isArray(answers.capabilities)) throw new Error('Invalid capabilities');
   if (typeof answers.signer !== 'string') throw new Error('Invalid signer');
-  if (typeof answers.publicKey !== 'string')
-    throw new Error('Invalid publicKey');
+  if (typeof answers.publicKey !== 'string') throw new Error('Invalid publicKey');
   if (typeof answers.chainId !== 'string') throw new Error('Invalid chainId');
   if (typeof answers.network !== 'string') throw new Error('Invalid network');
   if (typeof answers.endpoint !== 'string') throw new Error('Invalid endpoint');
   return true;
 };
-const isSignCommand = (
-  signCommand: unknown,
-): signCommand is Partial<SignedPayload> => {
+const isSignCommand = (signCommand: unknown): signCommand is Partial<SignedPayload> => {
   if (typeof signCommand !== 'object') return false;
   return true;
 };
@@ -97,15 +91,7 @@ export const localQuestions: IQuestion[] = [
     action: async (answers: IAnswers) => {
       if (!isValidSigningAnswers(answers)) throw new Error('Invalid answers');
 
-      const {
-        network,
-        endpoint,
-        command,
-        capabilities,
-        signer,
-        publicKey,
-        chainId,
-      } = answers;
+      const { network, endpoint, command, capabilities, signer, publicKey, chainId } = answers;
       await new Promise<void>((resolve) => {
         setTimeout(() => {
           resolve();
@@ -145,9 +131,7 @@ export const localQuestions: IQuestion[] = [
 
       if (!isSignCommand(signCommand)) throw new Error('Invalid signCommand');
 
-      const res = await buildCommand(
-        local({ signatureValidation: false, preflight: false }),
-      )(signCommand);
+      const res = await buildCommand(local({ signatureValidation: false, preflight: false }))(signCommand);
       return { result: res?.result, response: res?.response };
     },
   },

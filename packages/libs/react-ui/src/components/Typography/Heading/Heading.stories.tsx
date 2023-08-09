@@ -1,8 +1,4 @@
-import {
-  colorVariants,
-  fontVariants,
-  transformVariants,
-} from '../typography.css';
+import { colorVariants, fontVariants, transformVariants } from '../typography.css';
 
 import { boldVariants, elementVariants } from './Heading.css';
 
@@ -37,9 +33,7 @@ const meta: Meta<typeof Heading> = {
       control: { type: 'select' },
     },
     transform: {
-      options: Object.keys(
-        transformVariants,
-      ) as (keyof typeof transformVariants)[],
+      options: Object.keys(transformVariants) as (keyof typeof transformVariants)[],
       control: { type: 'radio' },
     },
   },
@@ -60,14 +54,7 @@ export const Primary: Story = {
     transform: undefined,
   },
   render: ({ font, bold, as, variant, transform, children, color }) => (
-    <Heading
-      as={as}
-      variant={variant}
-      font={font}
-      bold={bold}
-      color={color}
-      transform={transform}
-    >
+    <Heading as={as} variant={variant} font={font} bold={bold} color={color} transform={transform}>
       {children}
     </Heading>
   ),

@@ -2,16 +2,11 @@ import { IInputProps, Input } from '@components/Input';
 import { IInputWrapperProps, InputWrapper } from '@components/InputWrapper';
 import React, { FC } from 'react';
 
-export interface ITextFieldProps
-  extends Omit<IInputWrapperProps, 'children' | 'htmlFor'> {
+export interface ITextFieldProps extends Omit<IInputWrapperProps, 'children' | 'htmlFor'> {
   inputProps: Omit<IInputProps, 'disabled' | 'children'>;
 }
 
-export const TextField: FC<ITextFieldProps> = ({
-  disabled = false,
-  inputProps,
-  ...rest
-}) => {
+export const TextField: FC<ITextFieldProps> = ({ disabled = false, inputProps, ...rest }) => {
   const { id } = inputProps;
 
   return (

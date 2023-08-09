@@ -11,10 +11,7 @@ interface IMostPopularPagesRequest extends ApiRequestWithoutQuery {
   query: IMostPopularQuery;
 }
 
-const mostPopular = async (
-  req: IMostPopularPagesRequest,
-  res: NextApiResponse,
-): Promise<void> => {
+const mostPopular = async (req: IMostPopularPagesRequest, res: NextApiResponse): Promise<void> => {
   const {
     query: { slug = '/', limit = '5' },
   } = req;

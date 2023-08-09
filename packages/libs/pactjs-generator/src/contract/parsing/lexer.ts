@@ -91,10 +91,7 @@ export interface ILogger {
   (msg: object | string, ...args: Array<object | string>): void;
 }
 
-export const getLexerOutput = (
-  contract: string,
-  logger: ILogger = () => {},
-): moo.Token[] => {
+export const getLexerOutput = (contract: string, logger: ILogger = () => {}): moo.Token[] => {
   lexer.reset(contract);
   let token: moo.Token | undefined = undefined;
 

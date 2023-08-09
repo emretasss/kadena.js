@@ -12,9 +12,7 @@ export const SearchModal: FC = () => {
   const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [query, setQuery] = useState<string | undefined>();
 
-  const handleSubmit = async (
-    evt: FormEvent<HTMLFormElement>,
-  ): Promise<void> => {
+  const handleSubmit = async (evt: FormEvent<HTMLFormElement>): Promise<void> => {
     evt.preventDefault();
 
     const value = searchInputRef.current?.value ?? '';

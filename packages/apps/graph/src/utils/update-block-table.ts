@@ -60,10 +60,5 @@ async function main(): Promise<void> {
 }
 
 main()
-  .catch((...err) =>
-    console.error(
-      ...err,
-      '\n\nAn error occurred. You can always drop the id column and try again.',
-    ),
-  )
+  .catch((...err) => console.error(...err, '\n\nAn error occurred. You can always drop the id column and try again.'))
   .finally(() => prismaClient.$disconnect());

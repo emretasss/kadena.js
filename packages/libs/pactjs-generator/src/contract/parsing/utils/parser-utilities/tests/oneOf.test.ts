@@ -18,10 +18,7 @@ describe('oneOf parser', () => {
 
   it('should return FAILED if none of the rules satisfy the input', () => {
     const pointer = getPointer('not matched with rules');
-    const result = oneOf(
-      seq(id('first'), id('rule')),
-      seq(id('second'), id('rule')),
-    )(pointer);
+    const result = oneOf(seq(id('first'), id('rule')), seq(id('second'), id('rule')))(pointer);
     expect(result).toBe(FAILED);
   });
 });

@@ -1,7 +1,4 @@
-import {
-  helperIconColor,
-  helperTextColor,
-} from './InputHelper/InputHelper.css';
+import { helperIconColor, helperTextColor } from './InputHelper/InputHelper.css';
 
 import { inputStatusColor } from '@components/Input/Input.css';
 import { sprinkles } from '@theme/sprinkles.css';

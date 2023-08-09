@@ -1,9 +1,4 @@
-import {
-  getClient,
-  isSignedTransaction,
-  Pact,
-  signWithChainweaver,
-} from '@kadena/client';
+import { getClient, isSignedTransaction, Pact, signWithChainweaver } from '@kadena/client';
 import { IPactDecimal } from '@kadena/types';
 
 import { accountKey } from '../utils/account-key';
@@ -28,25 +23,14 @@ const [sender, receiver, transferAmount] = process.argv.slice(2);
  * @param amount - Amount of coins transferred to the new account
  * @return
  */
-async function transferCreate(
-  sender: string,
-  receiver: string,
-  amount: number,
-): Promise<void> {
+async function transferCreate(sender: string, receiver: string, amount: number): Promise<void> {
   const senderPublicKey = accountKey(sender);
   const pactDecimal: IPactDecimal = { decimal: `${amount}` };
 
   const { submit, pollStatus } = getClient(API_HOST);
 
   const transaction = Pact.builder
-    .execution(
-      Pact.modules.coin['transfer-create'](
-        sender,
-        receiver,
-        () => '(read-keyset "ks")',
-        pactDecimal,
-      ),
-    )
+    .execution(Pact.modules.coin['transfer-create'](sender, receiver, () => '(read-keyset "ks")', pactDecimal))
     .addData('ks', {
       keys: [accountKey(receiver)],
       pred: 'keys-all',

@@ -1,20 +1,12 @@
-import {
-  darkTheme,
-  IconButton,
-  styled,
-  StyledComponent,
-} from '@kadena/react-components';
+import { darkTheme, IconButton, styled, StyledComponent } from '@kadena/react-components';
 
-export const HamburgerButton: StyledComponent<typeof IconButton> = styled(
-  IconButton,
-  {
-    background: '$neutral4 !important',
-    display: 'flex',
-    '@md': {
-      display: 'none',
-    },
+export const HamburgerButton: StyledComponent<typeof IconButton> = styled(IconButton, {
+  background: '$neutral4 !important',
+  display: 'flex',
+  '@md': {
+    display: 'none',
   },
-);
+});
 
 export const SkipNav: StyledComponent<'a'> = styled('a', {
   position: 'absolute',
@@ -40,13 +32,12 @@ export const HeaderIconGroup: StyledComponent<'div'> = styled('div', {
   marginLeft: '$6',
 });
 
-export const HeaderSocialIconGroup: StyledComponent<typeof HeaderIconGroup> =
-  styled(HeaderIconGroup, {
-    display: 'none',
-    '@lg': {
-      display: 'flex',
-    },
-  });
+export const HeaderSocialIconGroup: StyledComponent<typeof HeaderIconGroup> = styled(HeaderIconGroup, {
+  display: 'none',
+  '@lg': {
+    display: 'flex',
+  },
+});
 
 export const HideOnMobile: StyledComponent<'div'> = styled('div', {
   display: 'none',

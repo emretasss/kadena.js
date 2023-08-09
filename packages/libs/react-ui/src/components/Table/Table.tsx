@@ -15,10 +15,7 @@ export const Table: FC<ITableProps> = ({ children, striped }) => {
   return (
     <table className={classNames(tableClass, { stripedClass: striped })}>
       {React.Children.map(children, (child) => {
-        if (
-          !React.isValidElement(child) ||
-          (Boolean(child) && child.type !== TBody && child.type !== THead)
-        )
+        if (!React.isValidElement(child) || (Boolean(child) && child.type !== TBody && child.type !== THead))
           return null;
 
         return child;

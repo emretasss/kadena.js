@@ -4,11 +4,7 @@ import { IQuestionAnswer } from '../questions/questions.js';
 import { Box, Text } from 'ink';
 import React from 'react';
 
-const Answer = ({
-  value,
-}: {
-  value: HistoryValue;
-}): ReturnType<typeof Text> => {
+const Answer = ({ value }: { value: HistoryValue }): ReturnType<typeof Text> => {
   if (Array.isArray(value)) {
     return (
       <>
@@ -32,12 +28,7 @@ export const SummaryView = ({
     {answeredQuestions.map(({ question, answer }) => {
       const values = Object.values(answer);
       return (
-        <Box
-          key={question.name}
-          flexDirection="column"
-          marginX={2}
-          marginTop={1}
-        >
+        <Box key={question.name} flexDirection="column" marginX={2} marginTop={1}>
           <Text>{question.message}</Text>
           {values.map((value: HistoryValue) => (
             <Answer key={JSON.stringify(value)} value={value} />
@@ -51,8 +42,6 @@ export const SummaryView = ({
 interface ISummaryProps {
   answeredQuestions: IQuestionAnswer['answeredQuestions'];
 }
-export const Summary = ({
-  answeredQuestions,
-}: ISummaryProps): ReturnType<typeof SummaryView> => {
+export const Summary = ({ answeredQuestions }: ISummaryProps): ReturnType<typeof SummaryView> => {
   return <SummaryView answeredQuestions={answeredQuestions} />;
 };

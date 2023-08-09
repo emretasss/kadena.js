@@ -2,9 +2,7 @@ import { hasSameBasePath } from '..';
 
 describe('utils hasSameBasePath', () => {
   it('return true when the start of the paths are equal', () => {
-    expect(
-      hasSameBasePath('/docs/kadena', '/docs/kadena/het-is-me-wat'),
-    ).toEqual(true);
+    expect(hasSameBasePath('/docs/kadena', '/docs/kadena/het-is-me-wat')).toEqual(true);
 
     expect(hasSameBasePath('/docs/kadena', '/docs/kadena')).toEqual(true);
 

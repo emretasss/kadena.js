@@ -1,8 +1,4 @@
-import {
-  baseGlobalStyles,
-  darkTheme as stitchesDarkTheme,
-  globalCss,
-} from '@kadena/react-components';
+import { baseGlobalStyles, darkTheme as stitchesDarkTheme, globalCss } from '@kadena/react-components';
 import { ModalProvider } from '@kadena/react-ui';
 // eslint-disable-next-line import/no-unresolved
 import { darkThemeClass } from '@kadena/react-ui/theme';

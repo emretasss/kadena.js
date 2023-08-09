@@ -14,8 +14,7 @@ const meta: Meta<{} & ITreeProps> = {
       },
     },
     linked: {
-      description:
-        'by enabling linked feature sibling trees will close their siblings on open',
+      description: 'by enabling linked feature sibling trees will close their siblings on open',
       defaultValue: false,
       control: {
         type: 'boolean',
@@ -72,13 +71,6 @@ export const Dynamic: Story = {
     ],
   },
   render: ({ title, isOpen, items, linked }) => {
-    return (
-      <Tree
-        title={title}
-        isOpen={Boolean(isOpen)}
-        items={items ?? []}
-        linked={Boolean(linked)}
-      />
-    );
+    return <Tree title={title} isOpen={Boolean(isOpen)} items={items ?? []} linked={Boolean(linked)} />;
   },
 };

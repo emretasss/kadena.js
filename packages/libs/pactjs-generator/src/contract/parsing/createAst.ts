@@ -13,11 +13,7 @@ export function createAst(contract: string, logger: ILogger = () => {}): IAst {
   return getChildren(lexer, logger);
 }
 
-function getChildren(
-  lexer: moo.Lexer,
-  logger: ILogger,
-  parentNodes: IAstNode[] = [],
-): IAstNode[] {
+function getChildren(lexer: moo.Lexer, logger: ILogger, parentNodes: IAstNode[] = []): IAstNode[] {
   let token: moo.Token | undefined;
   const nodes: IAstNode[] = [];
   while ((token = lexer.next())) {

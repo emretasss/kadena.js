@@ -10,11 +10,7 @@ test('Takes in message, signature, and public key in binary object, returns bool
   };
   const { hash, sig, pubKey } = signCmd;
 
-  const isValidSig = verifySig(
-    base64UrlDecodeArr(hash),
-    hexToBin(sig),
-    hexToBin(pubKey),
-  );
+  const isValidSig = verifySig(base64UrlDecodeArr(hash), hexToBin(sig), hexToBin(pubKey));
 
   expect(isValidSig).toEqual(isValidSig);
 });

@@ -10,9 +10,7 @@ import { mockFetch } from './mokker';
 import fetch from 'cross-fetch';
 
 const mockedFunctionFetch = fetch as jest.MockedFunction<typeof fetch>;
-mockedFunctionFetch.mockImplementation(
-  mockFetch as jest.MockedFunction<typeof fetch>,
-);
+mockedFunctionFetch.mockImplementation(mockFetch as jest.MockedFunction<typeof fetch>);
 
 import chainweb from '..';
 
@@ -39,10 +37,7 @@ describe('chainweb.cut', () => {
   /* By Peers */
 
   it('gets p2p cuts of network and validates', async () => {
-    const r = await chainweb.cut.peers(
-      'mainnet01',
-      'https://us-e1.chainweb.com',
-    );
+    const r = await chainweb.cut.peers('mainnet01', 'https://us-e1.chainweb.com');
     logg('Cut Peers:', r);
     expect(r).toBeTruthy();
     expect(r.length).toBeGreaterThan(0);
@@ -52,10 +47,7 @@ describe('chainweb.cut', () => {
   /* By Current */
 
   it('gets current cut from chainweb node', async () => {
-    const r = await chainweb.cut.current(
-      'mainnet01',
-      'https://api.chainweb.com',
-    );
+    const r = await chainweb.cut.current('mainnet01', 'https://api.chainweb.com');
     logg('Current Cut:', r);
     expect(r).toBeTruthy();
     expect(r).toHaveProperty('instance');

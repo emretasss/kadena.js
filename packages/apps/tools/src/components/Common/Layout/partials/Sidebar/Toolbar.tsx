@@ -1,9 +1,5 @@
 import { MenuButton } from './MenuButton';
-import {
-  gridItemMiniMenuStyle,
-  gridMiniMenuListItemStyle,
-  gridMiniMenuListStyle,
-} from './styles.css';
+import { gridItemMiniMenuStyle, gridMiniMenuListItemStyle, gridMiniMenuListStyle } from './styles.css';
 
 import { useLayoutContext } from '@/context';
 import { useRouter } from 'next/router';
@@ -27,9 +23,7 @@ export const Toolbar: FC<IMiniMenuProps> = () => {
             <MenuButton
               {...item}
               onClick={() => handleItemClick(index)}
-              active={
-                index === activeMenuIndex || item.href === router.pathname
-              }
+              active={index === activeMenuIndex || item.href === router.pathname}
             />
           </li>
         ))}

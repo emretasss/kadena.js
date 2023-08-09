@@ -9,9 +9,7 @@ import { testURL } from './mockdata/Pact';
 import fetch from 'cross-fetch';
 
 const mockedFunctionFetch = fetch as jest.MockedFunction<typeof fetch>;
-mockedFunctionFetch.mockImplementation(
-  mockFetch as jest.MockedFunction<typeof fetch>,
-);
+mockedFunctionFetch.mockImplementation(mockFetch as jest.MockedFunction<typeof fetch>);
 
 test('/poll should return request keys of txs submitted', async () => {
   // A tx created for chain 0 of devnet using `pact -a`.
@@ -35,10 +33,7 @@ test('/poll should return request keys of txs submitted', async () => {
   };
   const localReq: IPollRequestBody = signedCommand;
   const responseExpected: IPollResponse = commandResult;
-  const responseActual: Response | IPollResponse = await poll(
-    localReq,
-    testURL,
-  );
+  const responseActual: Response | IPollResponse = await poll(localReq, testURL);
 
   expect(responseExpected).toEqual(responseActual);
 });

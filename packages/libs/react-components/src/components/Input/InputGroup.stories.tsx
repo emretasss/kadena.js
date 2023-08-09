@@ -77,26 +77,9 @@ export const Primary: Story = {
   render: ({ tag, helper, info, label, disabled, status }) => {
     return (
       <>
-        <InputGroup
-          tag={tag}
-          helper={helper}
-          info={info}
-          label={label}
-          status={status}
-          disabled={disabled}
-        >
-          <Input
-            leadingText="Leading"
-            placeholder={'This is a placeholder'}
-            disabled={disabled}
-            status={status}
-          />
-          <Input
-            leadingText="Leading"
-            placeholder={'This is a placeholder'}
-            disabled={disabled}
-            status={status}
-          />
+        <InputGroup tag={tag} helper={helper} info={info} label={label} status={status} disabled={disabled}>
+          <Input leadingText="Leading" placeholder={'This is a placeholder'} disabled={disabled} status={status} />
+          <Input leadingText="Leading" placeholder={'This is a placeholder'} disabled={disabled} status={status} />
         </InputGroup>
       </>
     );

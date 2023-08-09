@@ -1,26 +1,13 @@
 import { IconButton, SystemIcon } from '@kadena/react-ui';
 
-import {
-  InnerWrapper,
-  NavLink,
-  Spacer,
-  StyledHeader,
-  StyledLogoWrapper,
-  StyledNav,
-  StyledUl,
-} from '../styles';
+import { InnerWrapper, NavLink, Spacer, StyledHeader, StyledLogoWrapper, StyledNav, StyledUl } from '../styles';
 import { DocsLogo } from '..';
 
 import { AsideToggle } from './AsideToggle';
 import { HamburgerMenuToggle } from './HamburgerMenuToggle';
 import { NavItemActiveBackground } from './NavItemActiveBackground';
 import { SearchButton } from './SearchButton';
-import {
-  HeaderIconGroup,
-  HeaderSocialIconGroup,
-  HideOnMobile,
-  SkipNav,
-} from './styles';
+import { HeaderIconGroup, HeaderSocialIconGroup, HideOnMobile, SkipNav } from './styles';
 import { ThemeToggle } from './ThemeToggle';
 import { useHeaderAnimation } from './useHeaderAnimation';
 
@@ -86,13 +73,8 @@ export const Header: FC<IProps> = ({ menuItems, layout = 'full' }) => {
           <HideOnMobile>
             <SearchButton />
           </HideOnMobile>
-          <HamburgerMenuToggle
-            toggleMenu={toggleMenu}
-            isMenuOpen={isMenuOpen}
-          />
-          {isOneOfLayoutType(layout, 'code') && (
-            <AsideToggle toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
-          )}
+          <HamburgerMenuToggle toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+          {isOneOfLayoutType(layout, 'code') && <AsideToggle toggleAside={toggleAside} isAsideOpen={isAsideOpen} />}
         </HeaderIconGroup>
       </InnerWrapper>
     </StyledHeader>

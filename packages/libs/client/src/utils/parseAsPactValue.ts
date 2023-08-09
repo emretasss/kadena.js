@@ -9,9 +9,7 @@ const isDate = (obj: unknown): obj is Date => {
 /**
  * @internal
  */
-export function parseAsPactValue(
-  arg: PactLiteral | (() => string),
-): string | number | boolean {
+export function parseAsPactValue(arg: PactLiteral | (() => string)): string | number | boolean {
   switch (typeof arg) {
     case 'object': {
       if ('decimal' in arg) {
@@ -28,9 +26,7 @@ export function parseAsPactValue(
       return JSON.stringify(arg);
     }
     case 'number':
-      throw new Error(
-        'Type `number` is not allowed in the command. Use `{ decimal: 10 }` or `{ int: 10 }` instead',
-      );
+      throw new Error('Type `number` is not allowed in the command. Use `{ decimal: 10 }` or `{ int: 10 }` instead');
     case 'string':
       return `"${arg}"`;
     case 'function':

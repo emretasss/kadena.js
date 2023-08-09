@@ -1,16 +1,7 @@
 import { INotificationProps, SystemIcons } from '@kadena/react-components';
 
-export type LabelType =
-  | 'info'
-  | 'note'
-  | 'tip'
-  | 'caution'
-  | 'danger'
-  | 'warning';
-export type IconType =
-  | (typeof SystemIcons)['Information']
-  | (typeof SystemIcons)['Bell']
-  | undefined;
+export type LabelType = 'info' | 'note' | 'tip' | 'caution' | 'danger' | 'warning';
+export type IconType = (typeof SystemIcons)['Information'] | (typeof SystemIcons)['Bell'] | undefined;
 
 export const getColor = (label?: LabelType): INotificationProps['color'] => {
   if (!label) return;

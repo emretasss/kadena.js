@@ -10,10 +10,7 @@ interface IReturn {
   setActive: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const useSideMenu = (
-  closeMenu: () => void,
-  menuItems: IMenuItem[],
-): IReturn => {
+export const useSideMenu = (closeMenu: () => void, menuItems: IMenuItem[]): IReturn => {
   const router = useRouter();
   const [oldPathname, setOldPathname] = useState<string>('');
   const [active, setActive] = useState<number>(1);
@@ -21,9 +18,7 @@ export const useSideMenu = (
   useEffect(() => {
     setOldPathname(router.pathname);
 
-    const matchingItem = menuItems.find((item) =>
-      hasSameBasePath(item.root, router.pathname),
-    );
+    const matchingItem = menuItems.find((item) => hasSameBasePath(item.root, router.pathname));
 
     const hasSubMenu = matchingItem?.children.length ?? 0;
 
@@ -42,14 +37,8 @@ export const useSideMenu = (
     });
   }, [setOldPathname, oldPathname, router.pathname, router.events, menuItems]);
 
-  const clickMenu = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    item: IMenuItem,
-  ): void => {
-    if (
-      hasSameBasePath(router.pathname, item.root ?? '') &&
-      item.children.length
-    ) {
+  const clickMenu = (e: React.MouseEvent<HTMLAnchorElement>, item: IMenuItem): void => {
+    if (hasSameBasePath(router.pathname, item.root ?? '') && item.children.length) {
       e.preventDefault();
       setActive(1);
     } else {

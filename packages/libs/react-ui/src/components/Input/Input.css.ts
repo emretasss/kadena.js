@@ -1,11 +1,6 @@
 import { sprinkles } from '@theme/sprinkles.css';
 import { darkThemeClass, vars } from '@theme/vars.css';
-import {
-  createVar,
-  fallbackVar,
-  style,
-  styleVariants,
-} from '@vanilla-extract/css';
+import { createVar, fallbackVar, style, styleVariants } from '@vanilla-extract/css';
 
 export const inputStatusColor = createVar();
 
@@ -22,16 +17,10 @@ export const containerClass = style([
     borderRadius: '$sm',
   }),
   {
-    borderBottom: `1px solid ${fallbackVar(
-      inputStatusColor,
-      vars.colors.$gray30,
-    )}`,
+    borderBottom: `1px solid ${fallbackVar(inputStatusColor, vars.colors.$gray30)}`,
     selectors: {
       [`${darkThemeClass} &`]: {
-        borderBottom: `1px solid ${fallbackVar(
-          inputStatusColor,
-          vars.colors.$gray60,
-        )}`,
+        borderBottom: `1px solid ${fallbackVar(inputStatusColor, vars.colors.$gray60)}`,
       },
       '.inputGroup &': {
         borderRadius: 0,

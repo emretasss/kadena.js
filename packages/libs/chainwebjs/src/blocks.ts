@@ -1,17 +1,6 @@
-import {
-  headerByBlockHash,
-  headers,
-  headerStream,
-  recentHeaders,
-} from './headers';
+import { headerByBlockHash, headers, headerStream, recentHeaders } from './headers';
 import { payloads } from './internal';
-import {
-  IBlockHeader,
-  IBlockPayloadMap,
-  IBlockPayloads,
-  IRetryOptions,
-  ITransactionElement,
-} from './types';
+import { IBlockHeader, IBlockPayloadMap, IBlockPayloads, IRetryOptions, ITransactionElement } from './types';
 
 import EventSource from 'eventsource';
 
@@ -68,8 +57,7 @@ export async function headers2blocks(
     // index payloads by payloadHash
     const paysMap = pays.reduce(
       (m, c) => {
-        m[c.payloadHash] =
-          c as unknown as IBlockPayloadMap<ITransactionElement>;
+        m[c.payloadHash] = c as unknown as IBlockPayloadMap<ITransactionElement>;
         return m;
       },
       {} as { [key: string]: IBlockPayloadMap<ITransactionElement> },
@@ -86,9 +74,7 @@ export async function headers2blocks(
         return false;
       } else {
         // return true;
-        throw new Error(
-          `failed to get payloads for some headers. Missing ${hdr.payloadHash}`,
-        );
+        throw new Error(`failed to get payloads for some headers. Missing ${hdr.payloadHash}`);
       }
     });
   }
@@ -171,8 +157,7 @@ export function blockStream(
   network: string,
   host: string,
 ): EventSource {
-  const ro: IRetryOptions =
-    depth > 1 ? {} : { retry404: true, minTimeout: 1000 };
+  const ro: IRetryOptions = depth > 1 ? {} : { retry404: true, minTimeout: 1000 };
   const cb = async (hdr: IBlockHeader): Promise<void> => {
     const blocks = await headers2blocks([hdr], network, host, ro);
     callback(blocks[0]);

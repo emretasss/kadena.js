@@ -32,10 +32,7 @@ export const getPointer = (contract: string): IPointer => {
   };
 };
 
-export const getBlockPointer = (
-  pointer: IPointer,
-  initCounter = 1,
-): IPointer => {
+export const getBlockPointer = (pointer: IPointer, initCounter = 1): IPointer => {
   let counter = initCounter;
   const snapshots: Record<number, number> = {};
   return {

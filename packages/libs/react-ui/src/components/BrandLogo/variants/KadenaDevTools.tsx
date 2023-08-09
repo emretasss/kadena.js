@@ -2,21 +2,9 @@ import * as React from 'react';
 import { SVGProps } from 'react';
 
 const KadenaDevToolsLogo: React.FC<SVGProps<SVGSVGElement>> = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="146"
-    height="44"
-    viewBox="0 0 146 44"
-    fill="none"
-  >
-    <path
-      d="M25.2418 11.3036H18.9678L11.5837 19.0524V25.5088L25.2418 11.3036Z"
-      fill="url(#paint0_linear_2005_70)"
-    />
-    <path
-      d="M11.5837 32.6964H6.28009V11.3036H11.5837V32.6964Z"
-      fill="#F0F0F0"
-    />
+  <svg xmlns="http://www.w3.org/2000/svg" width="146" height="44" viewBox="0 0 146 44" fill="none">
+    <path d="M25.2418 11.3036H18.9678L11.5837 19.0524V25.5088L25.2418 11.3036Z" fill="url(#paint0_linear_2005_70)" />
+    <path d="M11.5837 32.6964H6.28009V11.3036H11.5837V32.6964Z" fill="#F0F0F0" />
     <path
       d="M25.7199 32.6964L17.0048 19.8708L13.4556 23.5599L19.5614 32.6964H25.7199Z"
       fill="url(#paint1_linear_2005_70)"

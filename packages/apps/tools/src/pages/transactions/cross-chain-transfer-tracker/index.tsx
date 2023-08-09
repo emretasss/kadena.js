@@ -1,11 +1,4 @@
-import {
-  Breadcrumbs,
-  Button,
-  Heading,
-  ProductIcon,
-  SystemIcon,
-  TrackerCard,
-} from '@kadena/react-ui';
+import { Breadcrumbs, Button, Heading, ProductIcon, SystemIcon, TrackerCard } from '@kadena/react-ui';
 
 import {
   StyledInfoItem,
@@ -14,9 +7,7 @@ import {
   StyledInfoTitle,
 } from '../cross-chain-transfer-finisher/styles';
 
-import RequestKeyField, {
-  REQUEST_KEY_VALIDATION,
-} from '@/components/Global/RequestKeyField';
+import RequestKeyField, { REQUEST_KEY_VALIDATION } from '@/components/Global/RequestKeyField';
 import Routes from '@/constants/routes';
 import { useAppContext } from '@/context/app-context';
 import { useToolbar } from '@/context/layout-context';
@@ -27,11 +18,7 @@ import {
   StyledInfoBox,
   StyledMainContent,
 } from '@/pages/transactions/cross-chain-transfer-tracker/styles';
-import {
-  getTransferStatus,
-  IStatusData,
-  StatusId,
-} from '@/services/transfer-tracker/get-transfer-status';
+import { getTransferStatus, IStatusData, StatusId } from '@/services/transfer-tracker/get-transfer-status';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Debug from 'debug';
 import { useRouter } from 'next/router';
@@ -69,9 +56,7 @@ const CrossChainTransferTracker: FC = () => {
     },
   ]);
 
-  const debug = Debug(
-    'kadena-transfer:pages:transfer:cross-chain-transfer-tracker',
-  );
+  const debug = Debug('kadena-transfer:pages:transfer:cross-chain-transfer-tracker');
   const [data, setData] = useState<IStatusData>({});
   const [txError, setTxError] = useState<string>('');
 
@@ -177,9 +162,7 @@ const CrossChainTransferTracker: FC = () => {
             />
             <StyledInfoItem>
               <StyledInfoItemTitle>{t('Amount')}</StyledInfoItemTitle>
-              <StyledInfoItemLine>{` ${data.amount} ${t(
-                'KDA',
-              )}`}</StyledInfoItemLine>
+              <StyledInfoItemLine>{` ${data.amount} ${t('KDA')}`}</StyledInfoItemLine>
             </StyledInfoItem>
             <StyledInfoItem>
               <StyledInfoItemTitle>{t('Status')}</StyledInfoItemTitle>
@@ -192,11 +175,7 @@ const CrossChainTransferTracker: FC = () => {
 
             <TrackerCard
               variant="vertical"
-              icon={
-                data?.id === StatusId.Success
-                  ? ProductIcon.Receiver
-                  : ProductIcon.ReceiverInactive
-              }
+              icon={data?.id === StatusId.Success ? ProductIcon.Receiver : ProductIcon.ReceiverInactive}
               labelValues={[
                 {
                   label: t('Receiver'),

@@ -86,9 +86,7 @@ describe('HeaderBuffer', () => {
       hb.add(data1);
       hb.add(data2);
     } catch (err) {
-      expect(err.message).toMatch(
-        `HeaderBuffer: confirmation depth violation: block at height 3306633 got orphaned`,
-      );
+      expect(err.message).toMatch(`HeaderBuffer: confirmation depth violation: block at height 3306633 got orphaned`);
     }
   });
 
@@ -110,9 +108,7 @@ describe('HeaderBuffer', () => {
     try {
       hb.add(data1);
     } catch (err) {
-      expect(err.message).toMatch(
-        `HeaderBuffer: confirmation depth violation: block at height 3306634 got orphane`,
-      );
+      expect(err.message).toMatch(`HeaderBuffer: confirmation depth violation: block at height 3306634 got orphane`);
     }
   });
 
@@ -131,9 +127,7 @@ describe('HeaderBuffer', () => {
       hb.add(data2);
       hb.add(data3);
     } catch (err) {
-      expect(err.message).toMatch(
-        `HeaderBuffer: missing block at height 3306635`,
-      );
+      expect(err.message).toMatch(`HeaderBuffer: missing block at height 3306635`);
     }
   });
 });

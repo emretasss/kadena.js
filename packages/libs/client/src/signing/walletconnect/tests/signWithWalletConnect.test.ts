@@ -1,7 +1,4 @@
-import {
-  IExecutionPayloadObject,
-  IPactCommand,
-} from '../../../interfaces/IPactCommand';
+import { IExecutionPayloadObject, IPactCommand } from '../../../interfaces/IPactCommand';
 import { createTransaction } from '../../../utils/createTransaction';
 import { ISingleSignFunction } from '../../ISignFunction';
 import { createWalletConnectSign } from '../signWithWalletConnect';
@@ -62,15 +59,9 @@ describe('signWithWalletConnect', () => {
       ),
     };
 
-    signWithWalletConnect = createWalletConnectSign(
-      client as unknown as Client,
-      session,
-      walletConnectChainId,
-    );
+    signWithWalletConnect = createWalletConnectSign(client as unknown as Client, session, walletConnectChainId);
 
-    const signedTransaction = await signWithWalletConnect(
-      createTransaction(transaction),
-    );
+    const signedTransaction = await signWithWalletConnect(createTransaction(transaction));
 
     expect(client.request).toHaveBeenCalledWith({
       topic: session.topic,
@@ -119,11 +110,7 @@ describe('signWithWalletConnect', () => {
       ),
     };
 
-    signWithWalletConnect = createWalletConnectSign(
-      client as unknown as Client,
-      session,
-      walletConnectChainId,
-    );
+    signWithWalletConnect = createWalletConnectSign(client as unknown as Client, session, walletConnectChainId);
 
     //@ts-ignore
     delete transaction.payload.exec;
@@ -147,11 +134,7 @@ describe('signWithWalletConnect', () => {
       ),
     };
 
-    signWithWalletConnect = createWalletConnectSign(
-      client as unknown as Client,
-      session,
-      walletConnectChainId,
-    );
+    signWithWalletConnect = createWalletConnectSign(client as unknown as Client, session, walletConnectChainId);
 
     //@ts-ignore
     delete transaction.signers[0].clist;
@@ -189,11 +172,7 @@ describe('signWithWalletConnect', () => {
       ),
     };
 
-    signWithWalletConnect = createWalletConnectSign(
-      client as unknown as Client,
-      session,
-      walletConnectChainId,
-    );
+    signWithWalletConnect = createWalletConnectSign(client as unknown as Client, session, walletConnectChainId);
 
     try {
       await signWithWalletConnect(createTransaction(transaction));

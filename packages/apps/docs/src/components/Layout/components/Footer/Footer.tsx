@@ -16,16 +16,8 @@ export const Footer: FC = () => {
       <InnerFooterWrapper>
         <Box justifyContent="space-around" alignItems="center">
           <DocsLogo />
-          <IconButton
-            title="Go to our Github"
-            icon={SystemIcon.Github}
-            onClick={() => alert('todo, make an href')}
-          />
-          <IconButton
-            title="Go to our Twitter"
-            icon={SystemIcon.Twitter}
-            onClick={() => alert('todo, make an href')}
-          />
+          <IconButton title="Go to our Github" icon={SystemIcon.Github} onClick={() => alert('todo, make an href')} />
+          <IconButton title="Go to our Twitter" icon={SystemIcon.Twitter} onClick={() => alert('todo, make an href')} />
           <IconButton
             onClick={() => alert('todo, make an href')}
             title="Go to our Linkedin"

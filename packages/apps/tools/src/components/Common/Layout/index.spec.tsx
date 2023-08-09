@@ -1,6 +1,4 @@
-jest.mock('@/components/Common/WalletConnectButton', () =>
-  jest.fn(() => <button>connect wallet</button>),
-);
+jest.mock('@/components/Common/WalletConnectButton', () => jest.fn(() => <button>connect wallet</button>));
 
 import Layout from './index';
 

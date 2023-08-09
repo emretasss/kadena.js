@@ -13,8 +13,7 @@ if (process.argv.length !== 6) {
   process.exit(1);
 }
 
-const [sender, senderPrivateKey, receiver, transferAmount] =
-  process.argv.slice(2);
+const [sender, senderPrivateKey, receiver, transferAmount] = process.argv.slice(2);
 
 /**
  * Create a new KDA account and transfer funds to it
@@ -72,9 +71,4 @@ async function transferCreate(
   console.log(result);
 }
 
-transferCreate(
-  sender,
-  senderPrivateKey,
-  receiver,
-  Number(transferAmount),
-).catch(console.error);
+transferCreate(sender, senderPrivateKey, receiver, Number(transferAmount)).catch(console.error);

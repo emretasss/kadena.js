@@ -36,40 +36,36 @@ export const BaseBackground: StyledComponent<
   },
 });
 
-export const AsideBackground: StyledComponent<typeof BaseBackground> = styled(
-  BaseBackground,
-  {
-    $$shadowWidth: '$sizes$25',
-    display: 'none',
-    '@md': {
-      display: 'block',
-    },
-    '&::before': {
-      content: '',
-      position: 'absolute',
-      pointerEvents: 'none',
-      inset: 0,
-      zIndex: 0,
-      backgroundImage: 'url("/assets/bg-code.png")',
-      backgroundRepeat: 'no-repeat',
-      backgroundPositionY: '-100px',
+export const AsideBackground: StyledComponent<typeof BaseBackground> = styled(BaseBackground, {
+  $$shadowWidth: '$sizes$25',
+  display: 'none',
+  '@md': {
+    display: 'block',
+  },
+  '&::before': {
+    content: '',
+    position: 'absolute',
+    pointerEvents: 'none',
+    inset: 0,
+    zIndex: 0,
+    backgroundImage: 'url("/assets/bg-code.png")',
+    backgroundRepeat: 'no-repeat',
+    backgroundPositionY: '-100px',
+    backgroundPositionX: 'calc(100vw  - ($$asideMenuWidthMDDefault + $$shadowWidth))',
+    '@2xl': {
       backgroundPositionX:
-        'calc(100vw  - ($$asideMenuWidthMDDefault + $$shadowWidth))',
-      '@2xl': {
-        backgroundPositionX:
-          'calc($sizes$pageWidth + ((100vw - $sizes$pageWidth) /2 ) - ($$asideMenuWidthLGDefault +  $$shadowWidth))',
-      },
-    },
-    '&::after': {
-      '@md': {
-        left: 'calc(100vw  - ($$asideMenuWidthMDDefault + $sizes$4))',
-      },
-      '@2xl': {
-        left: 'calc($sizes$pageWidth + ((100vw - $sizes$pageWidth) /2) - $$asideMenuWidthLGDefault)',
-      },
+        'calc($sizes$pageWidth + ((100vw - $sizes$pageWidth) /2 ) - ($$asideMenuWidthLGDefault +  $$shadowWidth))',
     },
   },
-);
+  '&::after': {
+    '@md': {
+      left: 'calc(100vw  - ($$asideMenuWidthMDDefault + $sizes$4))',
+    },
+    '@2xl': {
+      left: 'calc($sizes$pageWidth + ((100vw - $sizes$pageWidth) /2) - $$asideMenuWidthLGDefault)',
+    },
+  },
+});
 
 export const Aside: StyledComponent<
   'aside',
@@ -128,10 +124,7 @@ export const AsideItem: StyledComponent<'li'> = styled('li', {
   lineHeight: '$base',
 });
 
-export const AsideItemLink: StyledComponent<
-  typeof Link,
-  { isActive?: boolean | 'true' | 'false' }
-> = styled(Link, {
+export const AsideItemLink: StyledComponent<typeof Link, { isActive?: boolean | 'true' | 'false' }> = styled(Link, {
   textDecoration: 'none',
   '&:hover': {
     textDecoration: 'underline',
@@ -153,10 +146,7 @@ export const AsideItemLink: StyledComponent<
   },
 });
 
-export const AsideList: StyledComponent<
-  'ul',
-  { inner?: boolean | 'true' | 'false' | undefined }
-> = styled('ul', {
+export const AsideList: StyledComponent<'ul', { inner?: boolean | 'true' | 'false' | undefined }> = styled('ul', {
   listStyle: 'initial',
   listStylePosition: 'outside',
   margin: 0,

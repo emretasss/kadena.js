@@ -17,16 +17,11 @@ export type INavItems = INavItem[];
 
 export interface INavHeaderContainerProps {
   brand?: LogoVariant;
-  children?: FunctionComponentElement<
-    INavHeaderNavigationProps | INavHeaderContentProps
-  >[];
+  children?: FunctionComponentElement<INavHeaderNavigationProps | INavHeaderContentProps>[];
   items?: INavItems;
 }
 
-export const NavHeaderContainer: FC<INavHeaderContainerProps> = ({
-  brand = logoVariants[0],
-  children,
-}) => {
+export const NavHeaderContainer: FC<INavHeaderContainerProps> = ({ brand = logoVariants[0], children }) => {
   return (
     <header className={containerClass} data-testid="kda-navheader">
       <div className={logoClass}>

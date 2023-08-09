@@ -9,11 +9,7 @@ export interface INavHeaderLinkProps {
   active?: boolean;
 }
 
-export const NavHeaderLink: FC<INavHeaderLinkProps> = ({
-  children,
-  href,
-  active,
-}) => {
+export const NavHeaderLink: FC<INavHeaderLinkProps> = ({ children, href, active }) => {
   return (
     <a
       className={classNames(linkClass, {

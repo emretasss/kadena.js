@@ -1,9 +1,4 @@
-import {
-  ChainId,
-  ICommand,
-  IContinuationPayloadObject,
-  Pact,
-} from '@kadena/client';
+import { ChainId, ICommand, IContinuationPayloadObject, Pact } from '@kadena/client';
 
 import client from '@/constants/client';
 import Debug from 'debug';
@@ -34,8 +29,7 @@ export async function finishXChainTransfer(
         gasLimit: 850,
       })
       .createTransaction();
-    return (await client.submit(continuationTransaction as ICommand))
-      .requestKey;
+    return (await client.submit(continuationTransaction as ICommand)).requestKey;
   } catch (e) {
     debug(e.message);
     return { error: e.message };

@@ -13,7 +13,5 @@ export interface ISingleSignFunction {
  * @public
  */
 export interface ISignFunction extends ISingleSignFunction {
-  (
-    transactionList: IUnsignedCommand[],
-  ): Promise<(ICommand | IUnsignedCommand)[]>;
+  (transactionList: IUnsignedCommand[]): Promise<(ICommand | IUnsignedCommand)[]>;
 }

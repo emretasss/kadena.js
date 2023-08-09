@@ -13,5 +13,4 @@ Test project to verify pactjs-cli and pactjs-generator
 
 ## Client examples
 
-This project demonstrates the use of the `@kadena/pact-cli` together with
-`@kadena/client` for _smart contracts_.
+This project demonstrates the use of the `@kadena/pact-cli` together with `@kadena/client` for _smart contracts_.

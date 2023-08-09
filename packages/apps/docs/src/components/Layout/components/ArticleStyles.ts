@@ -6,10 +6,7 @@ export const Article: StyledComponent<'article'> = styled('article', {
   backgroundColor: 'transparent',
 });
 
-export const Content: StyledComponent<
-  'div',
-  { layout?: 'landing' | 'home' | 'code' }
-> = styled('div', {
+export const Content: StyledComponent<'div', { layout?: 'landing' | 'home' | 'code' }> = styled('div', {
   display: 'flex',
   position: 'relative',
   padding: '$10 0 $35',

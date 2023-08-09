@@ -9,12 +9,7 @@ import { NotificationHeader } from './NotificationHeader';
 
 import { FC } from 'react';
 
-export type {
-  INotificationProps,
-  INotificationHeaderProps,
-  INotificationActionsProps,
-  INotificationButtonProps,
-};
+export type { INotificationProps, INotificationHeaderProps, INotificationActionsProps, INotificationButtonProps };
 
 interface INotification {
   Root: FC<INotificationProps>;

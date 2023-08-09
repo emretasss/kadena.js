@@ -2,22 +2,14 @@ import { IPactCommand } from '../../interfaces/IPactCommand';
 
 import { patchCommand } from './patchCommand';
 
-export type ValidDataTypes =
-  | Record<string, unknown>
-  | string
-  | number
-  | boolean
-  | Array<ValidDataTypes>;
+export type ValidDataTypes = Record<string, unknown> | string | number | boolean | Array<ValidDataTypes>;
 
 /**
  * Reducer to add `data` to the {@link IPactCommand.payload}
  *
  * @public
  */
-export const addData: (
-  key: string,
-  value: ValidDataTypes,
-) => (cmd: Partial<IPactCommand>) => Partial<IPactCommand> =
+export const addData: (key: string, value: ValidDataTypes) => (cmd: Partial<IPactCommand>) => Partial<IPactCommand> =
   (key: string, value: ValidDataTypes) =>
   (cmd: Partial<IPactCommand>): Partial<IPactCommand> => {
     let target: 'exec' | 'cont' = 'exec';

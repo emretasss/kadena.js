@@ -39,10 +39,7 @@ export const getRecentHeights: DocumentNode = gql`
   ${CORE_BLOCK_FIELDS}
 
   query getRecentHeights($completedOnly: Boolean = true, $count: Int!) {
-    completedBlockHeights(
-      completedHeights: $completedOnly
-      heightCount: $count
-    ) {
+    completedBlockHeights(completedHeights: $completedOnly, heightCount: $count) {
       ...CoreBlockFields
     }
   }

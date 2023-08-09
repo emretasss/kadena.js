@@ -1,8 +1,4 @@
-import {
-  colorVariants,
-  fontVariants,
-  transformVariants,
-} from '../typography.css';
+import { colorVariants, fontVariants, transformVariants } from '../typography.css';
 
 import { elementVariants, heading } from './Heading.css';
 

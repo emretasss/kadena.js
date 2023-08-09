@@ -10,21 +10,12 @@ export const DocsLogo: FC<IProps> = ({ overwriteTheme }) => {
 
   if (overwriteTheme === 'dark' || (!overwriteTheme && theme === 'dark')) {
     return (
-      <svg
-        width="107"
-        height="44"
-        viewBox="0 0 107 44"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="107" height="44" viewBox="0 0 107 44" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M34.7074 7.29248H26.0807L15.9275 17.9471V26.8245L34.7074 7.29248Z"
           fill="url(#paint0_linear_673_240)"
         />
-        <path
-          d="M15.9275 36.7075H8.63501V7.29248H15.9275V36.7075Z"
-          fill="#F0F0F0"
-        />
+        <path d="M15.9275 36.7075H8.63501V7.29248H15.9275V36.7075Z" fill="#F0F0F0" />
         <path
           d="M35.365 36.7076L23.3817 19.0725L18.5015 24.1449L26.897 36.7076H35.365Z"
           fill="url(#paint1_linear_673_240)"
@@ -62,21 +53,9 @@ export const DocsLogo: FC<IProps> = ({ overwriteTheme }) => {
   }
 
   return (
-    <svg
-      width="107"
-      height="44"
-      viewBox="0 0 107 44"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M34.7077 7.29248H26.0809L15.9277 17.9471V26.8245L34.7077 7.29248Z"
-        fill="url(#paint0_linear_818_4704)"
-      />
-      <path
-        d="M15.9277 36.7075H8.63525V7.29248H15.9277V36.7075Z"
-        fill="#191C1D"
-      />
+    <svg width="107" height="44" viewBox="0 0 107 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M34.7077 7.29248H26.0809L15.9277 17.9471V26.8245L34.7077 7.29248Z" fill="url(#paint0_linear_818_4704)" />
+      <path d="M15.9277 36.7075H8.63525V7.29248H15.9277V36.7075Z" fill="#191C1D" />
       <path
         d="M35.365 36.7076L23.3817 19.0725L18.5015 24.1449L26.897 36.7076H35.365Z"
         fill="url(#paint1_linear_818_4704)"

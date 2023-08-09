@@ -4,10 +4,7 @@ import { Search } from '@/components';
 import { Article, Content } from '@/components/Layout/components';
 import { SearchHeader } from '@/components/Layout/Landing/components';
 import { searchFormClass } from '@/components/Search/styles.css';
-import {
-  checkSubTreeForActive,
-  getPathName,
-} from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
+import { checkSubTreeForActive, getPathName } from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { FC, FormEvent, useEffect, useRef, useState } from 'react';
@@ -23,9 +20,7 @@ const SearchPage: FC = () => {
 
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSubmit = async (
-    evt: FormEvent<HTMLFormElement>,
-  ): Promise<void> => {
+  const handleSubmit = async (evt: FormEvent<HTMLFormElement>): Promise<void> => {
     evt.preventDefault();
 
     const value = searchInputRef.current?.value ?? '';

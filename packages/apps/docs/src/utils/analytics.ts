@@ -18,10 +18,7 @@ interface IOptionsPageViewType {
   send_to?: string;
 }
 
-export const analyticsEvent = (
-  name: keyof typeof EVENT_NAMES,
-  options: IOptionsType = {},
-): void => {
+export const analyticsEvent = (name: keyof typeof EVENT_NAMES, options: IOptionsType = {}): void => {
   if (process.env.NODE_ENV === 'development') {
     console.warn('GTAG EVENT', { name, options });
   }

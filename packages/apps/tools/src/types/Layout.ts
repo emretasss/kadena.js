@@ -6,8 +6,7 @@ export interface IMenuItem {
   target?: '_self' | '_blank' | '_parent' | '_top';
 }
 
-export interface ISidebarSubMenuItem
-  extends Omit<IAccordionProps, 'isOpen' | 'onToggle' | 'children'> {
+export interface ISidebarSubMenuItem extends Omit<IAccordionProps, 'isOpen' | 'onToggle' | 'children'> {
   items: ITreeProps[];
 }
 export interface ISidebarToolbarItem {

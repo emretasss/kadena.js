@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
 
-const KadenaOverview: React.FC<SVGProps<SVGSVGElement>> = (
-  props: SVGProps<SVGSVGElement>,
-) => (
-  <svg
-    width={40}
-    height={40}
-    viewBox="0 0 40 40"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+const KadenaOverview: React.FC<SVGProps<SVGSVGElement>> = (props: SVGProps<SVGSVGElement>) => (
+  <svg width={40} height={40} viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" {...props}>
     <g clipPath="url(#clip0_1080_2287)">
       <path
         d="M309.3,257.61l-69.44-69.43,65.51-65.51a36.54,36.54,0,0,0,0-51.69h0a36.55,36.55,0,0,0-51.68,0L147.81,176.87a16,16,0,0,0,0,22.62l29.55,29.56,80.25,80.25a36.56,36.56,0,0,0,51.69,0h0A36.56,36.56,0,0,0,309.3,257.61Z"

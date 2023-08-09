@@ -82,11 +82,11 @@ export function parser(contract: string, logger: ILogger): Output {
   const STACK_ARGS_TYPE: 'args_type' = 'args_type';
   const STACK_ARGS: 'args' = 'args';
 
-  const lastThreeTokens: [
-    moo.Token | undefined,
-    moo.Token | undefined,
-    moo.Token | undefined,
-  ] = [undefined, undefined, undefined];
+  const lastThreeTokens: [moo.Token | undefined, moo.Token | undefined, moo.Token | undefined] = [
+    undefined,
+    undefined,
+    undefined,
+  ];
 
   const output: Output = {} as Output;
   while ((token = lexer.next())) {
@@ -117,34 +117,23 @@ export function parser(contract: string, logger: ILogger): Output {
       case KW_ATOM:
         if (state.stack.includes(STACK_DEFUN_TYPE)) {
           logger('output: defun_type', token.value);
-          output[state.moduleName].defuns[state.defunName].returnType =
-            token.value;
+          output[state.moduleName].defuns[state.defunName].returnType = token.value;
           logger(`pop ${STACK_DEFUN_TYPE}`);
           state.stack.pop();
           break;
         }
 
-        if (
-          state.stack.includes(STACK_ARGS_TYPE) &&
-          state.stack.includes(KW_DEFUN)
-        ) {
+        if (state.stack.includes(STACK_ARGS_TYPE) && state.stack.includes(KW_DEFUN)) {
           logger('output: adding defun args type', token.value);
-          output[state.moduleName].defuns[state.defunName].args[
-            state.argName
-          ].type = token.value;
+          output[state.moduleName].defuns[state.defunName].args[state.argName].type = token.value;
           logger(`pop ${STACK_ARGS_TYPE}`);
           state.stack.pop();
           break;
         }
 
-        if (
-          state.stack.includes(STACK_ARGS_TYPE) &&
-          state.stack.includes(KW_DEFCAP)
-        ) {
+        if (state.stack.includes(STACK_ARGS_TYPE) && state.stack.includes(KW_DEFCAP)) {
           logger(`output: adding ${KW_DEFCAP} args type`, token.value);
-          output[state.moduleName].defcaps[state.defcapName].args[
-            state.argName
-          ].type = token.value;
+          output[state.moduleName].defcaps[state.defcapName].args[state.argName].type = token.value;
           logger(`pop ${STACK_ARGS_TYPE}`);
           state.stack.pop();
           break;
@@ -256,16 +245,13 @@ export function parser(contract: string, logger: ILogger): Output {
           state.stack.includes(STACK_ARGS) &&
           state.defcapName !== ''
         ) {
-          logger(
-            `output: adding ${STACK_ARGS} for ${state.defcapName}, ${token.value}`,
-          );
-          output[state.moduleName].defcaps[state.defcapName].args[token.value] =
-            {
-              name: token.value,
-              type: 'undefined',
-              line: token.line,
-              col: token.col,
-            };
+          logger(`output: adding ${STACK_ARGS} for ${state.defcapName}, ${token.value}`);
+          output[state.moduleName].defcaps[state.defcapName].args[token.value] = {
+            name: token.value,
+            type: 'undefined',
+            line: token.line,
+            col: token.col,
+          };
         }
 
         break;
@@ -284,10 +270,7 @@ export function parser(contract: string, logger: ILogger): Output {
           break;
         }
 
-        if (
-          state.stack.includes(STACK_ARGS) &&
-          lastThreeTokens[1]!.type === 'atom'
-        ) {
+        if (state.stack.includes(STACK_ARGS) && lastThreeTokens[1]!.type === 'atom') {
           // in args
           // last one is atom
           state.stack.push(STACK_ARGS_TYPE);
@@ -309,19 +292,13 @@ export function parser(contract: string, logger: ILogger): Output {
         break;
 
       case 'lparen':
-        if (
-          state.stack.includes(KW_DEFUN) &&
-          !state.stack.includes(STACK_ARGS)
-        ) {
+        if (state.stack.includes(KW_DEFUN) && !state.stack.includes(STACK_ARGS)) {
           state.stack.push(STACK_ARGS);
           logger('========================');
           logger(`=== push ${STACK_ARGS} for ${KW_DEFUN}`);
           logger('========================');
         }
-        if (
-          state.stack.includes(KW_DEFCAP) &&
-          !state.stack.includes(STACK_ARGS)
-        ) {
+        if (state.stack.includes(KW_DEFCAP) && !state.stack.includes(STACK_ARGS)) {
           state.stack.push(STACK_ARGS);
           logger(`push ${STACK_ARGS} for ${KW_DEFCAP}`);
         }

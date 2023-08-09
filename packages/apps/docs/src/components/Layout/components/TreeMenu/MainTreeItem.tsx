@@ -33,16 +33,10 @@ export const MainTreeItem: FC<IProps> = ({ item, root = false, level = 1 }) => {
 
     if (!menuOpen) {
       ul?.style.setProperty('height', '0');
-      parentUl?.style.setProperty(
-        'height',
-        `${parentScrollHeight - scrollHeight}px`,
-      );
+      parentUl?.style.setProperty('height', `${parentScrollHeight - scrollHeight}px`);
     } else {
       ul?.style.setProperty('height', `${scrollHeight}px`);
-      parentUl?.style.setProperty(
-        'height',
-        `${parentScrollHeight + scrollHeight}px`,
-      );
+      parentUl?.style.setProperty('height', `${parentScrollHeight + scrollHeight}px`);
     }
 
     setIsMounted(true);
@@ -74,11 +68,7 @@ export const MainTreeItem: FC<IProps> = ({ item, root = false, level = 1 }) => {
             {item.menu}
           </StyledButton>
 
-          <StyledTreeList
-            role="list"
-            menuOpen={menuOpen}
-            level={`l${nextLevel()}`}
-          >
+          <StyledTreeList role="list" menuOpen={menuOpen} level={`l${nextLevel()}`}>
             {!root && <Item item={item} level={nextLevel()} />}
             {item.children.map((v) => {
               return <MainTreeItem key={v.root} level={nextLevel()} item={v} />;

@@ -17,17 +17,8 @@ import { IPactCommand } from '../interfaces/IPactCommand';
 import { runPact } from './api/runPact';
 import { getSpv, pollSpv } from './api/spv';
 import { pollStatus } from './api/status';
-import {
-  INetworkOptions,
-  IPollOptions,
-  IPollRequestPromise,
-} from './interfaces/interfaces';
-import {
-  groupByHost,
-  kadenaHostGenerator,
-  mergeAll,
-  mergeAllPollRequestPromises,
-} from './utils/utils';
+import { INetworkOptions, IPollOptions, IPollRequestPromise } from './interfaces/interfaces';
+import { groupByHost, kadenaHostGenerator, mergeAll, mergeAllPollRequestPromises } from './utils/utils';
 
 /**
  * Represents the object type that the `submit` or `send` function returns,
@@ -84,10 +75,7 @@ export interface IBaseClient {
    * @param options - Optional settings for preflight and signatureVerification.
    * @returns A promise that resolves to the local response.
    */
-  local: <T extends ILocalOptions>(
-    transaction: LocalRequestBody,
-    options?: T,
-  ) => Promise<LocalResponse<T>>;
+  local: <T extends ILocalOptions>(transaction: LocalRequestBody, options?: T) => Promise<LocalResponse<T>>;
 
   /**
    * Submits one or more public (unencrypted) signed commands to the blockchain for execution.
@@ -121,9 +109,7 @@ export interface IBaseClient {
    * @param transactionDescriptors - transaction descriptors to get the status.
    * @returns  A promise that resolves to the poll response with the command result.
    */
-  getStatus: (
-    transactionDescriptors: ITransactionDescriptor[] | ITransactionDescriptor,
-  ) => Promise<IPollResponse>;
+  getStatus: (transactionDescriptors: ITransactionDescriptor[] | ITransactionDescriptor) => Promise<IPollResponse>;
 
   /**
    * Listens for the result of the request. This is a long-polling process that eventually returns the result.
@@ -133,9 +119,7 @@ export interface IBaseClient {
    * @param transactionDescriptors - transaction descriptors to listen for.
    * @returns A promise that resolves to the command result.
    */
-  listen: (
-    transactionDescriptor: ITransactionDescriptor,
-  ) => Promise<ICommandResult>;
+  listen: (transactionDescriptor: ITransactionDescriptor) => Promise<ICommandResult>;
 
   /**
    * Creates an SPV proof for a request. This is required for multi-step tasks.
@@ -162,10 +146,7 @@ export interface IBaseClient {
    * @param targetChainId - The target chain ID for the SPV proof.
    * @returns A promise that resolves to the generated SPV proof.
    */
-  createSpv: (
-    transactionDescriptor: ITransactionDescriptor,
-    targetChainId: ChainId,
-  ) => Promise<string>;
+  createSpv: (transactionDescriptor: ITransactionDescriptor, targetChainId: ChainId) => Promise<string>;
 }
 
 /**
@@ -177,9 +158,7 @@ export interface IClient extends IBaseClient {
    * An alias for `local` when both preflight and signatureVerification are `true`.
    * @see local
    */
-  preflight: (
-    transaction: ICommand | IUnsignedCommand,
-  ) => Promise<ILocalCommandResult>;
+  preflight: (transaction: ICommand | IUnsignedCommand) => Promise<ILocalCommandResult>;
 
   /**
    * An alias for `local` when preflight is `false` and signatureVerification is `true`.
@@ -203,11 +182,7 @@ export interface IClient extends IBaseClient {
    *
    * @see {@link IBaseClient.local | local() function}
    */
-  runPact: (
-    code: string,
-    data: Record<string, unknown>,
-    option: INetworkOptions,
-  ) => Promise<ICommandResult>;
+  runPact: (code: string, data: Record<string, unknown>, option: INetworkOptions) => Promise<ICommandResult>;
 
   /**
    * Alias for `submit`.
@@ -223,9 +198,7 @@ export interface IClient extends IBaseClient {
    *
    * @deprecated Use `getStatus` instead.
    */
-  getPoll: (
-    transactionDescriptors: ITransactionDescriptor[] | ITransactionDescriptor,
-  ) => Promise<IPollResponse>;
+  getPoll: (transactionDescriptors: ITransactionDescriptor[] | ITransactionDescriptor) => Promise<IPollResponse>;
 }
 
 /**
@@ -246,21 +219,14 @@ export interface ICreateClient {
    * Note: The default hostUrlGenerator creates a Kadena testnet or mainnet URL based on networkId.
    * @param hostAddressGenerator - the function that generates the URL based on `chainId` and `networkId` from the transaction
    */
-  (
-    hostAddressGenerator?: (options: {
-      chainId: ChainId;
-      networkId: string;
-    }) => string,
-  ): IClient;
+  (hostAddressGenerator?: (options: { chainId: ChainId; networkId: string }) => string): IClient;
 }
 
 /**
  * Creates Chainweb client
  * @public
  */
-export const createClient: ICreateClient = (
-  host = kadenaHostGenerator,
-): IClient => {
+export const createClient: ICreateClient = (host = kadenaHostGenerator): IClient => {
   const getHost = typeof host === 'string' ? () => host : host;
 
   const client: IBaseClient = {
@@ -298,17 +264,13 @@ export const createClient: ICreateClient = (
       transactionDescriptors: ITransactionDescriptor[] | ITransactionDescriptor,
       options?: IPollOptions,
     ): IPollRequestPromise<ICommandResult> {
-      const requestsList = Array.isArray(transactionDescriptors)
-        ? transactionDescriptors
-        : [transactionDescriptors];
+      const requestsList = Array.isArray(transactionDescriptors) ? transactionDescriptors : [transactionDescriptors];
       const results = groupByHost(
         requestsList.map(({ requestKey, chainId, networkId }) => ({
           requestKey,
           hostUrl: getHost({ chainId, networkId }),
         })),
-      ).map(([hostUrl, requestKeys]) =>
-        pollStatus(hostUrl, requestKeys, options),
-      );
+      ).map(([hostUrl, requestKeys]) => pollStatus(hostUrl, requestKeys, options));
 
       // merge all of the result in one object
       const mergedPollRequestPromises = mergeAllPollRequestPromises(results);
@@ -316,9 +278,7 @@ export const createClient: ICreateClient = (
       return mergedPollRequestPromises;
     },
     async getStatus(transactionDescriptors) {
-      const requestsList = Array.isArray(transactionDescriptors)
-        ? transactionDescriptors
-        : [transactionDescriptors];
+      const requestsList = Array.isArray(transactionDescriptors) ? transactionDescriptors : [transactionDescriptors];
 
       const results = await Promise.all(
         groupByHost(

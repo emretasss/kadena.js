@@ -75,21 +75,13 @@ export const Select: FC<ISelectProps> = ({
       )}
       <StyledSelects>
         <StyledSelectWrapper variant={variant}>
-          {Boolean(leadingText) && (
-            <StyledLeadingText>{leadingText}</StyledLeadingText>
-          )}
+          {Boolean(leadingText) && <StyledLeadingText>{leadingText}</StyledLeadingText>}
           {LeftPanel && (
             <StyledIconWrapper>
               <LeftPanel size="md" />
             </StyledIconWrapper>
           )}
-          <StyledSelect
-            variant={variant}
-            disabled={disabled}
-            onChange={handleSelectChange}
-            value={value}
-            {...rest}
-          />
+          <StyledSelect variant={variant} disabled={disabled} onChange={handleSelectChange} value={value} {...rest} />
           {RightPanel && (
             <StyledIconWrapper>
               <RightPanel size="md" />

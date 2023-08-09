@@ -1,11 +1,6 @@
 import { Breadcrumbs, SystemIcon, TextField } from '@kadena/react-ui';
 
-import {
-  StyledAccountForm,
-  StyledForm,
-  StyledList,
-  StyledListItem,
-} from './styles';
+import { StyledAccountForm, StyledForm, StyledList, StyledListItem } from './styles';
 
 import { ChainSelect } from '@/components/Global';
 import { kadenaConstants } from '@/constants/kadena';
@@ -13,20 +8,10 @@ import Routes from '@/constants/routes';
 import { useAppContext } from '@/context/app-context';
 import { useToolbar } from '@/context/layout-context';
 import { usePersistentChainID } from '@/hooks';
-import {
-  type IModulesResult,
-  listModules,
-} from '@/services/modules/list-module';
+import { type IModulesResult, listModules } from '@/services/modules/list-module';
 import Debug from 'debug';
 import useTranslation from 'next-translate/useTranslation';
-import React, {
-  ChangeEventHandler,
-  FC,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { ChangeEventHandler, FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 const ModuleExplorer: FC = () => {
   Debug('kadena-transfer:pages:transfer:module-explorer');
@@ -71,19 +56,13 @@ const ModuleExplorer: FC = () => {
   }, [chainID, network]);
 
   const filteredModules = useMemo(
-    () =>
-      (modules?.data || []).filter((module: string) =>
-        module.includes(moduleSearch),
-      ),
+    () => (modules?.data || []).filter((module: string) => module.includes(moduleSearch)),
     [modules, moduleSearch],
   );
 
-  const onModuleNameChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-    (e) => {
-      setModuleSearch(e.target.value);
-    },
-    [],
-  );
+  const onModuleNameChange = useCallback<ChangeEventHandler<HTMLInputElement>>((e) => {
+    setModuleSearch(e.target.value);
+  }, []);
 
   return (
     <div>
@@ -93,11 +72,7 @@ const ModuleExplorer: FC = () => {
       </Breadcrumbs.Root>
       <StyledForm>
         <StyledAccountForm>
-          <ChainSelect
-            onChange={onChainSelectChange}
-            value={chainID}
-            ariaLabel="Select Chain ID"
-          />
+          <ChainSelect onChange={onChainSelectChange} value={chainID} ariaLabel="Select Chain ID" />
           <TextField
             label={t('Module Name')}
             inputProps={{
@@ -113,11 +88,7 @@ const ModuleExplorer: FC = () => {
         {!filteredModules?.length && t('No modules found.')}
         {filteredModules?.map((module) => (
           <StyledListItem key={module} data-module-name={module}>
-            <a
-              href={`/transfer/module-explorer/networks/${network}/chains/${chainID}/modules/${module}`}
-            >
-              {module}
-            </a>
+            <a href={`/transfer/module-explorer/networks/${network}/chains/${chainID}/modules/${module}`}>{module}</a>
           </StyledListItem>
         ))}
       </StyledList>

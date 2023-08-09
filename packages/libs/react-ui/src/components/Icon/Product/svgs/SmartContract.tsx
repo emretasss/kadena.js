@@ -1,16 +1,8 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
 
-const SmartContract: React.FC<SVGProps<SVGSVGElement>> = (
-  props: SVGProps<SVGSVGElement>,
-) => (
-  <svg
-    width={40}
-    height={40}
-    viewBox="0 0 40 40"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+const SmartContract: React.FC<SVGProps<SVGSVGElement>> = (props: SVGProps<SVGSVGElement>) => (
+  <svg width={40} height={40} viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" {...props}>
     <g clipPath="url(#clip0_1080_2286)">
       <path
         d="M324,133.09a16,16,0,0,0,16-16V95.31a16,16,0,0,0-16-16H251.34A149.24,149.24,0,0,0,150.2,40H56A16,16,0,0,0,40,56V323.63a16,16,0,0,0,16,16h94.17a149.25,149.25,0,0,0,100.76-38.94H324a16,16,0,0,0,16-16V262.91a16,16,0,0,0-16-16H288.72a148.77,148.77,0,0,0,9-30.69H324a16,16,0,0,0,16-16V178.44a16,16,0,0,0-16-16H297.5a148.38,148.38,0,0,0-8.62-29.35Zm-58.7,29.35H206a16,16,0,0,0-16,16v21.78a16,16,0,0,0,16,16h59.76a80,80,0,0,1-19.37,30.69H206a16,16,0,0,0-16,16V270h-1.78A80,80,0,0,1,190,110v7.08a16,16,0,0,0,16,16h40.39A79.82,79.82,0,0,1,265.3,162.44Z"

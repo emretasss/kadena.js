@@ -3,12 +3,7 @@
 
 import { SystemIcons } from '../Icons';
 
-import {
-  StyledHeading,
-  StyledIconContainer,
-  StyledNotification,
-  StyledText,
-} from './styles';
+import { StyledHeading, StyledIconContainer, StyledNotification, StyledText } from './styles';
 
 import { VariantProps } from '@stitches/react';
 import React, { FC } from 'react';
@@ -23,11 +18,7 @@ export interface INotificationProps {
   simple?: VariantProps<typeof StyledNotification>['simple'];
 }
 
-export const NotificationBody = ({
-  children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element => {
+export const NotificationBody = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return <StyledText as="div">{children}</StyledText>;
 };
 

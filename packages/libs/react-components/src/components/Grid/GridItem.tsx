@@ -14,22 +14,12 @@ export interface IGridItemProps {
   area?: CSSProperties['gridArea'];
 }
 
-const createSpan = (
-  colStart: IGridItemProps['colStart'],
-  colEnd: IGridItemProps['colEnd'],
-): string => {
+const createSpan = (colStart: IGridItemProps['colStart'], colEnd: IGridItemProps['colEnd']): string => {
   if (colStart === undefined || colEnd === undefined) return 'auto';
   return `${colStart}/${colEnd}`;
 };
 
-const GridItem: FC<IGridItemProps> = ({
-  children,
-  colStart,
-  colEnd,
-  rowStart,
-  rowEnd,
-  area,
-}) => {
+const GridItem: FC<IGridItemProps> = ({ children, colStart, colEnd, rowStart, rowEnd, area }) => {
   const styles = {
     gridColumn: createSpan(colStart, colEnd),
     gridRow: createSpan(rowStart, rowEnd),

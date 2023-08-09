@@ -50,11 +50,7 @@ client.on('error', (...args) => {
 
 // received transaction with confirmation depth < client.confirmationDepth
 client.on('unconfirmed', (newTx: ITransaction) =>
-  console.log(
-    '[UNCONFIRMED]',
-    newTx.meta.id,
-    `conf=${newTx.meta.confirmations}`,
-  ),
+  console.log('[UNCONFIRMED]', newTx.meta.id, `conf=${newTx.meta.confirmations}`),
 );
 
 // received transaction with confirmation depth >= client.confirmationDepth

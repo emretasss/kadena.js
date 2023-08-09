@@ -9,10 +9,7 @@ export interface ITabsContainerProps {
   defaultSelected?: string;
 }
 
-export const TabsContainer: FC<ITabsContainerProps> = ({
-  children,
-  defaultSelected = '',
-}) => {
+export const TabsContainer: FC<ITabsContainerProps> = ({ children, defaultSelected = '' }) => {
   const [selectedTab, setSelectedTab] = useState<string>(defaultSelected);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const selectedUnderlineRef = useRef<HTMLSpanElement | null>(null);
@@ -20,25 +17,15 @@ export const TabsContainer: FC<ITabsContainerProps> = ({
   useEffect(() => {
     if (!containerRef.current || !selectedUnderlineRef.current) return;
     //find the selectedTab
-    let selected = containerRef.current.querySelector(
-      '[data-selected="true"]',
-    ) as HTMLButtonElement;
+    let selected = containerRef.current.querySelector('[data-selected="true"]') as HTMLButtonElement;
 
     if (selected === undefined || selected === null) {
-      selected = containerRef.current.querySelectorAll(
-        'button',
-      )[0] as HTMLButtonElement;
+      selected = containerRef.current.querySelectorAll('button')[0] as HTMLButtonElement;
     }
 
     // set position of the bottom line
-    selectedUnderlineRef.current.style.setProperty(
-      'transform',
-      `translateX(${selected.offsetLeft}px)`,
-    );
-    selectedUnderlineRef.current.style.setProperty(
-      'width',
-      `${selected.offsetWidth}px`,
-    );
+    selectedUnderlineRef.current.style.setProperty('transform', `translateX(${selected.offsetLeft}px)`);
+    selectedUnderlineRef.current.style.setProperty('width', `${selected.offsetWidth}px`);
   }, [containerRef, selectedTab, selectedUnderlineRef]);
 
   const handleClick = (value: string): void => {

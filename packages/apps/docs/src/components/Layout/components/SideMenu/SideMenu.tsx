@@ -25,10 +25,7 @@ interface IProps {
 }
 
 export const SideMenu: FC<IProps> = ({ closeMenu, menuItems }) => {
-  const { active, clickMenu, clickSubMenu, setActive } = useSideMenu(
-    closeMenu,
-    menuItems,
-  );
+  const { active, clickMenu, clickSubMenu, setActive } = useSideMenu(closeMenu, menuItems);
   const router = useRouter();
 
   const activeItem = menuItems.find((item) => item.isMenuOpen);
@@ -75,9 +72,7 @@ export const SideMenu: FC<IProps> = ({ closeMenu, menuItems }) => {
           {menuItems.map((item) => (
             <StyledItem key={item.root}>
               <StyledLink
-                onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) =>
-                  clickMenu(e, item)
-                }
+                onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => clickMenu(e, item)}
                 href={item.root}
                 data-hassubmenu={!!item.children?.length}
               >
@@ -88,12 +83,7 @@ export const SideMenu: FC<IProps> = ({ closeMenu, menuItems }) => {
         </StyledUl>
       </MenuCard>
       {activeItem && (
-        <MenuCard
-          cyTestId="sidemenu-submenu"
-          active={active}
-          idx={1}
-          onClick={clickSubMenu}
-        >
+        <MenuCard cyTestId="sidemenu-submenu" active={active} idx={1} onClick={clickSubMenu}>
           <StyledTreeList role="list" root={true}>
             <MainTreeItem item={activeItem} root={true} />
           </StyledTreeList>

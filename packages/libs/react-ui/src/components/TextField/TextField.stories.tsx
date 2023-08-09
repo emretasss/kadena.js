@@ -41,10 +41,7 @@ const meta: Meta<
       },
     },
     status: {
-      options: [
-        undefined,
-        ...(Object.keys(statusVariant) as (keyof typeof statusVariant)[]),
-      ],
+      options: [undefined, ...(Object.keys(statusVariant) as (keyof typeof statusVariant)[])],
       control: {
         type: 'select',
       },
@@ -99,18 +96,7 @@ export const Group: Story = {
     rightIcon: undefined,
     leadingText: 'Leading',
   },
-  render: ({
-    leadingText,
-    leftIcon,
-    rightIcon,
-    onChange,
-    disabled,
-    status,
-    tag,
-    helperText,
-    info,
-    label,
-  }) => {
+  render: ({ leadingText, leftIcon, rightIcon, onChange, disabled, status, tag, helperText, info, label }) => {
     return (
       <TextField
         tag={tag}

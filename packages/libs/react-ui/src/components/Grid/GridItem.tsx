@@ -15,9 +15,7 @@ export interface IGridItemProps {
   rowSpan?: keyof typeof rowSpanVariants;
 }
 
-const assembleColumnSpanVariants = (
-  columnSpan: ResponsiveInputType,
-): string | string[] => {
+const assembleColumnSpanVariants = (columnSpan: ResponsiveInputType): string | string[] => {
   if (typeof columnSpan === 'number') {
     return explicitItemColumnVariant[columnSpan];
   }
@@ -33,11 +31,7 @@ const assembleColumnSpanVariants = (
   ];
 };
 
-const GridItem: FC<IGridItemProps> = ({
-  children,
-  columnSpan,
-  rowSpan = 1,
-}) => {
+const GridItem: FC<IGridItemProps> = ({ children, columnSpan, rowSpan = 1 }) => {
   const className = classNames(
     gridItemClass,
     rowSpanVariants[rowSpan],

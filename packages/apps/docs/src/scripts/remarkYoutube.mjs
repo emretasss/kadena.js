@@ -6,8 +6,7 @@
 
 const getYouTubeVideoId = (link) => {
   if (!link) return;
-  const youtubeRegExp =
-    /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})/;
+  const youtubeRegExp = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/(watch\?v=)?([a-zA-Z0-9_-]{11})/;
   const match = link.match(youtubeRegExp);
 
   if (match && match[5]) {

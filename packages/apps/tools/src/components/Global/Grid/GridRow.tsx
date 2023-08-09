@@ -7,8 +7,6 @@ export interface IGridRowProps {
   children: ReactNode;
 }
 
-const GridRow: FC<IGridRowProps> = ({ children, ...rest }) => (
-  <StyledGridRow {...rest}>{children}</StyledGridRow>
-);
+const GridRow: FC<IGridRowProps> = ({ children, ...rest }) => <StyledGridRow {...rest}>{children}</StyledGridRow>;
 
 export default GridRow;

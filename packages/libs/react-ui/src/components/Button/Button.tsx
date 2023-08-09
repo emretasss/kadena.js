@@ -1,16 +1,11 @@
-import {
-  buttonLoadingClass,
-  colorVariants,
-  iconLoadingClass,
-} from './Button.css';
+import { buttonLoadingClass, colorVariants, iconLoadingClass } from './Button.css';
 import { ButtonIcon } from './ButtonIcon';
 
 import { SystemIcon } from '@components/Icon';
 import cx from 'classnames';
 import React, { ButtonHTMLAttributes, FC } from 'react';
 
-export interface IButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'as' | 'disabled'> {
+export interface IButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'as' | 'disabled'> {
   as?: 'button' | 'a';
   variant?: keyof typeof colorVariants;
   children: React.ReactNode;
@@ -19,9 +14,7 @@ export interface IButtonProps
   icon?: keyof typeof SystemIcon;
   iconAlign?: 'left' | 'right';
   loading?: boolean;
-  onClick?:
-    | React.MouseEventHandler<HTMLButtonElement>
-    | React.FormEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | React.FormEventHandler<HTMLButtonElement>;
   target?: '_blank' | '_self';
   title?: string;
 }
@@ -56,38 +49,22 @@ export const Button: FC<IButtonProps> = ({
 
   const buttonChildren = (
     <>
-      {Icon && iconAlign === 'left' && (
-        <ButtonIcon icon={Icon} className={iconClassname} />
-      )}
+      {Icon && iconAlign === 'left' && <ButtonIcon icon={Icon} className={iconClassname} />}
       {children}
-      {Icon && iconAlign === 'right' && (
-        <ButtonIcon icon={Icon} className={iconClassname} />
-      )}
+      {Icon && iconAlign === 'right' && <ButtonIcon icon={Icon} className={iconClassname} />}
     </>
   );
 
   if (renderAsAnchor) {
     return (
-      <a
-        aria-label={ariaLabel}
-        className={buttonClassname}
-        data-testid="kda-button"
-        href={href}
-        target={target}
-      >
+      <a aria-label={ariaLabel} className={buttonClassname} data-testid="kda-button" href={href} target={target}>
         {buttonChildren}
       </a>
     );
   }
 
   return (
-    <button
-      {...props}
-      aria-label={ariaLabel}
-      className={buttonClassname}
-      data-testid="kda-button"
-      onClick={onClick}
-    >
+    <button {...props} aria-label={ariaLabel} className={buttonClassname} data-testid="kda-button" onClick={onClick}>
       {buttonChildren}
     </button>
   );

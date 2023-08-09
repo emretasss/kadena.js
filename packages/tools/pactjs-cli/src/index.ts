@@ -7,15 +7,10 @@ import { program } from 'commander';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-const packageJson: { version: string } = JSON.parse(
-  readFileSync(join(__dirname, '../package.json'), 'utf8'),
-);
+const packageJson: { version: string } = JSON.parse(readFileSync(join(__dirname, '../package.json'), 'utf8'));
 
 contractGenerateCommand(program, packageJson.version);
 templateGenerateCommand(program, packageJson.version);
 retrieveContractCommand(program, packageJson.version);
 
-program
-  .description('pactjs cli to create transactions for Kadena chainweb')
-  .version(packageJson.version)
-  .parse();
+program.description('pactjs cli to create transactions for Kadena chainweb').version(packageJson.version).parse();

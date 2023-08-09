@@ -117,6 +117,4 @@ export const itemColumnVariants: ResponsiveVariant = {
   xxl: itemColumnVariantsArray[4],
 };
 
-export type ResponsiveInputType =
-  | number
-  | Record<keyof typeof breakpoints, keyof typeof columnCount>;
+export type ResponsiveInputType = number | Record<keyof typeof breakpoints, keyof typeof columnCount>;

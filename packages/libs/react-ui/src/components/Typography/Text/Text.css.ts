@@ -1,8 +1,4 @@
-import {
-  colorVariants,
-  fontVariants,
-  transformVariants,
-} from '../typography.css';
+import { colorVariants, fontVariants, transformVariants } from '../typography.css';
 
 import { sprinkles } from '@theme/sprinkles.css';
 import { style, styleVariants } from '@vanilla-extract/css';

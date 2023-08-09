@@ -6,8 +6,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import React, { ButtonHTMLAttributes, FC, useRef } from 'react';
 
-export interface IMenuButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IMenuButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title?: string;
   href?: string;
   active?: boolean;

@@ -10,12 +10,7 @@ interface IProps {
   isDone?: boolean;
 }
 
-export const InfiniteScroll: FC<IProps> = ({
-  handleLoad,
-  isLoading,
-  error,
-  isDone,
-}) => {
+export const InfiniteScroll: FC<IProps> = ({ handleLoad, isLoading, error, isDone }) => {
   const loadRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -46,11 +41,7 @@ export const InfiniteScroll: FC<IProps> = ({
           <>
             <Heading as="h5">{error}</Heading>
 
-            <Button
-              onClick={() => handleLoad(true)}
-              icon="Refresh"
-              iconAlign="left"
-            >
+            <Button onClick={() => handleLoad(true)} icon="Refresh" iconAlign="left">
               Try again
             </Button>
           </>

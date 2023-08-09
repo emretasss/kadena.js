@@ -1,10 +1,6 @@
 jest.mock('cross-fetch');
 
-import type {
-  ICommandResult,
-  IListenRequestBody,
-  ListenResponse,
-} from '../interfaces/PactAPI';
+import type { ICommandResult, IListenRequestBody, ListenResponse } from '../interfaces/PactAPI';
 import { listen } from '../listen';
 
 import { mockFetch } from './mockdata/mockFetch';
@@ -13,9 +9,7 @@ import { testURL } from './mockdata/Pact';
 import fetch, { Response } from 'cross-fetch';
 
 const mockedFunctionFetch = fetch as jest.MockedFunction<typeof fetch>;
-mockedFunctionFetch.mockImplementation(
-  mockFetch as jest.MockedFunction<typeof fetch>,
-);
+mockedFunctionFetch.mockImplementation(mockFetch as jest.MockedFunction<typeof fetch>);
 
 test('/listen should return result of tx queried', async () => {
   // A tx created for chain 0 of devnet using `pact -a`.
@@ -37,10 +31,7 @@ test('/listen should return result of tx queried', async () => {
   };
   const localReq: IListenRequestBody = requestKey;
   const responseExpected: ListenResponse = commandResult1;
-  const responseActual: ICommandResult | Response = await listen(
-    localReq,
-    testURL,
-  );
+  const responseActual: ICommandResult | Response = await listen(localReq, testURL);
 
   expect(responseExpected).toEqual(responseActual);
 });

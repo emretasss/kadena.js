@@ -5,8 +5,7 @@ import React, { type FC } from 'react';
 import { FieldError } from 'react-hook-form';
 import * as z from 'zod';
 
-interface IAccountNameFieldProps
-  extends Partial<Omit<ITextFieldProps, 'inputProps'>> {
+interface IAccountNameFieldProps extends Partial<Omit<ITextFieldProps, 'inputProps'>> {
   inputProps: Partial<ITextFieldProps['inputProps']>;
   error?: FieldError;
 }
@@ -14,13 +13,7 @@ interface IAccountNameFieldProps
 // @see; https://github.com/kadena-io/chainweb-node/blob/master/pact/coin-contract/v5/coin-v5.pact#L14
 export const NAME_VALIDATION = z.string().trim().min(3).max(256);
 
-const AccountNameField: FC<IAccountNameFieldProps> = ({
-  error,
-  inputProps,
-  status,
-  helperText,
-  ...rest
-}) => {
+const AccountNameField: FC<IAccountNameFieldProps> = ({ error, inputProps, status, helperText, ...rest }) => {
   const { t } = useTranslation('common');
 
   return (

@@ -5,30 +5,9 @@ import { createStitches } from '@stitches/react';
 
 export type { VariantProps } from '@stitches/react';
 
-import {
-  blue,
-  crimson,
-  cyan,
-  green,
-  indigo,
-  mauve,
-  pink,
-  plum,
-  purple,
-  teal,
-  violet,
-} from '@radix-ui/colors';
+import { blue, crimson, cyan, green, indigo, mauve, pink, plum, purple, teal, violet } from '@radix-ui/colors';
 
-export const {
-  styled,
-  css,
-  globalCss,
-  keyframes,
-  getCssText,
-  theme,
-  createTheme,
-  config,
-} = createStitches({
+export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme, config } = createStitches({
   theme: {
     colors: {
       ...mauve,

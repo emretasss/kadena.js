@@ -9,13 +9,7 @@ interface IProps {
 export const EditPage: FC<IProps> = ({ editLink }) => {
   if (!editLink) return null;
   return (
-    <Button
-      as="a"
-      href={editLink}
-      target="_blank"
-      rel="noreferrer"
-      title="Edit this page"
-    >
+    <Button as="a" href={editLink} target="_blank" rel="noreferrer" title="Edit this page">
       Edit this page
     </Button>
   );

@@ -28,25 +28,9 @@ export type {
   INavFooterIconButtonProps,
   INavFooterLinkProps,
 } from './NavFooter';
-export type {
-  INotificationProps,
-  INotificationHeaderProps,
-  INotificationActionsProps,
-} from './Notification';
-export type {
-  ITableProps,
-  ITBodyProps,
-  ITdProps,
-  IThProps,
-  ITHeadProps,
-  ITrProps,
-} from './Table';
-export type {
-  ITextProps,
-  IHeadingProps,
-  IGradientTextProps,
-  ILabelProps,
-} from './Typography';
+export type { INotificationProps, INotificationHeaderProps, INotificationActionsProps } from './Notification';
+export type { ITableProps, ITBodyProps, ITdProps, IThProps, ITHeadProps, ITrProps } from './Table';
+export type { ITextProps, IHeadingProps, IGradientTextProps, ILabelProps } from './Typography';
 
 export { Accordion } from './Accordion';
 export { Box } from './Box';

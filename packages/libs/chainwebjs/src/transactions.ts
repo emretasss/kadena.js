@@ -1,16 +1,6 @@
-import {
-  blockByBlockHash,
-  blocks,
-  headers2blocks,
-  recentBlocks,
-} from './blocks';
+import { blockByBlockHash, blocks, headers2blocks, recentBlocks } from './blocks';
 import { chainUpdates } from './headers';
-import {
-  IBlockHeader,
-  IBlockPayloads,
-  IRetryOptions,
-  ITransactionElement,
-} from './types';
+import { IBlockHeader, IBlockPayloads, IRetryOptions, ITransactionElement } from './types';
 
 import EventSource from 'eventsource';
 
@@ -21,9 +11,7 @@ import EventSource from 'eventsource';
  *
  * @alpha
  */
-export const filterTxs = (
-  blocks: IBlockPayloads<ITransactionElement>[],
-): ITransactionElement[] => {
+export const filterTxs = (blocks: IBlockPayloads<ITransactionElement>[]): ITransactionElement[] => {
   return blocks
     .filter((x) => x.payload.transactions.length > 0)
     .flatMap((x) => {
@@ -97,12 +85,8 @@ export function txStream(
   network: string,
   host: string,
 ): EventSource {
-  const ro: IRetryOptions =
-    depth > 1 ? {} : { retry404: true, minTimeout: 1000 };
-  const cb = async (u: {
-    txCount: number;
-    header: IBlockHeader;
-  }): Promise<void> => {
+  const ro: IRetryOptions = depth > 1 ? {} : { retry404: true, minTimeout: 1000 };
+  const cb = async (u: { txCount: number; header: IBlockHeader }): Promise<void> => {
     if (u.txCount > 0) {
       const blocks = await headers2blocks([u.header], network, host, ro);
       filterTxs(blocks).forEach(callback);

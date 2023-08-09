@@ -7,10 +7,7 @@ import { Article, Content } from '@/components/Layout/components';
 import { HomeHeader } from '@/components/Layout/Landing/components';
 import { IMostPopularPage } from '@/types/MostPopularData';
 import getMostPopularPages from '@/utils/getMostPopularPages';
-import {
-  checkSubTreeForActive,
-  getPathName,
-} from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
+import { checkSubTreeForActive, getPathName } from '@/utils/staticGeneration/checkSubTreeForActive.mjs';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import React, { FC } from 'react';
@@ -34,24 +31,15 @@ const Home: FC<IProps> = ({ popularPages }) => {
                   Kadena.io
                 </a>
               </BrowseSection>
-              <BrowseSection
-                title="Developers"
-                className={browseSectionWrapper}
-              >
+              <BrowseSection title="Developers" className={browseSectionWrapper}>
                 <Link href="/docs/build/quickstart">Quick start</Link>
-                <Link href="/docs/pact/beginner/language-basics">
-                  Pact Language resources
-                </Link>
+                <Link href="/docs/pact/beginner/language-basics">Pact Language resources</Link>
                 <Link href="/docs/pact">Pact developer tutorials</Link>
               </BrowseSection>
               <BrowseSection title="Programs" className={browseSectionWrapper}>
                 <Link href="/docs/build/support">Developer program</Link>
-                <Link href="/docs/contribute/ambassadors">
-                  Ambassador program
-                </Link>
-                <Link href="/docs/build/support/technical-grants">
-                  Technical grants
-                </Link>
+                <Link href="/docs/contribute/ambassadors">Ambassador program</Link>
+                <Link href="/docs/build/support/technical-grants">Technical grants</Link>
               </BrowseSection>
             </Stack>
           </Box>

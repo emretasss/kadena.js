@@ -1,11 +1,5 @@
 import { ICommandResult } from '@kadena/chainweb-node-client';
-import {
-  IContinuationPayloadObject,
-  isSignedTransaction,
-  Pact,
-  readKeyset,
-  signWithChainweaver,
-} from '@kadena/client';
+import { IContinuationPayloadObject, isSignedTransaction, Pact, readKeyset, signWithChainweaver } from '@kadena/client';
 import { ChainId, ICommand, IUnsignedCommand } from '@kadena/types';
 
 import { listen, pollCreateSpv, pollStatus, submit } from './util/client';
@@ -23,18 +17,12 @@ interface IAccount {
 
 const amount: string = '1';
 // change these two accounts with your accounts
-const senderAccount: string =
-  'k:dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46';
-const receiverAccount: string =
-  'k:2f48080efe54e6eb670487f664bcaac7684b4ebfcfc8a3330ef080c9c97f7e11';
+const senderAccount: string = 'k:dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46';
+const receiverAccount: string = 'k:2f48080efe54e6eb670487f664bcaac7684b4ebfcfc8a3330ef080c9c97f7e11';
 
 const NETWORK_ID: string = 'testnet04';
 
-function startInTheFirstChain(
-  from: IAccount,
-  to: IAccount,
-  amount: string,
-): IUnsignedCommand {
+function startInTheFirstChain(from: IAccount, to: IAccount, amount: string): IUnsignedCommand {
   return Pact.builder
     .execution(
       Pact.modules.coin.defpact['transfer-crosschain'](
@@ -97,22 +85,14 @@ async function doCrossChainTransfer(
   return (
     Promise.resolve(startInTheFirstChain(from, to, amount))
       .then((command) => signWithChainweaver(command))
-      .then((command) =>
-        isSignedTransaction(command)
-          ? command
-          : Promise.reject('CMD_NOT_SIGNED'),
-      )
+      .then((command) => (isSignedTransaction(command) ? command : Promise.reject('CMD_NOT_SIGNED')))
       // inspect is only for development you can remove them
       .then(inspect('EXEC_SIGNED'))
       .then((cmd) => submit(cmd))
       .then(inspect('SUBMIT_RESULT'))
       .then(listen)
       .then(inspect('LISTEN_RESULT'))
-      .then((status) =>
-        status.result.status === 'failure'
-          ? Promise.reject(new Error('DEBIT REJECTED'))
-          : status,
-      )
+      .then((status) => (status.result.status === 'failure' ? Promise.reject(new Error('DEBIT REJECTED')) : status))
       .then((status) =>
         Promise.all([
           status,

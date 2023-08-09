@@ -55,8 +55,7 @@ const Item: FC<IResultProps> = ({ item }) => {
 };
 
 export const StaticResults: FC<IProps> = ({ results, limitResults }) => {
-  const limitedResults =
-    limitResults !== undefined ? results.slice(0, limitResults) : results;
+  const limitedResults = limitResults !== undefined ? results.slice(0, limitResults) : results;
 
   return (
     <Box marginY="$10">

@@ -45,31 +45,27 @@ describe('client utils', () => {
         second: true,
         third: 'test',
       };
-      expect(getUrl(host, endpoint, params)).toBe(
-        'http://host/api/test?second=true&third=test',
-      );
+      expect(getUrl(host, endpoint, params)).toBe('http://host/api/test?second=true&third=test');
     });
   });
 
   describe('kadenaHostGenerator', () => {
     it('returns mainnet url with the correct chainId', () => {
-      expect(
-        kadenaHostGenerator({ networkId: 'mainnet01', chainId: '14' }),
-      ).toBe('https://api.chainweb.com/chainweb/0.0/mainnet01/chain/14/pact');
+      expect(kadenaHostGenerator({ networkId: 'mainnet01', chainId: '14' })).toBe(
+        'https://api.chainweb.com/chainweb/0.0/mainnet01/chain/14/pact',
+      );
     });
 
     it('returns testnet url with the correct chainId', () => {
-      expect(
-        kadenaHostGenerator({ networkId: 'testnet04', chainId: '14' }),
-      ).toBe(
+      expect(kadenaHostGenerator({ networkId: 'testnet04', chainId: '14' })).toBe(
         'https://api.testnet.chainweb.com/chainweb/0.0/testnet04/chain/14/pact',
       );
     });
 
     it('throes exception if networkId is not either mainnet01 nor testnet04 ', () => {
-      expect(() =>
-        kadenaHostGenerator({ networkId: 'incorrect-network', chainId: '14' }),
-      ).toThrowError(Error(`UNKNOWN_NETWORK_ID: incorrect-network`));
+      expect(() => kadenaHostGenerator({ networkId: 'incorrect-network', chainId: '14' })).toThrowError(
+        Error(`UNKNOWN_NETWORK_ID: incorrect-network`),
+      );
     });
   });
 
@@ -165,28 +161,18 @@ describe('client utils', () => {
 
   describe('mergeAllPollRequestPromises', () => {
     it('merge all input poll promises into one', async () => {
-      const pr1: IPollRequestPromise<string> = Object.assign(
-        Promise.resolve({ key1: 'r1' }),
-        {
-          requests: { key1: Promise.resolve('r1') },
-        },
-      );
+      const pr1: IPollRequestPromise<string> = Object.assign(Promise.resolve({ key1: 'r1' }), {
+        requests: { key1: Promise.resolve('r1') },
+      });
 
-      const pr2: IPollRequestPromise<string> = Object.assign(
-        Promise.resolve({ key2: 'r2' }),
-        {
-          requests: { key2: Promise.resolve('r2') },
-        },
-      );
+      const pr2: IPollRequestPromise<string> = Object.assign(Promise.resolve({ key2: 'r2' }), {
+        requests: { key2: Promise.resolve('r2') },
+      });
       const mergedPr = mergeAllPollRequestPromises([pr1, pr2]);
 
       expect(Object.keys(mergedPr.requests)).toEqual(['key1', 'key2']);
 
-      const res = await Promise.all([
-        mergedPr,
-        mergedPr.requests.key1,
-        mergedPr.requests.key2,
-      ]);
+      const res = await Promise.all([mergedPr, mergedPr.requests.key1, mergedPr.requests.key2]);
 
       expect(res[0]).toEqual({
         key1: 'r1',

@@ -16,22 +16,16 @@ describe('parseType', () => {
   });
 
   it('throws exception if number is not integer', () => {
-    expect(() => parseAsPactValue({ int: '10.1' })).toThrowError(
-      new Error('PactNumber is not an integer'),
-    );
+    expect(() => parseAsPactValue({ int: '10.1' })).toThrowError(new Error('PactNumber is not an integer'));
   });
 
   it('throws exception if value is NaN', () => {
-    expect(() => parseAsPactValue({ decimal: 'test' })).toThrowError(
-      new Error('Value is NaN'),
-    );
+    expect(() => parseAsPactValue({ decimal: 'test' })).toThrowError(new Error('Value is NaN'));
   });
 
   it('throws exception if value is a number', () => {
     expect(() => parseAsPactValue(10)).toThrowError(
-      new Error(
-        'Type `number` is not allowed in the command. Use `{ decimal: 10 }` or `{ int: 10 }` instead',
-      ),
+      new Error('Type `number` is not allowed in the command. Use `{ decimal: 10 }` or `{ int: 10 }` instead'),
     );
   });
 
@@ -45,9 +39,7 @@ describe('parseType', () => {
 
   it('returns stringified arg, if its an object', () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect(parseAsPactValue({ test: 'test' } as any)).toBe(
-      JSON.stringify({ test: 'test' }),
-    );
+    expect(parseAsPactValue({ test: 'test' } as any)).toBe(JSON.stringify({ test: 'test' }));
   });
 
   it('returns arg, if its a boolean', () => {

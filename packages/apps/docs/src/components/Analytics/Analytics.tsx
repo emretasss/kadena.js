@@ -43,9 +43,7 @@ export const Analytics: FC = () => {
   }
   return (
     <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${TRACKING_ID}`}
-      ></Script>
+      <Script src={`https://www.googletagmanager.com/gtag/js?id=${TRACKING_ID}`}></Script>
       <Script
         id="gtag-init"
         dangerouslySetInnerHTML={{

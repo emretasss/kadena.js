@@ -1,16 +1,8 @@
 import type { SVGProps } from 'react';
 import * as React from 'react';
 
-const Gas: React.FC<SVGProps<SVGSVGElement>> = (
-  props: SVGProps<SVGSVGElement>,
-) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={40}
-    height={40}
-    viewBox="0 0 40 40"
-    {...props}
-  >
+const Gas: React.FC<SVGProps<SVGSVGElement>> = (props: SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} viewBox="0 0 40 40" {...props}>
     <g clipPath="url(#gas-icon_svg__a)">
       <path
         fill="#fff"

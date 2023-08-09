@@ -26,9 +26,7 @@ export interface IUnsignedSignatureWithHash extends ISignature {
 /**
  * @alpha
  */
-export type SignatureWithHash =
-  | ISignedSignatureWithHash
-  | IUnsignedSignatureWithHash;
+export type SignatureWithHash = ISignedSignatureWithHash | IUnsignedSignatureWithHash;
 
 /**
  * @alpha

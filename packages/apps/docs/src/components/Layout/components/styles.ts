@@ -43,45 +43,45 @@ export const BasePageGrid: StyledComponent<'div'> = styled('div', {
   },
 });
 
-export const MenuBack: StyledComponent<
+export const MenuBack: StyledComponent<'button', { isOpen?: boolean | 'true' | 'false' | undefined }> = styled(
   'button',
-  { isOpen?: boolean | 'true' | 'false' | undefined }
-> = styled('button', {
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-  background: 'rgba(0,0,0,.5)',
-  border: 0,
-  cursor: 'pointer',
-  opacity: 0,
-  transform: 'translateX(-100%)',
-  transition: 'opacity .5s ease, transform .1s ease',
-  zIndex: 'calc($sideMenu - 1)',
-  '@md': {
+  {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    background: 'rgba(0,0,0,.5)',
+    border: 0,
+    cursor: 'pointer',
     opacity: 0,
-    pointerEvent: 'none',
-  },
+    transform: 'translateX(-100%)',
+    transition: 'opacity .5s ease, transform .1s ease',
+    zIndex: 'calc($sideMenu - 1)',
+    '@md': {
+      opacity: 0,
+      pointerEvent: 'none',
+    },
 
-  variants: {
-    isOpen: {
-      true: {
-        transform: 'translateX(0)',
-        opacity: 1,
-        '@md': {
+    variants: {
+      isOpen: {
+        true: {
+          transform: 'translateX(0)',
+          opacity: 1,
+          '@md': {
+            transform: 'translateX(-100%)',
+            opacity: 0,
+          },
+        },
+        false: {
           transform: 'translateX(-100%)',
+          pointerEvents: 'none',
           opacity: 0,
         },
       },
-      false: {
-        transform: 'translateX(-100%)',
-        pointerEvents: 'none',
-        opacity: 0,
-      },
     },
   },
-});
+);
 
 export const Menu: StyledComponent<
   'div',
@@ -180,10 +180,7 @@ export const StyledNav: StyledComponent<'nav'> = styled('nav', {
   },
 });
 
-export const StyledUl: StyledComponent<
-  'ul',
-  { ref?: React.ForwardedRef<HTMLUListElement> }
-> = styled('ul', {
+export const StyledUl: StyledComponent<'ul', { ref?: React.ForwardedRef<HTMLUListElement> }> = styled('ul', {
   display: 'flex',
   gap: '$4',
   padding: 0,
@@ -191,10 +188,7 @@ export const StyledUl: StyledComponent<
   width: '100%',
 });
 
-export const NavLink: StyledComponent<
-  typeof Link,
-  { active?: boolean | 'true' | 'false' | undefined }
-> = styled(Link, {
+export const NavLink: StyledComponent<typeof Link, { active?: boolean | 'true' | 'false' | undefined }> = styled(Link, {
   color: '$neutral100',
   fontFamily: '$main',
   textDecoration: 'none',
@@ -222,31 +216,29 @@ export const NavLink: StyledComponent<
   },
 });
 
-export const AnimationBackgroundWrapper: StyledComponent<
-  'div',
-  { show?: boolean | 'true' | 'false' | undefined }
-> = styled('div', {
-  position: 'absolute',
+export const AnimationBackgroundWrapper: StyledComponent<'div', { show?: boolean | 'true' | 'false' | undefined }> =
+  styled('div', {
+    position: 'absolute',
 
-  top: 0,
-  left: 0,
-  zIndex: 0,
-  opacity: 0,
+    top: 0,
+    left: 0,
+    zIndex: 0,
+    opacity: 0,
 
-  defaultVariants: {
-    show: true,
-  },
-  variants: {
-    show: {
-      true: {
-        opacity: 1,
-      },
-      false: {
-        opacity: 0,
+    defaultVariants: {
+      show: true,
+    },
+    variants: {
+      show: {
+        true: {
+          opacity: 1,
+        },
+        false: {
+          opacity: 0,
+        },
       },
     },
-  },
-});
+  });
 
 export const Spacer: StyledComponent<'div'> = styled('div', {
   flex: 1,

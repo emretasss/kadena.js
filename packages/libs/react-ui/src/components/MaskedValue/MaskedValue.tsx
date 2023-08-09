@@ -1,9 +1,4 @@
-import {
-  iconContainer,
-  titleContainer,
-  valueContainer,
-  valueIconContainer,
-} from './MaskedValue.css';
+import { iconContainer, titleContainer, valueContainer, valueIconContainer } from './MaskedValue.css';
 
 import { SystemIcon } from '@components/Icon';
 import React, { FC, useState } from 'react';
@@ -33,9 +28,7 @@ export const MaskedValue: FC<IMaskedValueProps> = ({
 
   // If the value size is shorter than the unmasked chars, we don't mask it
   if (startUnmaskedValues + endUnmaskedValues <= value.length - 1) {
-    maskedValue = `${value.slice(0, startUnmaskedValues)}****${value.slice(
-      -endUnmaskedValues,
-    )}`;
+    maskedValue = `${value.slice(0, startUnmaskedValues)}****${value.slice(-endUnmaskedValues)}`;
   }
 
   return (
@@ -44,15 +37,9 @@ export const MaskedValue: FC<IMaskedValueProps> = ({
       <div className={valueIconContainer}>
         <div className={valueContainer}>{visible ? value : maskedValue}</div>
         {visible ? (
-          <SystemIcon.EyeOffOutline
-            className={iconContainer}
-            onClick={toggleVisibility}
-          />
+          <SystemIcon.EyeOffOutline className={iconContainer} onClick={toggleVisibility} />
         ) : (
-          <SystemIcon.EyeOutline
-            className={iconContainer}
-            onClick={toggleVisibility}
-          />
+          <SystemIcon.EyeOutline className={iconContainer} onClick={toggleVisibility} />
         )}
       </div>
     </div>

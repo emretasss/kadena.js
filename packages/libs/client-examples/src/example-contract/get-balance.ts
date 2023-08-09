@@ -19,7 +19,6 @@ async function getBalance(account: Account): Promise<void> {
   console.log(res);
 }
 
-const myAccount: string =
-  'k:dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46';
+const myAccount: string = 'k:dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46';
 
 getBalance(myAccount).catch(console.error);

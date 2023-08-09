@@ -9,8 +9,7 @@ const meta: Meta<{} & IAccordionProps> = {
     linked: {
       type: 'boolean',
       defaultValue: true,
-      description:
-        'Each section will close the other sections if they are linked',
+      description: 'Each section will close the other sections if they are linked',
       control: {
         type: 'boolean',
       },

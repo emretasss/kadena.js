@@ -11,9 +11,7 @@ export interface IBrandLogoProps {
   variant?: LogoVariant;
 }
 
-const renderSwitch = (
-  logo: LogoVariant = 'Kadena',
-): FC<SVGProps<SVGSVGElement>> => {
+const renderSwitch = (logo: LogoVariant = 'Kadena'): FC<SVGProps<SVGSVGElement>> => {
   switch (logo) {
     case 'Docs':
       return KadenaDocsLogo;
