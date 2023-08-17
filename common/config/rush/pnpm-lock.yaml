@@ -646,55 +646,6 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
 
-  ../../packages/libs/bootstrap-lib:
-    dependencies:
-      '@kadena/cryptography-utils':
-        specifier: workspace:*
-        version: link:../cryptography-utils
-      '@kadena/pactjs':
-        specifier: workspace:*
-        version: link:../pactjs
-      '@kadena/types':
-        specifier: workspace:*
-        version: link:../types
-      '@types/isomorphic-fetch':
-        specifier: ~0.0.36
-        version: 0.0.36
-      cross-fetch:
-        specifier: ~3.1.5
-        version: 3.1.8(encoding@0.1.13)
-      node-fetch:
-        specifier: ~2.6.2
-        version: 2.6.12(encoding@0.1.13)
-    devDependencies:
-      '@kadena-dev/eslint-config':
-        specifier: workspace:*
-        version: link:../../tools/eslint-config
-      '@kadena-dev/heft-rig':
-        specifier: workspace:*
-        version: link:../../tools/heft-rig
-      '@kadena-dev/markdown':
-        specifier: workspace:*
-        version: link:../../tools/remark-plugins
-      '@rushstack/eslint-config':
-        specifier: ~3.3.0
-        version: 3.3.2(eslint@8.45.0)(typescript@5.1.6)
-      '@rushstack/heft':
-        specifier: ~0.50.6
-        version: 0.50.7(@types/node@16.18.39)
-      '@types/heft-jest':
-        specifier: ~1.0.3
-        version: 1.0.3
-      '@types/node':
-        specifier: ^16.0.0
-        version: 16.18.39
-      eslint:
-        specifier: ^8.45.0
-        version: 8.45.0
-      prettier:
-        specifier: ~3.0.0
-        version: 3.0.0
-
   ../../packages/libs/chainweb-node-client:
     dependencies:
       '@kadena/cryptography-utils':
