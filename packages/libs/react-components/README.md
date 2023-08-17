@@ -1,3 +1,6 @@
+> [!WARNING]  
+> This package is depcrated in favor of @kadena/react-ui
+
 # React Components
 
 Component library of Kadena.
