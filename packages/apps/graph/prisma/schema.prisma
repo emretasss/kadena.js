@@ -12,45 +12,59 @@ datasource db {
 }
 
 model Block {
-  chainid      BigInt
-  creationtime DateTime      @db.Timestamptz(6)
+  // chainId
+  chainId      BigInt        @map("chainid")
+  // creationTime
+  creationTime DateTime      @map("creationtime") @db.Timestamptz(6)
   epoch        DateTime      @db.Timestamptz(6)
   flags        Decimal       @db.Decimal(20, 0)
   hash         String        @id @db.VarChar
   height       BigInt
+  // minerAccount
   miner        String        @db.VarChar
   nonce        Decimal       @db.Decimal(20, 0)
+  // parentBlockHash
   parent       String        @db.VarChar
   payload      String        @db.VarChar
+  // proofOfWorkHash
   powhash      String        @db.VarChar
   predicate    String        @db.VarChar
   target       Decimal       @db.Decimal(80, 0)
   weight       Decimal       @db.Decimal(80, 0)
   id           Int           @unique(map: "blocks_id_uniq") @default(autoincrement())
   events       Event[]
+  // minerKeys
   minerkeys    Minerkey[]
   transactions Transaction[]
   transfers    Transfer[]
 
-  @@index([height(sort: Desc), chainid])
+  @@index([height(sort: Desc), chainId])
   @@map("blocks")
 }
 
 model Event {
-  blockHash  String @db.VarChar @map("block")
-  chainid    BigInt
-  height     BigInt
-  idx        BigInt
-  module     String @db.VarChar
-  modulehash String @db.VarChar
-  name       String @db.VarChar
-  params     Json
-  paramtext  String @db.VarChar
-  qualname   String @db.VarChar
-  requestkey String @db.VarChar
-  id         Int    @unique(map: "events_id_uniq") @default(autoincrement())
+  blockHash   String       @map("block") @db.VarChar
+  // chainId
+  chainid     BigInt
+  height      BigInt
+  // orderIndex
+  idx         BigInt
+  // moduleName
+  module      String       @db.VarChar
+  // moduleHash
+  modulehash  String       @db.VarChar
+  name        String       @db.VarChar
+  // parameters
+  params      Json
+  // parameterText check with Enis
+  paramtext   String       @db.VarChar
+  // qualifiedName
+  qualname    String       @db.VarChar
+  // requestKey
+  requestkey  String       @db.VarChar
+  id          Int          @unique(map: "events_id_uniq") @default(autoincrement())
   transaction Transaction? @relation(fields: [blockHash, requestkey], references: [blockHash, requestkey])
-  block     Block  @relation(fields: [blockHash], references: [hash], onDelete: NoAction, onUpdate: NoAction)
+  block       Block        @relation(fields: [blockHash], references: [hash], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([blockHash, idx, requestkey])
   @@index([height(sort: Desc), chainid, idx], map: "events_height_chainid_idx")
@@ -59,6 +73,7 @@ model Event {
 }
 
 model Minerkey {
+  // blockHash
   block  String @db.VarChar
   key    String @db.VarChar
   blocks Block  @relation(fields: [block], references: [hash], onDelete: NoAction, onUpdate: NoAction)
@@ -68,12 +83,18 @@ model Minerkey {
 }
 
 model Signer {
+  // address: is used for multi-sig accounts blake2hash(sign1,sig2) = address prepended with `w:`
   addr       String? @db.VarChar
+  // capabilities
   caps       Json
+  // orderIndex
   idx        Int
+  // publicKey
   pubkey     String  @db.VarChar
+  // requestKey
   requestkey String  @db.VarChar
   scheme     String? @db.VarChar
+  // signature
   sig        String  @db.VarChar
 
   @@id([idx, requestkey])
@@ -81,29 +102,39 @@ model Signer {
 }
 
 model Transaction {
+  // badResult
   badresult    Json?
-  blockHash    String   @db.VarChar @map("block")
+  blockHash    String   @map("block") @db.VarChar
+  // chainId
   chainid      BigInt
   code         String?  @db.VarChar
   continuation Json?
+  // creationTime
   creationtime DateTime @db.Timestamptz(6)
   data         Json?
   gas          BigInt
+  // gasLimit
   gaslimit     BigInt
+  // gasPrice
   gasprice     Float
+  // goodResult
   goodresult   Json?
   height       BigInt
   logs         String?  @db.VarChar
   metadata     Json?
   nonce        String   @db.VarChar
+  // eventCount
   num_events   BigInt?
+  // pactId
   pactid       String?  @db.VarChar
   proof        String?  @db.VarChar
+  // requestKey
   requestkey   String   @db.VarChar
   rollback     Boolean?
   sender       String   @db.VarChar
   step         BigInt?
   ttl          BigInt
+  // transactionId
   txid         BigInt?
   events       Event[]
   block        Block    @relation(fields: [blockHash], references: [hash], onDelete: NoAction, onUpdate: NoAction)
@@ -117,13 +148,20 @@ model Transaction {
 model Transfer {
   amount     Decimal @db.Decimal
   block      String  @db.VarChar
+  // chainId
   chainid    BigInt
+  // senderAccount
   from_acct  String  @db.VarChar
   height     BigInt
+  // ask Enis what this is
   idx        BigInt
+  // moduleHash
   modulehash String  @db.VarChar
+  // moduleName
   modulename String  @db.VarChar
+  // requestKey
   requestkey String  @db.VarChar
+  // receiverAccount
   to_acct    String  @db.VarChar
   blocks     Block   @relation(fields: [block], references: [hash], onDelete: NoAction, onUpdate: NoAction)
 
@@ -145,5 +183,3 @@ model schema_migrations {
 
   @@ignore
 }
-
-

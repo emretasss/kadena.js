@@ -9,11 +9,9 @@ import {
 } from '@kadena/client';
 import type { ChainId, ICommand, IUnsignedCommand } from '@kadena/types';
 
-import { apiHostGenerator } from '../utils/apiHostGenerator';
+import { apiHostGenerator as theApiHostGenerator } from '../utils/apiHostGenerator';
 import { inspect } from '../utils/fp';
-
-const { listen, pollCreateSpv, pollStatus, submit } =
-  createClient(apiHostGenerator);
+import { IUtilityFunction } from '../utils/IBaseUtilityFunction';
 
 interface IAccount {
   account: string;
@@ -22,18 +20,10 @@ interface IAccount {
   guard: string;
 }
 
-// npx ts-node crosschain-transfer.ts
-
-const amount: string = '1';
-// change these two accounts with your accounts
-const senderAccount: string =
-  'k:dc20ab800b0420be9b1075c97e80b104b073b0405b5e2b78afd29dd74aaf5e46';
-const receiverAccount: string =
-  'k:2f48080efe54e6eb670487f664bcaac7684b4ebfcfc8a3330ef080c9c97f7e11';
-
-const NETWORK_ID: string = 'testnet04';
-
 function startInTheFirstChain(
+  networkId: string,
+  chainId: ChainId,
+  senderAccount: string,
   from: IAccount,
   to: IAccount,
   amount: string,
@@ -64,19 +54,20 @@ function startInTheFirstChain(
       ),
     ])
     .addKeyset('receiver-guard', 'keys-all', to.publicKey)
-    .setMeta({ chainId: from.chainId, senderAccount: from.account })
-    .setNetworkId(NETWORK_ID)
+    .setMeta({ chainId, senderAccount })
+    .setNetworkId(networkId)
     .createTransaction();
 }
 
 function finishInTheTargetChain(
+  networkId: string,
   continuation: IContinuationPayloadObject['cont'],
   targetChainId: ChainId,
   gasPayer: string = 'kadena-xchain-gas',
 ): IUnsignedCommand {
   const builder = Pact.builder
     .continuation(continuation)
-    .setNetworkId(NETWORK_ID)
+    .setNetworkId(networkId)
     // uncomment this if you want to pay gas yourself
     // .addSigner(gasPayer.publicKey, (withCapability) => [
     //   withCapability('coin.GAS'),
@@ -91,13 +82,33 @@ function finishInTheTargetChain(
   return builder.createTransaction();
 }
 
+const createDoCrossChainTransfer: IUtilityFunction<
+  typeof doCrossChainTransfer
+> = (
+  { chainId, networkId, senderAccount },
+  apiHostGenerator = theApiHostGenerator,
+) => {
+  const { listen, pollCreateSpv, pollStatus, submit } =
+    createClient(apiHostGenerator);
+  return doCrossChainTransfer;
+};
+
 async function doCrossChainTransfer(
   from: IAccount,
   to: IAccount,
   amount: string,
 ): Promise<Record<string, ICommandResult>> {
   return (
-    Promise.resolve(startInTheFirstChain(from, to, amount))
+    Promise.resolve(
+      startInTheFirstChain(
+        networkId,
+        chainId as ChainId,
+        senderAccount,
+        from,
+        to,
+        amount,
+      ),
+    )
       .then((command) => signWithChainweaver(command))
       .then((command) =>
         isSignedTransaction(command)
@@ -132,6 +143,7 @@ async function doCrossChainTransfer(
       .then(
         ([status, proof]) =>
           finishInTheTargetChain(
+            networkId,
             {
               pactId: status.continuation?.pactId,
               proof,
@@ -154,27 +166,8 @@ async function doCrossChainTransfer(
       .then(inspect('FINAL_RESULT'))
   );
 }
-
-const from: IAccount = {
-  account: senderAccount,
-  chainId: '1',
-  publicKey: keyFromAccount(senderAccount),
-  // use keyset guard
-  guard: keyFromAccount(senderAccount),
-};
-
-const to: IAccount = {
-  account: receiverAccount, // k:account of sender
+createDoCrossChainTransfer({
   chainId: '0',
-  publicKey: keyFromAccount(receiverAccount),
-  // use keyset guard
-  guard: keyFromAccount(receiverAccount),
-};
-
-doCrossChainTransfer(from, to, amount)
-  .then((result) => console.log('success', result))
-  .catch((error) => console.error('error', error));
-
-function keyFromAccount(senderAccount: string): string {
-  return senderAccount.split(':')[1];
-}
+  networkId: '0',
+  senderAccount: '0',
+});
