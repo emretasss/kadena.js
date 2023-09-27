@@ -4,14 +4,6 @@ type all = any;
 /**
  * @internal
  */
-export const asyncPipe =
-  (...args: Array<(arg: all) => all>): ((init: all) => Promise<all>) =>
-  (init: all): Promise<all> =>
-    args.reduce((chain, fn) => chain.then(fn), Promise.resolve(init));
-
-/**
- * @internal
- */
 export const head = (args: all[]): any => args[0];
 
 /**

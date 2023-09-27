@@ -38,6 +38,7 @@
   "dependencies": {
     "@kadena/client": "workspace:^",
     "@kadena/cryptography-utils": "workspace:*",
+    "@kadena/types": "workspace:^",
     "debug": "~4.3.4"
   },
   "devDependencies": {
