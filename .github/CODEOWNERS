@@ -19,3 +19,4 @@
 /packages/tools/eslint-plugin                   @alber70g
 /packages/tools/heft-rig                        @alber70g
 /packages/tools/remark-plugins                  @webpro
+/packages/tools/e2e-tests                       @ghislain89
