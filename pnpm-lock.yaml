@@ -1157,6 +1157,9 @@ importers:
       '@kadena-dev/markdown':
         specifier: workspace:*
         version: link:../../tools/remark-plugins
+      '@kadena/pactjs-cli':
+        specifier: workspace:^
+        version: link:../../tools/pactjs-cli
       '@microsoft/api-extractor':
         specifier: ^7.37.0
         version: 7.37.0(@types/node@16.18.48)
@@ -1726,7 +1729,7 @@ importers:
         version: link:../../tools/remark-plugins
       '@microsoft/api-extractor':
         specifier: ^7.37.0
-        version: 7.37.0(@types/node@18.17.14)
+        version: 7.37.0(@types/node@16.18.48)
       '@rushstack/eslint-config':
         specifier: ~3.3.0
         version: 3.3.0(eslint@8.45.0)(typescript@5.2.2)
@@ -21330,7 +21333,7 @@ packages:
       pretty-format: 29.7.0
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.8.2(@types/node@16.18.48)(typescript@5.2.2)
+      ts-node: 10.8.2(@types/node@18.17.14)(typescript@5.2.2)
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -30025,7 +30028,6 @@ packages:
       typescript: 5.2.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
-    dev: true
 
   /ts-toolbelt@9.6.0:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
