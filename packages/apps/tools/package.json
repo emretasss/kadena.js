@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "pnpm run generate:contracts && next build",
+    "deploy:faucet": "ts-node src/pact/faucet/deploy.ts",
     "dev": "next dev",
     "eject": "react-scripts eject",
     "format": "pnpm run --sequential /^format:.*/",
@@ -85,6 +86,7 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "~29.6.1",
     "prettier": "~3.0.3",
+    "ts-node": "~10.8.2",
     "typescript": "5.2.2"
   },
   "volta": {
